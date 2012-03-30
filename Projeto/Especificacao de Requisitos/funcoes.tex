@@ -1,0 +1,39 @@
+\newcounter{Number}
+\newcommand{\Item}{\stepcounter{Number}\theNumber}
+\newcounter{NumberReqF}
+\newcommand{\ReqF}{F\stepcounter{NumberReqF}\theNumberReqF ~- }
+\newcounter{NumberReqNF}[NumberReqF]
+\newcommand{\ReqNF}{NF \stepcounter{NumberReqNF}\theNumberReqF .\theNumberReqNF ~- }
+
+
+\newcolumntype{Y}[1]{>{\setlength\hsize{#1\hsize}%
+    \raggedright\arraybackslash}X}
+\newcolumntype{F}{|p{\columnwidth-2\tabcolsep-2\arrayrulewidth}|}
+\setlength\extrarowheight{2pt}
+
+\newcommand\NFReq[5]{%
+  \ReqNF #1 & #2 & #3 & (#4) & (#5)\tabularnewline
+  \hline
+}
+
+\newcommand{\TabelaRequisito}[4]{
+  \setcounter{NumberReqNF}{0}
+  \begin{table}[h]
+    \noindent\begin{tabularx}{\columnwidth}{|Y{0.4}|Y{0.5}|Y{0.25}|c|c|}
+      \hline
+      \multicolumn{3}{|l|}{\ReqF #1} & \multicolumn{2}{l|}{Hidden (#2)}\tabularnewline
+      \hline
+      \multicolumn{5}{F}{#3}\tabularnewline
+      \hline
+      \multicolumn{5}{|c|}{Non-Functional Requirements}\tabularnewline
+      \hline
+      Name & Restriction & Category & Desirable & Permanent\tabularnewline
+      \hline
+      #4%
+      % more and more requirements here...
+    \end{tabularx}
+  \end{table}
+}
+
+
+

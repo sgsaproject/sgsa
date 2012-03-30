@@ -1,0 +1,1 @@
+Figuras do documento devem estar nesta pasta
