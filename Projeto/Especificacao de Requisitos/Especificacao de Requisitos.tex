@@ -4,10 +4,11 @@
 \usepackage[english,brazilian]{babel}
 \usepackage{graphicx}
 \usepackage{tabularx,calc}
-\usepackage{placeins}
+%\usepackage{placeins}
 \usepackage{color}
 \usepackage{xcolor,colortbl}
-
+\usepackage[section]{placeins}
+\usepackage{morefloats}
 
 \include{funcoes}   % Funções
 
@@ -22,11 +23,13 @@
     \date{22/01/2012}
     \maketitle
 
-	\newpage
+	%\newpage
+	\clearpage
     
     \tableofcontents
     
-    \newpage
+    %\newpage
+    \clearpage
     \section{Introdução}
     	\subsection{Propósito deste documento}
         \subsection{Escopo do produto}
@@ -35,7 +38,7 @@
         	\subsubsection{Limite do produto}
         	\subsubsection{Benefícios do produto}
         	\begin{table}[h]
-	        	\noindent\begin{tabular}{|p{0.30\columnwidth}|p{0.30\columnwidth}|p{0.40\columnwidth}|}
+	        	\noindent\begin{tabular}{|p{0.30\columnwidth}|p{0.30\columnwidth}|p{0.32\columnwidth}|}
 	        		\hline
 	        		\setcounter{Number}{0}
 	        	    \textbf{Número de ordem} & \textbf{Benefício} & \textbf{Valor para o cliente} \\
@@ -54,7 +57,7 @@
         	
         	\subsubsection{Definições, acrônimos e abreviações}
         	        	\begin{table}[h]
-        		        	\noindent\begin{tabular}{|p{0.30\columnwidth}|p{0.30\columnwidth}|p{0.40\columnwidth}|}
+        		        	\noindent\begin{tabular}{|p{0.30\columnwidth}|p{0.30\columnwidth}|p{0.32\columnwidth}|}
         		        		\hline
         		        		\setcounter{Number}{0}
         		        		\textbf{Número de ordem} & \textbf{Termo} & \textbf{Definição} \\
@@ -70,7 +73,7 @@
         	        	
         	\subsubsection{Referências}
         	        	\begin{table}[!h]
-        		        	\noindent\begin{tabular}{|p{0.30\columnwidth}|p{0.30\columnwidth}|p{0.40\columnwidth}|}
+        		        	\noindent\begin{tabular}{|p{0.30\columnwidth}|p{0.30\columnwidth}|p{0.32\columnwidth}|}
         		        		\hline
         		        		\setcounter{Number}{0}
         		        		\textbf{Número de ordem} & \textbf{Tipo Material} & \textbf{Referência bibliográfica} \\
@@ -83,10 +86,12 @@
         		        		\hline
         		        	\end{tabular}
         	        	\end{table}	
-        \newpage	
+        %\newpage
+        \clearpage
         \section{Visão Geral}
         
-        \newpage	
+        %\newpage
+        \clearpage
         \section{Requisitos Funcionais e Não-Funcionais Associados}
         
         	\subsection{Requisitos funcionais e requisitos não-funcionais associados}
