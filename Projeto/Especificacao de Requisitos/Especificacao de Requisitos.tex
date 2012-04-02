@@ -143,66 +143,101 @@
         
         	\subsection{Requisitos funcionais e requisitos não-funcionais associados}
         
+			
+			
+			
 
-		\setcounter{NumberReqF}{0}
-		\setcounter{NumberReqNF}{0}
-        	
-        	\TabelaRequisito{Realizar inscrição}{}
-        	{Permite a realização inscrição do participante pelo site}
-        	{%
-	        	  \NFReq{Campos}
-	        	  {Devem ser informados nome, data nascimento, RG, CPF, instituição, campus, curso, e-mail e senha}
-	        	  {Especificação}{}{X}%
-        	}
-        	
-        	\TabelaRequisito{Solicitar isenção}{}
-        	{Permite o participante solicitar isenção de pagamento no evento}
-        	{%
-				\NFReq{Campos}
-	        	  {Deve ser informado o motivo}
-	        	  {Especificação}{}{X}%
-				\NFReq{Documento}
-	        	  {Permitir o envio de arquivos}
-	        	  {Especificação}{}{X}%
-        	}
-        	
-        	\TabelaRequisito{Realizar login}{}
-        	{O participante coloca sua identificação e acessa a sua conta.}
-        	{%
-				\NFReq{Campos}
-	        	  {O participante deve informar seu email e senha}
-	        	  {Especificação}{}{}%
-				\NFReq{Verificação de email}
-	        	  {O participante somente poderá ter acesso após confirmar seu endereço de email}
-	        	  {Especificação}{}{}%
-        	}
+			\setcounter{NumberReqF}{0}
+			\setcounter{NumberReqNF}{0}
 			
-									
-			\TabelaRequisito{Recuperar senha}{}
-        	{O participante solicita a recuperação de senha e a nova senha temporária é enviada por email}
-        	{%
-				\NFReq{Campos}
-	        	  {O participante deve informar seu email}
-	        	  {Especificação}{}{}%
-        	}
-			
-			\TabelaRequisito{Editar dados do participante}{}
-        	{O participante acessa sua conta e edita seu proprios dados}
-        	{%
-				\NFReq{Dados editaveis}
-	        	  {O participante pode editar todos os dados com exceção do email que deve ser confirmado novamente}
-	        	  {Especificação}{}{}%
+			\subsubsection{Area do Site}
         	
-        	}
+				\TabelaRequisito{Realizar inscrição}{}
+				{Permite a realização inscrição do participante pelo site}
+				{%
+					  \NFReq{Campos}
+					  {Devem ser informados nome, data nascimento, RG, CPF, instituição, campus, curso, e-mail e senha}
+					  {Especificação}{}{X}%
+				}
+				
+				\TabelaRequisito{Solicitar isenção}{}
+				{Permite o participante solicitar isenção de pagamento no evento}
+				{%
+					\NFReq{Campos}
+					  {Deve ser informado o motivo}
+					  {Especificação}{}{X}%
+					\NFReq{Documento}
+					  {Permitir o envio de arquivos}
+					  {Especificação}{}{X}%
+				}
+				
+				\TabelaRequisito{Realizar login}{}
+				{O participante coloca sua identificação e acessa a sua conta.}
+				{%
+					\NFReq{Campos}
+					  {O participante deve informar seu email e senha}
+					  {Especificação}{}{}%
+					\NFReq{Verificação de email}
+					  {O participante somente poderá ter acesso após confirmar seu endereço de email}
+					  {Especificação}{}{}%
+				}
+				
+										
+				\TabelaRequisito{Recuperar senha}{}
+				{O participante solicita a recuperação de senha e a nova senha temporária é enviada por email}
+				{%
+					\NFReq{Campos}
+					  {O participante deve informar seu email}
+					  {Especificação}{}{}%
+				}
+				
+				\TabelaRequisito{Mostrar timeline das palestras}{}
+				{Mostra numa linha do tempo as palestras que estão ocorrendo e irão ocorrer.}
+				{%
+				
+				}
+				
+				\TabelaRequisito{Mostrar programação do evento}{}
+				{Mostra o calendário de programação do evento}
+				{%
+				
+				}
+				
+				\TabelaRequisito{Enviar mensagem de contato}{}
+				{Envia uma mensagem de contato para organização}
+				{%
+				
+				}
+				
+				\TabelaRequisito{Validar certificado}{}
+				{Verificar a validade do certificado}
+				{%
+				
+				}
 			
-			\TabelaRequisito{Visualizar suas participações}{}
-        	{O participante pode acessar o site e ver suas palestras em que participou.}
-        	{%
-				\NFReq{Dados disponiveis}
-					{O participante poderá visualizar o nome, horario de inicio e fim, horario de entrada e saida, quantidade de hora e total de horas}
-					{Especificação}{}{}%
-        	}
-									
+			\clearpage
+			\subsubsection{Area do Participante}
+			
+				\TabelaRequisito{Editar dados do participante}{}
+				{O participante acessa sua conta e edita seu proprios dados}
+				{%
+					\NFReq{Dados editaveis}
+					  {O participante pode editar todos os dados com exceção do email que deve ser confirmado novamente}
+					  {Especificação}{}{}%
+				
+				}
+				
+				\TabelaRequisito{Visualizar suas participações}{}
+				{O participante pode acessar o site e ver suas palestras em que participou.}
+				{%
+					\NFReq{Dados disponiveis}
+						{O participante poderá visualizar o nome, horario de inicio e fim, horario de entrada e saida, quantidade de hora e total de horas}
+						{Especificação}{}{}%
+				}
+			
+			\clearpage
+			\subsubsection{Area do Administrador}
+			
 			\TabelaRequisito{Realizar pagamento}{}
         	{Marca o pagamento do participante}
         	{%
@@ -342,29 +377,7 @@
         	
         	}
 			
-			\TabelaRequisito{Mostrar timeline das palestras}{}
-        	{Mostra numa linha do tempo as palestras que estão ocorrendo e irão ocorrer.}
-        	{%
-        	
-        	}
 			
-			\TabelaRequisito{Mostrar programação do evento}{}
-        	{Mostra o calendário de programação do evento}
-        	{%
-        	
-        	}
-			
-			\TabelaRequisito{Enviar mensagem de contato}{}
-        	{Envia uma mensagem de contato para organização}
-        	{%
-        	
-        	}
-			
-			\TabelaRequisito{Validar certificado}{}
-        	{Verificar a validade do certificado}
-        	{%
-        	
-        	}
 			
 			\TabelaRequisito{Enviar email de ativação de conta}{}
         	{Envia um email para que o participante confirme sua conta}
@@ -378,7 +391,6 @@
         	
         	}
 
-			\FloatBarrier
 			\TabelaRequisito{Enviar email de confirmação de inscrição em palestra}{}
         	{Envia um email confirmando a inscrição de um participante numa palestra}
         	{%
@@ -402,7 +414,7 @@
         	
         	\subsection{Requisitos Prioritários}
         	
-        	\newpage
+        	\clearpage
         	\section{Requisitos Organizados}
 	        	\subsection{Casos de Uso}
 	        	
@@ -417,9 +429,8 @@
 	        	\subsection{Consultas}
 	        	\subsection{Casos de Uso Expandidos}
         	
-        	\newpage
+        	\clearpage
         	\section{Modelo Conceitual}
         	
-        	
-        	
+        	        	
 \end{document}
