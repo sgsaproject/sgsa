@@ -148,45 +148,61 @@
 		\setcounter{NumberReqNF}{0}
         	
         	\TabelaRequisito{Realizar inscrição}{}
-        	{Permite a inscrição do participante pelo site}
+        	{Permite a realização inscrição do participante pelo site}
         	{%
-        	  \NFReq{Campos}
-        	  {Devem ser informados nome, data nascimento, instituição, campus, e-mail e senha}
-        	  {Especificação}{X}{}%
+	        	  \NFReq{Campos}
+	        	  {Devem ser informados nome, data nascimento, RG, CPF, instituição, campus, curso, e-mail e senha}
+	        	  {Especificação}{}{X}%
         	}
         	
         	\TabelaRequisito{Solicitar isenção}{}
         	{Permite o participante solicitar isenção de pagamento no evento}
         	{%
+				\NFReq{Campos}
+	        	  {Deve ser informado o motivo}
+	        	  {Especificação}{}{X}%
+				\NFReq{Documento}
+	        	  {Permitir o envio de arquivos}
+	        	  {Especificação}{}{X}%
         	}
         	
-        	
-        	
         	\TabelaRequisito{Realizar login}{}
-        	{O ouvinte coloca sua identificação e acessa a sua conta.}
+        	{O participante coloca sua identificação e acessa a sua conta.}
         	{%
-        	
+				\NFReq{Campos}
+	        	  {O participante deve informar seu email e senha}
+	        	  {Especificação}{}{}%
+				\NFReq{Verificação de email}
+	        	  {O participante somente poderá ter acesso após confirmar seu endereço de email}
+	        	  {Especificação}{}{}%
         	}
 			
 									
 			\TabelaRequisito{Recuperar senha}{}
-        	{O ouvinte solicita a recuperação de senha}
+        	{O participante solicita a recuperação de senha e a nova senha temporária é enviada por email}
         	{%
+				\NFReq{Campos}
+	        	  {O participante deve informar seu email}
+	        	  {Especificação}{}{}%
+        	}
+			
+			\TabelaRequisito{Editar dados do participante}{}
+        	{O participante acessa sua conta e edita seu proprios dados}
+        	{%
+				\NFReq{Dados editaveis}
+	        	  {O participante pode editar todos os dados com exceção do email que deve ser confirmado novamente}
+	        	  {Especificação}{}{}%
         	
         	}
 			
 			\TabelaRequisito{Visualizar suas participações}{}
-        	{O ouvinte pode acessar o site e ver suas palestras em que participou.}
+        	{O participante pode acessar o site e ver suas palestras em que participou.}
         	{%
-        	
+				\NFReq{Dados disponiveis}
+					{O participante poderá visualizar o nome, horario de inicio e fim, horario de entrada e saida, quantidade de hora e total de horas}
+					{Especificação}{}{}%
         	}
-			
-			\TabelaRequisito{Editar dados do ouvinte}{}
-        	{O ouvinte acessa sua conta e atualiza os dados}
-        	{%
-        	
-        	}
-			
+									
 			\TabelaRequisito{Realizar pagamento}{}
         	{Marca o pagamento do participante}
         	{%
@@ -229,7 +245,7 @@
         	}
 			
 			\TabelaRequisito{Notificar participante em outra palestra}{}
-        	{Notifica sobre um participante que está em outra palestra e oferece possiblidade de fechar a participação}
+        	{Notifica sobre um participante que está em outra palestra e oferece possibilidade de fechar a participação}
         	{%
         	
         	}
