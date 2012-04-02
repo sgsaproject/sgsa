@@ -8,7 +8,7 @@
 \usepackage{color}
 \usepackage{xcolor,colortbl}
 \usepackage{morefloats}
-\usepackage{longtable}
+\usepackage{setspace}
 
 \include{funcoes}   % Funções
 
@@ -88,8 +88,55 @@
         	        	\end{table}	
         %\newpage
         \clearpage
-        \section{Visão Geral}
+        \section{Visão Geral do Sistema}
         
+        \begin{onehalfspace}
+		A Semana Acadêmica do Centro de Tecnologia de Alegrete (SACTA) é um estímulo aos alunos à troca de conhecimentos nos âmbitos acadêmico e profissional, à exposição de suas pesquisas e uma oportunidade de aumentar seus conhecimentos.
+        
+        Durante a semana acadêmica acontecem palestras e mini-cursos onde os participantes podem aprender com outros alunos, com professores ou profissionais atuantes no mercado sobre assuntos de interesse a cada um dos cursos do Campus.
+        
+        A Semana Acadêmica do Centro de Tecnologia de Alegrete é organizada pelo Centro Estudantil, com apoio dos professores e alunos do campus bem como de empresas patrocinadoras.
+        
+        O que?
+        
+        O SGSA é um sistema para a gestão da Semana Acadêmica.
+        
+        Para que?
+        
+        Para realizar a gestão da Semana Acadêmica desde a inscrição, pagamento, geração de credenciais, controle de ouvintes até a finalização do evento, contabilizando as participações dos ouvintes.
+        
+        Para quem?
+        
+        Toda comunidade acadêmica (discentes, docentes, técnico-administrativos) e comunidade externa.
+        
+        Por que?
+        \begin{itemize}
+        \item Facilitar o controle e agilizar tanto para organização quanto para os participantes.
+        \item Também para fornecer informações sobre o evento para todos.
+        \item Tornar mais rápida a entrada dos participantes nas palestras/mini-cursos
+        \item Tornar mais rápida a inscrição dos participantes no evento.
+        \item Controlar a entrada e saída dos participantes.
+        \item Controlar as palestras.
+        \item Controlar as salas e locais do evento.
+        \item Gerar relatórios.
+        \item Certificado de participação
+        \item Participantes por palestra.
+        \item Palestras (dados das palestras)
+        \item Participantes (dados dos participantes)
+        \end{itemize}
+        
+        Quando?
+        
+        A semana acadêmica deste ano de 2012 ocorrerá de 11 a 15 de junho. O sistema precisará ficar pronto, ou pelo menos com uma versão beta até 15 dias antes do início do evento, ou seja ate 31/05/2012.
+        
+        Onde?
+        
+        UNIPAMPA Campus Alegrete, nas salas de aula e laboratórios disponíveis. Pode haver palestras/mini-cursos fora do prédio. Também podem existir visitações em outros lugares da cidade de Alegrete. Assim o sistema não pode restringir que os eventos possam ocorrer em ambientes externos, sem conexão a internet.
+        
+        Como?
+        
+        Inicialmente o sistema será aberto as inscrições dos interessados, disponibilizado pela internet. Logo após, haverá a fase de credenciamento onde a organização irá receber o pagamento, marcar como pago e gerar a credencial do participante e o recibo de pagamento, impresso na hora. Durante o evento, antes de iniciar a palestra haverá um representante da organização no local da mesma para fazer a entrada dos participantes. O participante, munido de sua credencial, entrega ao representante, no qual registra a entrada do participante na palestra, e devolve sua credencial. Por fim, é gerado o relatório.
+        \end{onehalfspace}
         %\newpage
         \clearpage
         \section{Requisitos Funcionais e Não-Funcionais Associados}
@@ -104,7 +151,7 @@
         	{Permite a inscrição do participante pelo site}
         	{%
         	  \NFReq{Campos}
-        	  {Devem ser informados nome, data nascimento, instuição, campus, email e senha}
+        	  {Devem ser informados nome, data nascimento, instituição, campus, e-mail e senha}
         	  {Especificação}{X}{}%
         	}
         	
