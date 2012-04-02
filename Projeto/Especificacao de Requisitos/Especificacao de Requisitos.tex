@@ -4,11 +4,11 @@
 \usepackage[english,brazilian]{babel}
 \usepackage{graphicx}
 \usepackage{tabularx,calc}
-%\usepackage{placeins}
+\usepackage{placeins}
 \usepackage{color}
 \usepackage{xcolor,colortbl}
-\usepackage[section]{placeins}
 \usepackage{morefloats}
+\usepackage{longtable}
 
 \include{funcoes}   % Funções
 
@@ -314,7 +314,8 @@
         	{%
         	
         	}
-			
+
+			\FloatBarrier
 			\TabelaRequisito{Enviar email de confirmação de inscrição em palestra}{}
         	{}
         	{%
@@ -333,7 +334,7 @@
         	
         	}
         	        	        	
-        	\FloatBarrier	
+        	\FloatBarrier
         	
         	
         	\subsection{Requisitos Suplementares}
