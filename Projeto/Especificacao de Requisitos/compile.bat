@@ -1,2 +1,8 @@
-pdflatex -synctex=1 -interaction=nonstopmode "Especificacao de Requisitos".tex
+pdflatex "Especificacao de Requisitos".tex
+del *.aux
+del *.bbl
+del *.blg
+del *.dvi
+del *.log
+del *.toc
 pause
