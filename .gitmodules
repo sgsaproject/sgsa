@@ -1,3 +1,3 @@
 [submodule "src/vendor/ZendFramework"]
 	path = src/vendor/ZendFramework
-	url = https://github.com/zendframework/ZendSkeletonApplication.git
+	url = https://github.com/zendframework/zf2.git
