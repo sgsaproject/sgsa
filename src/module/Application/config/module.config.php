@@ -119,6 +119,13 @@ return array(
                     'exceptionTemplate' => 'error/index',
                 ),
             ),
+			//
+			//'Application\Controller\IndexController' => array(
+			//	'parameters' => array(
+			//		'documentManager' => 'mongo_dm'
+			//	)
+			//),
+			//
         ),
     ),
 );
