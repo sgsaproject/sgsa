@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="SGSA" basedir="." default="build" phingVersion="2.4.12">
+	<property name="srcdir" value="${project.basedir}/src" override="true" />
+	<property name="builddir" value="${project.basedir}/build" override="true" />
+	
+	<target name="info" depends="">
+        <echo msg="Basedir: ${project.basedir}" />
+		<echo msg="Srcdir: ${srcdir}" />
+    </target>
+	
+	<target name="prepare">
+        <echo msg="Making directory ./build" />
+		<delete dir="./build" includeemptydirs="true" verbose="true" failonerror="true" />
+        <mkdir dir="./build"/>
+    </target>
+	
+	<target name="testEnvironment" depends="">
+        <echo msg="Testing environment..." />
+		<!--<exec command="php -v" dir="${project.basedir}" passthru="true"/>-->
+		<exec executable="php" logoutput="true">
+			<arg value="-v"/>
+		</exec>
+    </target>
+	
+	<!--
+	<target name="version" depends="">
+        <echo msg="Inserting new version" />
+		<copy file="version.txt" tofile="${srcdir}/version.txt" overwrite="true"/>
+    </target>
+	<version releasetype="Bugfix" file="${srcdir}/version.txt" property="version.number"/>
+	-->
+
+	<target name="build" depends="info,prepare,testEnvironment">
+        <echo msg="Building..." />
+    </target>
+</project>
