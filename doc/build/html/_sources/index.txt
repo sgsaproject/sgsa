@@ -1,5 +1,5 @@
 .. SGSA documentation master file, created by
-   sphinx-quickstart on Sat Apr 21 20:52:08 2012.
+   sphinx-quickstart on Tue Apr 24 16:23:01 2012.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
@@ -13,8 +13,8 @@ Contents:
 
 
 
-Indices and tables
-==================
+Indices and tabelas
+===================
 
 * :ref:`genindex`
 * :ref:`modindex`
