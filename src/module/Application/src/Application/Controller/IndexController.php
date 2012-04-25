@@ -3,33 +3,25 @@
 namespace Application\Controller;
 
 use Zend\Mvc\Controller\ActionController,
-    Zend\View\Model\ViewModel;
-	Application\Document\User;
+    Zend\View\Model\ViewModel,
+    Application\Model\Document\User;
 
 class IndexController extends ActionController
 {
-		
-	public function indexAction()
+
+    public function indexAction()
     {
-		//$config = new \Doctrine\ODM\MongoDB\Configuration();
-		//$config->setProxyDir('Application/Document/Proxies');
-		//$config->setProxyNamespace('Proxies');
+        $dm = $this->getLocator()->get('mongo_dm');
+        //var_dump($em);
 
-		//$reader = new \Doctrine\Common\Annotations\AnnotationReader();
-		//$reader->setDefaultAnnotationNamespace('Doctrine\ODM\MongoDB\Mapping\\');
-		//$config->setMetadataDriverImpl(new \Doctrine\ODM\MongoDB\Mapping\Driver\AnnotationDriver($reader, __DIR__ . '/Documents'));
+        $user = new User();
+        $user->setName('Bulat S.');
 
-		//$dm = \Doctrine\ODM\MongoDB\DocumentManager::create(new Mongo(), $config);
-		
-		
-		//$em = $this->getLocator()->get('mongo_dm');
-		// create user
-		$user = new User();
-		$user->setName('Bulat S.');
-		//$user->setEmail('email@example.com');
-		$em->persist($user);
-		$em->flush();
-		//var_dump($em);
+        // tell Doctrine 2 to save $user on the next flush()
+        $dm->persist($user);
+        $dm->flush();
+
         return new ViewModel();
     }
+
 }
