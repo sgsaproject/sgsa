@@ -15,7 +15,8 @@ class EnvironmentTest extends phpRack_Test
             ->isLoaded('fileinfo')
 			->isLoaded('curl')
 			->isLoaded('openssl')
-			->isLoaded('sockets');
+			->isLoaded('sockets')
+			->isLoaded('xdebug');
     }
 	
 	public function testPear()
