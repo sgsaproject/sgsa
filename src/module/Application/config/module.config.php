@@ -1,16 +1,15 @@
 <?php
+
 return array(
     'di' => array(
         'instance' => array(
-
             // Setup for controllers.
-
             // Injecting the plugin broker for controller plugins into
             // the action controller for use by all controllers that
             // extend it
             'Zend\Mvc\Controller\ActionController' => array(
                 'parameters' => array(
-                    'broker'       => 'Zend\Mvc\Controller\PluginBroker',
+                    'broker' => 'Zend\Mvc\Controller\PluginBroker',
                 ),
             ),
             'Zend\Mvc\Controller\PluginBroker' => array(
@@ -18,41 +17,38 @@ return array(
                     'loader' => 'Zend\Mvc\Controller\PluginLoader',
                 ),
             ),
-
             // Setup for router and routes
             'Zend\Mvc\Router\RouteStack' => array(
                 'parameters' => array(
                     'routes' => array(
                         'default' => array(
-                            'type'    => 'Zend\Mvc\Router\Http\Segment',
+                            'type' => 'Zend\Mvc\Router\Http\Segment',
                             'options' => array(
-                                'route'    => '/[:controller[/:action]]',
+                                'route' => '/[:controller[/:action]]',
                                 'constraints' => array(
                                     'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                    'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                    'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 ),
                                 'defaults' => array(
                                     'controller' => 'Application\Controller\IndexController',
-                                    'action'     => 'index',
+                                    'action' => 'index',
                                 ),
                             ),
                         ),
                         'home' => array(
                             'type' => 'Zend\Mvc\Router\Http\Literal',
                             'options' => array(
-                                'route'    => '/',
+                                'route' => '/',
                                 'defaults' => array(
                                     'controller' => 'Application\Controller\IndexController',
-                                    'action'     => 'index',
+                                    'action' => 'index',
                                 ),
                             ),
                         ),
                     ),
                 ),
             ),
-
             // Setup for the view layer.
-
             // Using the PhpRenderer, which just handles html produced by php 
             // scripts
             'Zend\View\Renderer\PhpRenderer' => array(
@@ -72,7 +68,7 @@ return array(
             // Defining where the layout/layout view should be located
             'Zend\View\Resolver\TemplateMapResolver' => array(
                 'parameters' => array(
-                    'map'  => array(
+                    'map' => array(
                         'layout/layout' => __DIR__ . '/../view/layout/layout.phtml',
                     ),
                 ),
@@ -81,7 +77,7 @@ return array(
             // very similar to include_path
             'Zend\View\Resolver\TemplatePathStack' => array(
                 'parameters' => array(
-                    'paths'  => array(
+                    'paths' => array(
                         'application' => __DIR__ . '/../view',
                     ),
                 ),
@@ -108,8 +104,8 @@ return array(
             'Zend\Mvc\View\RouteNotFoundStrategy' => array(
                 'parameters' => array(
                     'displayNotFoundReason' => true,
-                    'displayExceptions'     => true,
-                    'notFoundTemplate'      => 'error/404',
+                    'displayExceptions' => true,
+                    'notFoundTemplate' => 'error/404',
                 ),
             ),
             // View script rendered in case of other exceptions
@@ -119,13 +115,13 @@ return array(
                     'exceptionTemplate' => 'error/index',
                 ),
             ),
-			//
-			//'Application\Controller\IndexController' => array(
-			//	'parameters' => array(
-			//		'documentManager' => 'mongo_dm'
-			//	)
-			//),
-			//
+        //
+        //'Application\Controller\IndexController' => array(
+        //	'parameters' => array(
+        //		'documentManager' => 'mongo_dm'
+        //	)
+        //),
+        //
         ),
     ),
 );

@@ -1,5 +1,4 @@
-﻿<?php
-
+<?php
 namespace Application\Model\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
