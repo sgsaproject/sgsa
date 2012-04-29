@@ -24,7 +24,7 @@ $settings = array(
     ),
     'config' => array(
         // set the default database to use (or not)
-        'default_db' => 'dblab'
+        'default_db' => 'sgsa'
     ),
     'connection' => array(
         //'server'  => 'mongodb://<user>:<password>@<server>:<port>',
