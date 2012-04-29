@@ -14,12 +14,12 @@
         <mkdir dir="./build"/>
     </target>
 	
-	<target name="testEnvironment" depends="">
+    <target name="testEnvironment" depends="">
         <echo msg="Testing environment..." />
-		<!--<exec command="php -v" dir="${project.basedir}" passthru="true"/>-->
-		<exec executable="php" logoutput="true">
-			<arg value="-v"/>
-		</exec>
+	<!--<exec command="php -v" dir="${project.basedir}" passthru="true"/>-->
+	<exec executable="php" logoutput="true">
+		<arg value="${srcdir}/tests/phpRack/index.php"/>
+	</exec>
     </target>
 	
 	<!--
