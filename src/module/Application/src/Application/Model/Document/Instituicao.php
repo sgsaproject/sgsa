@@ -67,7 +67,7 @@ class Instituicao {
      * @param tipo array $campi
      * @return array $campi
      */
-    public function setCampi($campi) {
+    public function setCampi(array $campi) {
         $this->campi = $campi;
     }
 
