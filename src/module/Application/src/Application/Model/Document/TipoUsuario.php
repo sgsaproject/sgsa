@@ -14,8 +14,8 @@ class TipoUsuario {
     private $nome;
 
     /**
-     *
-     * @return the $id 
+     * Descrição: Metodo getId, responsavel por buscar o valor da variavel $id.
+     * @return int $id 
      */
     public function getId() {
 
@@ -23,8 +23,9 @@ class TipoUsuario {
     }
 
     /**
-     *
-     * @return the $nome
+     * 
+     * Descrição: metodo getNome, responsavel por pegar o nome da variavel "$nome".
+     * @return string $nome
      */
     public function getNome() {
 
@@ -32,8 +33,9 @@ class TipoUsuario {
     }
 
     /**
-     *
-     * @param field_type $id 
+     * Descrição: Metodo setiDe, responsavel por setar a informação recebida por parametro($ID) na variavel ID.
+     * @param tipo string $id 
+     * @return int $id
      */
     public function setId($id) {
 
@@ -41,8 +43,10 @@ class TipoUsuario {
     }
 
     /**
-     *
-     * @param field_type $nome
+     * 
+     * Descrição: Metodo setNome, responsavel por setar a informação recebida por parametro($nome) na variavel nome.
+     * @param tipo string $nome
+     * @return string $nome
      */
     public function setNome($nome) {
 
