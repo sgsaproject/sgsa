@@ -1,9 +1,15 @@
 <?php
-
-
-class Instituicao
+class InstituicaoTest extends \Zend\Test\PHPUnit\ControllerTestCase
 {
-    //put your code here
+    public function setUp()
+    {
+        parent::setUp();
+    }
+    
+    public function testInsertInstituicao(){
+        $this->assertTrue(true);
+    }
+    
 }
 
-?>
+
