@@ -21,6 +21,14 @@
 		<arg value="${srcdir}/tests/phpRack/index.php"/>
 	</exec>
     </target>
+    
+    <target name="phpUnit" depends="">
+        <echo msg="Testing..." />
+	<!--<exec command="php -v" dir="${project.basedir}" passthru="true"/>-->
+	<exec executable="phpunit" dir="${srcdir}/tests/phpunit" logoutput="true">
+		<arg value=""/>
+	</exec>
+    </target>
 	
 	<!--
 	<target name="version" depends="">
@@ -30,7 +38,7 @@
 	<version releasetype="Bugfix" file="${srcdir}/version.txt" property="version.number"/>
 	-->
 
-    <target name="build" depends="info,prepare,testEnvironment">
+    <target name="build" depends="info,prepare,testEnvironment,phpUnit">
         <echo msg="Building..." />
     </target>
 </project>
