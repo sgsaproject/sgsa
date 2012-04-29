@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 namespace Application\Controller;
 
@@ -37,7 +37,7 @@ class IndexController extends ActionController
 		$dm->persist($campusItaqui);
         $dm->persist($instituicao);
         $dm->flush();
-		$instituicao2 = $dm->getRepository('Instituicao')->findOneByName('UNIPAMPA');
+		$instituicao2 = $dm->getRepository('Application\Model\Document\Instituicao')->findOneByNome('UNIPAMPA');
 		var_dump($instituicao2);
 
         return new ViewModel();

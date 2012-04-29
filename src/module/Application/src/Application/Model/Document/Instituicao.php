@@ -1,4 +1,4 @@
-<?php
+ï»¿<?php
 
 namespace Application\Model\Document;
 
@@ -34,7 +34,7 @@ class Instituicao
     }
 	
 	/**
-	 * Retorna todos os campi associados com a Instituição
+	 * Retorna todos os campi associados com a InstituiÃ§Ã£o
      * @return the $campi
      */
     public function getCampi()
@@ -59,7 +59,7 @@ class Instituicao
     }
 	
 	/**
-	 * Seta os campi associados com a Instituição
+	 * Seta os campi associados com a InstituiÃ§Ã£o
      * @param field_type $campi
      */
     public function setCampi($campi)
