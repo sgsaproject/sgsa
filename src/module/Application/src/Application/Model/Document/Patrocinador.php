@@ -1,11 +1,11 @@
-<?php
+﻿<?php
 
 namespace Application\Model\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 
 /** @ODM\Document */
-class Evento {
+class Patrocinador {
 
     /** @ODM\Id */
     private $id;
