@@ -5,13 +5,12 @@
     </testsuite>
     <filter>
         <whitelist>
-            <directory suffix=".php">../../vendor</directory>
             <directory suffix=".php">../../module</directory>
         </whitelist>
     </filter>
     <logging>
         <log highlowerbound="80" lowupperbound="50"
      highlight="true" yui="true" charset="UTF-8"
-     target="../../data/logs/report" type="coverage-html" />
+     target="./report" type="coverage-html" />
     </logging>
 </phpunit>
