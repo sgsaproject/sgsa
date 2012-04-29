@@ -5,7 +5,7 @@ namespace Application\Model\Document;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 
 /** @ODM\Document */
-class Instituicao
+class Local
 {
 
     /** @ODM\Id */
@@ -14,8 +14,21 @@ class Instituicao
     /** @ODM\Field(type="string") */
     private $nome;
 	
-	/** @ODM\ReferenceMany(targetDocument="Campus") */
-	private $campi = array();
+	/** @ODM\ReferenceMany(targetDocument="Palestra") */
+	private $palestras = array();
+	
+	
+	private $sala;
+	private $numeroSala;
+	private $arCondicionado;
+	private $numeroCadeiras;
+	private $quadro;
+	private $projetor;
+	private $extensao;
+	private $mesas;
+	
+	/** @ODM\Field(type="string") */
+	private $outros;
 
     /**
      * @return the $id
@@ -34,12 +47,11 @@ class Instituicao
     }
 	
 	/**
-	 * Retorna todos os campi associados com a Instituição
-     * @return the $campi
+     * @return the $palestras
      */
-    public function getCampi()
+    public function getPalestras()
     {
-        return $this->campi;
+        return $this->palestras;
     }
 
     /**
@@ -59,12 +71,11 @@ class Instituicao
     }
 	
 	/**
-	 * Seta os campi associados com a Instituição
-     * @param field_type $campi
+     * @param field_type $palestras
      */
-    public function setCampi($campi)
+    public function setPalestras($palestras)
     {
-        $this->campi = $campi;
+        $this->palestras = $palestras;
     }
 	
 }
