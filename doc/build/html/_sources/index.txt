@@ -3,13 +3,15 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+================================
 Bem-Vindo à documentação do SGSA!
 ================================
 
-**Sumário:**
+Sumário
+================================
 
 * `Introdução`_
-* `Tutorial`_
+* `Tutorial de Instalação`_
 * `Requisitos de software`_
 
 .. toctree::
@@ -55,5 +57,5 @@ Como?
 Inicialmente o sistema será aberto as inscrições dos interessados, disponibilizado pela internet. Logo após, haverá a fase de credenciamento onde a organização irá receber o pagamento, marcar como pago e gerar a credencial do participante e o recibo de pagamento, impresso na hora. Durante o evento, antes de iniciar a palestra haverá um representante da organização no local da mesma para fazer a entrada dos participantes. O participante, munido de sua credencial, entrega ao representante, no qual registra a entrada do participante na palestra, e devolve sua credencial. Por fim, é gerado o relatório.
 
 .. _Introdução: introducao.html
-.. _Tutorial: tutorial.html
+.. _Tutorial de Instalação: tutorialinstalacao.html
 .. _Requisitos de software: requisitossoftware.html
