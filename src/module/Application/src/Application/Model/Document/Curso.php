@@ -5,45 +5,48 @@ namespace Application\Model\Document;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 
 /** @ODM\Document */
-class Curso
-{ 
+class Curso {
 
     /** @ODM\Id */
     private $id;
 
     /** @ODM\Field(type="string") */
     private $nome;
-	
+
     /**
-     * @return the $id
+     * Descrição: Metodo getId, responsavel por buscar o valor da variável $id.
+     * @return int $id 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
     /**
-     * @return the $nome
+     * 
+     * Descrição: metodo getNome, responsavel por pegar o nome da variável "$nome".
+     * @return string $nome
      */
-    public function getNome()
-    {
+    public function getNome() {
         return $this->nome;
     }
-	
+
     /**
-     * @param field_type $id
+     * Descrição: Metodo setId, responsavel por setar a informação recebida por parametro($id) na variável id.
+     * @param tipo string $id 
+     * @return int $id
      */
-    public function setId($id)
-    {
+    public function setId($id) {
         $this->id = $id;
     }
 
     /**
-     * @param field_type $nome
+     * 
+     * Descrição: Metodo setNome, responsavel por setar a informação recebida por parametro($nome) na variável nome.
+     * @param tipo string $nome
+     * @return string $nome
      */
-    public function setNome($nome)
-    {
+    public function setNome($nome) {
         $this->nome = $nome;
     }
-	
+
 }
