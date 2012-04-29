@@ -5,7 +5,7 @@ namespace Application\Model\Document;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 
 /** @ODM\Document */
-class Evento { 
+class Evento {
 
     /** @ODM\Id */
     private $id;
@@ -14,28 +14,36 @@ class Evento {
     private $nome;
 
     /**
-     * @return the $id
+     * Descrição: Metodo getId, responsavel por buscar o valor da variavel $id.
+     * @return int $id 
      */
     public function getId() {
         return $this->id;
     }
 
     /**
-     * @return the $nome
+     * 
+     * Descrição: metodo getNome, responsavel por pegar o nome da variavel "$nome".
+     * @return string $nome
      */
     public function getNome() {
         return $this->nome;
     }
 
     /**
-     * @param field_type $id
+     * Descrição: Metodo setiDe, responsavel por setar a informação recebida por parametro($ID) na variavel ID.
+     * @param tipo string $id 
+     * @return int $id
      */
     public function setId($id) {
         $this->id = $id;
     }
 
     /**
-     * @param field_type $nome
+     * 
+     * Descrição: Metodo setNome, responsavel por setar a informação recebida por parametro($nome) na variavel nome.
+     * @param tipo string $nome
+     * @return string $nome
      */
     public function setNome($nome) {
         $this->nome = $nome;
