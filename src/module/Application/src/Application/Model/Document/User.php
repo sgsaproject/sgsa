@@ -5,8 +5,7 @@ namespace Application\Model\Document;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 
 /** @ODM\Document */
-class User
-{
+class User {
 
     /** @ODM\Id */
     private $id;
@@ -15,34 +14,38 @@ class User
     private $name;
 
     /**
-     * @return the $id
+     * Responsável por buscar o valor da variável $id.
+     * @return int $id 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
     /**
-     * @return the $name
+     * 
+     * Responsável por pegar o nome da variável "$nome".
+     * @return string $nome
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
     /**
-     * @param field_type $id
+     * Responsável por setar a informação recebida por parametro($id) na variável id.
+     * @param tipo string $id 
+     * @return int $id
      */
-    public function setId($id)
-    {
+    public function setId($id) {
         $this->id = $id;
     }
 
     /**
-     * @param field_type $name
+     * 
+     * Responsável por setar a informação recebida por parametro($nome) na variável nome.
+     * @param tipo string $nome
+     * @return string $nome
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
     }
 
