@@ -32,7 +32,7 @@ class Campus {
 
     /**
      * 
-     * Descrição: metodo getNome, responsavel por pegar o nome da variável "$nome".
+     * Responsável por pegar o nome da variável "$nome".
      * @return string $nome
      */
     public function getNome() {
@@ -41,7 +41,7 @@ class Campus {
 
     /**
      * 
-     * Descrição: metodo getCursos, responsavel por retornar o curso associado.
+     * Responsável por retornar o curso associado.
      * @return array cursos
      */
     public function getCursos() {
@@ -50,7 +50,7 @@ class Campus {
 
     /**
      * 
-     * Descrição: metodo getCursos, responsavel por retornar o evento associado.
+     * Responsável por retornar o evento associado.
      * @return array eventos
      */
     public function getEventos() {
@@ -59,7 +59,7 @@ class Campus {
 
     /**
      * 
-     * Descrição: metodo getCursos, responsavel por retornar o local associado.
+     * Responsável por retornar o local associado.
      * @return array locais
      */
     public function getLocais() {
@@ -67,7 +67,7 @@ class Campus {
     }
 
     /**
-     * Descrição: Metodo setId, responsavel por setar a informação recebida por parametro($id) na variável id.
+     * Responsável por setar a informação recebida por parametro($id) na variável id.
      * @param tipo string $id 
      * @return int $id
      */
@@ -77,7 +77,7 @@ class Campus {
 
     /**
      * 
-     * Descrição: Metodo setNome, responsavel por setar a informação recebida por parametro($nome) na variável nome.
+     * Responsável por setar a informação recebida por parametro($nome) na variável nome.
      * @param tipo string $nome
      * @return string $nome
      */
@@ -87,7 +87,7 @@ class Campus {
 
     /**
      * 
-     * Descrição: Metodo setCursos, responsavel por setar as informações recebidas por parametro($cursos) no array cursos.
+     * Responsável por setar as informações recebidas por parametro($cursos) no array cursos.
      * @param tipo array $cursos
      * @return array $cursos
      */
@@ -97,7 +97,7 @@ class Campus {
 
     /**
      * 
-     * Descrição: Metodo setEventos, responsavel por setar as informações recebidas por parametro($eventos) no array eventos.
+     * Responsável por setar as informações recebidas por parametro($eventos) no array eventos.
      * @param tipo array $eventos
      * @return array $eventos
      */
@@ -106,7 +106,7 @@ class Campus {
     }
 
     /**
-     * Descrição: Metodo setLocais, responsavel por setar as informações recebidas por parametro($cursos) no array locais.
+     * Responsável por setar as informações recebidas por parametro($cursos) no array locais.
      * @param tipo array $locais
      * @return array $locais
      */

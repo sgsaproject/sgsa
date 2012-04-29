@@ -14,7 +14,7 @@ class Evento {
     private $nome;
 
     /**
-     * Descrição: Metodo getId, responsavel por buscar o valor da variavel $id.
+     * Responsável por buscar o valor da variavel $id.
      * @return int $id 
      */
     public function getId() {
@@ -23,7 +23,7 @@ class Evento {
 
     /**
      * 
-     * Descrição: metodo getNome, responsavel por pegar o nome da variavel "$nome".
+     * Responsável por pegar o nome da variavel "$nome".
      * @return string $nome
      */
     public function getNome() {
@@ -31,7 +31,7 @@ class Evento {
     }
 
     /**
-     * Descrição: Metodo setiDe, responsavel por setar a informação recebida por parametro($ID) na variavel ID.
+     * Responsável por setar a informação recebida por parametro($ID) na variavel ID.
      * @param tipo string $id 
      * @return int $id
      */
@@ -41,7 +41,7 @@ class Evento {
 
     /**
      * 
-     * Descrição: Metodo setNome, responsavel por setar a informação recebida por parametro($nome) na variavel nome.
+     * Responsável por setar a informação recebida por parametro($nome) na variavel nome.
      * @param tipo string $nome
      * @return string $nome
      */

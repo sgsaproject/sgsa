@@ -63,7 +63,7 @@ class Instituicao {
 
     /**
      * 
-     * Responsavel por setar as informações recebidas por parametro($campi) no array de campi associados com a Instituição.
+     * Responsável por setar as informações recebidas por parametro($campi) no array de campi associados com a Instituição.
      * @param tipo array $campi
      * @return array $campi
      */
