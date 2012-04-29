@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="SGSA" basedir="." default="build" phingVersion="2.4.12">
-	<property name="srcdir" value="${project.basedir}/src" override="true" />
-	<property name="builddir" value="${project.basedir}/build" override="true" />
+    <property name="srcdir" value="${project.basedir}/src" override="true" />
+    <property name="builddir" value="${project.basedir}/build" override="true" />
 	
-	<target name="info" depends="">
+    <target name="info" depends="">
         <echo msg="Basedir: ${project.basedir}" />
-		<echo msg="Srcdir: ${srcdir}" />
+	<echo msg="Srcdir: ${srcdir}" />
     </target>
 	
-	<target name="prepare">
+    <target name="prepare">
         <echo msg="Making directory ./build" />
-		<delete dir="./build" includeemptydirs="true" verbose="true" failonerror="true" />
+	<delete dir="./build" includeemptydirs="true" verbose="true" failonerror="true" />
         <mkdir dir="./build"/>
     </target>
 	
@@ -26,11 +26,11 @@
 	<target name="version" depends="">
         <echo msg="Inserting new version" />
 		<copy file="version.txt" tofile="${srcdir}/version.txt" overwrite="true"/>
-    </target>
+        </target>
 	<version releasetype="Bugfix" file="${srcdir}/version.txt" property="version.number"/>
 	-->
 
-	<target name="build" depends="info,prepare,testEnvironment">
+    <target name="build" depends="info,prepare,testEnvironment">
         <echo msg="Building..." />
     </target>
 </project>
