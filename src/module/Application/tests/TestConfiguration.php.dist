@@ -24,10 +24,11 @@ define('ZEND_FRAMEWORK_PATH', realpath(__DIR__ . '/../../../vendor/ZendFramework
 // define('MODULE_NAME', 'SomeModuleName');
 
 // Add additional paths where additional modules can be found
-// $additionalModulePaths = array(
+ $additionalModulePaths = array(
 //     '/usr/share/lib/php/',
-//     'DoctrineMongoODMModule' => realpath(__DIR__.'/../../../vendor/DoctrineMongoODMModule'),
-// );
+     'DoctrineMongoODMModule' => realpath(__DIR__.'/../../../vendor/DoctrineMongoODMModule'),
+ );
 
+ 
 // Add dependencies, for example a vendor may create several modules that all depend on a common library
-//$moduleDependencies = array('DoctrineMongoODMModule');
+ $moduleDependencies = array('DoctrineMongoODMModule');
