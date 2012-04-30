@@ -44,7 +44,7 @@ $modules = array($moduleName);
 if (isset($moduleDependencies)) {
     $modules = array_merge($modules, $moduleDependencies);
 }
-//var_dump($modulePaths);die;
+
 $listenerOptions = new Zend\Module\Listener\ListenerOptions(array('module_paths' => $modulePaths));
 $defaultListeners = new Zend\Module\Listener\DefaultListenerAggregate($listenerOptions);
 $moduleManager = new \Zend\Module\Manager($modules);

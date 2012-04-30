@@ -1,18 +1,20 @@
 <?php
 namespace Application\Model\Document;
+use Doctrine\ODM\MongoDB\Mapping\Annotations\Document,
+    Doctrine\ODM\MongoDB\Mapping\Annotations\Field,
+    Doctrine\ODM\MongoDB\Mapping\Annotations\ReferenceMany,
+   Doctrine\ODM\MongoDB\Mapping\Annotations\Id;
 
-use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
-
-/** @ODM\Document */
+/** @Document */
 class Instituicao {
 
-    /** @ODM\Id */
+    /** @Id */
     private $id;
 
-    /** @ODM\Field(type="string") */
+    /** @Field(type="string") */
     private $nome;
 
-    /** @ODM\ReferenceMany(targetDocument="Campus") */
+    /** @ReferenceMany(targetDocument="Campus") */
     private $campi = array();
 
     /**
