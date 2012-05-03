@@ -48,7 +48,7 @@ if (!in_array($settings['cache'], $cache)) {
     ));
 }
 $settings['cache'] = 'doctrine_cache_' . $settings['cache'];
-
+//var_dump(realpath(__DIR__ . '/../../module/Application/src/Application/Model/Document/Proxy'));die;
 return array(
     'doctrine_mongoodm_module' => array(
         'annotation_file' => $settings['annotation_file'],
@@ -62,8 +62,12 @@ return array(
             'mongo_config' => array(
                 'parameters' => array(
                     'opts' => array(
-                        'auto_generate_proxies' => !$settings['production'],
-                        'auto_generate_hydrators' => !$settings['production'],
+                        'auto_generate_proxies'   => true,
+                        'proxy_dir'               => __DIR__ . '/../../module/Application/src/Application/Model/Document/Proxy',
+                        'proxy_namespace'         => 'Application\Model\Document\Proxy',
+                        'auto_generate_hydrators' => true,
+                        'hydrator_dir'            => __DIR__ . '/../../module/Application/src/Application/Model/Document/Hydrators',
+                        'hydrator_namespace'      => 'Application\Model\Document\Hydrators',
                         'default_db' => $settings['config']['default_db'],
                     ),
                     'metadataCache' => $settings['cache'],
@@ -82,3 +86,4 @@ return array(
         ),
     ),
 );
+

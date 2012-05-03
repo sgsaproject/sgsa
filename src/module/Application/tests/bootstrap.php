@@ -10,7 +10,7 @@ if (is_readable($testsPath . '/TestConfiguration.php')) {
 }
 
 $path = array(
-    ZEND_FRAMEWORK_PATH,
+    ZF2_PATH,
     get_include_path(),
 );
 set_include_path(implode(PATH_SEPARATOR, $path));
@@ -44,7 +44,7 @@ $modules = array($moduleName);
 if (isset($moduleDependencies)) {
     $modules = array_merge($modules, $moduleDependencies);
 }
-
+//var_dump($modules);die;
 $listenerOptions = new Zend\Module\Listener\ListenerOptions(array('module_paths' => $modulePaths));
 $defaultListeners = new Zend\Module\Listener\DefaultListenerAggregate($listenerOptions);
 $moduleManager = new \Zend\Module\Manager($modules);

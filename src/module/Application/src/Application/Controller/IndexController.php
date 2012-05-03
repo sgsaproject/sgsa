@@ -17,7 +17,8 @@ class IndexController extends ActionController
     public function indexAction()
     {
         $dm = $this->getLocator()->get('mongo_dm');
-
+        $mc = $this->getLocator()->get('mongo_connection');
+        var_dump($mc);
         //$instituicao = new Instituicao();
         //$instituicao->setNome('UNIPAMPA');
 //        $campusAlegrete = new Campus();
@@ -32,8 +33,10 @@ class IndexController extends ActionController
         //$dm->persist($instituicao);
         //$dm->flush();
         //var_dump($instituicao);
-        $instituicao2 = $dm->getRepository('\Application\Model\Document\Instituicao')->findOneByNome('UNIPAMPA');
-        var_dump($instituicao2);
+        $instituicao2 = $dm->getRepository('Application\Model\Document\Instituicao')->findByNome('UNIPAMPA');
+        var_dump($instituicao2->toArray());
+        //$result = $dm->getRepository('Application\Model\Document\Instituicao')->findBy(array('nome' => 'UNIPAMPA'));
+        //print_r($result->toArray());
 
         return new ViewModel();
     }
