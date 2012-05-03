@@ -26,7 +26,7 @@ define('ZEND_FRAMEWORK_PATH', realpath(__DIR__ . '/../../../vendor/ZendFramework
 // Add additional paths where additional modules can be found
  $additionalModulePaths = array(
 //     '/usr/share/lib/php/',
-     'DoctrineMongoODMModule' => realpath(__DIR__.'/../../../vendor/DoctrineMongoODMModule'),
+     realpath(__DIR__.'/../../../vendor/'),
  );
 
  
