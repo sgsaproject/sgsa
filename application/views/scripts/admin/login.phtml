@@ -1,0 +1,10 @@
+<div id="formLogin">
+    <h1>Bem vindo ao sistema</h1>
+    <p>Digite seu login e senha para entrar no sistema.</p>
+    <br />
+    <?= $this->login ?>
+    <?if(isset($this->error)):?>
+        <span class="error"><?=$this->error?></span>
+    <?endif;?>
+        <a href="#">Esqueceu a senha?</a>
+</div>

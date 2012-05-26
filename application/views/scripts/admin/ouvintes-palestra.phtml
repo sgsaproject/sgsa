@@ -1,0 +1,36 @@
+<br />
+<div class="box-topo">
+    <h2>Ouvintes na sala</h2>
+</div>
+<div class="tabela" id="tabela-ouvintes">
+    <table class="tabela" name="ouvintes">
+
+        <thead>
+            <tr>
+                <td width="10%">Código</td>
+                <td width="60%">Nome Completo</td>
+                <td width="15%">Hora Entrada</td>
+                <td width="15%">Hora Saída</td>
+            </tr>
+        </thead>
+
+        <tbody>
+            <? foreach ($this->sessoes as $sessao): ?>
+                <? $ouvinte = $sessao->findDependentRowset('Application_Model_DbTable_Ouvinte')->current() ?>
+                <tr>
+                    <td><?= $ouvinte->codigo_barras ?></td>
+                    <td><?= $ouvinte->nome ?></td>
+                    <td style="color:green;"><?=$this->FormatarHora($sessao->hora_entrada) ?></td>
+                    <td style="color:red;"><?= $this->FormatarHora($sessao->hora_saida) ?></td>
+                </tr>
+            <? endforeach; ?>
+
+        </tbody>
+
+    </table>
+
+
+</div>
+<div class="box-footer">
+    <span class="txt_pequeno txt_light">No momento estão <?= count($this->sessoes) ?> ouvintes na sala.</span>
+</div>

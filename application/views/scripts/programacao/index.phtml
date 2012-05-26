@@ -1,0 +1,33 @@
+<h2>Programação</h2>
+<div class="tabela">
+    <!--<div class="botao">
+        <a href="https://spreadsheets.google.com/spreadsheet/pub?hl=en_US&hl=en_US&key=0Ak-rnvrEPBtHdFNvMldxVVo3M1hpUDRPakNtQ1hvVGc&single=true&gid=6&output=html" target="_blank">Ver Programação Parcial</a>
+    </div>
+    <br />-->
+    <table class="tabela" name="programacao">
+        <thead>
+            <tr>
+                <td width="10%">Data</td>
+                <td width="10%">Hora de Início</td>
+                <td width="10%">Sala</td>
+                <td width="30%">Palestra</td>
+                <td width="20%">Palestrante</td>
+                <td width="20%">Instituição do Palestrante</td>
+            </tr>
+        </thead>
+        <tbody>
+            <? foreach ($this->palestras as $palestra): ?>
+                <tr>
+                    <td><?= $this->FormatarData($palestra->hora_inicio_prevista) ?></td>
+                    <td><?= $this->FormatarHora($palestra->hora_inicio_prevista) ?></td>
+                    <td><?= $palestra->sala ?></td>
+                    <td><?= $palestra->nome_palestra ?></td>
+                    <td><?= $palestra->nome_palestrante  ?></td>
+                    <td><?= $palestra->instituicao ?></td>
+                </tr>
+            <? endforeach; ?>
+        </tbody>
+    </table>
+    
+    
+</div>

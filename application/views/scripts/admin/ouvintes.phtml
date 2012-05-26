@@ -1,0 +1,60 @@
+<div class="box-topo">
+    <h2>Ouvintes Cadastrados no Sistema</h2>
+    <ul class="tabela_controles">
+<!--        <li><a href="<?//=$this->baseUrl('admin/pesquisar-ouvinte')?>" rel="tooltip" title="Pesquisar Ouvinte">
+                <img height="24" width="24" alt="Pesquisar Ouvinte" src="<?//=$this->baseUrl('img/pesquisar.png')?>" border="0" /></a></li>-->
+                
+        <li><a href="<?=$this->baseUrl('admin/ouvintes/filtro/isento')?>" rel="tooltip" title="Listar Ouvintes Isentos">
+                <img height="24" width="24" alt="Listar Ouvintes Isentos" src="<?=$this->baseUrl('img/isento.png')?>" border="0" /></a></li>
+                
+        <li><a href="<?=$this->baseUrl('admin/ouvintes/filtro/pago')?>" rel="tooltip" title="Listar Ouvintes Pagos">
+                <img height="24" width="24" alt="Listar Ouvintes Pagos" src="<?=$this->baseUrl('img/pago.png')?>" border="0" /></a></li>
+        
+        <li><a href="<?=$this->baseUrl('admin/ouvintes/filtro/nao-pago')?>" rel="tooltip" title="Listar Ouvintes Não-Pagos">
+                <img height="24" width="24" alt="Listar Ouvintes Não-Pagos" src="<?=$this->baseUrl('img/naopago.png')?>" border="0" /></a></li>        
+        
+    </ul>
+</div>
+<?=$this->form?>
+<div class="tabela">
+    <table class="tabela" name="palestras">
+        <thead>
+            <tr>
+                <td width="8%">ID</td>
+                <td width="17%">Instituição</td>
+                <td width="27%">Nome</td>
+                <td width="10%">Cód. Barras</td>
+                <td width="15%">Pagamento</td>
+                <td width="13%">Opções</td>
+            </tr>
+        </thead>
+        
+        <tbody>
+            
+            <?foreach($this->ouvintes as $ouvinte):?>
+            <tr>
+                <td><?=$ouvinte->id_ouvinte?></td>
+                <td><?=$ouvinte->instituicao?></td>
+                <td><?=$ouvinte->nome?></td>
+                <td><?=$ouvinte->codigo_barras?></td>
+                <td><?=$this->FormatarPagamento($ouvinte->pagamento)?></td>
+                <td>
+                    <a href="<?=$this->baseUrl('/admin/ver-dados-ouvinte/id_ouvinte/'.$ouvinte->id_ouvinte)?>" rel="tooltip" title="Ver dados do ouvinte"><img alt="Ver Dados do Ouvinte" width="16" height="16" src="<?=$this->baseUrl('img/editar.ico')?>" /></a>
+                    <a onClick="return confirm('Deseja deletar esse ouvinte?');" href="<?=$this->baseUrl('admin/deletar-ouvinte/id_ouvinte/'.$ouvinte->id_ouvinte)?>" rel="tooltip" title="Deletar Ouvinte"><img alt="Deletar Ouvinte" width="16" height="16" src="<?=$this->baseUrl('img/apagar.png')?>" /></a>
+                    <a onClick="return confirm('Deseja editar os dados desse ouvinte?');" href="<?=$this->baseUrl('admin/editar-ouvinte/id_ouvinte/'.$ouvinte->id_ouvinte)?>" rel="tooltip" title="Editar dados do ouvinte"><img alt="Editar Ouvinte" width="16" height="16" src="<?=$this->baseUrl('img/editar.png')?>" /></a>
+                    <a onClick="return confirm('Deseja marcar este ouvinte como Não-Pago?');" href="<?=$this->baseUrl('admin/alterar-pagamento/pagamento/naopago/id_ouvinte/'.$ouvinte->id_ouvinte)?>" rel="tooltip" title="Marcar Ouvinte como não pago"><img alt="Marcar Ouvinte como não pago" width="16" height="16" src="<?=$this->baseUrl('img/marcarnaopago.ico')?>" /></a>
+                    <a onClick="return confirm('Deseja marcar este ouvinte como Pago?');" href="<?=$this->baseUrl('admin/alterar-pagamento/pagamento/pago/id_ouvinte/'.$ouvinte->id_ouvinte)?>" rel="tooltip" title="Marcar Ouvinte como Pago"><img alt="Marcar Ouvinte como pago" width="16" height="16" src="<?=$this->baseUrl('img/marcarpago.ico')?>" /></a>
+                    <a onClick="return confirm('Deseja marcar este ouvinte como Isento?');" href="<?=$this->baseUrl('admin/alterar-pagamento/pagamento/isento/id_ouvinte/'.$ouvinte->id_ouvinte)?>" rel="tooltip" title="Marcar Ouvinte como Isento"><img alt="Marcar Ouvinte como isento" width="16" height="16" src="<?=$this->baseUrl('img/marcarisento.ico')?>" /></a>
+                </td>
+            </tr>
+            <?endforeach;?>
+            
+        </tbody>
+        
+    </table>
+</div>
+<div class="box-footer">
+    <span class="txt_pequeno txt_light">Existem <?=count($this->ouvintes)?> ouvintes cadastrados no sistema.</span>
+    <br />
+    <span class="txt_pequeno txt_light" style="font-weight: bold;"><?=empty($this->filtro) ? '':'Filtrado por '.$this->filtro?></span>
+</div>

@@ -1,0 +1,6 @@
+<? $c = Zend_Controller_Front::getInstance()->getRequest()->getControllerName(); ?>
+<li><a href="<?=$this->baseUrl('/index')?>" class="<?=$c == 'index' ? 'current' : ''?>">Pagina Inicial</a></li>
+<li><a href="<?=$this->baseUrl('/objetivo')?>" class="<?=$c == 'objetivo' ? 'current' : ''?>">Objetivo</a></li>
+<li><a href="<?=$this->baseUrl('/inscricao')?>" class="<?=$c == 'inscricao' ? 'current' : ''?>">Inscrições</a></li>
+<li><a href="<?=$this->baseUrl('/programacao')?>" class="<?=$c == 'programacao' ? 'current' : ''?>">Programação</a></li>
+<li><a href="<?=$this->baseUrl('/contato')?>" class="<?=$c == 'contato' ? 'current' : ''?>">Contato</a></li> 

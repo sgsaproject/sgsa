@@ -1,0 +1,11 @@
+<div style="margin:20px;">
+    <p>Nome: <?= $this->ouvinte->nome ?></p>
+    <p>Email: <?=$this->ouvinte->email?></p>
+    <p>Instituição: <?=$this->ouvinte->instituicao?></p>
+    <p>Codigo de Barras: <?=$this->ouvinte->codigo_barras?></p>
+    <p style="margin-top:5px;"><img src="<?= $this->baseUrl('/index/codigo-barras/code/' . $this->ouvinte->codigo_barras) ?>" alt="<?= $this->ouvinte->codigo_barras ?>" /></p>
+</div>
+
+<div class="botao">
+    <a href="<?=$this->baseUrl('/admin/ouvintes')?>">Voltar</a>
+</div>

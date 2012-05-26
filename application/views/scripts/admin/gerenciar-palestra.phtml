@@ -1,0 +1,112 @@
+<div id="info">
+    <div id="palestra">
+        <h3>Palestrante: <span><?= $this->palestra->nome_palestrante ?></span></h3>
+        <h3>Palestra: <span><?= $this->palestra->nome_palestra ?></span></h3>
+    </div>
+    <div id="fiscais">
+        <? $p = $this->palestra->findDependentRowset('Application_Model_DbTable_Permissao') ?>
+        <? foreach ($p as $fiscal): ?>
+            <h3>Fiscal: <span><?= $fiscal->findDependentRowset('Application_Model_DbTable_Usuario')->current()->nome ?></span></h3>
+        <? endforeach; ?>
+    </div>
+</div>
+<div id="ouvintes">
+    <br />
+    <div class="box-topo">
+        <h2>Ouvintes na sala</h2>
+    </div>
+    <div class="tabela" id="tabela-ouvintes">
+        <table class="tabela" name="ouvintes">
+
+            <thead>
+                <tr>
+                    <td width="10%">Código</td>
+                    <td width="55%">Nome Completo</td>
+                    <td width="15%">Hora Entrada</td>
+                    <td width="20%">Hora Saída</td>
+                </tr>
+            </thead>
+
+            <tbody>
+                <? foreach ($this->sessoes as $sessao): ?>
+                    <? $ouvinte = $sessao->findDependentRowset('Application_Model_DbTable_Ouvinte')->current() ?>
+                    <tr>
+                        <td><?= $ouvinte->codigo_barras ?></td>
+                        <td><?= $ouvinte->nome ?></td>
+                        <td style="color:green;"><?= $this->FormatarHora($sessao->hora_entrada) ?></td>
+                        <td style="color:red;"><?= $this->FormatarHora($sessao->hora_saida) ?></td>
+                    </tr>
+                <? endforeach; ?>
+
+            </tbody>
+
+        </table>
+
+
+    </div>
+    <div class="box-footer">
+        <span class="txt_pequeno txt_light">No momento estão <?= count($this->sessoes) ?> ouvintes na sala.</span>
+    </div>
+
+</div>
+
+<div id="extra">
+
+    <script type="text/javascript">
+        function reloadOuvintes(){
+            $("#ouvintes").load('<?= $this->baseUrl('/admin/ouvintes-palestra/id_palestra/' . $this->palestra->id_palestra) ?>');
+        }
+        function marcar(){
+            var cod = $("#codigo_barras").val(); 
+            $("#status-ouvinte").load('<?= $this->baseUrl('/admin/registrar-ouvinte-palestra/codigo_barras/') ?>'+cod+'/id_palestra/'+<?= $this->palestra->id_palestra ?>);
+            $("#codigo_barras").val('');
+            setTimeout("reloadOuvintes()", 2000);
+            setTimeout("$('#status-ouvinte').html('')", 8000);          
+        }
+        
+    </script>
+    <form action="#" onsubmit="marcar();return false">
+        <p>Codigo de Barras</p> <br /> 
+        <input type="text" name="codigo_barras" id="codigo_barras" value="" />
+        <input type="submit" value="Marcar Entrada/Saida Ouvinte" rel="tooltip" class="button" title="Marcar Entrada/Saida Ouvinte"/>
+    </form>
+    <div id="status-ouvinte"></div>
+
+    <br />
+    <br />
+
+    <hr />
+
+    <br />
+    
+    <script type="text/javascript">
+        function iniciarPalestra(id){
+            if(confirm("Deseja iniciar a palestra no sistema?")){
+                window.location = "<?=$this->baseUrl('/admin/iniciar-palestra/id_palestra/')?>"+id;
+            }
+        }
+        function finalizarPalestra(id){
+            if(confirm("Deseja finalizar a palestra no sistema?")){
+                window.location = "<?=$this->baseUrl('/admin/finalizar-palestra/id_palestra/')?>"+id;
+            }
+        }
+    </script>
+    
+    <form action="" onSubmit="iniciarPalestra('<?=$this->palestra->id_palestra?>');return false">
+        <input type="submit" rel="tooltip" class="button" title="Inicia palestra no sistema" value="Inicia Palestra" />
+    </form>
+    <br /></br>
+    <form action="" onSubmit="finalizarPalestra('<?=$this->palestra->id_palestra?>');return false">
+        <input type="submit" rel="tooltip" class="button" title="Finaliza palestra no sistema" value="Finaliza Palestra" />
+    </form>
+    
+    <script type="text/javascript">
+        function atualizarTempoCorrente(){
+            $("#tempoCorrente").load('<?= $this->baseUrl('/admin/tempo-corrente/id_palestra/'.$this->palestra->id_palestra) ?>');
+        }
+        setInterval("atualizarTempoCorrente()", 2000);
+    </script>
+    <div id="tempoCorrente">
+    </div>
+
+</div>

@@ -1,0 +1,46 @@
+<div class="box-topo">
+    <h2>Palestras Cadastradas</h2>
+    <ul class="tabela_controles">
+        <li><a href="<?=$this->baseUrl('admin/inserir-editar-palestra')?>" rel="tooltip" title="Cadastrar Palestra">
+                <img height="24" width="24" alt="Insere Nova Palestra" src="<?=$this->baseUrl('img/historico.png')?>" border="0" /></a></li>
+    </ul>
+</div>
+<div class="tabela">
+    <table class="tabela" name="palestras">
+        <thead>
+            <tr>
+                <td width="15%">Data e Hora</td>
+                <td width="15%">Palestrante</td>
+                <td width="25%">Nome da Palestra</td>
+                <td width="10%">Sala</td>
+                <td width="23%">Fiscais</td>
+                <td width="12%">Opções</td>
+            </tr>
+        </thead>
+        <tbody>
+            <?foreach($this->palestras as $palestra):?>
+            <tr>
+                <td><?=$this->FormatarDataHora($palestra->hora_inicio_prevista)?></td>
+                <td><?=$palestra->nome_palestrante?></td>
+                <td><?=$palestra->nome_palestra?></td>
+                <td><?=$palestra->sala?></td>
+                <?$p = $palestra->findDependentRowset('Application_Model_DbTable_Permissao')?>
+                <td>
+                    <?foreach($p as $fiscal):?>
+                        Fiscal:<?=$fiscal->findDependentRowset('Application_Model_DbTable_Usuario')->current()->nome?> <a href="<?=$this->baseUrl('/admin/apagar-fiscal/id_palestra/'.$palestra->id_palestra.'/id_usuario/'.$fiscal->id_usuario)?>" onClick="return confirm('Deseja apagar o fiscal?');" rel="tooltip" title="Apagar Fiscal  da Palestra"><img src="<?=$this->baseUrl('/img/apagar.png')?>" width="16" height="16" border="0" alt="" /></a><br />
+                    <?endforeach;?>
+                </td>
+                <td>
+                    <a href="<?=$this->baseUrl('/admin/inserir-editar-palestra/id_palestra/'.$palestra->id_palestra)?>" rel="tooltip" title="Editar dados da palestra"><img src="<?=$this->baseUrl('/img/editar.png')?>" width="16" height="16" border="0" alt="" /></a>
+                    <a href="<?=$this->baseUrl('/admin/apagar-palestra/id_palestra/'.$palestra->id_palestra)?>" onClick="return confirm('Deseja apagar a palestra do Sistema?');" rel="tooltip" title="Apagar Palestra do sistema"><img src="<?=$this->baseUrl('/img/apagar.png')?>" width="16" height="16" border="0" alt="" /></a>
+                    <a href="<?=$this->baseUrl('/admin/gerenciar-palestra/id_palestra/'.$palestra->id_palestra)?>" onClick="return confirm('Deseja gerenciar a palestra?');" rel="tooltip" title="Gerenciar palestra"><img src="<?=$this->baseUrl('/img/play.ico')?>" width="16" height="16" border="0" alt="" /></a>
+                    <a href="<?=$this->baseUrl('/admin/adicionar-fiscal-palestra/id_palestra/'.$palestra->id_palestra)?>" onClick="return confirm('Deseja fiscal a palestra?');" rel="tooltip" title="Adicionar fiscal na palestra"><img src="<?=$this->baseUrl('/img/addfiscal.ico')?>" width="16" height="16" border="0" alt="" /></a>
+                </td>
+            </tr>
+            <?endforeach;?>
+        </tbody>
+    </table>
+</div>
+<div class="box-footer">
+    <span class="txt_pequeno txt_light">Existem <?=count($this->palestras)?> palestras cadastradas no sistema.</span>
+</div>

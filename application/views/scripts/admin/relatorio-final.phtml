@@ -1,0 +1,45 @@
+<h1>Relatório Final</h1>
+<!--<table cellpadding="10">
+    <thead><td>Nome</td><td>Total</td><td>E-mail</td></thead>
+<? //foreach($this->result as $o):?>
+<tr><td><? //= ucwords(strtolower($o['nome'])) ?></td><td><? //=$o['total'] ?> Horas</td><td><? //= strtolower($o['email']) ?></td></tr>
+<? // endforeach; ?>
+</table>-->
+<table>
+    <tr>
+        <td>
+            <?
+
+            function fullUpper($string) {
+                return strtr(strtoupper($string), array(
+                            "à" => "À",
+                            "è" => "È",
+                            "ì" => "Ì",
+                            "ò" => "Ò",
+                            "ù" => "Ù",
+                            "á" => "Á",
+                            "é" => "É",
+                            "í" => "Í",
+                            "ó" => "Ó",
+                            "ú" => "Ú",
+                            "â" => "Â",
+                            "ê" => "Ê",
+                            "î" => "Î",
+                            "ô" => "Ô",
+                            "û" => "Û",
+                            "ç" => "Ç",
+                            "ã" => "Ã",
+                            "ĩ" => "Ĩ",
+                            "õ" => "Õ",
+                            "ũ" => "Ũ",
+                            "ö" => "Ö"
+                        ));
+            }
+
+            foreach ($this->result as $o) {
+                echo fullUpper($o['nome']) . "," . $o['total'] . "," . $o['email'] . "<br />";
+            }
+            ?>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,393 @@
+
+body {
+
+    background-color: #254406;
+    background-image: url('../img/glass-green.png');
+    background-repeat: no-repeat;
+    font-family: "Lucida Grande", Verdana, sans-serif;
+
+}
+
+.tooltip {
+    position: absolute;
+    display: none;
+    padding: 5px 20px;
+    background: #333 url('../img/grad-rev.png') repeat-x top;
+    color: #fff;
+    font-size: 12px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    border-width: 2px;
+    border-style: groove;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 1px 0px rgba(225, 225, 225, 0.5) inset;
+    -moz-box-shadow: 0px 1px 0px rgba(225, 225, 225, 0.5) inset;
+    -webkit-box-shadow: 0px 1px 0px rgba(225, 225, 225, 0.5) inset;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+
+form {
+    margin: 0;
+    padding: 0;
+    padding-top: 15px;
+    padding-bottom: 20px;
+    padding-left: 150px;
+}
+
+.red {
+    color:#be1a10;
+}
+.txt_pequeno {
+    font-size: 85%;	
+}
+.txt_light {
+    color: #4d4d4d;	
+}
+
+label {
+    display: block;
+    float: left;
+    width: 200px;
+    padding-top: 10px;
+    font-size: 14px;
+}
+.lp {
+    width: 200px;
+}
+.lm {
+    width: 300px;
+}
+.lg {
+    width: 400px;
+}
+
+input[type=text],input[type=password], select, textarea {
+    border: solid 1px #e1e2e3;
+    margin: 4px 4px 8px 0px;
+    padding: 5px;
+    vertical-align: middle;
+    font-size: 11px;
+}
+
+textarea {
+    padding: 5px;
+    background: #e1e2e3;
+    border: 1px solid #bfbfbf;
+    box-shadow: inset 1px 1px 1px rgba(0,0,0,0.1);
+    -moz-box-shadow: inset 1px 1px 1px rgba(0,0,0,0.1);
+    -webkit-box-shadow: inset 1px 1px 1px rgba(0,0,0,0.1);
+    color:#545454;
+}
+
+input[type="text"],input[type=password], .inputbox{
+    padding: 5px;
+    background: #e1e2e3;
+    border: 1px solid #bfbfbf;
+    box-shadow: inset 1px 1px 1px rgba(0,0,0,0.1);
+    -moz-box-shadow: inset 1px 1px 1px rgba(0,0,0,0.1);
+    -webkit-box-shadow: inset 1px 1px 1px rgba(0,0,0,0.1);
+    color:#545454;
+}
+
+.button{
+    border:solid 1px #dfdfdf!important;
+    text-align:center;
+    padding:0px 10px;
+    color:#595959 !important;
+    cursor:pointer;
+    font-size:13px;
+    display:inline-block;
+    height:26px;
+    line-height:25px;
+    background-image:url(../img/bg-button.gif);
+    background-repeat:repeat-x;
+}
+.button:hover{ 
+    background-position:0 -26px;
+}
+
+#global {
+
+    background-color: #ffffff;
+    margin: 0 auto;
+    width: 1000px;
+    padding: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+}
+
+#topo {
+    width: 980px;
+    height: 172px;
+}
+#topo h1 {
+    font: 22px;
+    float: left;
+    background-image: url("../img/logo.png");
+    margin-left: 10px;
+    height: 172px;
+    width: 633px;
+}
+#topo #logoUnipampa {
+    float: right;
+    background-image: url("../img/logo_unipampa.png");
+    margin-top: 20px;
+    margin-right: 10px;
+    width: 300px;
+    height: 172px;
+}
+
+#menuBar {
+
+}
+#menuBar ul#menu {
+    width: 1000px;
+    height: 43px;
+    background: #FFF url("../img/menu-bg.gif") top left repeat-x;
+    font-size: 0.8em;
+    font-weight: bold; 
+    list-style-type: none; 
+    margin: 0; 
+    padding: 0;
+    float: left;
+}
+#menuBar ul#menu li {
+    display: block;
+    float: left;
+    margin: 0 0 0 5px;
+}
+#menuBar ul#menu li a {
+    height: 43px;
+    color: #777;
+    text-decoration: none;
+    display: block;
+    float: left; 
+    line-height: 200%; 
+    padding: 8px 15px 0;
+}
+#menuBar ul#menu li a:hover {
+    color: #FFF;
+    background: #FFF url("../img/current-bg.gif") top left repeat-x;
+    padding: 5px 15px 0;
+}
+#menuBar ul#menu li a.current {
+    color: #FFF;
+    background: #FFF url("../img/current-bg.gif") top left repeat-x;
+    padding: 5px 15px 0;
+}
+
+#conteudo {
+    margin: 5px;
+    width: 980px;
+    float: left;
+    min-height: 500px;
+}
+#conteudo h1 {
+    font-size: 22px;
+    font-weight: 700;
+    padding-left: 150px;
+}
+#conteudo h2 {
+    font-size: 22px;
+    font-weight: 700;
+}
+#conteudo p {
+    font-size: 12px;
+    padding: 0;
+    margin: 0;
+}
+#conteudo #info {
+    width: 960px;
+    height: 50px;
+    margin: 3px;
+    padding-top: 10px;
+    padding-left: 15px;
+    background-color: #88ba3d;
+    color: #ffffff;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+#conteudo #info #palestra {
+    float: left;
+    width: 580px;
+}
+#conteudo #info #fiscais {
+    float: right;
+    width: 360px;
+}
+#conteudo #info h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+}
+#conteudo #info h3 span {
+    font-size: 14px;
+    font-weight: normal;
+}
+
+#conteudo #ouvintes {
+    width: 700px;
+    float: left;
+}
+#conteudo  #ouvintes h4 {
+    font-size: 14px;
+    font-weight: 700;
+    padding-left: 20px;
+}
+#formLogin {
+    margin-left: 170px;
+    width: 500px;
+}
+#formLogin h1 {
+    padding: 0;
+    margin: 0;
+    margin-top: 30px;
+}
+#formLogin a {
+    color: #333;
+    font-size: 12px;
+    text-decoration: none;
+}
+#formLogin a:hover {
+    text-decoration: underline;
+}
+#formLogin form {
+    padding: 0;
+    margin: 0;
+}
+#formLogin p {
+    margin: 0;
+    padding: o;
+}
+#formLogin label {
+    width: 150px;
+}
+#formLogin .lembrarSenha {
+    font-size: 14px;
+}
+
+.tabelaProgramacao {
+    border: black solid 1px;
+}
+#horario {
+    width: 100%;
+}
+.dia{
+    -o-transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+.tabela {
+    border: none;
+    width: 100%;
+}
+.tabela thead th, .tabela thead td {
+    padding: 6px 10px;
+    font-weight: 700;
+    font-size: 12px;
+    color: #333;
+    background: url('../img/boxheader.gif') repeat-x scroll center top #E2E2E2;	
+    border-bottom: 1px solid #cccccc;
+    border-right: 1px solid #CCCCCC;
+}
+.tabela thead th.ultimo, .tabela thead td.ultimo {
+    border-right: 0;	
+}
+.tabela tbody th, .tabela tbody td {
+    border-right: 1px dotted #cccccc;
+    vertical-align: middle;
+    padding: 10px;
+    font-size: 70%;	
+}
+.tabela tbody tr:hover th, .tabela tbody tr:hover td {
+    background: #A6C457;
+    color: #fff;
+}
+.tabela_controles {
+    bottom: 0;
+    margin: 0 15px 0 0;
+    position: absolute;
+    right: 0;
+    line-height: 100%;
+    border-right: 1px solid #ccc;
+}
+.tabela_controles li {
+    float: left;
+    list-style: none outside none;
+}
+.tabela_controles li a {
+    color: #181818;
+    text-shadow: none;
+    text-decoration: none;
+    font-size: 93%;
+    outline: none;
+    display: block;
+    background: url('../img/boxheader.gif') repeat-x 0 5px #ffffff;
+    border-left: 1px solid #ccc;
+    padding: 9px 15px 5px 14px;
+}
+.tabela_controles li a:hover {
+    background: url('../img/boxheader-rev.gif') repeat-x top #ffffff;
+}
+.box-topo {
+    background: #e2e2e2 url('../img/boxheader.gif') repeat-x top;
+    padding: 12px 15px 10px;
+    border-bottom: 1px solid #ccc;
+    position: relative;
+    border-radius: 3px 3px 0 0;	
+    -moz-border-radius: 3px 3px 0 0;	
+    -webkit-border-radius: 3px 3px 0 0;	
+}
+.box-topo h2 {
+    font-weight: 700;
+    display: inline;
+    font-size: 116%;
+    color: #333333;
+    text-shadow: 0 1px 0 #fff;
+    margin-bottom: 0;
+}
+.box-footer {
+    background: #e2e2e2 url('../img/boxheader.gif') repeat-x top;
+    padding: 10px 15px;
+    border-top: 1px solid #ccc;
+    position: relative;
+    border-radius:0 0 3px 3px;
+    -moz-border-radius:0 0 3px 3px;
+    -webkit-border-radius:0 0 3px 3px;	
+}
+
+#conteudo #extra {
+    text-align: center;
+    padding-top: 40px;
+    float: right;
+    width: 260px;
+}
+#conteudo #extra p {
+    margin-left: 0;
+    padding-left: 0;
+}
+#conteudo #extra form {
+    margin: 0;
+    padding: 0;
+}
+
+#rodape {
+    margin-top: 10px;
+    clear: both;
+    background-color: #cccccc;
+    padding: 5px;
+}
+#rodape p {
+    font-size: 12px;
+    text-align: center;
+}

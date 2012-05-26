@@ -1,0 +1,83 @@
+<h2>Palestras Ouvintes</h2>
+<br />
+<script type="text/javascript">
+    /*function imprimir(){
+        var cods = $('#relatorio').html()
+        w=window.open();
+        w.document.write(cods);
+        w.print();
+        w.close();
+    }*/
+    function imprimir(){
+        td = document.getElementsByTagName("td");
+        for (i=0; i < td.length; i++) {
+            td[i].setAttribute("style", "border: black solid 1px");
+        }
+        table = document.getElementsByTagName("table");
+        for (i=0; i < table.length; i++) {
+            table[i].setAttribute("style", "border: black solid 1px");
+        }
+        var cods = $('#relatorio').html();
+        w=window.open();
+        w.document.write(cods);
+        w.print();
+        w.close();
+    }
+</script>
+
+<div class="botao">
+    <button onClick="imprimir()">Imprimir</button>
+</div>
+
+<!--<div id="relatorio">
+    <ul>
+<? // foreach ($this->palestras as $palestra): ?>
+
+            <li><? //= $palestra->nome_palestra  ?> - Data: <? //= $this->FormatarData($palestra->hora_inicio_prevista)  ?>
+<? // $sessoes = $palestra->findDependentRowset('Application_Model_DbTable_Sessao') ?>
+<? // foreach ($sessoes as $sessao): ?>
+                    <ul>
+<? // $ouvinte = $sessao->findDependentRowset('Application_Model_DbTable_Ouvinte')->current(); ?>
+                        <li><? //= $ouvinte->nome  ?> - Instituição: <? //= $ouvinte->instituicao  ?> - Curso: <? //= $ouvinte->curso  ?> - Data Entrada: <? //= $this->formatarDataHora($sessao->hora_entrada)  ?> - Data Saída: <? //= $this->formatarDataHora($sessao->hora_saida)  ?> - Tempo de permanência: <? //= $this->CalcularTempo($sessao->hora_entrada, $sessao->hora_saida)  ?></li>
+                    </ul>
+<? // endforeach; ?>
+            </li>
+
+<? // endforeach; ?>
+    </ul>
+</div>-->
+
+<div id="relatorio">
+
+    <? foreach ($this->palestras as $palestra): ?>
+        <h2>Palestra: <?= $palestra->nome_palestra ?></h2>
+        <h3>Data: <?= $this->FormatarData($palestra->hora_inicio_prevista) ?></h3>
+        <table class="tabela" name="<?= $palestra->nome_palestra ?>">
+            <thead>
+                <tr>
+                    <td width="25%">Nome</td>
+                    <td width="25%">Instituição</td>
+                    <td width="20%">Curso</td>
+                    <td width="10%">Data Entrada</td>
+                    <td width="10%">Data Saída</td>
+                    <td width="10%">Tempo de Permanência</td>
+                </tr>
+            </thead>
+            <? $sessoes = $palestra->findDependentRowset('Application_Model_DbTable_Sessao') ?>
+            <? foreach ($sessoes as $sessao): ?>
+                <? $ouvinte = $sessao->findDependentRowset('Application_Model_DbTable_Ouvinte')->current(); ?>
+                <tbody>
+                    <tr>
+                        <td><?= $ouvinte->nome ?></td>
+                        <td><?= $ouvinte->instituicao ?></td>
+                        <td><?= $ouvinte->curso ?></td>
+                        <td><?= $this->formatarDataHora($sessao->hora_entrada) ?></td>
+                        <td><?= $this->formatarDataHora($sessao->hora_saida) ?></td>
+                        <td><?= $this->CalcularTempo($sessao->hora_entrada, $sessao->hora_saida) ?></td>
+                    </tr>
+                </tbody>
+            <? endforeach; ?>
+        </table>
+        <br /><br /><hr style="border: black groove 3px;" /><br /><br />
+    <? endforeach; ?>
+</div>

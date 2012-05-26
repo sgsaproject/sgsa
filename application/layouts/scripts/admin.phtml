@@ -1,0 +1,80 @@
+<?= $this->doctype(); ?>
+<html>
+    <head>
+        <?= $this->headMeta() ?>
+        <?= $this->headTitle() ?>
+        <link href="<?= $this->baseUrl('/img/favicon.ico') ?>" rel="shortcut icon" type="image/x-icon" /> 
+
+        <!-- CSS Sistema -->
+        <?
+        $this->headLink()->appendStylesheet($this->baseUrl('/css/estiloGlobal.css'))
+                ->appendStylesheet($this->baseUrl('/css/south-street/jquery-ui-1.8.13.custom.css'));
+        ?>
+
+        <? $this->headScript()->appendFile($this->baseUrl('/js/tooltip.js'))
+                ->appendFile($this->baseUrl('/js/jquery.ui.datepicker-pt-BR.js')) ?>
+
+        <?= $this->headLink(); ?>
+
+        <?= $this->jQuery(); ?>
+
+        <?= $this->headScript() ?>
+
+
+
+        <script>
+            $(function() {
+                $( "button, input:submit, a", ".botao" ).button();
+            });
+        </script>
+
+        <script type="text/javascript">
+
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-17819294-2']);
+            _gaq.push(['_trackPageview']);
+
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+
+        </script>
+
+    </head>
+    <body>
+        <div id="global">
+
+            <div id="topo">
+
+                <h1></h1>
+                <div id="logoUnipampa"></div>
+
+            </div>
+
+            <div id="menuBar">
+
+                <ul id="menu">
+                    <?= $this->render('layout/menu_admin.phtml') ?>
+                </ul>
+
+            </div>
+
+            <div id="conteudo">
+
+                <?php echo $this->layout()->content; ?>
+
+                <?= $this->Message() ?>
+
+            </div>
+
+            <div id="rodape">
+
+                <p>Sistema de Controle da Semana Acadêmica do Campus Tecnológico de Alegrete. <a href="<?= $this->baseUrl('/creditos/') ?>">Créditos</a>.</p>
+
+            </div>
+
+        </div>
+    </body>
+</html>
