@@ -14,7 +14,7 @@ class InstituicaoTest extends \ApplicationTest\Framework\TestCase
 
     public function testInsertInstituicao()
     {
-        $dm = $this->getLocator()->get('mongo_dm');
+        //$dm = $this->getLocator()->get('mongo_dm');
         $instituicao = new Instituicao();
         $instituicao->setNome('UNIPAMPA');
         //$dm->persist($instituicao);
