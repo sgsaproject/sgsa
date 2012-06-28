@@ -12,11 +12,12 @@ import java.net.UnknownHostException;
 public class Server {
 
     private String ip;
-    private int port = 9999;
+    private int port;
     private Socket socket;
 
     public Server(String ip) throws UnknownHostException, IOException {
         this.ip = ip;
+        this.port = 5588;
         this.socket = new Socket(ip, port);
     }
 

@@ -12,16 +12,11 @@ import java.util.logging.Logger;
  */
 public class Server {
 
-    private final int port = 9999;
+    private final int port = 5588;
     private ServerSocket server;
     private Clients clients;
 
     public Server() {
-        try {
-            server = new ServerSocket(9999);
-        } catch (IOException ex) {
-            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
-        }
         clients = new Clients();
     }
 
