@@ -87,7 +87,7 @@ $application->getBootstrap()->bootstrap('db');
 $db = Zend_Db_Table::getDefaultAdapter();
 echo 'Criando tabelas <br/>' . BREAK_LINE;
 $db->beginTransaction();
-$sql = file_get_contents(APPLICATION_PATH . '/models/crebas.sql');
+$sql = file_get_contents(APPLICATION_PATH . '/../data/sql/sacta.sql');
 $db->query($sql);
 $db->commit();
 
