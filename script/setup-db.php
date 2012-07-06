@@ -92,5 +92,5 @@ $db->query($sql);
 $db->commit();
 
 
-require_once 'fixtures.php';
+require_once APPLICATION_PATH . '/../data/fixtures.php';
 
