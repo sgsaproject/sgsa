@@ -43,7 +43,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $cache = Zend_Cache::factory('Core', 'Apc', $frontendOptions, $backendOptions);
         
         Zend_Db_Table::setDefaultMetadataCache($cache);
+        Zend_Locale::setCache($cache);
+        Zend_Date::setOptions(array('cache'=>$cache));
         
+        return $cache;
     }
 
     public function _initZendMail() {
@@ -98,7 +101,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             # Setup the cache plugin
             if ($this->hasPluginResource('cache')) {
                 $this->bootstrap('cache');
-                $cache = $this - getPluginResource('cache')->getDbAdapter();
+                $cache = $this->getPluginResource('cache')->getDbAdapter();
                 $options['plugins']['Cache']['backend'] = $cache->getBackend();
             }
 
