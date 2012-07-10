@@ -99,9 +99,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             }
 
             # Setup the cache plugin
-            if ($this->hasPluginResource('cache')) {
+            if ($this->hasResource('cache')) {
                 $this->bootstrap('cache');
-                $cache = $this->getPluginResource('cache')->getDbAdapter();
+                $cache = $this->getResource('cache');
                 $options['plugins']['Cache']['backend'] = $cache->getBackend();
             }
 
