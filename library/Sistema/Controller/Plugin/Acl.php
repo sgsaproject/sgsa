@@ -76,6 +76,13 @@ class Sistema_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract {
 
         $controller = $request->controller;
         $action = $request->action;
+        
+         if ($acl->has($controller) == false) {
+            $request->setControllerName('error');
+            $request->setActionName('error');
+            return;
+        }
+
 
         if (!$acl->isAllowed($role, $controller, $action)) {
 
