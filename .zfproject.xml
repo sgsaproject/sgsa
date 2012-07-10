@@ -59,6 +59,8 @@
           <dbTableFile dbTableName="TipoUsuario"/>
           <dbTableFile dbTableName="Usuario"/>
         </dbTableDirectory>
+        <modelFile modelName="Usuario"/>
+        <modelFile modelName="TipoUsuario"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <viewsDirectory>

@@ -4,6 +4,8 @@ class Application_Model_DbTable_TipoUsuario extends Zend_Db_Table_Abstract
 {
 
     protected $_name = 'tipo_usuario';
+    
+    protected $_rowClass = 'Application_Model_TipoUsuario';
 
     protected $_referenceMap = array(
         'TipoUsuario' => array(
@@ -16,6 +18,10 @@ class Application_Model_DbTable_TipoUsuario extends Zend_Db_Table_Abstract
     public function getTipoUsuario(){
          $select = $this->select()->order('nome ASC');
          return $this->fetchAll($select);
+    }
+    
+    public function getTipoUsuarioById($idTipoUsuario) {
+        return $this->find($idTipoUsuario);
     }
 
 }
