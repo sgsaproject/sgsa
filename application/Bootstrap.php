@@ -29,6 +29,23 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
     }
 
+    protected function _initCache() {
+        $frontendOptions = array(
+            'lifetime' => 7200, // cache lifetime of 2 hours
+            'automatic_serialization' => true
+        );
+
+        $backendOptions = array(
+            //'cache_dir' => APPLICATION_PATH. '/../data/cache/' // Directory where to put the cache files
+        );
+
+        // getting a Zend_Cache_Core object
+        $cache = Zend_Cache::factory('Core', 'Apc', $frontendOptions, $backendOptions);
+        
+        Zend_Db_Table::setDefaultMetadataCache($cache);
+        
+    }
+
     public function _initZendMail() {
         $config = array('ssl' => 'tls',
             'port' => 587,
