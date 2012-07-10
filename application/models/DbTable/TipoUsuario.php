@@ -21,7 +21,7 @@ class Application_Model_DbTable_TipoUsuario extends Zend_Db_Table_Abstract
     }
     
     public function getTipoUsuarioById($idTipoUsuario) {
-        return $this->find($idTipoUsuario);
+        return $this->find($idTipoUsuario)->current();
     }
 
 }
