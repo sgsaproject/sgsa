@@ -89,14 +89,6 @@ echo 'Criando tabelas <br/>' . BREAK_LINE;
 $db->beginTransaction();
 $sql = file_get_contents(APPLICATION_PATH . '/../data/sql/sacta.sql');
 $db->query($sql);
-$sql = file_get_contents(APPLICATION_PATH . '/../data/sql/alters_sacta.sql');
-$db->query($sql);
-$sql = file_get_contents(APPLICATION_PATH . '/../data/sql/alter_constraint_sessao.sql');
-$db->query($sql);
-$sql = file_get_contents(APPLICATION_PATH . '/../data/sql/alter_constraint_permissoes.sql');
-$db->query($sql);
-$sql = file_get_contents(APPLICATION_PATH . '/../data/sql/inserts_sacta.sql');
-$db->query($sql);
 $db->commit();
 
 

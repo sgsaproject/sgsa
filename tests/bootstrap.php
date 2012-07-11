@@ -23,3 +23,5 @@ $application = new Zend_Application(
     APPLICATION_PATH . '/configs/application.ini'
 );
 $application->bootstrap();
+
+require_once '../script/setup-db.php';

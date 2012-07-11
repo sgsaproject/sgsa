@@ -2,13 +2,11 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
-CREATE SCHEMA IF NOT EXISTS `sacta` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
-USE `sacta` ;
 
 -- -----------------------------------------------------
--- Table `sacta`.`palestra`
+-- Table `palestra`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `sacta`.`palestra` (
+CREATE  TABLE IF NOT EXISTS `palestra` (
   `id_palestra` INT NOT NULL AUTO_INCREMENT ,
   `nome_palestra` VARCHAR(150) NULL ,
   `nome_palestrante` VARCHAR(100) NULL ,
@@ -23,9 +21,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `sacta`.`tipo_usuario`
+-- Table `tipo_usuario`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `sacta`.`tipo_usuario` (
+CREATE  TABLE IF NOT EXISTS `tipo_usuario` (
   `id_tipo_usuario` INT NOT NULL AUTO_INCREMENT ,
   `nome` VARCHAR(30) NULL ,
   `alias` VARCHAR(30) NULL ,
@@ -34,9 +32,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `sacta`.`usuario`
+-- Table `usuario`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `sacta`.`usuario` (
+CREATE  TABLE IF NOT EXISTS `usuario` (
   `id_usuario` INT NOT NULL AUTO_INCREMENT ,
   `nome` VARCHAR(100) NULL ,
   `email` VARCHAR(50) NULL ,
@@ -47,16 +45,16 @@ CREATE  TABLE IF NOT EXISTS `sacta`.`usuario` (
   INDEX `fk_usuario_tipo_usuario1` (`id_tipo_usuario` ASC) ,
   CONSTRAINT `fk_usuario_tipo_usuario1`
     FOREIGN KEY (`id_tipo_usuario` )
-    REFERENCES `sacta`.`tipo_usuario` (`id_tipo_usuario` )
+    REFERENCES `tipo_usuario` (`id_tipo_usuario` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `sacta`.`ouvinte`
+-- Table `ouvinte`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `sacta`.`ouvinte` (
+CREATE  TABLE IF NOT EXISTS `ouvinte` (
   `id_ouvinte` INT NOT NULL AUTO_INCREMENT ,
   `nome` VARCHAR(100) NULL ,
   `rg` VARCHAR(15) NULL ,
@@ -64,16 +62,17 @@ CREATE  TABLE IF NOT EXISTS `sacta`.`ouvinte` (
   `curso` VARCHAR(50) NULL ,
   `instituicao` VARCHAR(50) NULL ,
   `pagamento` VARCHAR(10) NULL DEFAULT 'naopago' ,
-  `impresso` TINYINT(1)  NULL DEFAULT 0 ,
-  `codigo_barras` CHAR(6)  NOT NULL ,
-  PRIMARY KEY (`id_ouvinte`) )
+  `impresso` TINYINT(1) NULL DEFAULT 0 ,
+  `codigo_barras` CHAR(6) NOT NULL ,
+  PRIMARY KEY (`id_ouvinte`) ,
+  UNIQUE INDEX `un_cod_barras` (`codigo_barras` ASC) )
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `sacta`.`sessao`
+-- Table `sessao`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `sacta`.`sessao` (
+CREATE  TABLE IF NOT EXISTS `sessao` (
   `id_sessao` INT NOT NULL AUTO_INCREMENT ,
   `id_ouvinte` INT NOT NULL ,
   `id_palestra` INT NOT NULL ,
@@ -84,21 +83,21 @@ CREATE  TABLE IF NOT EXISTS `sacta`.`sessao` (
   INDEX `fk_sessao_palestra2` (`id_palestra` ASC) ,
   CONSTRAINT `fk_sessao_ouvinte2`
     FOREIGN KEY (`id_ouvinte` )
-    REFERENCES `sacta`.`ouvinte` (`id_ouvinte` )
+    REFERENCES `ouvinte` (`id_ouvinte` )
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_sessao_palestra2`
     FOREIGN KEY (`id_palestra` )
-    REFERENCES `sacta`.`palestra` (`id_palestra` )
+    REFERENCES `palestra` (`id_palestra` )
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `sacta`.`permissao`
+-- Table `permissao`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `sacta`.`permissao` (
+CREATE  TABLE IF NOT EXISTS `permissao` (
   `id_permissao` INT NOT NULL AUTO_INCREMENT ,
   `id_usuario` INT NOT NULL ,
   `id_palestra` INT NOT NULL ,
@@ -107,14 +106,25 @@ CREATE  TABLE IF NOT EXISTS `sacta`.`permissao` (
   INDEX `fk_usuario_palestra_palestra1` (`id_palestra` ASC) ,
   CONSTRAINT `fk_usuario_palestra_usuario1`
     FOREIGN KEY (`id_usuario` )
-    REFERENCES `sacta`.`usuario` (`id_usuario` )
+    REFERENCES `usuario` (`id_usuario` )
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_usuario_palestra_palestra1`
     FOREIGN KEY (`id_palestra` )
-    REFERENCES `sacta`.`palestra` (`id_palestra` )
+    REFERENCES `palestra` (`id_palestra` )
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `email_pendente`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `email_pendente` (
+  `idemail_pendente` INT NOT NULL AUTO_INCREMENT ,
+  `id_ouvinte` INT NOT NULL ,
+  `data` DATETIME NOT NULL ,
+  PRIMARY KEY (`idemail_pendente`) )
 ENGINE = InnoDB;
 
 
@@ -122,3 +132,21 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Data for table `tipo_usuario`
+-- -----------------------------------------------------
+START TRANSACTION;
+INSERT INTO `tipo_usuario` (`id_tipo_usuario`, `nome`, `alias`) VALUES (1, 'Organizador', 'organizador');
+INSERT INTO `tipo_usuario` (`id_tipo_usuario`, `nome`, `alias`) VALUES (2, 'Colaborador', 'colaborador');
+INSERT INTO `tipo_usuario` (`id_tipo_usuario`, `nome`, `alias`) VALUES (3, 'Administrador', 'administrador');
+
+COMMIT;
+
+-- -----------------------------------------------------
+-- Data for table `usuario`
+-- -----------------------------------------------------
+START TRANSACTION;
+INSERT INTO `usuario` (`id_usuario`, `nome`, `email`, `login`, `senha`, `id_tipo_usuario`) VALUES (1, 'Administrador', '', 'admin', 'admin', 3);
+
+COMMIT;
