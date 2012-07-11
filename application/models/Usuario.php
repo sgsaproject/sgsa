@@ -45,6 +45,14 @@ class Application_Model_Usuario extends Zend_Db_Table_Row_Abstract {
     }
     
     public function getId_tipo_usuario() {
+        return $this->id_tipo_usuario;
+    }
+    
+    public function setId_tipo_usuario($idTipoUsuario) {
+        $this->id_tipo_usuario = $idTipoUsuario;
+    }
+    
+    public function getTipoUsuario() {
         if (is_null($this->tipoUsuario)) {
             $tipoUsuarioDAO = new Application_Model_DbTable_TipoUsuario();
             $this->tipoUsuario = $tipoUsuarioDAO->getTipoUsuarioById($this->id_tipo_usuario);
@@ -52,8 +60,8 @@ class Application_Model_Usuario extends Zend_Db_Table_Row_Abstract {
         return $this->tipoUsuario;
     }
     
-    public function setId_tipo_usuario() {
-        
+    public function setTipoUsuario(Application_Model_TipoUsuario $tipoUsuario) {
+        $this->tipoUsuario = $tipoUsuario;
     }
 
 }
