@@ -27,9 +27,6 @@ $application = new Zend_Application(
                 APPLICATION_PATH . '/configs/application.ini'
 );
 
-$application->bootstrap();
-
-
 $options = $application->getOptions();
 
 if (!key_exists('db', $options['resources'])) {
