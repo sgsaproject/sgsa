@@ -31,6 +31,5 @@ class Application_Model_DbTable_Usuario extends Zend_Db_Table_Abstract
     public function getUsuarioById($idUsuario) {
         return $this->find($idUsuario)->current();
     }
-
 }
 

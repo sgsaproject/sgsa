@@ -61,6 +61,7 @@
         </dbTableDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="TipoUsuario"/>
+        <modelFile modelName="Ouvinte"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <viewsDirectory>

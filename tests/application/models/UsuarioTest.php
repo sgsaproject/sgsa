@@ -16,7 +16,7 @@ class UsuarioTest extends PHPUnit_Framework_TestCase {
     public function testGetId_tipo_usuario() {
         $usuarioDbTable = new Application_Model_DbTable_Usuario();
         $usuario = $usuarioDbTable->createRow();
-        $usuario->setId_tipo_usuario(1); // id do administrador
+        $usuario->setId_tipo_usuario(1);
         $tipoUsuario = $usuario->getTipoUsuario();
         $this->assertInstanceOf('Zend_Db_Table_Row_Abstract', $tipoUsuario);
         $this->assertInstanceOf('Application_Model_TipoUsuario', $tipoUsuario);
