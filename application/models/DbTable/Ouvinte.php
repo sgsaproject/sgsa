@@ -4,6 +4,7 @@ class Application_Model_DbTable_Ouvinte extends Zend_Db_Table_Abstract
 {
 
     protected $_name = 'ouvinte';
+    protected $_rowClass = 'Application_Model_Ouvinte';
     protected $_dependentTables = array('Application_Model_DbTable_Sessao');
     protected $_referenceMap = array(
         'TipoUsuario' => array(
