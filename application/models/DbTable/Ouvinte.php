@@ -14,6 +14,10 @@ class Application_Model_DbTable_Ouvinte extends Zend_Db_Table_Abstract
         )
     );
     
+    public function getOuvinteById($idOuvinte) {
+        return $this->find($idOuvinte)->current();
+    }
+    
     public function getOuvintes(){
         $select = $this->select()->order('nome asc');
         return $this->fetchAll($select);

@@ -3,6 +3,7 @@
 class Application_Model_Ouvinte extends Zend_Db_Table_Row_Abstract {
 
     private $palestras;
+    private $sessoes;
 
     public function getId_ouvinte() {
         return $this->id_ouvinte;
@@ -82,6 +83,14 @@ class Application_Model_Ouvinte extends Zend_Db_Table_Row_Abstract {
         } else {
             $this->codigo_barras = $codigoBarras;
         }
+    }
+    
+    public function getSessoes() {
+        if (is_null($this->sessoes)) {
+            $sessaoDAO = new Application_Model_DbTable_Sessao();
+            $this->sessoes = $sessaoDAO->getSessoesOfOuvinteById($this->id_ouvinte);
+        }
+        return $this->sessoes;
     }
 
 }

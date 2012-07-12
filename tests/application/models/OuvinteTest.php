@@ -28,5 +28,33 @@ class OuvinteTest extends PHPUnit_Framework_TestCase {
         $id = $ouvinte->save();
         $this->assertNotNull($id);
     }
+    
+    public function testGetSessoes() {
+        $ouvinteDAO = new Application_Model_DbTable_Ouvinte();
+        $ouvinte = $ouvinteDAO->createRow();
+        $idOuvinte = $ouvinte->save();
+        $ouvinte->setId_ouvinte($idOuvinte);
+        
+        $palestraDAO = new Application_Model_DbTable_Palestra();
+        $palestra = $palestraDAO->createRow();
+        $idPalestra = $palestra->save();
+        
+        $sessaoDAO = new Application_Model_DbTable_Sessao();
+        $sessao = $sessaoDAO->createRow();
+        $sessao->setId_ouvinte($idOuvinte);
+        $sessao->setId_palestra($idPalestra);
+        $sessao->save();
+        
+        $sessao = $sessaoDAO->createRow();
+        $sessao->setId_ouvinte($idOuvinte);
+        $sessao->setId_palestra($idPalestra);
+        $sessao->save();
+        
+        $sessoes = $ouvinte->getSessoes();
+        $count = count($sessoes);
+        
+        $this->assertInstanceOf('Zend_Db_Table_Rowset_Abstract', $sessoes);
+        $this->assertEquals(2, $count);
+    }
 
 }

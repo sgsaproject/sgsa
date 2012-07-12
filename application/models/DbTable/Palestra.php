@@ -42,8 +42,8 @@ class Application_Model_DbTable_Palestra extends Zend_Db_Table_Abstract
        }
     }
     
-    public function getPalestraasdfads() {
-        $this;
+    public function getPalestraById($idPalestra) {
+        return $this->find($idPalestra)->current();
     }
 
 }

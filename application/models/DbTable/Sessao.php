@@ -3,18 +3,21 @@
 class Application_Model_DbTable_Sessao extends Zend_Db_Table_Abstract {
 
     protected $_name = 'sessao';
+    
+    protected $_rowClass = 'Application_Model_Sessao';
+    
     protected $_dependentTables = array('Application_Model_DbTable_Ouvinte','Application_Model_DbTable_Palestra');
     
-    protected $_referenceMap = array(
-        'TipoUsuario' => array(
-            'refTableClass' => 'Application_Model_DbTable_Ouvinte',
-            'columns' => array('id_ouvinte'),
-            'refColumns' => 'id_ouvinte'
+    protected $_referenceMap =  array(
+        'SessaoOuvinte'      => array(
+            'refTableClass'  => 'Application_Model_DbTable_Ouvinte',
+            'columns'        => array('id_ouvinte'),
+            'refColumns'     => 'id_ouvinte'
         ),
-        'SessaoPalestra' => array(
-            'refTableClass' => 'Application_Model_DbTable_Palestra',
-            'columns' => array('id_palestra'),
-            'refColumns' => 'id_palestra'
+        'SessaoPalestra'     => array(
+            'refTableClass'  => 'Application_Model_DbTable_Palestra',
+            'columns'        => array('id_palestra'),
+            'refColumns'     => 'id_palestra'
         )
     );
 
@@ -100,6 +103,15 @@ class Application_Model_DbTable_Sessao extends Zend_Db_Table_Abstract {
     
     public function getByData($data){
         $select = $this->select()->where("hora_entrada between '$data 00:00:00' and '$data 23:59:00'");
+        return $this->fetchAll($select);
+    }
+    
+    public function getSessoesOfOuvinte(Application_Model_Ouvinte $ouvinte) {
+        $this->getSessoesOfOuvinteById($ouvinte->getId_ouvinte());
+    }
+    
+    public function getSessoesOfOuvinteById($idOuvinte) {
+        $select = $this->select()->where('id_ouvinte = ?', $idOuvinte);
         return $this->fetchAll($select);
     }
 

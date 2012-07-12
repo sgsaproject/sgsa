@@ -4,7 +4,7 @@ class Application_Model_DbTable_Permissao extends Zend_Db_Table_Abstract
 {
 
     protected $_name = 'permissao';
-    //protected $_dependentTables = array('Application_Model_DbTable_Usuario');
+    protected $_dependentTables = array('Application_Model_DbTable_Usuario');
     
     protected $_referenceMap =  array(
         'PermissaoPalestra'  => array(

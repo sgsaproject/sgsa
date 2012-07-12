@@ -2,6 +2,8 @@
 
 class Application_Model_Palestra extends Zend_Db_Table_Row_Abstract 
 {
+    private $usuarios;
+    
     public function getId_palestra() {
         return $this->id_palestra;
     }
@@ -73,5 +75,14 @@ class Application_Model_Palestra extends Zend_Db_Table_Row_Abstract
     public function setSala($sala) {
         $this->sala = $sala;
     }
+    
+    public function getUsuariosComPermissao() {
+        if (is_null($this->usuarios)) {
+            $this->usuarios = $this->findManyToManyRowset('Application_Model_DbTable_Usuario',
+                    'Application_Model_DbTable_Permissao');
+        }
+        return $this->usuarios;
+    }
+    
 }
 
