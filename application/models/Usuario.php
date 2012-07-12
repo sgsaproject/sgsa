@@ -3,6 +3,7 @@
 class Application_Model_Usuario extends Zend_Db_Table_Row_Abstract {
     
     private $tipoUsuario;
+    private $palestras;
 
     public function getId_usuario() {
         return $this->id_usuario;
@@ -62,6 +63,14 @@ class Application_Model_Usuario extends Zend_Db_Table_Row_Abstract {
     
     public function setTipoUsuario(Application_Model_TipoUsuario $tipoUsuario) {
         $this->tipoUsuario = $tipoUsuario;
+    }
+    
+    public function getPalestrasComPermissao() {
+        if (is_null($this->palestras)) {
+            $this->palestras = $this->findManyToManyRowset('Application_Model_DbTable_Palestra',
+                    'Application_Model_DbTable_Permissao');
+        }
+        return $this->palestras;
     }
 
 }

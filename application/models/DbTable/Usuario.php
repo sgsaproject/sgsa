@@ -5,7 +5,8 @@ class Application_Model_DbTable_Usuario extends Zend_Db_Table_Abstract
 
     protected $_name = 'usuario';
 
-    protected $_dependentTables = array('Application_Model_DbTable_TipoUsuario');
+    protected $_dependentTables = array('Application_Model_DbTable_TipoUsuario',
+        'Application_Model_DbTable_Permissao');
     
     protected $_rowClass = 'Application_Model_Usuario';
     

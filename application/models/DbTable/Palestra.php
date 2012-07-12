@@ -5,8 +5,10 @@ class Application_Model_DbTable_Palestra extends Zend_Db_Table_Abstract
 
     protected $_name = 'palestra';
     
+    protected $_rowClass = 'Application_Model_Palestra';
+    
     protected $_dependentTables = array('Application_Model_DbTable_Permissao',
-        'Application_Model_DbTable_Sessao');
+        'Application_Model_DbTable_Sessao', 'Application_Model_DbTable_Permissao');
     
     protected $_referenceMap = array(
         'Sessao-Palestra' => array(
@@ -40,7 +42,9 @@ class Application_Model_DbTable_Palestra extends Zend_Db_Table_Abstract
        }
     }
     
-    
+    public function getPalestraasdfads() {
+        $this;
+    }
 
 }
 

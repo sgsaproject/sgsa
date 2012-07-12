@@ -1,6 +1,6 @@
 <?php
 
-class Application_Model_Ouvinte {
+class Application_Model_Ouvinte extends Zend_Db_Table_Row_Abstract {
 
     private $palestras;
 
@@ -56,8 +56,8 @@ class Application_Model_Ouvinte {
         return $this->pagamento;
     }
 
-    public function setPagamento() {
-        $this->pagamento = pagamento;
+    public function setPagamento($pagamento) {
+        $this->pagamento = $pagamento;
     }
 
     public function isImpresso() {

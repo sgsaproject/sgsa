@@ -4,13 +4,18 @@ class Application_Model_DbTable_Permissao extends Zend_Db_Table_Abstract
 {
 
     protected $_name = 'permissao';
-    protected $_dependentTables = array('Application_Model_DbTable_Usuario');
+    //protected $_dependentTables = array('Application_Model_DbTable_Usuario');
     
-    protected $_referenceMap = array(
-        'TipoUsuario' => array(
-            'refTableClass' => 'Application_Model_DbTable_Palestra',
-            'columns' => array('id_palestra'),
-            'refColumns' => 'id_palestra'
+    protected $_referenceMap =  array(
+        'PermissaoPalestra'  => array(
+            'refTableClass'  => 'Application_Model_DbTable_Palestra',
+            'columns'        => array('id_palestra'),
+            'refColumns'     => 'id_palestra'
+        ),
+        'PermissaoUsuario'   => array(
+            'refTableClass'  => 'Application_Model_DbTable_Usuario',
+            'columns'        => array('id_usuario'),
+            'refColumns'     => 'id_usuario'
         )
     );
     
@@ -36,6 +41,12 @@ class Application_Model_DbTable_Permissao extends Zend_Db_Table_Abstract
         }
     }
 
-
+    /*public function getPalestrasByUsuario(Application_Model_Usuario $usuario) {
+        $this->getPalestrasByIdUsuario($usuario->getId_usuario());
+    }
+    
+    public function getPalestrasByIdUsuario($usuario) {
+        
+    }*/
 }
 

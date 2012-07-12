@@ -62,6 +62,7 @@
         <modelFile modelName="Usuario"/>
         <modelFile modelName="TipoUsuario"/>
         <modelFile modelName="Ouvinte"/>
+        <modelFile modelName="Palestra"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <viewsDirectory>
