@@ -114,6 +114,15 @@ class Application_Model_DbTable_Sessao extends Zend_Db_Table_Abstract {
         $select = $this->select()->where('id_ouvinte = ?', $idOuvinte);
         return $this->fetchAll($select);
     }
+    
+    public function getSessoesOfPalestra(Application_Model_Palestra $palestra) {
+        $this->getSessoesOfOuvinteById($palestra->getId_palestra());
+    }
+    
+    public function getSessoesOfPalestraById($idPalestra) {
+        $select = $this->select()->where('id_palestra = ?', $idPalestra);
+        return $this->fetchAll($select);
+    }
 
 }
 

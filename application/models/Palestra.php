@@ -3,6 +3,7 @@
 class Application_Model_Palestra extends Zend_Db_Table_Row_Abstract 
 {
     private $usuarios;
+    private $sessoes;
     
     public function getId_palestra() {
         return $this->id_palestra;
@@ -84,5 +85,12 @@ class Application_Model_Palestra extends Zend_Db_Table_Row_Abstract
         return $this->usuarios;
     }
     
+    public function getSessoes() {
+        if (is_null($this->sessoes)) {
+            $sessaoDAO = new Application_Model_DbTable_Sessao();
+            $this->sessoes = $sessaoDAO->getSessoesOfPalestraById($this->id_palestra);
+        }
+        return $this->sessoes;
+    }
 }
 
