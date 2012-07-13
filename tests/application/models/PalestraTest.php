@@ -16,7 +16,7 @@ class PalestraTest extends PHPUnit_Framework_TestCase {
         for ($i = 0; $i < $num; $i++) {
             $usuarioDAO = new Application_Model_DbTable_Usuario();
             $usuario = $usuarioDAO->createRow();
-            $usuario->setId_tipo_usuario(1);
+            $usuario->setIdTipoUsuario(1);
             $idUsuario = $usuario->save();
 
             $permissao = new Application_Model_DbTable_Permissao();

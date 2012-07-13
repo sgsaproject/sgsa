@@ -5,11 +5,11 @@ class Application_Model_Usuario extends Zend_Db_Table_Row_Abstract {
     private $tipoUsuario;
     private $palestras;
 
-    public function getId_usuario() {
+    public function getId() {
         return $this->id_usuario;
     }
     
-    public function setId_usuario($idUsuario) {
+    public function setId($idUsuario) {
         $this->id_usuario = $idUsuario;
     }
 
@@ -45,11 +45,11 @@ class Application_Model_Usuario extends Zend_Db_Table_Row_Abstract {
         $this->senha = $senha;
     }
     
-    public function getId_tipo_usuario() {
+    public function getIdTipoUsuario() {
         return $this->id_tipo_usuario;
     }
     
-    public function setId_tipo_usuario($idTipoUsuario) {
+    public function setIdTipoUsuario($idTipoUsuario) {
         $this->id_tipo_usuario = $idTipoUsuario;
     }
     

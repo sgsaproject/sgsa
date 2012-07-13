@@ -17,7 +17,7 @@ class OuvinteTest extends PHPUnit_Framework_TestCase {
     public function testSaveOuvinte() {
         $ouvinteDAO = new Application_Model_DbTable_Ouvinte();
         $ouvinte = $ouvinteDAO->createRow();
-        $ouvinte->setCodigo_barras(666666);
+        $ouvinte->setCodigoBarras(666666);
         $ouvinte->setCurso("Engenharia de Software");
         $ouvinte->setEmail("thiagockrug@gmail.com");
         $ouvinte->setImpresso(true);
@@ -33,7 +33,7 @@ class OuvinteTest extends PHPUnit_Framework_TestCase {
         $ouvinteDAO = new Application_Model_DbTable_Ouvinte();
         $ouvinte = $ouvinteDAO->createRow();
         $idOuvinte = $ouvinte->save();
-        $ouvinte->setId_ouvinte($idOuvinte);
+        $ouvinte->setId($idOuvinte);
         
         $palestraDAO = new Application_Model_DbTable_Palestra();
         $palestra = $palestraDAO->createRow();
@@ -41,13 +41,13 @@ class OuvinteTest extends PHPUnit_Framework_TestCase {
         
         $sessaoDAO = new Application_Model_DbTable_Sessao();
         $sessao = $sessaoDAO->createRow();
-        $sessao->setId_ouvinte($idOuvinte);
-        $sessao->setId_palestra($idPalestra);
+        $sessao->setIdOuvinte($idOuvinte);
+        $sessao->setIdPalestra($idPalestra);
         $sessao->save();
         
         $sessao = $sessaoDAO->createRow();
-        $sessao->setId_ouvinte($idOuvinte);
-        $sessao->setId_palestra($idPalestra);
+        $sessao->setIdOuvinte($idOuvinte);
+        $sessao->setIdPalestra($idPalestra);
         $sessao->save();
         
         $sessoes = $ouvinte->getSessoes();

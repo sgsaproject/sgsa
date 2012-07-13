@@ -11,7 +11,7 @@ class PermissaoTest extends PHPUnit_Framework_TestCase
     public function testDeletar() {
         $usuarioDAO = new Application_Model_DbTable_Usuario();
         $usuario = $usuarioDAO->createRow();
-        $usuario->setId_tipo_usuario(1);
+        $usuario->setIdTipoUsuario(1);
         $idUsuario = $usuario->save();
         
         $palestraDAO = new Application_Model_DbTable_Palestra();
@@ -32,7 +32,7 @@ class PermissaoTest extends PHPUnit_Framework_TestCase
     public function testTemPermissao() {
         $usuarioDAO = new Application_Model_DbTable_Usuario();
         $usuario = $usuarioDAO->createRow();
-        $usuario->setId_tipo_usuario(1);
+        $usuario->setIdTipoUsuario(1);
         $idUsuario = $usuario->save();
         
         $palestraDAO = new Application_Model_DbTable_Palestra();
@@ -52,7 +52,7 @@ class PermissaoTest extends PHPUnit_Framework_TestCase
     public function testNaoTemPermissao() {
         $usuarioDAO = new Application_Model_DbTable_Usuario();
         $usuario = $usuarioDAO->createRow();
-        $usuario->setId_tipo_usuario(1);
+        $usuario->setIdTipoUsuario(1);
         $idUsuario = $usuario->save();
         
         $palestraDAO = new Application_Model_DbTable_Palestra();

@@ -2,14 +2,13 @@
 
 class Application_Model_Ouvinte extends Zend_Db_Table_Row_Abstract {
 
-    private $palestras;
     private $sessoes;
 
-    public function getId_ouvinte() {
+    public function getId() {
         return $this->id_ouvinte;
     }
 
-    public function setId_ouvinte($idOuvinte) {
+    public function setId($idOuvinte) {
         $this->id_ouvinte = $idOuvinte;
     }
 
@@ -72,11 +71,11 @@ class Application_Model_Ouvinte extends Zend_Db_Table_Row_Abstract {
         $this->impresso = $impresso;
     }
 
-    public function getCodigo_barras() {
+    public function getCodigoBarras() {
         return $this->codigo_barras;
     }
 
-    public function setCodigo_barras($codigoBarras) {
+    public function setCodigoBarras($codigoBarras) {
         $tamanho = 6;
         if (strlen($codigoBarras) !== $tamanho) {
             throw new Application_Model_Ouvite_Exception('Tamanho do código de barras incorreto. Tamanho informado: ' . $codigoBarras . '. Tamanho máximo: ' . $tamanho);

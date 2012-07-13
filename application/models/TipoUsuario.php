@@ -2,11 +2,11 @@
 
 class Application_Model_TipoUsuario extends Zend_Db_Table_Row_Abstract
 {
-    public function getId_tipo_usuario() {
+    public function getId() {
         return $this->id_tipo_usuario;
     }
     
-    public function setId_tipo_usuario($idTipoUsuario) {
+    public function setId($idTipoUsuario) {
         $this->id_tipo_usuario = $idTipoUsuario;
     }
     

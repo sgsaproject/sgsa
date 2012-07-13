@@ -5,19 +5,19 @@ class Application_Model_Sessao extends Zend_Db_Table_Row_Abstract
     private $ouvinte;
     private $palestra;
     
-    public function getId_sessao() {
+    public function getId() {
         return $this->id_sessao;
     }
     
-    public function setId_sessao($idSessao) {
+    public function setId($idSessao) {
         $this->id_sessao = $idSessao;
     }
     
-    public function getId_ouvinte() {
+    public function getIdOuvinte() {
         return $this->id_ouvinte;
     }
     
-    public function setId_ouvinte($idOuvinte) {
+    public function setIdOuvinte($idOuvinte) {
         return $this->id_ouvinte = $idOuvinte;
     }
     
@@ -34,11 +34,11 @@ class Application_Model_Sessao extends Zend_Db_Table_Row_Abstract
         $this->id_ouvinte = $ouvinte->getId_ouvinte();
     }
 
-    public function getId_palestra() {
+    public function getIdPalestra() {
         return $this->id_palestra;
     }
     
-    public function setId_palestra($idPalestra) {
+    public function setIdPalestra($idPalestra) {
         $this->id_palestra = $idPalestra;
     }
     
@@ -55,19 +55,19 @@ class Application_Model_Sessao extends Zend_Db_Table_Row_Abstract
         $this->id_palestra = $palestra->getId_palestra();
     }
     
-    public function getHora_entrada() {
+    public function getHoraEntrada() {
         return $this->hora_entrada;
     }
     
-    public function setHora_entrada($horaEntrada) {
+    public function setHoraEntrada($horaEntrada) {
         $this->hora_entrada = $horaEntrada;
     }
     
-    public function getHora_saida() {
+    public function getHoraSaida() {
         return $this->hora_saida;
     }
     
-    public function setHora_saida($horaSaida) {
+    public function setHoraSsaida($horaSaida) {
         $this->hora_saida = $horaSaida;
     }
 }
