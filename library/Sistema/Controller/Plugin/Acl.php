@@ -7,7 +7,7 @@ class Sistema_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract {
         $acl = new Zend_Acl();
 
         $tiposusuario = new Application_Model_DbTable_TipoUsuario();
-        $roles = $tiposusuario->fetchAll();
+        $roles = $tiposusuario->getTipoUsuario();
         foreach ($roles as $role) {
             $acl->addRole(new Zend_Acl_Role($role->alias));
         }
