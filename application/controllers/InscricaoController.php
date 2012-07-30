@@ -22,33 +22,25 @@ class InscricaoController extends Zend_Controller_Action {
                 //Inicia o modelo, insere os dados e redireciona
                 $ouvinteModel = new Application_Model_DbTable_Ouvinte();
 
-                //gera o numero de codigo de barras e verifica se já nao existe, caso contrario gera outro
-                do {
-                    //gera o numero de codigo de barras do ouvinte
-                    $dados['codigo_barras'] = '';
-                    $numeros = range(0, 9);
-                    for ($index = 0; $index < 5; $index++) {
-                        $dados['codigo_barras'] .= $numeros[rand(0, 9)];
-                    }
-                } while ($ouvinteModel->existeCodigoBarras($dados['codigo_barras']));
+                $codigoBarras = new Application_Model_CodigoBarra();
 
+                $dados['codigo_barras'] = $codigoBarras->gerarCodigoBarras();
 
                 $id_ouvinte = $ouvinteModel->insert($dados);
-                
-                $msg = $this->view->partial('/layout/templates/emailConfirmacao.phtml',array(
+
+                $msg = $this->view->partial('/layout/templates/emailConfirmacao.phtml', array(
                     'nome' => $dados['nome']
-                ));
-                
+                        ));
+
                 try {
-                $mail = new Zend_Mail('utf-8');
-                $mail->setFrom('saadmlivramento@gmail.com')
-                        ->setReplyTo('saadmlivramento@gmail.com')
-                        ->addTo($dados['email'])
-                        ->setBodyHtml($msg)
-                        ->setSubject('Inscrição Semana Acadêmica 2011')
-                        ->send(Zend_Registry::get('transport'));
-                
-                } catch(Exception $e){
+                    $mail = new Zend_Mail('utf-8');
+                    $mail->setFrom('saadmlivramento@gmail.com')
+                            ->setReplyTo('saadmlivramento@gmail.com')
+                            ->addTo($dados['email'])
+                            ->setBodyHtml($msg)
+                            ->setSubject('Inscrição Semana Acadêmica 2011')
+                            ->send(Zend_Registry::get('transport'));
+                } catch (Exception $e) {
                     $date = new Zend_Date();
                     $emailPendenteModel = new Application_Model_DbTable_EmailPendente();
                     $emailPendenteModel->insert(array(
@@ -56,7 +48,7 @@ class InscricaoController extends Zend_Controller_Action {
                         'data' => $date->get(Sistema_Data::DATABASE_DATETIME)
                     ));
                 }
-                
+
                 $this->_redirect('/inscricao/sucesso');
             }
         }

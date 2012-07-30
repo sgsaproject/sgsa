@@ -36,16 +36,16 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         );
 
         $backendOptions = array(
-            //'cache_dir' => APPLICATION_PATH. '/../data/cache/' // Directory where to put the cache files
+                //'cache_dir' => APPLICATION_PATH. '/../data/cache/' // Directory where to put the cache files
         );
 
         // getting a Zend_Cache_Core object
         $cache = Zend_Cache::factory('Core', 'Apc', $frontendOptions, $backendOptions);
-        
+
         Zend_Db_Table::setDefaultMetadataCache($cache);
         Zend_Locale::setCache($cache);
-        Zend_Date::setOptions(array('cache'=>$cache));
-        
+        Zend_Date::setOptions(array('cache' => $cache));
+
         return $cache;
     }
 
@@ -53,8 +53,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $config = array('ssl' => 'tls',
             'port' => 587,
             'auth' => 'login',
-            'username' => 'saadmlivramento@gmail.com',
-            'password' => 'saadm123livramento');
+            'username' => '',
+            'password' => '');
         $transport = new Zend_Mail_Transport_Smtp('smtp.gmail.com', $config);
         Zend_Registry::set('transport', $transport);
     }

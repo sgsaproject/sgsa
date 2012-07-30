@@ -13,11 +13,32 @@ class OuvinteTest extends PHPUnit_Framework_TestCase {
         $ouvinte->setImpresso(1);
         $this->assertTrue($ouvinte->isImpresso());
     }
+    
+    public function testSetCodigoBarras() {
+        $ouvinteDAO = new Application_Model_DbTable_Ouvinte();
+        $ouvinte = $ouvinteDAO->createRow();
+        $ouvinte->setCodigoBarras(00);
+        $this->assertEquals(00, $ouvinte->getCodigoBarras());
+        
+        try {
+            $ouvinte->setCodigoBarras(-123);
+            $this->fail('Código de barras negativo');
+        } catch (Application_Model_OuvinteException $e) {
+            $this->assertEquals(00, $ouvinte->getCodigoBarras());
+        }
+        
+        try {
+            $ouvinte->setCodigoBarras(123456);
+            $this->fail('Código de barras maior que o tamanho máximo permitido');
+        } catch (Application_Model_OuvinteException $e) {
+            $this->assertEquals(00, $ouvinte->getCodigoBarras());
+        }
+    }
 
     public function testSaveOuvinte() {
         $ouvinteDAO = new Application_Model_DbTable_Ouvinte();
         $ouvinte = $ouvinteDAO->createRow();
-        $ouvinte->setCodigoBarras(666666);
+        $ouvinte->setCodigoBarras(66666);
         $ouvinte->setCurso("Engenharia de Software");
         $ouvinte->setEmail("thiagockrug@gmail.com");
         $ouvinte->setImpresso(true);

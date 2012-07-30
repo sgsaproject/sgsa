@@ -64,6 +64,7 @@
         <modelFile modelName="Ouvinte"/>
         <modelFile modelName="Palestra"/>
         <modelFile modelName="Sessao"/>
+        <modelFile modelName="CodigoBarra"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <viewsDirectory>
