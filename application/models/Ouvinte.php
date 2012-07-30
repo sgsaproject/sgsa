@@ -78,9 +78,9 @@ class Application_Model_Ouvinte extends Zend_Db_Table_Row_Abstract {
     public function setCodigoBarras($codigoBarras) {
         $tamanho = 5;
         if (strlen($codigoBarras) !== $tamanho) {
-            throw new Application_Model_OuviteException('Tamanho do código de barras incorreto. Tamanho informado: ' . $codigoBarras . '. Tamanho máximo: ' . $tamanho);
-        } else if ($codigoBarras >= 0) {
-            throw new Application_Model_OuviteException('Código de barras inválido. O código de barras deve ser maior ou igual a 0.');
+            throw new Application_Model_OuvinteException('Tamanho do código de barras incorreto. Tamanho informado: ' . strlen($codigoBarras) . '. Tamanho correto: ' . $tamanho);
+        } else if ($codigoBarras < 0) {
+            throw new Application_Model_OuvinteException('Código de barras inválido. O código de barras deve ser maior ou igual a 0.');
         } else {
             $this->codigo_barras = $codigoBarras;
         }

@@ -85,7 +85,7 @@ class Application_Model_DbTable_Sessao extends Zend_Db_Table_Abstract {
         $rows = $this->fetchAll($select);
         foreach ($rows as $row) {
             $date = new Zend_Date();
-            $row->hora_entrada = $date->get(Sistema_Data::DATABASE_DATETIME);
+            $row->hora_entrada = $date->get(Sistema_Data::ZEND_DATABASE_DATETIME);
             $row->save();
         }
     }
@@ -96,7 +96,7 @@ class Application_Model_DbTable_Sessao extends Zend_Db_Table_Abstract {
         $rows = $this->fetchAll($select);
         foreach ($rows as $row) {
             $date = new Zend_Date();
-            $row->hora_saida = $date->get(Sistema_Data::DATABASE_DATETIME);
+            $row->hora_saida = $date->get(Sistema_Data::ZEND_DATABASE_DATETIME);
             $row->save();
         }
     }

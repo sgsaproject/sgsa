@@ -31,7 +31,7 @@ class Application_Model_Sessao extends Zend_Db_Table_Row_Abstract
     
     public function setOuvinte(Application_Model_Ouvinte $ouvinte) {
         $this->ouvinte = $ouvinte;
-        $this->id_ouvinte = $ouvinte->getId_ouvinte();
+        $this->id_ouvinte = $ouvinte->getId();
     }
 
     public function getIdPalestra() {
@@ -52,7 +52,7 @@ class Application_Model_Sessao extends Zend_Db_Table_Row_Abstract
     
     public function setPalestra(Application_Model_Palestra $palestra) {
         $this->palestra = $palestra;
-        $this->id_palestra = $palestra->getId_palestra();
+        $this->id_palestra = $palestra->getId();
     }
     
     public function getHoraEntrada() {

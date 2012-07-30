@@ -45,7 +45,7 @@ class InscricaoController extends Zend_Controller_Action {
                     $emailPendenteModel = new Application_Model_DbTable_EmailPendente();
                     $emailPendenteModel->insert(array(
                         'id_ouvinte' => $id_ouvinte,
-                        'data' => $date->get(Sistema_Data::DATABASE_DATETIME)
+                        'data' => $date->get(Sistema_Data::ZEND_DATABASE_DATETIME)
                     ));
                 }
 

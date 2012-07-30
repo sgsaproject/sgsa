@@ -38,35 +38,43 @@ class Application_Model_Palestra extends Zend_Db_Table_Row_Abstract
     }
     
     public function getHoraInicioPrevista() {
-        return $this->hora_inicio_prevista;
+        $data = DateTime::createFromFormat(Sistema_Data::PHP_DATABASE_DATETIME, $this->hora_inicio_prevista);
+        return $data->format(Sistema_Data::PHP_REGULAR_DATETIME);
     }
     
     public function setHoraInicioPrevista($horaInicioPrevista) {
-        $this->hora_inicio_palestra = $horaInicioPrevista;
+        $data = DateTime::createFromFormat(Sistema_Data::PHP_REGULAR_DATETIME, $horaInicioPrevista);
+        $this->hora_inicio_prevista = $data->format(Sistema_Data::PHP_DATABASE_DATETIME);
     }
     
     public function getHoraFimPrevista() {
-        return $this->hora_fim_prevista;
+        $data = DateTime::createFromFormat(Sistema_Data::PHP_DATABASE_DATETIME, $this->hora_fim_prevista);
+        return $data->format(Sistema_Data::PHP_REGULAR_DATETIME);
     }
     
     public function setHoraFimPrevista($horaFimPrevista) {
-        $this->hora_fim_prevista = $horaFimPrevista;
+        $data = DateTime::createFromFormat(Sistema_Data::PHP_REGULAR_DATETIME, $horaFimPrevista);
+        $this->hora_fim_prevista = $data->format(Sistema_Data::PHP_DATABASE_DATETIME);
     }
     
     public function getHoraInicio() {
-        return $this->hora_inicio;
+        $data = DateTime::createFromFormat(Sistema_Data::PHP_DATABASE_DATETIME, $this->hora_inicio);
+        return $data->format(Sistema_Data::PHP_REGULAR_DATETIME);
     }
     
     public function setHoraInicio($horaInicio) {
-        $this->hora_inicio = $horaInicio;
+        $data = DateTime::createFromFormat(Sistema_Data::PHP_REGULAR_DATETIME, $horaInicio);
+        $this->hora_inicio = $data->format(Sistema_Data::PHP_DATABASE_DATETIME);
     }
     
     public function getHoraFim() {
-        return $this->hora_fim;
+        $data = DateTime::createFromFormat(Sistema_Data::PHP_DATABASE_DATETIME, $this->hora_fim);
+        return $data->format(Sistema_Data::PHP_REGULAR_DATETIME);
     }
     
     public function setHoraFim($horaFim) {
-        $this->hora_fim = $horaFim;
+        $data = DateTime::createFromFormat(Sistema_Data::PHP_REGULAR_DATETIME, $horaFim);
+        $this->hora_fim = $data->format(Sistema_Data::PHP_DATABASE_DATETIME);
     }
     
     public function getSala() {

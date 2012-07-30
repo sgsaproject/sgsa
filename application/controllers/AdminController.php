@@ -87,7 +87,7 @@ class AdminController extends Zend_Controller_Action {
             $palestra['hora_fim_prevista'] = $data_fim[1];
 
             $date = new Zend_Date($data_inicio[0]);
-            $palestra['data_palestra'] = $date->get(Sistema_Data::REGULAR_DATE);
+            $palestra['data_palestra'] = $date->get(Sistema_Data::ZEND_REGULAR_DATE);
 
 
             //preenche o formulario
@@ -104,10 +104,10 @@ class AdminController extends Zend_Controller_Action {
                 $fim = $dados['data_palestra'] . ' ' . $dados['hora_fim_prevista'];
 
                 $date = new Zend_Date($inicio);
-                $dados['hora_inicio_prevista'] = $date->get(Sistema_Data::DATABASE_DATETIME);
+                $dados['hora_inicio_prevista'] = $date->get(Sistema_Data::ZEND_DATABASE_DATETIME);
 
                 $date = new Zend_Date($fim);
-                $dados['hora_fim_prevista'] = $date->get(Sistema_Data::DATABASE_DATETIME);
+                $dados['hora_fim_prevista'] = $date->get(Sistema_Data::ZEND_DATABASE_DATETIME);
 
                 unset($dados['data_palestra']);
 
@@ -362,12 +362,12 @@ class AdminController extends Zend_Controller_Action {
                     $sessaoModel->insert(array(
                         'id_palestra' => $dados['id_palestra'],
                         'id_ouvinte' => $ouvinte->id_ouvinte,
-                        'hora_entrada' => $date->get(Sistema_Data::DATABASE_DATETIME)
+                        'hora_entrada' => $date->get(Sistema_Data::ZEND_DATABASE_DATETIME)
                     ));
                     $this->view->mensagem = 'Entrada do Ouvinte ' . $ouvinte->nome . ' Registrada!';
                 } else if (!$sessaoModel->existeSaida($dados['id_palestra'], $ouvinte->id_ouvinte)) {
                     $sessao = $sessaoModel->getSessao($dados['id_palestra'], $ouvinte->id_ouvinte);
-                    $sessao->hora_saida = $date->get(Sistema_Data::DATABASE_DATETIME);
+                    $sessao->hora_saida = $date->get(Sistema_Data::ZEND_DATABASE_DATETIME);
                     $sessao->save();
                     $this->view->mensagem = 'Saída do Ouvinte ' . $ouvinte->nome . ' Registrada!';
                 } else {
@@ -394,7 +394,7 @@ class AdminController extends Zend_Controller_Action {
             $palestra = $palestraModel->find($id_palestra)->current();
             $date = new Zend_Date();
             if (empty($palestra->hora_inicio)) {
-                $palestra->hora_inicio = $date->get(Sistema_Data::DATABASE_DATETIME);
+                $palestra->hora_inicio = $date->get(Sistema_Data::ZEND_DATABASE_DATETIME);
                 $palestra->save();
                 $sessaoModel = new Application_Model_DbTable_Sessao();
                 $sessaoModel->zerarEntradaOuvintes($id_palestra);
@@ -419,7 +419,7 @@ class AdminController extends Zend_Controller_Action {
             $palestra = $palestraModel->find($id_palestra)->current();
             $date = new Zend_Date();
             if (empty($palestra->hora_fim)) {
-                $palestra->hora_fim = $date->get(Sistema_Data::DATABASE_DATETIME);
+                $palestra->hora_fim = $date->get(Sistema_Data::ZEND_DATABASE_DATETIME);
                 $palestra->save();
                 $sessaoModel = new Application_Model_DbTable_Sessao();
                 $sessaoModel->fechaSaidaOuvintes($id_palestra);
@@ -445,8 +445,8 @@ class AdminController extends Zend_Controller_Action {
                 $this->view->time = 'Não iniciada!';
             } else {
                 $date = new Zend_Date();
-                $date->subTime($palestra->hora_inicio, Sistema_Data::DATABASE_DATETIME);
-                $this->view->time = $date->get(Sistema_Data::REGULAR_TIME);
+                $date->subTime($palestra->hora_inicio, Sistema_Data::ZEND_DATABASE_DATETIME);
+                $this->view->time = $date->get(Sistema_Data::ZEND_REGULAR_TIME);
             }
         } else {
             $this->view->time = 'Palestra Finalizada!';
