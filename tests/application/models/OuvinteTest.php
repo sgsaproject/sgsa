@@ -17,21 +17,28 @@ class OuvinteTest extends PHPUnit_Framework_TestCase {
     public function testSetCodigoBarras() {
         $ouvinteDAO = new Application_Model_DbTable_Ouvinte();
         $ouvinte = $ouvinteDAO->createRow();
-        $ouvinte->setCodigoBarras(00);
-        $this->assertEquals(00, $ouvinte->getCodigoBarras());
+        $ouvinte->setCodigoBarras(98765);
+        $this->assertEquals(98765, $ouvinte->getCodigoBarras());
         
         try {
-            $ouvinte->setCodigoBarras(-123);
+            $ouvinte->setCodigoBarras(-12345);
             $this->fail('Código de barras negativo');
         } catch (Application_Model_OuvinteException $e) {
-            $this->assertEquals(00, $ouvinte->getCodigoBarras());
+            $this->assertEquals(98765, $ouvinte->getCodigoBarras());
+        }
+        
+        try {
+            $ouvinte->setCodigoBarras(123);
+            $this->fail('Código de barras menor que o tamanho permitido');
+        } catch (Application_Model_OuvinteException $e) {
+            $this->assertEquals(98765, $ouvinte->getCodigoBarras());
         }
         
         try {
             $ouvinte->setCodigoBarras(123456);
-            $this->fail('Código de barras maior que o tamanho máximo permitido');
+            $this->fail('Código de barras maior que o tamanho permitido');
         } catch (Application_Model_OuvinteException $e) {
-            $this->assertEquals(00, $ouvinte->getCodigoBarras());
+            $this->assertEquals(98765, $ouvinte->getCodigoBarras());
         }
     }
 

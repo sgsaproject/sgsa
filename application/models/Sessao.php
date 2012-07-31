@@ -31,7 +31,7 @@ class Application_Model_Sessao extends Zend_Db_Table_Row_Abstract
     
     public function setOuvinte(Application_Model_Ouvinte $ouvinte) {
         $this->ouvinte = $ouvinte;
-        $this->id_ouvinte = $ouvinte->getId_ouvinte();
+        $this->id_ouvinte = $ouvinte->getId();
     }
 
     public function getIdPalestra() {
@@ -52,23 +52,27 @@ class Application_Model_Sessao extends Zend_Db_Table_Row_Abstract
     
     public function setPalestra(Application_Model_Palestra $palestra) {
         $this->palestra = $palestra;
-        $this->id_palestra = $palestra->getId_palestra();
+        $this->id_palestra = $palestra->getId();
     }
     
     public function getHoraEntrada() {
-        return $this->hora_entrada;
+        $data = DateTime::createFromFormat(Sistema_Data::PHP_DATABASE_DATETIME, $this->hora_entrada);
+        return $data->format(Sistema_Data::PHP_REGULAR_DATETIME);
     }
     
     public function setHoraEntrada($horaEntrada) {
-        $this->hora_entrada = $horaEntrada;
+        $data = DateTime::createFromFormat(Sistema_Data::PHP_REGULAR_DATETIME, $horaEntrada);
+        $this->hora_entrada = $data->format(Sistema_Data::PHP_DATABASE_DATETIME);
     }
     
     public function getHoraSaida() {
-        return $this->hora_saida;
+        $data = DateTime::createFromFormat(Sistema_Data::PHP_DATABASE_DATETIME, $this->hora_saida);
+        return $data->format(Sistema_Data::PHP_REGULAR_DATETIME);
     }
     
-    public function setHoraSsaida($horaSaida) {
-        $this->hora_saida = $horaSaida;
+    public function setHoraSaida($horaSaida) {
+        $data = DateTime::createFromFormat(Sistema_Data::PHP_REGULAR_DATETIME, $horaSaida);
+        $this->hora_saida = $data->format(Sistema_Data::PHP_DATABASE_DATETIME);
     }
 }
 
