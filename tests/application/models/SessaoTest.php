@@ -62,11 +62,11 @@ class SessaoTest extends PHPUnit_Framework_TestCase {
         $palestra->setNomePalestra("Aprendendo Zeeeeeend");
         $palestra->setNomePalestrante("Rafael Tavares Amorim");
         $palestra->setInstituicao("Unipampa - Alegretchen");
-        $palestra->setHoraInicioPrevista();
-        $palestra->setHoraFimPrevista();
-        $palestra->setHoraInicio();
-        $palestra->setHoraFim();
-        $palestra->setSala();
+        $palestra->setHoraInicioPrevista("31/07/2012 16:00:00");
+        $palestra->setHoraFimPrevista("31/07/2012 18:00:00");
+        $palestra->setHoraInicio("31/07/2012 16:03:10");
+        $palestra->setHoraFim("31/07/2012 18:23:12");
+        $palestra->setSala(201);
         
         $id = $palestra->save();
         
@@ -87,11 +87,11 @@ class SessaoTest extends PHPUnit_Framework_TestCase {
         $palestra->setNomePalestra("Aprendendo Zeeeeeend");
         $palestra->setNomePalestrante("Rafael Tavares Amorim");
         $palestra->setInstituicao("Unipampa - Alegretchen");
-        $palestra->setHoraInicioPrevista();
-        $palestra->setHoraFimPrevista();
-        $palestra->setHoraInicio();
-        $palestra->setHoraFim();
-        $palestra->setSala();
+        $palestra->setHoraInicioPrevista("31/07/2012 16:00:00");
+        $palestra->setHoraFimPrevista("31/07/2012 18:00:00");
+        $palestra->setHoraInicio("31/07/2012 16:03:10");
+        $palestra->setHoraFim("31/07/2012 18:23:12");
+        $palestra->setSala(201);
         
         $sessaoDAO = new Application_Model_DbTable_Sessao();
         $sessao = $sessaoDAO->createRow();
@@ -102,8 +102,6 @@ class SessaoTest extends PHPUnit_Framework_TestCase {
         $this->assertInstanceOf('Zend_Db_Table_Row_Abstract', $palestra2);
         $this->assertInstanceOf('Application_Model_Palestra', $palestra2);
         $this->assertEquals($palestra, $palestra2);
-        
-        $this->fail("Not implemented yet");
     }
     
 }
