@@ -13,7 +13,7 @@ class UsuarioTest extends PHPUnit_Framework_TestCase {
         $this->assertInstanceOf('Application_Model_Usuario', $usuario);
     }
     
-    public function testGetId_tipo_usuario() {
+    public function testGetIdTipoUsuario() {
         $usuarioDbTable = new Application_Model_DbTable_Usuario();
         $usuario = $usuarioDbTable->createRow();
         $usuario->setIdTipoUsuario(1);

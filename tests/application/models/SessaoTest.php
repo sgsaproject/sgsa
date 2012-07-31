@@ -104,4 +104,32 @@ class SessaoTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($palestra, $palestra2);
     }
     
+    public function testGetHoraEntrada() {
+        $sessaoDAO = new Application_Model_DbTable_Sessao();
+        $sessao = $sessaoDAO->createRow();
+        $sessao->setHoraEntrada("01/02/2012 20:00:00");
+        $this->assertEquals("01/02/2012 20:00:00", $sessao->getHoraEntrada());
+    }
+    
+    public function testSetHoraEntrada() {
+        $sessaoDAO = new Application_Model_DbTable_Sessao();
+        $sessao = $sessaoDAO->createRow();
+        $sessao->setHoraEntrada("01/02/2012 20:00:00");
+        $this->assertEquals("2012-02-01 20:00:00", $sessao->hora_entrada);
+    }
+    
+    public function testGetHoraSaida() {
+        $sessaoDAO = new Application_Model_DbTable_Sessao();
+        $sessao = $sessaoDAO->createRow();
+        $sessao->setHoraSaida("01/02/2012 20:00:00");
+        $this->assertEquals("01/02/2012 20:00:00", $sessao->getHoraSaida());
+    }
+    
+    public function testSetHoraSaida() {
+        $sessaoDAO = new Application_Model_DbTable_Sessao();
+        $sessao = $sessaoDAO->createRow();
+        $sessao->setHoraSaida("01/02/2012 20:00:00");
+        $this->assertEquals("2012-02-01 20:00:00", $sessao->hora_saida);
+    }
+    
 }
