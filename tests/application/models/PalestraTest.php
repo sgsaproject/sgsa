@@ -157,21 +157,24 @@ class PalestraTest extends PHPUnit_Framework_TestCase {
         
         $this->assertInstanceOf('Zend_Db_Table_Rowset', $sessoes);
         
-        var_dump($sessao1->getPalestra());
-        
         foreach ($sessoes as $sessao) {
+            $this->assertInstanceOf('Zend_Db_Table_Row_Abstract', $sessao);
+            $this->assertInstanceOf('Application_Model_Sessao', $sessao);
+                
             if ($sessao->getId() == $idSessao1) {
+                var_dump($sessao->getPalestra());
+                var_dump($sessao1->getPalestra());
                 $this->assertEquals($sessao1->getOuvinte(), $sessao->getOuvinte());
-                $this->assertEquals($sessao1->getPalestra(), $sessao->getPalestra());
+                $this->assertEquals($sessao1->getPalestra()->getNomePalestra(), $sessao->getPalestra()->getNomePalestra());
                 $this->assertEquals($sessao1->getHoraEntrada(), $sessao->getHoraEntrada());
                 $this->assertEquals($sessao1->getHoraSaida(), $sessao->getHoraSaida());
-                $this->assertEquals($sessao1, $sessao);
+                
             } else if ($sessao->getId() == $idSessao2) {
                 $this->assertEquals($sessao2->getOuvinte(), $sessao->getOuvinte());
-                $this->assertEquals($sessao2->getPalestra(), $sessao->getPalestra());
+                $this->assertEquals($sessao2->getPalestra()->getNomePalestra(), $sessao->getPalestra()->getNomePalestra());
                 $this->assertEquals($sessao2->getHoraEntrada(), $sessao->getHoraEntrada());
                 $this->assertEquals($sessao2->getHoraSaida(), $sessao->getHoraSaida());
-                $this->assertEquals($sessao2, $sessao);
+                
             } else {
                 $this->fail("Mais sessões do que o esperado");
             }

@@ -34,8 +34,8 @@ class InscricaoController extends Zend_Controller_Action {
 
                 try {
                     $mail = new Zend_Mail('utf-8');
-                    $mail->setFrom('saadmlivramento@gmail.com')
-                            ->setReplyTo('saadmlivramento@gmail.com')
+                    $mail->setFrom('')
+                            ->setReplyTo('')
                             ->addTo($dados['email'])
                             ->setBodyHtml($msg)
                             ->setSubject('Inscrição Semana Acadêmica 2011')
