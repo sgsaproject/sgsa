@@ -11,9 +11,9 @@ defined('APPLICATION_ENV')
 // Ensure library/ is on include_path
 set_include_path(implode(PATH_SEPARATOR, array(
     realpath(APPLICATION_PATH . '/../library'),
-    get_include_path(),
+    str_replace('C:\\xampp\\php\\PEAR;','',get_include_path())
 )));
-
+//var_dump(get_include_path());die;
 require_once 'Zend/Loader/Autoloader.php';
 Zend_Loader_Autoloader::getInstance();
 
