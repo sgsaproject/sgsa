@@ -32,7 +32,7 @@ resources.db.params.charset = "utf8"
 ; http://framework.zend.com/manual/en/zend.application.available-resources.html#zend.application.available-resources.mail
 ; http://framework.zend.com/manual/en/zend.mail.html
 ;
-; resources.mail.transport.register = true
+ resources.mail.transport.register = true
 ; resources.mail.defaultfrom.email = <EMAIL>
 ; resources.mail.defaultfrom.name = <NAME>
 ; resources.mail.defaultreplyTo.email = <EMAIL>
@@ -42,7 +42,6 @@ resources.db.params.charset = "utf8"
 ;
 ; resources.mail.transport.type = "smtp" 
 ; resources.mail.transport.host = <HOST> ; REQUIRED!
-; resources.mail.transport.name = <NAME>
 ; resources.mail.transport.auth = 'crammd5', 'login' or 'plain'
 ; resources.mail.transport.username = <USERNAME>
 ; resources.mail.transport.password = <PASSWORD>
