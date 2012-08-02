@@ -26,10 +26,10 @@ class ContatoController extends Zend_Controller_Action {
                 $mail = new Zend_Mail('utf-8');
                 $mail->setFrom($dados['email'])
                         ->setReplyTo($dados['email'])
-                        ->addTo('saadmlivramento@gmail.com')
+                        ->addTo('')
                         ->setBodyHtml($msg)
                         ->setSubject('Contato Semana Acadêmica - '.$dados['assunto'])
-                        ->send(Zend_Registry::get('transport'));
+                        ->send();
                 //cria uma mensagem de aviso no jquery q sera exibida apos o redirect
                 $info = new Zend_Session_Namespace('sacta');
                 $info->mensagem='Obrigado pelo seu contato, entraremos em contato breve!';
@@ -37,10 +37,6 @@ class ContatoController extends Zend_Controller_Action {
                 $this->_redirect('/contato/index');
             }
         }
-
-
-
         $this->view->contato = $contato;
     }
-
 }
