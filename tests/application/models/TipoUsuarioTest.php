@@ -15,8 +15,8 @@ class TipoUsuarioTest extends PHPUnit_Framework_TestCase
     
     public function testCriaObjeto(){
         $tipoUsuario = new Application_Model_TipoUsuario();
-        //$this->assertInstanceOf('Zend_Db_Table_Row_Abstract', $tipoUsuario);
-        //$this->assertInstanceOf('Application_Model_TipoUsuario', $tipoUsuario);
+        $this->assertInstanceOf('Zend_Db_Table_Row_Abstract', $tipoUsuario);
+        $this->assertInstanceOf('Application_Model_TipoUsuario', $tipoUsuario);
     }
 
 

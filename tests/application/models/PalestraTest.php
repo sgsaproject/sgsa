@@ -9,8 +9,8 @@ class PalestraTest extends PHPUnit_Framework_TestCase {
     
     public function testCriaObjeto() {
         $palestra = new Application_Model_Palestra();
-        //$this->assertInstanceOf('Zend_Db_Table_Row_Abstract', $palestra);
-        //$this->assertInstanceOf('Application_Model_Palestra', $palestra);
+        $this->assertInstanceOf('Zend_Db_Table_Row_Abstract', $palestra);
+        $this->assertInstanceOf('Application_Model_Palestra', $palestra);
     }
     
     public function testSaveObject() {
@@ -28,8 +28,8 @@ class PalestraTest extends PHPUnit_Framework_TestCase {
         
         $palestra2 = $palestraDAO->getPalestraById($id);
         
-        //$this->assertInstanceOf('Zend_Db_Table_Row_Abstract', $palestra2);
-        //$this->assertInstanceOf('Application_Model_Palestra', $palestra2);
+        $this->assertInstanceOf('Zend_Db_Table_Row_Abstract', $palestra2);
+        $this->assertInstanceOf('Application_Model_Palestra', $palestra2);
         
         $this->assertEquals($palestra->getNomePalestra(), $palestra2->getNomePalestra());
         $this->assertEquals($palestra->getNomePalestrante(), $palestra2->getNomePalestrante());
@@ -117,7 +117,7 @@ class PalestraTest extends PHPUnit_Framework_TestCase {
 
         $usuarios = $palestra->getUsuariosComPermissao();
         $count = count($usuarios);
-        //$this->assertInstanceOf('Zend_Db_Table_Rowset_Abstract', $usuarios);
+        $this->assertInstanceOf('Zend_Db_Table_Rowset_Abstract', $usuarios);
         $this->assertEquals($num, $count);
     }
     
@@ -155,11 +155,11 @@ class PalestraTest extends PHPUnit_Framework_TestCase {
         
         $sessoes = $palestra->getSessoes();
         
-        //$this->assertInstanceOf('Zend_Db_Table_Rowset', $sessoes);
+        $this->assertInstanceOf('Zend_Db_Table_Rowset', $sessoes);
         
         foreach ($sessoes as $sessao) {
-            //$this->assertInstanceOf('Zend_Db_Table_Row_Abstract', $sessao);
-            //$this->assertInstanceOf('Application_Model_Sessao', $sessao);
+            $this->assertInstanceOf('Zend_Db_Table_Row_Abstract', $sessao);
+            $this->assertInstanceOf('Application_Model_Sessao', $sessao);
                 
             if ($sessao->getId() == $idSessao1) {
                 var_dump($sessao->getPalestra());

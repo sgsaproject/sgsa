@@ -81,7 +81,7 @@ class OuvinteTest extends PHPUnit_Framework_TestCase {
         $sessoes = $ouvinte->getSessoes();
         $count = count($sessoes);
         
-        //$this->assertInstanceOf('Zend_Db_Table_Rowset_Abstract', $sessoes);
+        $this->assertInstanceOf('Zend_Db_Table_Rowset_Abstract', $sessoes);
         $this->assertEquals(2, $count);
     }
 
