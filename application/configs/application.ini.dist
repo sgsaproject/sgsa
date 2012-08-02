@@ -61,6 +61,9 @@ phpSettings.display_errors = 1
 resources.db.params.dbname = "sacta_test"
 ;Fim dados banco de dados
 
+resources.mail.transport.type = "file"
+resources.mail.transport.path = APPLICATION_PATH "/../data/cache/sentmail"
+
 [development : production]
 phpSettings.display_startup_errors = 1
 phpSettings.display_errors = 1

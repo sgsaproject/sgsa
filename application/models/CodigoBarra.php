@@ -3,8 +3,9 @@
 class Application_Model_CodigoBarra {
 
     public function existeCodigoBarras($codigo) {
-        $select = $this->select()->where('codigo_barras = ?', $codigo);
-        $row = $this->fetchRow($select);
+        $ouvinteDbTable = new Application_Model_DbTable_Ouvinte();
+        $select = $ouvinteDbTable->select()->where('codigo_barras = ?', $codigo);
+        $row = $ouvinteDbTable->fetchRow($select);
         if (is_null($row)) {
             return false;
         } else {
