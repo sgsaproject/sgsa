@@ -4,6 +4,15 @@ class Application_Model_Ouvinte extends Zend_Db_Table_Row_Abstract {
 
     private $sessoes;
 
+    public function setAttributes(array $data = null) {
+        if (empty($data) == false) {
+            foreach ($data as $key => $value) {
+                $method = 'set' . ucfirst($key);
+                $this->{$method}($value);
+            }
+        }
+    }
+
     public function getId() {
         return $this->id_ouvinte;
     }

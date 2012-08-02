@@ -24,7 +24,8 @@ class InscricaoController extends Zend_Controller_Action {
                 $codigoBarras = new Application_Model_CodigoBarra();
                 $dados['codigo_barras'] = $codigoBarras->gerarCodigoBarras();
                 /*@var $ouvinte Application_Model_Ouvinte*/
-                $ouvinte = $ouvinteModel->createRow($dados);
+                $ouvinte = $ouvinteModel->createRow();
+                $ouvinte->setAttributes($dados);
                 $ouvinte->save();
                 $ouvinte->enviarEmailConfirmacao();
 
