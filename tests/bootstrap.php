@@ -22,6 +22,6 @@ $application = new Zend_Application(
                 APPLICATION_ENV,
                 APPLICATION_PATH . '/configs/application.ini'
 );
-//$application->getBootstrap();
+$application->getBootstrap()->bootstrap('mail');
 
 require_once '../script/setup-db.php';

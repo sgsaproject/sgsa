@@ -96,7 +96,7 @@ class Application_Model_Ouvinte extends Zend_Db_Table_Row_Abstract {
 
     public function enviarEmailConfirmacao() {
         $view = new Zend_View();
-        $view->setScriptPath(APPLICATION_PATH.'/views/scripts');
+        $view->setScriptPath(APPLICATION_PATH . '/views/scripts');
         $msg = $view->partial('/layout/templates/emailConfirmacao.phtml', array(
             'nome' => $this->nome
                 ));
@@ -106,7 +106,7 @@ class Application_Model_Ouvinte extends Zend_Db_Table_Row_Abstract {
             $mail->addTo($this->email)
                     ->setBodyHtml($msg)
                     ->setSubject('Inscrição Semana Acadêmica 2011')
-                    ->send(Zend_Registry::get('transport'));
+                    ->send();
         } catch (Exception $e) {
             $date = new Zend_Date();
             $emailPendenteModel = new Application_Model_DbTable_EmailPendente();
