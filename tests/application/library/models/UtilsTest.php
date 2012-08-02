@@ -26,6 +26,13 @@ class Sistema_Model_UtilsTest extends PHPUnit_Framework_TestCase {
         $this->setAttributes(array('nomeCompleto'=>'maria'));
         $this->assertSame('maria', $this->nomeCompleto);
     }
+    /**
+     * @expectedException BadMethodCallException
+     * @expectedExceptionMessage Call to undefined method
+     */
+    public function testSetAttributesNonExistingAttribute(){
+        $this->setAttributes(array('nome_completoo'=>'john'));
+    }
     
     private function getNomeCompleto() {
         return $this->nomeCompleto;
