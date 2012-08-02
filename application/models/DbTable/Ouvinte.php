@@ -69,7 +69,12 @@ class Application_Model_DbTable_Ouvinte extends Zend_Db_Table_Abstract
         $where = $this->getAdapter()->quoteInto('where impresso = ?', '0');
         $this->update(array('impresso' => 1), $where);
     }
-
+    
+    public function inserirOuvinte(array $dados){
+        parent::insert($dados);
+    }
+    
+    
 
 }
 

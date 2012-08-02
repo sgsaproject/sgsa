@@ -85,13 +85,36 @@ class Application_Model_Ouvinte extends Zend_Db_Table_Row_Abstract {
             $this->codigo_barras = $codigoBarras;
         }
     }
-    
+
     public function getSessoes() {
         if (is_null($this->sessoes)) {
             $sessaoDAO = new Application_Model_DbTable_Sessao();
             $this->sessoes = $sessaoDAO->getSessoesOfOuvinteById($this->id_ouvinte);
         }
         return $this->sessoes;
+    }
+
+    public function enviarEmailConfirmacao() {
+        $msg = $this->view->partial('/layout/templates/emailConfirmacao.phtml', array(
+            'nome' => $this->nome
+                ));
+
+        try {
+            $mail = new Zend_Mail('utf-8');
+            $mail->setFrom('')
+                    ->setReplyTo('')
+                    ->addTo($this->email)
+                    ->setBodyHtml($msg)
+                    ->setSubject('Inscrição Semana Acadêmica 2011')
+                    ->send(Zend_Registry::get('transport'));
+        } catch (Exception $e) {
+            $date = new Zend_Date();
+            $emailPendenteModel = new Application_Model_DbTable_EmailPendente();
+            $emailPendenteModel->insert(array(
+                'id_ouvinte' => $this->id_ouvinte,
+                'data' => $date->get(Sistema_Data::ZEND_DATABASE_DATETIME)
+            ));
+        }
     }
 
 }

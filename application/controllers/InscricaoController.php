@@ -7,12 +7,12 @@ class InscricaoController extends Zend_Controller_Action {
     }
 
     public function indexAction() {
-        
+         
     }
 
     public function inscreverAction() {
         $inscricao = new Application_Form_Inscricao();
-
+       
         //verifica se há post
         if ($this->_request->isPost()) {
             //verifica se o formulario é valido, se não renderiza com os erros
@@ -21,33 +21,12 @@ class InscricaoController extends Zend_Controller_Action {
                 $dados = $inscricao->getValues();
                 //Inicia o modelo, insere os dados e redireciona
                 $ouvinteModel = new Application_Model_DbTable_Ouvinte();
-
                 $codigoBarras = new Application_Model_CodigoBarra();
-
                 $dados['codigo_barras'] = $codigoBarras->gerarCodigoBarras();
-
-                $id_ouvinte = $ouvinteModel->insert($dados);
-
-                $msg = $this->view->partial('/layout/templates/emailConfirmacao.phtml', array(
-                    'nome' => $dados['nome']
-                        ));
-
-                try {
-                    $mail = new Zend_Mail('utf-8');
-                    $mail->setFrom('')
-                            ->setReplyTo('')
-                            ->addTo($dados['email'])
-                            ->setBodyHtml($msg)
-                            ->setSubject('Inscrição Semana Acadêmica 2011')
-                            ->send(Zend_Registry::get('transport'));
-                } catch (Exception $e) {
-                    $date = new Zend_Date();
-                    $emailPendenteModel = new Application_Model_DbTable_EmailPendente();
-                    $emailPendenteModel->insert(array(
-                        'id_ouvinte' => $id_ouvinte,
-                        'data' => $date->get(Sistema_Data::ZEND_DATABASE_DATETIME)
-                    ));
-                }
+                /*@var $ouvinte Application_Model_Ouvinte*/
+                $ouvinte = $ouvinteModel->createRow($dados);
+                $ouvinte->save();
+                $ouvinte->enviarEmailConfirmacao();
 
                 $this->_redirect('/inscricao/sucesso');
             }

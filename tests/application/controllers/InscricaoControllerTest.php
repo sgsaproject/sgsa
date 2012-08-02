@@ -8,13 +8,14 @@ class InscricaoControllerTest extends Zend_Test_PHPUnit_ControllerTestCase {
     }
 
     public function testInscricaoPage() {
-      
+
         $params = array('action' => 'index', 'controller' => 'inscricao', 'module' => 'default');
         $urlParams = $this->urlizeOptions($params);
         $url = $this->url($urlParams);
         $this->dispatch($url);
-        
+
         // assertions
+        $this->assertNotRedirect();
         $this->assertModule($urlParams['module']);
         $this->assertController($urlParams['controller']);
         $this->assertAction($urlParams['action']);
