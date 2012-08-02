@@ -95,15 +95,15 @@ class Application_Model_Ouvinte extends Zend_Db_Table_Row_Abstract {
     }
 
     public function enviarEmailConfirmacao() {
-        $msg = $this->view->partial('/layout/templates/emailConfirmacao.phtml', array(
+        $view = new Zend_View();
+        $view->setScriptPath(APPLICATION_PATH.'/views/scripts');
+        $msg = $view->partial('/layout/templates/emailConfirmacao.phtml', array(
             'nome' => $this->nome
                 ));
 
         try {
             $mail = new Zend_Mail('utf-8');
-            $mail->setFrom('')
-                    ->setReplyTo('')
-                    ->addTo($this->email)
+            $mail->addTo($this->email)
                     ->setBodyHtml($msg)
                     ->setSubject('Inscrição Semana Acadêmica 2011')
                     ->send(Zend_Registry::get('transport'));

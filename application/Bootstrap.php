@@ -45,7 +45,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         return $cache;
     }
 
-    public function _initZendMail() {
+    /*public function _initZendMail() {
         $config = array('ssl' => 'tls',
             'port' => 587,
             'auth' => 'login',
@@ -53,7 +53,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             'password' => '');
         $transport = new Zend_Mail_Transport_Smtp('smtp.gmail.com', $config);
         Zend_Registry::set('transport', $transport);
-    }
+    }*/
 
     protected function _initPlugins() {
         $front = Zend_Controller_Front::getInstance();

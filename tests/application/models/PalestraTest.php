@@ -162,8 +162,6 @@ class PalestraTest extends PHPUnit_Framework_TestCase {
             $this->assertInstanceOf('Application_Model_Sessao', $sessao);
                 
             if ($sessao->getId() == $idSessao1) {
-                var_dump($sessao->getPalestra());
-                var_dump($sessao1->getPalestra());
                 $this->assertEquals($sessao1->getOuvinte(), $sessao->getOuvinte());
                 $this->assertEquals($sessao1->getPalestra()->getNomePalestra(), $sessao->getPalestra()->getNomePalestra());
                 $this->assertEquals($sessao1->getHoraEntrada(), $sessao->getHoraEntrada());

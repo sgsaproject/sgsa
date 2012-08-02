@@ -27,6 +27,27 @@ resources.db.isDefaultTableAdapter = true
 resources.db.params.charset = "utf8"
 ;Fim dados banco de dados
 
+; Configure default mail transport and addresses.
+;
+; http://framework.zend.com/manual/en/zend.application.available-resources.html#zend.application.available-resources.mail
+; http://framework.zend.com/manual/en/zend.mail.html
+;
+; resources.mail.transport.register = true
+; resources.mail.defaultfrom.email = <EMAIL>
+; resources.mail.defaultfrom.name = <NAME>
+; resources.mail.defaultreplyTo.email = <EMAIL>
+; resources.mail.defaultreplyTo.name = <NAME>
+; 
+; Zend_Mail_Transport_Smtp
+;
+; resources.mail.transport.type = "smtp" 
+; resources.mail.transport.host = <HOST> ; REQUIRED!
+; resources.mail.transport.name = <NAME>
+; resources.mail.transport.auth = 'crammd5', 'login' or 'plain'
+; resources.mail.transport.username = <USERNAME>
+; resources.mail.transport.password = <PASSWORD>
+; resources.mail.transport.ssl = 'ssl' or 'tls'
+; resources.mail.transport.port = <PORT>
 
 phpSettings.date.timezone = "America/Sao_Paulo"
 

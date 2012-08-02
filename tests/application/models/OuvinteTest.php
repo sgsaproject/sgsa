@@ -84,5 +84,9 @@ class OuvinteTest extends PHPUnit_Framework_TestCase {
         $this->assertInstanceOf('Zend_Db_Table_Rowset_Abstract', $sessoes);
         $this->assertEquals(2, $count);
     }
+    
+    public function testEnviarEmailConfirmacao() {
+        
+    }
 
 }
