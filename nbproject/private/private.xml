@@ -2,4 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/C:/htdocs/sgsa/application/models/CodigoBarra.php</file>
+        <file>file:/C:/htdocs/sgsa/application/models/Usuario.php</file>
+        <file>file:/C:/htdocs/sgsa/application/models/Palestra.php</file>
+        <file>file:/C:/htdocs/sgsa/application/controllers/InscricaoController.php</file>
+        <file>file:/C:/htdocs/sgsa/library/Sistema/Model/Utils.php</file>
+        <file>file:/C:/htdocs/sgsa/tests/application/library/models/UtilsTest.php</file>
+        <file>file:/C:/htdocs/sgsa/tests/application/EmailTest.php</file>
+    </open-files>
 </project-private>

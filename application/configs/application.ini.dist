@@ -38,6 +38,9 @@ resources.db.params.charset = "utf8"
 ; resources.mail.defaultreplyTo.email = <EMAIL>
 ; resources.mail.defaultreplyTo.name = <NAME>
 ; 
+;
+;resources.mail.transport.type = "sendmail"
+;
 ; Zend_Mail_Transport_Smtp
 ;
 ; resources.mail.transport.type = "smtp" 

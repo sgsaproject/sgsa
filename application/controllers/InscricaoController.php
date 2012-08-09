@@ -27,6 +27,7 @@ class InscricaoController extends Zend_Controller_Action {
                 $ouvinte = $ouvinteModel->createRow();
                 $ouvinte->setAttributes($dados);
                 $ouvinte->save();
+                //var_dump($ouvinte->getEmail());die;
                 $ouvinte->enviarEmailConfirmacao();
 
                 $this->_redirect('/inscricao/sucesso');
