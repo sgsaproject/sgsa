@@ -103,10 +103,12 @@ class Application_Model_Ouvinte extends Zend_Db_Table_Row_Abstract {
                 ));
 
         try {
+            $config = new Zend_Config_Ini(APPLICATION_PATH.'/configs/application.ini', APPLICATION_ENV);
+            
             $mail = new Zend_Mail('utf-8');
             $mail->addTo($this->email)
                     ->setBodyHtml($msg)
-                    ->setSubject('Inscrição Semana Acadêmica 2011')
+                    ->setSubject('Inscrição ' . $config->evento->nome . ' de ' . $config->evento->ano)
                     ->send();
         } catch (Exception $e) {
             $date = new Zend_Date();
