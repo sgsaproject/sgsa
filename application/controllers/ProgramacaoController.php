@@ -10,6 +10,7 @@ class ProgramacaoController extends Zend_Controller_Action
 
     public function indexAction()
     {
+        $this->view->headTitle()->prepend('Palestras');
         $palestraModel = new Application_Model_DbTable_Palestra();
         $this->view->palestras =  $palestraModel->getPalestras();
     }

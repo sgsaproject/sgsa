@@ -51,6 +51,9 @@ resources.db.params.charset = "utf8"
 ; resources.mail.transport.ssl = 'ssl' or 'tls'
 ; resources.mail.transport.port = <PORT>
 
+evento.nome = ""
+evento.ano = ""
+
 phpSettings.date.timezone = "America/Sao_Paulo"
 
 [staging : production]

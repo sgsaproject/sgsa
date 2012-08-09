@@ -5,12 +5,12 @@ class ObjetivoController extends Zend_Controller_Action
 
     public function init()
     {
-        /* Initialize action controller here */
+        $this->view->headTitle()->prepend('Objetivo');
     }
 
     public function indexAction()
     {
-        // action body
+        
     }
 
 

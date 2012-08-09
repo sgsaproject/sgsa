@@ -3,7 +3,7 @@
 class InscricaoController extends Zend_Controller_Action {
 
     public function init() {
-        /* Initialize action controller here */
+        $this->view->headTitle()->prepend('Inscrição');
     }
 
     public function indexAction() {
@@ -36,7 +36,7 @@ class InscricaoController extends Zend_Controller_Action {
     }
 
     public function sucessoAction() {
-        // action body
+        $this->view->headTitle()->prepend('Inscrição');
     }
 
 }
