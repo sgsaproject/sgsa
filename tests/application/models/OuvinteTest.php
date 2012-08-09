@@ -86,7 +86,9 @@ class OuvinteTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testEnviarEmailConfirmacao() {
-        
+        $ouvinteDAO = new Application_Model_DbTable_Ouvinte();
+        $ouvinte = $ouvinteDAO->createRow();
+        $ouvinte->enviarEmailConfirmacao();
     }
 
 }

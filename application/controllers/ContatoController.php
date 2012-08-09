@@ -26,7 +26,7 @@ class ContatoController extends Zend_Controller_Action {
                 $mail = new Zend_Mail('utf-8');
                 $mail->setFrom($dados['email'])
                         ->setReplyTo($dados['email'])
-                        ->addTo('')
+                        ->addTo('thiagockrug@gmail.com')
                         ->setBodyHtml($msg)
                         ->setSubject('Contato Semana Acadêmica - '.$dados['assunto'])
                         ->send();
