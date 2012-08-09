@@ -3,11 +3,13 @@
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
     protected function _initViews() {
+        
+        $config = new Zend_Config_Ini(APPLICATION_PATH.'/configs/application.ini', APPLICATION_ENV);
 
         $this->bootstrap('view');
         $view = $this->getResource('view');
 
-        $view->title = 'Semana Acadêmica 2011';
+        $view->title = $config->evento->nome . ' de ' . $config->evento->ano;
         $view->slogan = '';
 
         $view->doctype('XHTML1_STRICT');

@@ -85,10 +85,46 @@ class OuvinteTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals(2, $count);
     }
     
+    /*@var $ouvinte Application_Model_Ouvinte*/
     public function testEnviarEmailConfirmacao() {
         $ouvinteDAO = new Application_Model_DbTable_Ouvinte();
         $ouvinte = $ouvinteDAO->createRow();
+        $ouvinte->setNome("Afonso Barbosa");
+        $ouvinte->setEmail("thiagockrug@gmail.com");
+        $codigoBarras = new Application_Model_CodigoBarra();
+        $ouvinte->setCodigoBarras($codigoBarras->gerarCodigoBarras());
+        $id = $ouvinte->save();
         $ouvinte->enviarEmailConfirmacao();
+        
+        $email = new Application_Model_DbTable_EmailPendente();
+        $emails = $email->getEmailsOfOuvinte($id);
+        $ouvinte2 = $ouvinteDAO->getOuvinteById($id);
+        
+        $this->assertNotNull($emails);
+        $this->assertEquals(0, $emails->count());
+        $this->assertEquals($id, $ouvinte2->getId());
+        $this->assertInstanceOf('Zend_Db_Table_Rowset_Abstract', $emails);
+    }
+    
+    /*@var $ouvinte Application_Model_Ouvinte*/
+    public function testEnviarEmailConfirmacaoEmailPendente() {
+        $ouvinteDAO = new Application_Model_DbTable_Ouvinte();
+        $ouvinte = $ouvinteDAO->createRow();
+        $ouvinte->setNome("Idelfonso Barbosa");
+        $codigoBarras = new Application_Model_CodigoBarra();
+        $ouvinte->setCodigoBarras($codigoBarras->gerarCodigoBarras());
+        $id = $ouvinte->save();
+        
+        $ouvinte->enviarEmailConfirmacao();
+        
+        $email = new Application_Model_DbTable_EmailPendente();
+        $emails = $email->getEmailsOfOuvinte($id);
+        $ouvinte2 = $ouvinteDAO->getOuvinteById($id);
+        
+        $this->assertNotNull($emails);
+        $this->assertEquals(1, $emails->count());
+        $this->assertEquals($id, $ouvinte2->getId());
+        $this->assertInstanceOf('Zend_Db_Table_Rowset_Abstract', $emails);
     }
 
 }

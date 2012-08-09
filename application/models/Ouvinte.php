@@ -108,7 +108,7 @@ class Application_Model_Ouvinte extends Zend_Db_Table_Row_Abstract {
             $mail = new Zend_Mail('utf-8');
             $mail->addTo($this->email)
                     ->setBodyHtml($msg)
-                    ->setSubject('Inscrição ' . $config->evento->nome . ' de ' . $config->evento->ano)
+                    ->setSubject('Inscrição na ' . $config->evento->nome . ' de ' . $config->evento->ano)
                     ->send();
         } catch (Exception $e) {
             $date = new Zend_Date();

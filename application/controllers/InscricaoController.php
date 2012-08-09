@@ -22,12 +22,11 @@ class InscricaoController extends Zend_Controller_Action {
                 //Inicia o modelo, insere os dados e redireciona
                 $ouvinteModel = new Application_Model_DbTable_Ouvinte();
                 $codigoBarras = new Application_Model_CodigoBarra();
-                $dados['codigo_barras'] = $codigoBarras->gerarCodigoBarras();
                 /*@var $ouvinte Application_Model_Ouvinte*/
                 $ouvinte = $ouvinteModel->createRow();
+                $ouvinte->setCodigoBarras($codigoBarras->gerarCodigoBarras());
                 $ouvinte->setAttributes($dados);
                 $ouvinte->save();
-                //var_dump($ouvinte->getEmail());die;
                 $ouvinte->enviarEmailConfirmacao();
 
                 $this->_redirect('/inscricao/sucesso');
