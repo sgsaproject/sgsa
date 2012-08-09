@@ -17,6 +17,30 @@ class CodigoBarrasTest extends PHPUnit_Framework_TestCase {
         $codigoBarras = $codigoBarrasModel->gerarCodigoBarras();
         $this->assertSame(strlen($codigoBarras), 5);
     }
+    
+    /*@var $ouvinte Application_Model_Ouvinte*/
+    public function testExisteCodigoBarras() {
+        $ouvinteDAO = new Application_Model_DbTable_Ouvinte();
+        $ouvinte = $ouvinteDAO->createRow();
+        $ouvinte->setCodigoBarras(12345);
+        $ouvinte->save();
+        
+        $codigoBarrasModel = new Application_Model_CodigoBarra();
+        $existeCodigoBarras = $codigoBarrasModel->existeCodigoBarras(12345);
+        
+        $this->assertTrue($existeCodigoBarras);
+    }
+    
+    /*@var $ouvinte Application_Model_Ouvinte*/
+    public function testNaoExisteCodigoBarras() {
+        $ouvinteDAO = new Application_Model_DbTable_Ouvinte();
+        $ouvinteDAO->delete('codigo_barras = 12345');
+        
+        $codigoBarrasModel = new Application_Model_CodigoBarra();
+        $existeCodigoBarras = $codigoBarrasModel->existeCodigoBarras(12345);
+        
+        $this->assertFalse($existeCodigoBarras);
+    }
 
 }
 
