@@ -42,7 +42,23 @@ class Sistema_Model_UtilsTest extends PHPUnit_Framework_TestCase {
         $this->nomeCompleto = $nomeCompleto;
     }
 
-
+    public function testSetAttributesOuvinte() {
+        $dados = array('nome' => 'Thiago Cassio Krug',
+            'rg' => '3093746001',
+            'email' => 'thiagockrug@gmail.com',
+            'curso' => 'Engenharia de Software',
+            'instituicao' => 'Unipampa');
+        
+        $ouvinteDAO = new Application_Model_DbTable_Ouvinte();
+        $ouvinte = $ouvinteDAO->createRow();
+        $ouvinte->setAttributes($dados);
+        
+        $this->assertEquals($ouvinte->getNome(), $dados['nome']);
+        $this->assertEquals($ouvinte->getRg(), $dados['rg']);
+        $this->assertEquals($ouvinte->getEmail(), $dados['email']);
+        $this->assertEquals($ouvinte->getCurso(), $dados['curso']);
+        $this->assertEquals($ouvinte->getInstituicao(), $dados['instituicao']);
+    }
 
 }
 

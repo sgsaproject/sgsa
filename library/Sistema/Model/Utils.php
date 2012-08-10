@@ -14,14 +14,12 @@ trait Sistema_Model_Utils {
                 array_map('ucfirst', $array);
                 $key = implode('', $array);
                 $method = 'set' . ucfirst($key);
-                if (method_exists($this, $method)) {
-                    $this->{$method}($value);
-                    return;
+                if (method_exists($this, $method) == false) {
+                    throw new BadMethodCallException('Call to undefined method');
                 }
-                throw new BadMethodCallException('Call to undefined method');
+                $this->{$method}($value);
             }
         }
     }
 
 }
-
