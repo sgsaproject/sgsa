@@ -29,18 +29,19 @@ class InscricaoControllerTest extends Zend_Test_PHPUnit_ControllerTestCase {
 
         $this->request->setMethod('POST')
                 ->setPost(array('nome' => 'Idelfina Souza', 'rg' => '63539631284',
-                    'email' => 'idelfinasouza@algummail.com', 'curso' => 'Farmácia',
-                    'instituicao', 'Unipampa'));
+                    'email' => 'eidelfinasouza@algummail.com', 'curso' => 'Farmácia',
+                    'instituicao' => 'Unipampa'));
 
         $this->dispatch($url);
-
+        
+        
         // assertions
         $this->assertRedirectTo('/inscricao/sucesso');
         $this->assertModule($urlParams['module']);
         $this->assertController($urlParams['controller']);
-        //$this->assertAction('sucesso');
-        //$this->assertQueryContentContains("div#conteudo h1", "Efetue sua Pré-Inscrição");
-        $this->fail('Fazer o teste pq esse naum tah funfando');
+        $this->assertAction('sucesso');
+        $this->assertQueryContentContains("h1", "Inscrição");
+        $this->assertQueryContentContains("p", "Inscrição feita com sucesso!");
     }
 
 }
