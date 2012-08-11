@@ -39,9 +39,21 @@ class InscricaoControllerTest extends Zend_Test_PHPUnit_ControllerTestCase {
         $this->assertRedirectTo('/inscricao/sucesso');
         $this->assertModule($urlParams['module']);
         $this->assertController($urlParams['controller']);
-        $this->assertAction('sucesso');
-        $this->assertQueryContentContains("h1", "Inscrição");
-        $this->assertQueryContentContains("p", "Inscrição feita com sucesso!");
+        $this->assertAction('inscrever');
+    }
+    
+    public function testSucessoAction() {
+        $params = array('action' => 'sucesso', 'controller' => 'inscricao', 'module' => 'default');
+        $urlParams = $this->urlizeOptions($params);
+        $url = $this->url($urlParams);
+        $this->dispatch($url);
+
+        // assertions
+        $this->assertNotRedirect();
+        $this->assertModule($urlParams['module']);
+        $this->assertController($urlParams['controller']);
+        $this->assertAction($urlParams['action']);
+        $this->assertQueryContentContains("div#conteudo h2", "Inscrição");
     }
 
 }

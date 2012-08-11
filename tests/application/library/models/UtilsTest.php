@@ -57,8 +57,6 @@ class Sistema_Model_UtilsTest extends PHPUnit_Framework_TestCase {
         $this->email = $email;
     }
 
-
-
     public function testSetAttributesOuvinte() {
         $dados = array('nome' => 'Thiago Cassio Krug',
             'rg' => '3093746001',
