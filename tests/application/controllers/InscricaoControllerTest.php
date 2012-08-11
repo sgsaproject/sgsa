@@ -34,7 +34,6 @@ class InscricaoControllerTest extends Zend_Test_PHPUnit_ControllerTestCase {
 
         $this->dispatch($url);
         
-        
         // assertions
         $this->assertRedirectTo('/inscricao/sucesso');
         $this->assertModule($urlParams['module']);
