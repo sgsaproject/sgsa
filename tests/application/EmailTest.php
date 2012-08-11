@@ -20,7 +20,7 @@ class EmailTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testSendMail() {
-        $this->clearMailFiles();
+        Sistema_Test_Mail::clearMailFiles();
         $mail = new Zend_Mail('utf-8');
         $mail->addTo('recipient3@yahoo.com');
         $mail->addCc('recipient4@yahoo.com');
@@ -28,7 +28,7 @@ class EmailTest extends PHPUnit_Framework_TestCase {
         $mail->setBodyHtml('1st email');
         $mail->send();
         
-        $fileMail = $this->getEmails();
+        $fileMail = Sistema_Test_Mail::getEmails();
         $this->assertContains('sactaunipampa@gmail.com', $fileMail[0]->getHeader('from'));
         $this->assertContains('recipient3@yahoo.com', $fileMail[0]->getHeader('to'));
         $this->assertContains('recipient4@yahoo.com', $fileMail[0]->getHeader('cc'));
@@ -36,38 +36,10 @@ class EmailTest extends PHPUnit_Framework_TestCase {
         $this->assertContains('1st email', $fileMail[0]->getContent());
 
     }
-
-    private function getEmails() {
-        $directory = APPLICATION_PATH. "/../data/cache/sentmail";
-        //remove the pesky .. and .
-        $files = array_diff(scandir($directory), array('..', '.'));
-        sort($files);  //IMPORTANT - We need them in order!
-        $emails = array();
-        foreach ($files as $file) {
-            if ($file !=='gitkeep') {
-                $email_str = realpath(APPLICATION_PATH . "/../data/cache/sentmail/" . $file);
-                $emails[] = new Zend_Mail_Message_File(array('file' => $email_str));
-            }
-        }
-        return $emails;
-    }
-
-    private static function clearMailFiles() {
-        //delete all files in folder
-        $directory = APPLICATION_PATH ."/../data/cache/sentmail";
-        $files1 = array_diff(scandir($directory), array('..', '.'));
-        foreach ($files1 as $val) {
-            if ($val !== 'gitkeep') {
-                unlink(realpath($directory . "/" . $val));
-            }
-        }
-    }
     
     protected function tearDown()
     {
-        self::clearMailFiles();
+        Sistema_Test_Mail::clearMailFiles();
         parent::tearDown();
     }
-
-
 }

@@ -65,6 +65,7 @@
         <modelFile modelName="Palestra"/>
         <modelFile modelName="Sessao"/>
         <modelFile modelName="CodigoBarra"/>
+        <modelFile modelName="Contato"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <viewsDirectory>
