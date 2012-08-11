@@ -16,20 +16,10 @@ class ContatoController extends Zend_Controller_Action {
                 //pega os dados do post do formulario
                 $dados = $contato->getValues();
                 
-                $msg ="
-                Nome: {$dados['nome']} <br/>
-                Email: {$dados['email']} <br/>
-                Telefone: {$dados['telefone']} <br/>
-                Mensagem: {$dados['mensagem']}
-                ";
-
-                $mail = new Zend_Mail('utf-8');
-                $mail->setFrom($dados['email'])
-                        ->setReplyTo($dados['email'])
-                        ->addTo('thiagockrug@gmail.com')
-                        ->setBodyHtml($msg)
-                        ->setSubject('Contato Semana Acadêmica - '.$dados['assunto'])
-                        ->send();
+                $contatoModel = new Application_Model_Contato();
+                $contatoModel->setAttributes($dados);
+                $contatoModel->enviarEmail();
+                
                 //cria uma mensagem de aviso no jquery q sera exibida apos o redirect
                 $info = new Zend_Session_Namespace('sacta');
                 $info->mensagem='Obrigado pelo seu contato, entraremos em contato breve!';

@@ -87,6 +87,8 @@ class OuvinteTest extends PHPUnit_Framework_TestCase {
     
     /*@var $ouvinte Application_Model_Ouvinte*/
     public function testEnviarEmailConfirmacao() {
+        Sistema_Test_Mail::clearMailFiles();
+        
         $ouvinteDAO = new Application_Model_DbTable_Ouvinte();
         $ouvinte = $ouvinteDAO->createRow();
         $ouvinte->setNome("Afonso Barbosa");
@@ -108,6 +110,8 @@ class OuvinteTest extends PHPUnit_Framework_TestCase {
     
     /*@var $ouvinte Application_Model_Ouvinte*/
     public function testEnviarEmailConfirmacaoEmailPendente() {
+        Sistema_Test_Mail::clearMailFiles();
+        
         $ouvinteDAO = new Application_Model_DbTable_Ouvinte();
         $ouvinte = $ouvinteDAO->createRow();
         $ouvinte->setNome("Idelfonso Barbosa");
@@ -125,6 +129,11 @@ class OuvinteTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals(1, $emails->count());
         $this->assertEquals($id, $ouvinte2->getId());
         $this->assertInstanceOf('Zend_Db_Table_Rowset_Abstract', $emails);
+    }
+    
+    protected function tearDown() {
+        Sistema_Test_Mail::clearMailFiles();
+        parent::tearDown();
     }
 
 }
