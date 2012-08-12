@@ -38,8 +38,7 @@
 if (extension_loaded('xdebug')) {
     xdebug_disable();
 }
-
-set_include_path(dirname(__FILE__)."\..\library" . PATH_SEPARATOR . get_include_path());
+set_include_path( realpath(dirname(__FILE__). DIRECTORY_SEPARATOR.'..'. DIRECTORY_SEPARATOR. 'library'). PATH_SEPARATOR .get_include_path());
 
 require_once 'PHPUnit/Util/Filter.php';
 
