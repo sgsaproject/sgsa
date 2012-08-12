@@ -3,3 +3,4 @@
 /build/
 /dist/
 /JavaApplication4/nbproject/private/
+*.log
