@@ -41,7 +41,7 @@ public class Server {
                     String text = sgsa.readText();
                     this.sendText(text, id);
                 } else {
-                    Client client = new Client(clientSocket);
+                    Client client = new Client(clientSocket, id);
                     client.start();
                     clients.add(client);
                 }

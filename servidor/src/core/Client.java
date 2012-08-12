@@ -20,8 +20,9 @@ public class Client extends Thread {
     private BufferedReader in;
     private PrintStream out;
 
-    public Client(Socket clientSocket) {
+    public Client(Socket clientSocket, int id) {
         try {
+            this.identifier = id;
             this.clientSocket = clientSocket;
             this.in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             this.out = new PrintStream(clientSocket.getOutputStream());
