@@ -24,7 +24,7 @@ class ImpressaoTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testImpressaoInfo() {
-        $this->assertEquals($this->impressao->getHost(), 'cec-alegrete.com');
+        //$this->assertEquals($this->impressao->getHost(), 'cec-alegrete.com');
         $this->assertEquals($this->impressao->getPort(), 5588);
         $this->assertEquals($this->impressao->getMaxCaracteresPorLinha(), 36);
     }
