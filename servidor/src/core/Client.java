@@ -79,6 +79,7 @@ public class Client extends Thread {
     }
     
     public synchronized void sendText(String text) {
-        this.getOut().println(text);
+        System.out.println(text);
+        this.getOut().print(text);
     }
 }

@@ -34,7 +34,6 @@ public class SGSA {//extends Thread {
             while ((line = in.readLine()) != null) {
                 server += line + "\n";
             }
-            System.out.println(server);
             return server;
         } catch (IOException ex) {
             Logger.getLogger(SGSA.class.getName()).log(Level.SEVERE, null, ex);
