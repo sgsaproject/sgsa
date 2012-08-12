@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -20,6 +20,8 @@ public class Server {
     private ServerSocket server;
     private Clients clients;
     private static Properties config;
+    
+    static Logger logger = Logger.getLogger(Server.class);
 
     public Server() {
         clients = new Clients();
@@ -29,9 +31,9 @@ public class Server {
     public void init() {
         try {
             server = new ServerSocket(port);
-            System.out.println("Servidor iniciado!");
+            logger.info("Servidor iniciado!");
             while (true) {
-                System.out.println("Escutando conexões na porta " + port + "...");
+                logger.info("Escutando conexões na porta " + port + "...");
                 Socket clientSocket = server.accept();
                 String ipClient = clientSocket.getInetAddress().getHostAddress();
                 String ipSGSA = config.getProperty("sgsa.ip");
@@ -47,7 +49,7 @@ public class Server {
                 }
             }
         } catch (IOException ex) {
-            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+            logger.fatal( null, ex);
         }
     }
 
