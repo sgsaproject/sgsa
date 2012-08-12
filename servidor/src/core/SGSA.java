@@ -1,12 +1,13 @@
 package core;
 
 import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -17,14 +18,20 @@ public class SGSA {//extends Thread {
     private Socket socket;
     private BufferedReader in;
     private PrintStream out;
+    private DataInputStream inputStream;
+    private DataOutputStream outputStream;
+    static Logger logger = Logger.getLogger(Server.class);
 
     public SGSA(Socket socket) {
         try {
             this.socket = socket;
             this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            this.out = new PrintStream(socket.getOutputStream());
+            //this.out = new PrintStream(socket.getOutputStream());
+
+            //this.inputStream = new DataInputStream(this.socket.getInputStream());
+            this.outputStream = new DataOutputStream(this.socket.getOutputStream());
         } catch (IOException ex) {
-            Logger.getLogger(SGSA.class.getName()).log(Level.SEVERE, null, ex);
+            logger.fatal(null, ex);
         }
     }
 
@@ -35,8 +42,9 @@ public class SGSA {//extends Thread {
                 server += line + "\n";
             }
             return server;
+            //return this.inputStream.readUTF();
         } catch (IOException ex) {
-            Logger.getLogger(SGSA.class.getName()).log(Level.SEVERE, null, ex);
+            logger.fatal(null, ex);
         }
         return null;
     }

@@ -1,13 +1,15 @@
 package core;
 
 import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -19,31 +21,39 @@ public class Client extends Thread {
     private Socket clientSocket;
     private BufferedReader in;
     private PrintStream out;
+    
+    private DataInputStream inputStream;
+    private DataOutputStream outputStream;
+    
+    static Logger logger = Logger.getLogger(Client.class);
 
     public Client(Socket clientSocket, int id) {
         try {
             this.identifier = id;
             this.clientSocket = clientSocket;
-            this.in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            this.out = new PrintStream(clientSocket.getOutputStream());
+            //this.in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            this.inputStream = new DataInputStream(this.clientSocket.getInputStream());
+            this.outputStream = new DataOutputStream(this.clientSocket.getOutputStream());
+            //this.out = new PrintStream(clientSocket.getOutputStream());
         } catch (IOException ex) {
-            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+            logger.fatal(null, ex);
         }
     }
 
     @Override
     public void run() {
         //BufferedReader entrada = null;
-        try {
-            //entrada = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            //PrintStream saida = new PrintStream(conexaoCliente.getOutputStream());
-            // aqui a cobra fuma!
-            // lê o comando SERVER
-            String server = in.readLine();
-            System.out.println(server);
-        } catch (IOException ex) {
-            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            //entrada = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+//            //PrintStream saida = new PrintStream(conexaoCliente.getOutputStream());
+//            // aqui a cobra fuma!
+//            // lê o comando SERVER
+//            
+//            String server = this.inputStream.readUTF();
+//            logger.info(server);
+//        } catch (IOException ex) {
+//            logger.fatal(null, ex);
+//        }
     }
 
     public synchronized int getIdentifier() {
@@ -61,25 +71,31 @@ public class Client extends Thread {
     public synchronized void setClientSocket(Socket clientSocket) {
         this.clientSocket = clientSocket;
     }
-    
+
     public synchronized BufferedReader getIn() {
         return this.in;
     }
-    
+
     public synchronized void setIn(BufferedReader in) {
         this.in = in;
     }
-    
+
     public synchronized PrintStream getOut() {
         return this.out;
     }
-    
+
     public synchronized void setOut(PrintStream out) {
         this.out = out;
     }
-    
+
     public synchronized void sendText(String text) {
-        System.out.println(text);
-        this.getOut().print(text);
+        logger.info(text);
+        try {
+            this.outputStream.writeUTF(text);
+            this.outputStream.flush();
+        } catch (IOException ex) {
+            logger.fatal(null, ex);
+        }
+        
     }
 }

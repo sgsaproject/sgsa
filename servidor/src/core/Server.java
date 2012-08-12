@@ -1,13 +1,15 @@
 package core;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Properties;
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 /**
@@ -20,11 +22,10 @@ public class Server {
     private ServerSocket server;
     private Clients clients;
     private static Properties config;
-    
     static Logger logger = Logger.getLogger(Server.class);
 
     public Server() {
-        clients = new Clients();
+        this.clients = new Clients();
         this.port = Integer.parseInt(config.getProperty("port"));
     }
 
@@ -35,21 +36,23 @@ public class Server {
             while (true) {
                 logger.info("Escutando conexões na porta " + port + "...");
                 Socket clientSocket = server.accept();
-                String ipClient = clientSocket.getInetAddress().getHostAddress();
-                String ipSGSA = config.getProperty("sgsa.ip");
+                BufferedReader d = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                String msgInicial = d.readLine();
                 int id = 1; // mudar pro id do cliente
-                if (ipClient.equalsIgnoreCase(ipSGSA)) {
+                if (msgInicial.equalsIgnoreCase("SGSA:PRINT")) {
                     SGSA sgsa = new SGSA(clientSocket);
                     String text = sgsa.readText();
+                    logger.info("Mensagem recebida de SGSA: " + text);
                     this.sendText(text, id);
                 } else {
+                    logger.info("Cliente de impressão conectado: " + msgInicial);
                     Client client = new Client(clientSocket, id);
-                    client.start();
-                    clients.add(client);
+                    //client.start();
+                    this.clients.add(client);
                 }
             }
         } catch (IOException ex) {
-            logger.fatal( null, ex);
+            logger.fatal(null, ex);
         }
     }
 
@@ -92,9 +95,9 @@ public class Server {
             fr = new FileReader("config.prop");
             config.load(fr);
         } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
+            logger.fatal(null, ex);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            logger.fatal(null, ex);
         }
     }
 
@@ -106,14 +109,17 @@ public class Server {
             FileWriter fw = new FileWriter("config.prop");
             config.store(fw, "");
         } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
+            logger.fatal(null, ex);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            logger.fatal(null, ex);
         }
     }
 
     private void sendText(String text, int id) {
-        //clients.getClientById(id).sendText(text);
-        clients.getFirst().sendText(text);
+        if (this.clients.getSize() == 0) {
+            logger.warn("Não há clientes para impressão");
+            return;
+        }
+        clients.getLast().sendText(text);
     }
 }

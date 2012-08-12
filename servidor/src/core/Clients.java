@@ -1,6 +1,7 @@
 package core;
 
 import java.util.ArrayList;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -9,9 +10,11 @@ import java.util.ArrayList;
 public class Clients {
 
     private ArrayList<Client> clients;
+    
+    static Logger logger = Logger.getLogger(Clients.class);
 
     public Clients() {
-        clients = new ArrayList<>();
+        this.clients = new ArrayList<>();
     }
 
     /**
@@ -21,7 +24,8 @@ public class Clients {
      * @return true caso foi adicionado com sucesso
      */
     public synchronized boolean add(Client client) {
-        return clients.add(client);
+        logger.info("Adicionado cliente: "+client.getClientSocket().getInetAddress().toString());
+        return this.clients.add(client);
     }
 
     /**
@@ -31,7 +35,7 @@ public class Clients {
      * @return true caso foi removido com sucesso
      */
     public synchronized boolean remove(Client client) {
-        return clients.remove(client);
+        return this.clients.remove(client);
     }
 
     /**
@@ -41,11 +45,11 @@ public class Clients {
      * @return true caso o nome esteja na lista
      */
     public synchronized boolean contains(Client client) {
-        return clients.contains(client);
+        return this.clients.contains(client);
     }
     
     public synchronized Client getClientById(int id) {
-        for (Client client : clients) {
+        for (Client client : this.clients) {
             if (client.getId() == id) {
                 return client;
             }
@@ -54,9 +58,13 @@ public class Clients {
     }
     
     public synchronized Client getFirst() {
-        return clients.get(0);
+        return this.clients.get(0);
     }
     public synchronized Client getLast() {
         return this.clients.get(this.clients.size() - 1);
+    }
+    
+    public int getSize() {
+        return this.clients.size();
     }
 }
