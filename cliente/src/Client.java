@@ -6,8 +6,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.UnknownHostException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -17,6 +16,8 @@ public class Client {
 
     private int identifier;
     private Server server;
+    
+    public static Logger logger = Logger.getLogger(Client.class);
 
     public Client(int identifier) {
         this.identifier = identifier;
@@ -25,12 +26,14 @@ public class Client {
     public void init(String ip) {
         try {
             // initialize the conection with server
+            logger.info("Conectando no servidor " + ip + "...");
             this.server = new Server(ip);
         } catch (UnknownHostException ex) {
-            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+            logger.fatal("", ex);
         } catch (IOException ex) {
-            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+            logger.fatal("", ex);
         }
+        logger.info("Conectado");
 
         OutputStream os = null;
         InputStream is = null;
@@ -41,13 +44,15 @@ public class Client {
             os = this.server.getOutputStream();
             is = this.server.getInputStream();
         } catch (IOException ex) {
-            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+            logger.fatal("", ex);
         }
 
         ps = new PrintStream(os);
 
+        logger.info("Enviando id: " + identifier);
         ps.println("Client id: " + identifier);
-
+        logger.info("Id " + identifier + " enviado");
+        
         BufferedReader in = new BufferedReader(new InputStreamReader(is));
         while (true) {
             try {
@@ -55,11 +60,10 @@ public class Client {
                 while ((line = in.readLine()) != null) {
                     text += line + "\n";
                 }
-                System.out.println(text);
+                logger.info("Mensagem recebida: " + text);
             } catch (IOException ex) {
-                Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+                logger.fatal("", ex);
             }
-            
         }
     }
 
