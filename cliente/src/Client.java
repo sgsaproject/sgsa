@@ -51,9 +51,9 @@ public class Client {
         BufferedReader in = new BufferedReader(new InputStreamReader(is));
         while (true) {
             try {
-                String text = "";
-                while (in.readLine() != null) {
-                    text += in.readLine() + "\n";
+                String text = "", line;
+                while ((line = in.readLine()) != null) {
+                    text += line + "\n";
                 }
                 System.out.println(text);
             } catch (IOException ex) {
