@@ -52,4 +52,8 @@ public class Clients {
         }
         return null;
     }
+    
+    public synchronized Client getFirst() {
+        return clients.get(0);
+    }
 }

@@ -111,6 +111,7 @@ public class Server {
     }
 
     private void sendText(String text, int id) {
-        clients.getClientById(id).sendText(text);
+        //clients.getClientById(id).sendText(text);
+        clients.getFirst().sendText(text);
     }
 }
