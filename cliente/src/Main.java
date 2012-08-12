@@ -13,7 +13,7 @@ public class Main {
         
         logger.info("Inicializando");
         
-        new Client(1).init("sacta.cec-alegrete.com");
+        new Client(1).init("localhost");
         
         logger.info("Finalizando");
     }
