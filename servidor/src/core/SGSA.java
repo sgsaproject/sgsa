@@ -30,9 +30,9 @@ public class SGSA {//extends Thread {
 
     public String readText() {
         try {
-            String server = "";
-            while (in.readLine() != null) {
-                server += in.readLine() + "\n";
+            String server = "", line;
+            while ((line = in.readLine()) != null) {
+                server += line + "\n";
             }
             System.out.println(server);
             return server;
