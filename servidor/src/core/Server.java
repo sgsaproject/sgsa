@@ -36,7 +36,7 @@ public class Server {
                 String ipClient = clientSocket.getInetAddress().getHostAddress();
                 String ipSGSA = config.getProperty("sgsa.ip");
                 if (ipClient.equalsIgnoreCase(ipSGSA)) {
-                    
+                    System.out.println("O SGSA se conectou! =]");
                 } else {
                     Client client = new Client(clientSocket);
                     client.start();

@@ -15,39 +15,63 @@ public class Client extends Thread {
 
     private int identifier;
     private Socket clientSocket;
+    private BufferedReader in;
+    private BufferedReader out;
 
     public Client(Socket clientSocket) {
-        this.clientSocket = clientSocket;
+        try {
+            this.clientSocket = clientSocket;
+            this.in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            //this.out = new PrintStream(clientSocket.getOutputStream());
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public void run() {
-        BufferedReader entrada = null;
+        //BufferedReader entrada = null;
         try {
-            entrada = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            //entrada = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             //PrintStream saida = new PrintStream(conexaoCliente.getOutputStream());
             // aqui a cobra fuma!
             // lê o comando SERVER
-            String server = entrada.readLine();
+            String server = in.readLine();
             System.out.println(server);
         } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public int getIdentifier() {
+    public synchronized int getIdentifier() {
         return identifier;
     }
 
-    public void setIdentifier(int identifier) {
+    public synchronized void setIdentifier(int identifier) {
         this.identifier = identifier;
     }
 
-    public Socket getClientSocket() {
+    public synchronized Socket getClientSocket() {
         return clientSocket;
     }
 
-    public void setClientSocket(Socket clientSocket) {
+    public synchronized void setClientSocket(Socket clientSocket) {
         this.clientSocket = clientSocket;
+    }
+    
+    public synchronized BufferedReader getIn() {
+        return this.in;
+    }
+    
+    public synchronized void setIn(BufferedReader in) {
+        this.in = in;
+    }
+    
+    public synchronized BufferedReader getOut() {
+        return this.out;
+    }
+    
+    public synchronized void setOut(BufferedReader out) {
+        this.out = out;
     }
 }
