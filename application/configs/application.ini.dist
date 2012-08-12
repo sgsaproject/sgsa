@@ -54,6 +54,10 @@ resources.db.params.charset = "utf8"
 evento.nome = ""
 evento.ano = ""
 
+impressao.servidor.host = "cec-alegrete.com"
+impressao.servidor.port = 5588
+impressao.max_caracteres_por_linha = 36
+
 phpSettings.date.timezone = "America/Sao_Paulo"
 
 [staging : production]
