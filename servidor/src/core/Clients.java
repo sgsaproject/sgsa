@@ -56,4 +56,7 @@ public class Clients {
     public synchronized Client getFirst() {
         return clients.get(0);
     }
+    public synchronized Client getLast() {
+        return this.clients.get(this.clients.size() - 1);
+    }
 }
