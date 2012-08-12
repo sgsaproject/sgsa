@@ -51,10 +51,14 @@ class Application_Model_Contato {
     }
 
     public function enviarEmail() {
-        $msg = "Nome: {$this->nome} <br/>" .
-               "Email: {$this->email} <br/>" .
-               "Telefone: {$this->telefone} <br/>" .
-               "Mensagem: {$this->mensagem}";
+        $view = new Zend_View();
+        $view->setScriptPath(APPLICATION_PATH . '/views/scripts/layout/templates/');
+        $emailContato = $view->partial('emailContato.phtml',
+                array('assunto' => $this->getAssunto(),
+                    'email' => $this->getEmail(),
+                    'mensagem' => $this->getMensagem(),
+                    'nome' => $this->getNome(),
+                    'telefone' => $this->getTelefone()));
 
         $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/application.ini', APPLICATION_ENV);
 
@@ -62,7 +66,7 @@ class Application_Model_Contato {
         $mail->setFrom($this->email)
                 ->setReplyTo($this->email)
                 ->addTo($config->resources->mail->defaultfrom->email)
-                ->setBodyHtml($msg)
+                ->setBodyHtml($emailContato)
                 ->setSubject('Contato Semana Acadêmica - ' . $this->assunto)
                 ->send();
     }

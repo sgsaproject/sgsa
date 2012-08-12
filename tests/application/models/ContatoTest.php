@@ -47,6 +47,8 @@ class ContatoTest extends PHPUnit_Framework_TestCase {
         $this->assertContains($contato->getEmail(), $fileMail[0]->getHeader('reply-to'));
         $this->assertContains($config->resources->mail->defaultfrom->email, $fileMail[0]->getHeader('to'));
         $this->assertContains($contato->getAssunto(), $fileMail[0]->getHeader('subject'));
+        $this->assertNotNull($fileMail[0]->getContent());
+        $this->assertGreaterThan(310, strlen($fileMail[0]->getContent())); //310 é o número de caracteres na página sem dados
     }
 
     protected function tearDown() {
