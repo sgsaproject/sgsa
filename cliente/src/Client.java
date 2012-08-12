@@ -1,6 +1,8 @@
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.UnknownHostException;
@@ -46,6 +48,19 @@ public class Client {
 
         ps.println("Client id: " + identifier);
 
+        BufferedReader in = new BufferedReader(new InputStreamReader(is));
+        while (true) {
+            try {
+                String text = "";
+                while (in.readLine() != null) {
+                    text += in.readLine() + "\n";
+                }
+                System.out.println(text);
+            } catch (IOException ex) {
+                Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
     }
 
     /**

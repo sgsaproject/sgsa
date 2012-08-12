@@ -3,6 +3,8 @@ package core;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,13 +18,13 @@ public class Client extends Thread {
     private int identifier;
     private Socket clientSocket;
     private BufferedReader in;
-    private BufferedReader out;
+    private PrintStream out;
 
     public Client(Socket clientSocket) {
         try {
             this.clientSocket = clientSocket;
             this.in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            //this.out = new PrintStream(clientSocket.getOutputStream());
+            this.out = new PrintStream(clientSocket.getOutputStream());
         } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -67,11 +69,15 @@ public class Client extends Thread {
         this.in = in;
     }
     
-    public synchronized BufferedReader getOut() {
+    public synchronized PrintStream getOut() {
         return this.out;
     }
     
-    public synchronized void setOut(BufferedReader out) {
+    public synchronized void setOut(PrintStream out) {
         this.out = out;
+    }
+    
+    public synchronized void sendText(String text) {
+        this.getOut().println(text);
     }
 }

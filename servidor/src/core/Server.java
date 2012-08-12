@@ -35,8 +35,11 @@ public class Server {
                 Socket clientSocket = server.accept();
                 String ipClient = clientSocket.getInetAddress().getHostAddress();
                 String ipSGSA = config.getProperty("sgsa.ip");
+                int id = 1; // mudar pro id do cliente
                 if (ipClient.equalsIgnoreCase(ipSGSA)) {
-                    System.out.println("O SGSA se conectou! =]");
+                    SGSA sgsa = new SGSA(clientSocket);
+                    String text = sgsa.readText();
+                    this.sendText(text, id);
                 } else {
                     Client client = new Client(clientSocket);
                     client.start();
@@ -105,5 +108,9 @@ public class Server {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    private void sendText(String text, int id) {
+        clients.getClientById(id).sendText(text);
     }
 }

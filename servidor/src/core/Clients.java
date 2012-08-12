@@ -43,4 +43,13 @@ public class Clients {
     public synchronized boolean contains(Client client) {
         return clients.contains(client);
     }
+    
+    public synchronized Client getClientById(int id) {
+        for (Client client : clients) {
+            if (client.getId() == id) {
+                return client;
+            }
+        }
+        return null;
+    }
 }
