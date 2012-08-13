@@ -33,7 +33,7 @@ class Application_Model_Impressao {
      * @throws Exception
      * @return void 
      */
-    public function contectar() {
+    public function conectar() {
         if ((socket_connect($this->socket, $this->host, $this->port)) == false) {
             throw new Exception("Could not bind to socket: " . socket_strerror(socket_last_error($this->socket)));
         }
