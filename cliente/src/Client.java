@@ -1,9 +1,7 @@
 
-import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.UnknownHostException;
@@ -17,6 +15,7 @@ public class Client {
 
     private int identifier;
     private Server server;
+    private Printer printer;
     public static Logger logger = Logger.getLogger(Client.class);
 
     public Client(int identifier) {
@@ -52,18 +51,24 @@ public class Client {
         logger.info("Enviando id: " + identifier);
         ps.println("Client id: " + identifier);
         logger.info("Id " + identifier + " enviado");
+        
+        printer = new Printer("COM3", 7);
 
         DataInputStream inputStream = new DataInputStream(is);
         try {
             String line;
             while (true) {
                 line = inputStream.readUTF();
+                try {
+                    printer.print(line, false, false);
+                } catch (Exception ex) {
+                    logger.fatal(ex);
+                }
                 logger.info("Mensagem recebida: " + line);
             }
         } catch (IOException ex) {
             logger.fatal("", ex);
         }
-
     }
 
     /**

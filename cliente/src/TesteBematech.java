@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 import com.sun.jna.Native;
 import javax.swing.JOptionPane;
@@ -24,7 +20,7 @@ class TesteBematech {
         byte condensado2 = 18;
         try {
             Mp2032 lib = (Mp2032) Native.loadLibrary("mp2032", Mp2032.class);
-            JOptionPane.showMessageDialog(null, lib.IniciaPorta("COM4"));
+            JOptionPane.showMessageDialog(null, lib.IniciaPorta("COM3"));
             JOptionPane.showMessageDialog(null, lib.ConfiguraModeloImpressora(7));
             JOptionPane.showMessageDialog(null, lib.BematechTX((char)escape + "" + (char)negrito1 + "texto negrito" + (char)escape + "" + (char)negrito2 + "" + (char)cr + "" + (char)lf));
             JOptionPane.showMessageDialog(null, lib.BematechTX((char)escape + "" + (char)italico1 + "texto italico" + (char)escape + "" + (char)italico2 + "" + (char)cr + "" + (char)lf));
