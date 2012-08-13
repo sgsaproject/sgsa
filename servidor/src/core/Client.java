@@ -21,10 +21,8 @@ public class Client extends Thread {
     private Socket clientSocket;
     private BufferedReader in;
     private PrintStream out;
-    
     private DataInputStream inputStream;
     private DataOutputStream outputStream;
-    
     static Logger logger = Logger.getLogger(Client.class);
 
     public Client(Socket clientSocket, int id) {
@@ -42,18 +40,20 @@ public class Client extends Thread {
 
     @Override
     public void run() {
-        //BufferedReader entrada = null;
-//        try {
-//            //entrada = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-//            //PrintStream saida = new PrintStream(conexaoCliente.getOutputStream());
-//            // aqui a cobra fuma!
-//            // lê o comando SERVER
-//            
-//            String server = this.inputStream.readUTF();
-//            logger.info(server);
-//        } catch (IOException ex) {
-//            logger.fatal(null, ex);
-//        }
+        BufferedReader entrada = null;
+        try {
+            //entrada = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            //PrintStream saida = new PrintStream(conexaoCliente.getOutputStream());
+            // aqui a cobra fuma!
+            // lê o comando SERVER
+            while (true) {
+                String server = this.inputStream.readUTF();
+                logger.info(server);
+            }
+
+        } catch (IOException ex) {
+            logger.fatal(null, ex);
+        }
     }
 
     public synchronized int getIdentifier() {
@@ -96,6 +96,6 @@ public class Client extends Thread {
         } catch (IOException ex) {
             logger.fatal(null, ex);
         }
-        
+
     }
 }

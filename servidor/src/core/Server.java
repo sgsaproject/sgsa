@@ -47,7 +47,7 @@ public class Server {
                 } else {
                     logger.info("Cliente de impressão conectado: " + msgInicial);
                     Client client = new Client(clientSocket, id);
-                    //client.start();
+                    client.start();
                     this.clients.add(client);
                 }
             }

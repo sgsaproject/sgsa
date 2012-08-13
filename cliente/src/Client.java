@@ -59,12 +59,12 @@ public class Client {
             String line;
             while (true) {
                 line = inputStream.readUTF();
+                logger.info("Mensagem recebida: " + line);
                 try {
                     printer.print(line, false, false);
                 } catch (Exception ex) {
                     logger.fatal(ex);
                 }
-                logger.info("Mensagem recebida: " + line);
             }
         } catch (IOException ex) {
             logger.fatal("", ex);
