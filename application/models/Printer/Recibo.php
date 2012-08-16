@@ -5,12 +5,9 @@
  *
  * @author Rafael
  */
-class Application_Model_Impressao {
+class Application_Model_Printer_Recibo extends Application_Model_Printer_Abstract {
 
-    private $socket;
-    private $host;
-    private $port;
-    private $texto;
+    
     private $maxCaracteresPorLinha;
 
     /**
@@ -18,14 +15,8 @@ class Application_Model_Impressao {
      * @throws Exception
      */
     public function __construct() {
-        if (($this->socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)) == false) {
-            throw new Exception("Could not create socket: " . socket_strerror(socket_last_error($this->socket)));
-        }
-        $this->texto = array();
-        $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/application.ini', APPLICATION_ENV);
-        $this->host = $config->impressao->servidor->host;
-        $this->port = $config->impressao->servidor->port;
-        $this->maxCaracteresPorLinha = $config->impressao->max_caracteres_por_linha;
+        parent::__construct();
+        $this->maxCaracteresPorLinha = $this->config->impressao->max_caracteres_por_linha;
     }
 
     /**
@@ -34,20 +25,11 @@ class Application_Model_Impressao {
      * @return void 
      */
     public function conectar() {
-        if ((socket_connect($this->socket, $this->host, $this->port)) == false) {
-            throw new Exception("Could not bind to socket: " . socket_strerror(socket_last_error($this->socket)));
-        }
+        parent::conectar();
         $this->enviarTexto('SGSA:PRINT'."\r\n");
     }
 
-    /**
-     * Adiciona um texto para impressão
-     * @param string $texto
-     * @return void
-     */
-    public function adicionarTexto($texto) {
-        $this->texto[] = $texto;
-    }
+    
 
     /**
      * Realiza uma quebra de linha
@@ -135,33 +117,10 @@ class Application_Model_Impressao {
         $this->texto = array();
     }
 
-    /**
-     * Desconecta do servidor de impressão
-     * @return void
-     */
-    public function desconectar() {
-        socket_close($this->socket);
-    }
-
-    public function getHost() {
-        return $this->host;
-    }
-
-    public function getPort() {
-        return $this->port;
-    }
-
     public function getMaxCaracteresPorLinha() {
         return $this->maxCaracteresPorLinha;
     }
-
-    public function getTexto() {
-        return $this->texto;
-    }
-
-    public function getTextoParaImpressao() {
-        return implode('', $this->texto);
-    }
+    
     /**
      * Envia um texto para o servidor de impressão
      * @param string $texto

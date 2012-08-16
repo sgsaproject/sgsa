@@ -13,13 +13,13 @@
 class ImpressaoTest extends PHPUnit_Framework_TestCase {
 
     /**
-     * @var Application_Model_Impressao 
+     * @var Application_Model_Printer_Recibo 
      */
     private $impressao;
 
     public function setUp() {
         $this->bootstrap = new Zend_Application(APPLICATION_ENV, APPLICATION_PATH . '/configs/application.ini');
-        $this->impressao = new Application_Model_Impressao();
+        $this->impressao = new Application_Model_Printer_Recibo();
         parent::setUp();
     }
 
