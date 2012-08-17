@@ -1,16 +1,11 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Description of ImpressaoTest
  *
  * @author Rafael
  */
-class ImpressaoTest extends PHPUnit_Framework_TestCase {
+class ReciboTest extends PHPUnit_Framework_TestCase {
 
     /**
      * @var Application_Model_Printer_Recibo 
