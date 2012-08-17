@@ -3,6 +3,10 @@ import com.sun.jna.Native;
 import javax.swing.JOptionPane;
 
 class TesteBematech {
+    
+    public void testeL42() {
+
+    }
 
     public static void main(String[] args) {
         byte escape = 27;
