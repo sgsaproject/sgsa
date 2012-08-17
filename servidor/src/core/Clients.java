@@ -64,7 +64,7 @@ public class Clients {
         return this.clients.get(this.clients.size() - 1);
     }
     
-    public int getSize() {
+    public synchronized int getSize() {
         return this.clients.size();
     }
 }
