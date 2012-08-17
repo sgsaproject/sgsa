@@ -1,5 +1,6 @@
 package core;
 
+import java.net.Socket;
 import java.util.ArrayList;
 import org.apache.log4j.Logger;
 
@@ -10,6 +11,7 @@ import org.apache.log4j.Logger;
 public class Clients {
 
     private ArrayList<Client> clients;
+    private static int idClient = 1;
     
     static Logger logger = Logger.getLogger(Clients.class);
 
@@ -66,5 +68,21 @@ public class Clients {
     
     public synchronized int getSize() {
         return this.clients.size();
+    }
+    
+    public Client getClientBySuporte(int tipoImpressora){
+        for (Client client : this.clients) {
+            if (client.getSuporte() == tipoImpressora) {
+                return client;
+            }
+        }
+        return null;
+    }
+    
+    public static Client create(Socket clientSocket){
+        logger.info("Criando cliente com id: "+Clients.idClient);
+        Client c = new Client(clientSocket, Clients.idClient );
+        Clients.idClient++;
+        return c;
     }
 }
