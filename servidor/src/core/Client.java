@@ -20,7 +20,14 @@ public class Client extends Thread {
     private PrintStream out;
     private DataInputStream inputStream;
     private DataOutputStream outputStream;
+    
+    private int suporte;
+            
     static Logger logger = Logger.getLogger(Client.class);
+    
+    public static final int SUPORTE_RECIBO = 1;
+    public static final int SUPORTE_ETIQUETA = 2;
+    public static final int SUPORTE_RECIBO_E_ETIQUETA = 3;
 
     public Client(Socket clientSocket, int id) {
         try {
@@ -95,4 +102,13 @@ public class Client extends Thread {
         }
 
     }
+
+    public int getSuporte() {
+        return suporte;
+    }
+
+    public void setSuporte(int suporte) {
+        this.suporte = suporte;
+    }
+    
 }

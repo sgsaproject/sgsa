@@ -47,9 +47,14 @@ public class Client {
 
         ps = new PrintStream(os);
 
-        logger.info("Enviando id: " + identifier);
-        ps.println("Client id: " + identifier);
-        logger.info("Id " + identifier + " enviado");
+//        logger.info("Enviando id: " + identifier);
+//        ps.println("Client id: " + identifier);
+//        logger.info("Id " + identifier + " enviado");
+        
+        //Fazer verificação das impressoras que estão disponíveis
+        //ps.println("CLIENT:PRINTER:RECIBO");
+        //ps.println("CLIENT:PRINTER:ETIQUETA");
+        //ps.println("CLIENT:PRINTER:RECIBO_E_ETIQUETA");
         
         //printer = new Printer("COM3", 7);
 
