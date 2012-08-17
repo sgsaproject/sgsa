@@ -26,7 +26,7 @@ class Application_Model_Printer_Recibo extends Application_Model_Printer_Abstrac
      */
     public function conectar() {
         parent::conectar();
-        $this->enviarTexto('SGSA:PRINT'."\r\n");
+        $this->enviarTexto('SGSA:PRINT:RECIBO'."\r\n");
     }
 
     
