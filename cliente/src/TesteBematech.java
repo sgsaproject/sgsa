@@ -1,11 +1,20 @@
 
 import com.sun.jna.Native;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 class TesteBematech {
     
-    public void testeL42() {
-
+    public void testaCOMS() {
+        try {
+            MP4200TH printer = new MP4200TH();
+            printer.iniciaPorta(null);
+            printer.configuraModeloImpressora(MP4200TH.MP_4200_TH);
+            printer.fechaPorta();
+        } catch (Exception ex) {
+            Logger.getLogger(TesteBematech.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public static void main(String[] args) {
