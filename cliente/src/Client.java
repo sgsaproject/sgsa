@@ -15,7 +15,6 @@ public class Client {
 
     private int identifier;
     private Server server;
-    private Printer printer;
     public static Logger logger = Logger.getLogger(Client.class);
 
     public Client(int identifier) {
@@ -52,7 +51,7 @@ public class Client {
         ps.println("Client id: " + identifier);
         logger.info("Id " + identifier + " enviado");
         
-        printer = new Printer("COM3", 7);
+        //printer = new Printer("COM3", 7);
 
         DataInputStream inputStream = new DataInputStream(is);
         try {
@@ -61,7 +60,7 @@ public class Client {
                 line = inputStream.readUTF();
                 logger.info("Mensagem recebida: " + line);
                 try {
-                    printer.print(line, false, false);
+                    //printer.print(line, false, false);
                 } catch (Exception ex) {
                     logger.fatal(ex);
                 }
