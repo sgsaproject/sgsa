@@ -7,12 +7,53 @@
  */
 class Application_Model_Printer_Etiqueta extends Application_Model_Printer_Abstract {
 
-    public function imprimir() {
+    /**
+     * Inicia o socket
+     * @throws Exception
+     */
+    public function __construct() {
+        parent::__construct();
         
     }
+    
+    /**
+     * Realiza conexão socket com o servidor de impressão
+     * @throws Exception
+     * @return void 
+     */
+    public function conectar() {
+        parent::conectar();
+        $this->enviarTexto('SGSA:PRINT:ETIQUETA'."\r\n");
+    }
+    
+    /**
+     * Manda texto para o servidor de impressão
+     * @throws Exception
+     * @return void
+     */
+    public function imprimir() {
+        $output = $this->getTextoParaImpressao();
+        $this->enviarTexto($output);
+        $this->texto = array();
+    }
 
+    /**
+     * Realiza uma quebra de linha
+     * @return void
+     */
     public function quebrarLinha() {
-        
+        $this->texto[] = '\n';
+    }
+    
+    /**
+     * Envia um texto para o servidor de impressão
+     * @param string $texto
+     * @throws Exception
+     */
+    private function enviarTexto($texto) {
+        if (socket_write($this->socket, $texto, strlen($texto)) == false) {
+            throw new Exception("Could not write output: " . socket_strerror(socket_last_error($this->socket)));
+        }
     }
 
     /**
@@ -140,7 +181,7 @@ class Application_Model_Printer_Etiqueta extends Application_Model_Printer_Abstr
      * @param type $data a text string
      */
     public function B($p1, $p2, $p3, $p4, $p5, $p6, $p7, $p8, $data) {
-        parent::adicionarTexto('B' . $p1 . ',' . $p2 . ',' . $p3 . ',' . $p4 . ',' . $p5 . ',' . $p6 . ',' . $p7 . ',' . $p8 . ',\'' . $data . '\'\n');
+        parent::adicionarTexto('B' . $p1 . ',' . $p2 . ',' . $p3 . ',' . $p4 . ',' . $p5 . ',' . $p6 . ',' . $p7 . ',' . $p8 . ',"' . $data . '"\n');
         // exemplo "B100,450,0,3,5,11,50,B,\"12345\"\n" // 5:11 eh o tamanho ideal, naum mude
     }
 

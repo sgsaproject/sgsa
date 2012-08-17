@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Description of ImpressaoTest
+ * Description of ReciboTest
  *
  * @author Rafael
  */
