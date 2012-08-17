@@ -1,7 +1,6 @@
 package core;
 
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -38,22 +37,67 @@ public class Server {
                 Socket clientSocket = server.accept();
                 BufferedReader d = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 String msgInicial = d.readLine();
-                int id = 1; // mudar pro id do cliente
-                if (msgInicial.equalsIgnoreCase("SGSA:PRINT")) {
-                    SGSA sgsa = new SGSA(clientSocket);
-                    String text = sgsa.readText();
-                    logger.info("Mensagem recebida de SGSA: " + text);
-                    this.sendText(text, id);
-                } else {
-                    logger.info("Cliente de impressão conectado: " + msgInicial);
-                    Client client = new Client(clientSocket, id);
-                    client.start();
-                    this.clients.add(client);
-                }
+                this.processarMensagem(clientSocket, msgInicial);
+
             }
         } catch (IOException ex) {
             logger.fatal(null, ex);
         }
+    }
+
+    private void processarMensagem(Socket clientSocket, String msgInicial) {
+        String msgInicialArray[] = msgInicial.split(":");
+        if (msgInicial.contains("SGSA:PRINT")) {
+            if (msgInicialArray.length != 3) {
+                logger.warn("Argumento inválido do SGSA");
+                logger.warn("Ignorando pedido de impressão");
+                return;
+            }
+            String tipoImpressora = msgInicialArray[2];
+
+            SGSA sgsa = new SGSA(clientSocket);
+            String text = sgsa.readText();
+            logger.info("Pedido de impressão recebido de SGSA para a impressora tipo: " + tipoImpressora);
+            logger.info("Texto para impressão: " + text);
+
+            if (tipoImpressora.equalsIgnoreCase("RECIBO")) {
+                this.sendText(text, Client.SUPORTE_RECIBO);
+            } else if (tipoImpressora.equalsIgnoreCase("ETIQUETA")) {
+                this.sendText(text, Client.SUPORTE_ETIQUETA);
+            } else if (tipoImpressora.equalsIgnoreCase("RECIBO_E_ETIQUETA")) {
+                this.sendText(text, Client.SUPORTE_RECIBO_E_ETIQUETA);
+            }
+            return;
+        }
+        if (msgInicial.contains("SGSA:LIST")) {
+            logger.info("SGSA solicita lista de impressoras");
+            return;
+        }
+        if (msgInicial.contains("CLIENT:PRINTER")) {
+            logger.info("Cliente de impressão conectado");
+            if (msgInicialArray.length != 3) {
+                logger.warn("Argumento inválido do SGSA");
+                logger.warn("Ignorando pedido de impressão");
+                return;
+            }
+
+            Client client = Clients.create(clientSocket);
+
+            if (msgInicialArray[2].equalsIgnoreCase("RECIBO")) {
+                client.setSuporte(Client.SUPORTE_RECIBO);
+            } else if (msgInicialArray[2].equalsIgnoreCase("ETIQUETA")) {
+                client.setSuporte(Client.SUPORTE_ETIQUETA);
+            } else if (msgInicialArray[2].equalsIgnoreCase("RECIBO_E_ETIQUETA")) {
+                client.setSuporte(Client.SUPORTE_RECIBO_E_ETIQUETA);
+            } else {
+                logger.warn("Tipo de impressora não suportado: " + msgInicialArray[2]);
+                return;
+            }
+            client.start();
+            this.clients.add(client);
+            return;
+        }
+        logger.warn("A mensagem recebida é inválida");
     }
 
     /**
@@ -115,11 +159,12 @@ public class Server {
         }
     }
 
-    private void sendText(String text, int id) {
+    private void sendText(String text, int tipoImpressora) {
         if (this.clients.getSize() == 0) {
             logger.warn("Não há clientes para impressão");
             return;
         }
+
         clients.getLast().sendText(text);
     }
 }
