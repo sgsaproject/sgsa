@@ -1,3 +1,4 @@
 /application/configs/application.ini
 /nbproject/private
 *.tmp
+.settings/
