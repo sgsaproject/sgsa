@@ -13,7 +13,7 @@ public class Main {
         
         logger.info("Inicializando");
         
-        new Client(1).init("localhost");
+        new Client(1,"localhost").init();
         
         logger.info("Finalizando");
     }

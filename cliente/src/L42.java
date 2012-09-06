@@ -1,4 +1,5 @@
 
+import java.io.IOException;
 import javax.print.Doc;
 import javax.print.DocFlavor;
 import javax.print.DocPrintJob;
@@ -34,26 +35,30 @@ public class L42 extends Printer {
     }
 
     @Override
-    public void imprimir(String texto) throws PrintException, Exception {
-        if (printer == null) {
-            logger.fatal("L42 Printer is not set.");
-            return;
-        }
-        DocPrintJob job = printer.createPrintJob();
-        byte[] by = texto.getBytes();
-        DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
-        // MIME type = "application/octet-stream",
-        // print data representation class name = "[B" (byte array).
-        Doc doc = new SimpleDoc(by, flavor, null);
+    public void imprimir(String texto) throws PrintException, IOException {
+        if (this.debug == false) {
+            if (printer == null) {
+                logger.fatal("L42 Printer is not set.");
+                return;
+            }
+            DocPrintJob job = printer.createPrintJob();
+            byte[] by = texto.getBytes();
+            DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
+            // MIME type = "application/octet-stream",
+            // print data representation class name = "[B" (byte array).
+            Doc doc = new SimpleDoc(by, flavor, null);
 
-        logger.info("Etiqueta pronta");
-        job.print(doc, null);
-        logger.info("Etiqueta enviada");
+            logger.info("Etiqueta pronta");
+            job.print(doc, null);
+            logger.info("Etiqueta enviada");
+        } else {
+            logger.info("Imprimindo na impressora: " + this.getClass().getName());
+            logger.info(texto);
+        }
     }
 
     @Override
     public boolean conectada() {
         return true;
     }
-    
 }

@@ -92,9 +92,15 @@ public class Client extends Thread {
         this.out = out;
     }
 
-    public synchronized void sendText(String text) {
+    public synchronized void sendText(String text, int tipoImpressora) {
         logger.info(text);
         try {
+            if(tipoImpressora == Client.SUPORTE_RECIBO){
+                this.outputStream.writeUTF("PRINT:RECIBO");
+            }else{
+                this.outputStream.writeUTF("PRINT:ETIQUETA");
+            }
+            
             this.outputStream.writeUTF(text);
             this.outputStream.flush();
         } catch (IOException ex) {

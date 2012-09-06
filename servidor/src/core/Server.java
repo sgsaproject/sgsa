@@ -64,9 +64,7 @@ public class Server {
                 this.sendText(text, Client.SUPORTE_RECIBO);
             } else if (tipoImpressora.equalsIgnoreCase("ETIQUETA")) {
                 this.sendText(text, Client.SUPORTE_ETIQUETA);
-            } else if (tipoImpressora.equalsIgnoreCase("RECIBO_E_ETIQUETA")) {
-                this.sendText(text, Client.SUPORTE_RECIBO_E_ETIQUETA);
-            }
+            } 
             return;
         }
         if (msgInicial.contains("SGSA:LIST")) {
@@ -85,10 +83,13 @@ public class Server {
 
             if (msgInicialArray[2].equalsIgnoreCase("RECIBO")) {
                 client.setSuporte(Client.SUPORTE_RECIBO);
+                logger.info("Cliente com suporte a recibo");
             } else if (msgInicialArray[2].equalsIgnoreCase("ETIQUETA")) {
                 client.setSuporte(Client.SUPORTE_ETIQUETA);
+                logger.info("Cliente com suporte a etiqueta");
             } else if (msgInicialArray[2].equalsIgnoreCase("RECIBO_E_ETIQUETA")) {
                 client.setSuporte(Client.SUPORTE_RECIBO_E_ETIQUETA);
+                logger.info("Cliente com suporte a recibo e etiqueta");
             } else {
                 logger.warn("Tipo de impressora não suportado: " + msgInicialArray[2]);
                 return;
@@ -165,6 +166,6 @@ public class Server {
             return;
         }
 
-        clients.getLast().sendText(text);
+        this.clients.getLast().sendText(text, tipoImpressora);
     }
 }
