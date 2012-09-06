@@ -24,13 +24,22 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="Scr_Pane1" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="Scr_Pane1" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="296" max="32767" attributes="0"/>
+                      <Component id="Lab_ListaPalestras" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="282" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="306" max="32767" attributes="0"/>
-              <Component id="Lab_ListaPalestras" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="282" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="But_GerenPalestra" min="-2" pref="234" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -41,7 +50,9 @@
               <Component id="Lab_ListaPalestras" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="Scr_Pane1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="24" max="32767" attributes="0"/>
+              <Component id="But_GerenPalestra" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -105,6 +116,21 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Lista de Palestras"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="But_GerenPalestra">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="14" style="1"/>
+        </Property>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/static/img/demo.png"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;&lt;body&gt;&#xa;&lt;b&gt;Bot&#xe3;o para visualizar os dados da Palestra selecionada.&lt;/b&gt;&#xa;&lt;/bode&gt;&#xa;&lt;/html&gt;"/>
+        <Property name="name" type="java.lang.String" value="Ger&#xea;nciar Palestra" noResource="true"/>
+      </Properties>
+      <AccessibilityProperties>
+        <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
+      </AccessibilityProperties>
     </Component>
   </SubComponents>
 </Form>

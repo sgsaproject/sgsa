@@ -29,6 +29,7 @@ public class listaPalestras extends javax.swing.JFrame {
         Scr_Pane1 = new javax.swing.JScrollPane();
         Tab_ListaPalestras = new javax.swing.JTable();
         Lab_ListaPalestras = new javax.swing.JLabel();
+        But_GerenPalestra = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,18 +49,29 @@ public class listaPalestras extends javax.swing.JFrame {
         Lab_ListaPalestras.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         Lab_ListaPalestras.setText("Lista de Palestras");
 
+        But_GerenPalestra.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        But_GerenPalestra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/static/img/demo.png"))); // NOI18N
+        But_GerenPalestra.setToolTipText("<html>\n<body>\n<b>Botão para visualizar os dados da Palestra selecionada.</b>\n</bode>\n</html>");
+        But_GerenPalestra.setName("Gerênciar Palestra"); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Scr_Pane1)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Scr_Pane1)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 296, Short.MAX_VALUE)
+                        .addComponent(Lab_ListaPalestras)
+                        .addGap(282, 282, 282))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(306, Short.MAX_VALUE)
-                .addComponent(Lab_ListaPalestras)
-                .addGap(282, 282, 282))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(But_GerenPalestra, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -68,8 +80,12 @@ public class listaPalestras extends javax.swing.JFrame {
                 .addComponent(Lab_ListaPalestras)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Scr_Pane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addComponent(But_GerenPalestra)
+                .addContainerGap())
         );
+
+        But_GerenPalestra.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -109,6 +125,7 @@ public class listaPalestras extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton But_GerenPalestra;
     private javax.swing.JLabel Lab_ListaPalestras;
     private javax.swing.JScrollPane Scr_Pane1;
     private javax.swing.JTable Tab_ListaPalestras;
