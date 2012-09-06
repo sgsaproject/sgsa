@@ -97,4 +97,9 @@ public class MP4200TH extends Printer {
             throw new Exception("Erro na comunicação!");
         }
     }
+
+    @Override
+    public boolean conectada() {
+        return true;
+    }
 }

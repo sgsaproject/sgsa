@@ -50,4 +50,10 @@ public class L42 extends Printer {
         job.print(doc, null);
         logger.info("Etiqueta enviada");
     }
+
+    @Override
+    public boolean conectada() {
+        return true;
+    }
+    
 }

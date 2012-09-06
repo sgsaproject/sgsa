@@ -47,15 +47,17 @@ public class Client {
 
         ps = new PrintStream(os);
 
-//        logger.info("Enviando id: " + identifier);
-//        ps.println("Client id: " + identifier);
-//        logger.info("Id " + identifier + " enviado");
+        L42 l42 = new L42();
+        MP4200TH mp4200 = new MP4200TH();
         
         //Fazer verificação das impressoras que estão disponíveis
-        ps.println("CLIENT:PRINTER:RECIBO");
-        //ps.println("CLIENT:PRINTER:ETIQUETA");
-        //ps.println("CLIENT:PRINTER:RECIBO_E_ETIQUETA");
-        
+        if(l42.conectada() && mp4200.conectada()){
+            ps.println("CLIENT:PRINTER:RECIBO_E_ETIQUETA");
+        }else if(l42.conectada()){
+            ps.println("CLIENT:PRINTER:ETIQUETA");
+        }else if(mp4200.conectada()){
+            ps.println("CLIENT:PRINTER:RECIBO");
+        }
         //printer = new Printer("COM3", 7);
 
         DataInputStream inputStream = new DataInputStream(is);
