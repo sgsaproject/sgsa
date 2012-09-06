@@ -22,6 +22,7 @@ public class Sessao extends javax.swing.JFrame {
     /**
      * Creates new form Sessao
      */
+    @SuppressWarnings("CallToThreadStartDuringObjectConstruction")
     public Sessao(Palestra palestra) {
         initComponents();
         this.palestra = palestra;
@@ -292,6 +293,7 @@ public class Sessao extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Sessao(palestra).setVisible(true);
             }
