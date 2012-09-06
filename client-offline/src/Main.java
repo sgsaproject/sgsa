@@ -1,6 +1,7 @@
 
 import model.Palestra;
 import util.Data;
+import view.ListaPalestras;
 import view.Sessao;
 
 /**
@@ -20,6 +21,8 @@ public class Main {
         palestra.setHoraFimPrevista(dataPalestra, "15:30:00");
         palestra.setHoraInicio(dataPalestra, "13:34:11");
         palestra.setHoraInicioPrevista(dataPalestra, "13:30:00");
+        
+        //ListaPalestras.main(palestra); 
         Sessao.main(palestra);
     }
 }
