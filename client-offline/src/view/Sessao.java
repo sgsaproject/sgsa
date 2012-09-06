@@ -120,6 +120,11 @@ public class Sessao extends javax.swing.JFrame {
         jlblTempoDecorrido.setBounds(450, 470, 280, 30);
 
         jbtnIniciarPalestra.setText("Iniciar Palestra");
+        jbtnIniciarPalestra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnIniciarPalestraActionPerformed(evt);
+            }
+        });
         jpnlSessao.add(jbtnIniciarPalestra);
         jbtnIniciarPalestra.setBounds(20, 80, 170, 40);
 
@@ -252,6 +257,11 @@ public class Sessao extends javax.swing.JFrame {
         sessao.setHoraEntrada(Data.getCurrentTime());
         palestra.addSessao(sessao);
     }//GEN-LAST:event_jbtnAddActionPerformed
+
+    private void jbtnIniciarPalestraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnIniciarPalestraActionPerformed
+
+        
+    }//GEN-LAST:event_jbtnIniciarPalestraActionPerformed
 
     /**
      * @param args the command line arguments
