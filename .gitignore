@@ -3,3 +3,4 @@
 *.tmp
 /client-offline/build/
 /client-offline/dist/
+nbproject/private
