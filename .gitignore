@@ -1,6 +1,6 @@
-/client-offline/nbproject/private
+client-offline/nbproject/private/
 *.log
 *.tmp
-/client-offline/build/
-/client-offline/dist/
+client-offline/build/
+client-offline/dist/
 nbproject/private/
