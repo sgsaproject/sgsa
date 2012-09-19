@@ -70,13 +70,13 @@ public class Clients {
         return this.clients.size();
     }
     
-    public Client getClientBySuporte(int tipoImpressora){
+    public Client getClientBySuporte(int tipoImpressora) throws Exception{
         for (Client client : this.clients) {
-            if (client.getSuporte() == tipoImpressora) {
+            if (client.getSuporte() == tipoImpressora || client.getSuporte() == Client.RECIBO_E_ETIQUETA) {
                 return client;
             }
         }
-        return null;
+        throw new Exception("Não há impressoras dispiniveis ");
     }
     
     public static Client create(Socket clientSocket){

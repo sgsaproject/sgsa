@@ -59,12 +59,7 @@ public class Server {
             String text = sgsa.readText();
             logger.info("Pedido de impressão recebido de SGSA para a impressora tipo: " + tipoImpressora);
             logger.info("Texto para impressão: " + text);
-
-            if (tipoImpressora.equalsIgnoreCase("RECIBO")) {
-                this.sendText(text, Client.SUPORTE_RECIBO);
-            } else if (tipoImpressora.equalsIgnoreCase("ETIQUETA")) {
-                this.sendText(text, Client.SUPORTE_ETIQUETA);
-            } 
+            this.sendText(text, Client.getTipoImpressoraByNome(tipoImpressora));
             return;
         }
         if (msgInicial.contains("SGSA:LIST")) {
@@ -82,13 +77,13 @@ public class Server {
             Client client = Clients.create(clientSocket);
 
             if (msgInicialArray[2].equalsIgnoreCase("RECIBO")) {
-                client.setSuporte(Client.SUPORTE_RECIBO);
+                client.setSuporte(Client.RECIBO);
                 logger.info("Cliente com suporte a recibo");
             } else if (msgInicialArray[2].equalsIgnoreCase("ETIQUETA")) {
-                client.setSuporte(Client.SUPORTE_ETIQUETA);
+                client.setSuporte(Client.ETIQUETA);
                 logger.info("Cliente com suporte a etiqueta");
             } else if (msgInicialArray[2].equalsIgnoreCase("RECIBO_E_ETIQUETA")) {
-                client.setSuporte(Client.SUPORTE_RECIBO_E_ETIQUETA);
+                client.setSuporte(Client.RECIBO_E_ETIQUETA);
                 logger.info("Cliente com suporte a recibo e etiqueta");
             } else {
                 logger.warn("Tipo de impressora não suportado: " + msgInicialArray[2]);
@@ -161,11 +156,10 @@ public class Server {
     }
 
     private void sendText(String text, int tipoImpressora) {
-        if (this.clients.getSize() == 0) {
-            logger.warn("Não há clientes para impressão");
-            return;
+        try {
+            this.clients.getClientBySuporte(tipoImpressora).sendText(text, tipoImpressora);
+        } catch (Exception ex) {
+            logger.fatal(ex.getMessage());
         }
-
-        this.clients.getLast().sendText(text, tipoImpressora);
     }
 }

@@ -25,9 +25,9 @@ public class Client extends Thread {
             
     static Logger logger = Logger.getLogger(Client.class);
     
-    public static final int SUPORTE_RECIBO = 1;
-    public static final int SUPORTE_ETIQUETA = 2;
-    public static final int SUPORTE_RECIBO_E_ETIQUETA = 3;
+    public static final int RECIBO = 1;
+    public static final int ETIQUETA = 2;
+    public static final int RECIBO_E_ETIQUETA = 3;
 
     public Client(Socket clientSocket, int id) {
         try {
@@ -93,20 +93,19 @@ public class Client extends Thread {
     }
 
     public synchronized void sendText(String text, int tipoImpressora) {
-        logger.info(text);
+        logger.info("Enviado texto para o tipo de impressora: " + Client.getTipoImpressoraByNome(tipoImpressora));
+        logger.info("Texto: " + text);
         try {
-            if(tipoImpressora == Client.SUPORTE_RECIBO){
+            if(tipoImpressora == Client.RECIBO){
                 this.outputStream.writeUTF("PRINT:RECIBO");
             }else{
                 this.outputStream.writeUTF("PRINT:ETIQUETA");
             }
-            
             this.outputStream.writeUTF(text);
             this.outputStream.flush();
         } catch (IOException ex) {
             logger.fatal(null, ex);
         }
-
     }
 
     public int getSuporte() {
@@ -115,6 +114,27 @@ public class Client extends Thread {
 
     public void setSuporte(int suporte) {
         this.suporte = suporte;
+    }
+    
+    public static String getTipoImpressoraByNome(int tipo){
+        if(tipo == Client.ETIQUETA){
+            return "ETIQUETA";
+        }else if(tipo == Client.RECIBO){
+            return "RECIBO";
+        }else if(tipo == Client.RECIBO_E_ETIQUETA){
+            return "RECIBO_E_ETIQUETA";
+        }
+        return null;
+    }
+    public static int getTipoImpressoraByNome(String tipo){
+        if(tipo.equalsIgnoreCase("ETIQUETA")){
+            return Client.ETIQUETA;
+        }else if(tipo.equalsIgnoreCase("RECIBO")){
+            return Client.RECIBO;
+        }else if(tipo.equalsIgnoreCase("RECIBO_E_ETIQUETA")){
+            return Client.RECIBO_E_ETIQUETA;
+        }
+        return -1;
     }
     
 }
