@@ -30,14 +30,14 @@
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="296" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="Lab_ListaPalestras" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="282" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="648" max="32767" attributes="0"/>
               <Component id="But_GerenPalestra" min="-2" pref="234" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -125,12 +125,16 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/static/img/demo.png"/>
         </Property>
+        <Property name="text" type="java.lang.String" value="Dados da Palestra"/>
         <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;&lt;body&gt;&#xa;&lt;b&gt;Bot&#xe3;o para visualizar os dados da Palestra selecionada.&lt;/b&gt;&#xa;&lt;/bode&gt;&#xa;&lt;/html&gt;"/>
         <Property name="name" type="java.lang.String" value="Ger&#xea;nciar Palestra" noResource="true"/>
       </Properties>
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
       </AccessibilityProperties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="But_GerenPalestraActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -4,17 +4,47 @@
  */
 package view;
 
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import org.apache.log4j.Logger;
+
 /**
  *
  * @author PC
  */
 public class ListaPalestras extends javax.swing.JFrame {
 
+    public static Logger logger = Logger.getLogger(ListaPalestras.class);
+    private ArrayList<Sessao> sessao = new ArrayList<>();
+
     /**
      * Creates new form ListaPalestras
      */
     public ListaPalestras() {
         initComponents();
+
+    }
+
+    /**
+     * Metodo que centraliza a interface na tala.
+     *
+     * @param componente
+     */
+    protected static void centralizar(Component componente) {
+        Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+        Rectangle r = componente.getBounds();
+
+        int widthSplash = r.width;
+        int heightSplash = r.height;
+
+        int posX = (screen.width / 2) - (widthSplash / 2);
+        int posY = (screen.height / 2) - (heightSplash / 2);
+
+        componente.setBounds(posX, posY, widthSplash, heightSplash);
     }
 
     /**
@@ -51,8 +81,14 @@ public class ListaPalestras extends javax.swing.JFrame {
 
         But_GerenPalestra.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         But_GerenPalestra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/static/img/demo.png"))); // NOI18N
+        But_GerenPalestra.setText("Dados da Palestra");
         But_GerenPalestra.setToolTipText("<html>\n<body>\n<b>Botão para visualizar os dados da Palestra selecionada.</b>\n</bode>\n</html>");
         But_GerenPalestra.setName("Gerênciar Palestra"); // NOI18N
+        But_GerenPalestra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                But_GerenPalestraActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -65,11 +101,11 @@ public class ListaPalestras extends javax.swing.JFrame {
                         .addComponent(Scr_Pane1)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 296, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(Lab_ListaPalestras)
                         .addGap(282, 282, 282))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(648, Short.MAX_VALUE)
                 .addComponent(But_GerenPalestra, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -80,7 +116,7 @@ public class ListaPalestras extends javax.swing.JFrame {
                 .addComponent(Lab_ListaPalestras)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Scr_Pane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(But_GerenPalestra)
                 .addContainerGap())
         );
@@ -89,6 +125,23 @@ public class ListaPalestras extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void But_GerenPalestraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_But_GerenPalestraActionPerformed
+
+        try {
+
+
+            Sessao objSessao = new Sessao(null);
+
+            this.dispose();
+            objSessao.setVisible(true);
+            centralizar(objSessao);
+
+        } catch (Exception error) {
+
+            java.util.logging.Logger.getLogger(ListaPalestras.class.getName()).log(Level.SEVERE, null, error);
+        }
+    }//GEN-LAST:event_But_GerenPalestraActionPerformed
 
     /**
      * @param args the command line arguments

@@ -1,5 +1,9 @@
 package view;
 
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.util.Date;
 import java.util.logging.Level;
 import model.Ouvinte;
@@ -49,6 +53,26 @@ public class Sessao extends javax.swing.JFrame {
         relogio = new Relogio();
         relogio.start();
     }
+    
+    
+        /**
+     * Metodo que centraliza a interface na tala.
+     *
+     * @param componente
+     */
+    protected static void centralizar(Component componente) {
+        Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+        Rectangle r = componente.getBounds();
+
+        int widthSplash = r.width;
+        int heightSplash = r.height;
+
+        int posX = (screen.width / 2) - (widthSplash / 2);
+        int posY = (screen.height / 2) - (heightSplash / 2);
+
+        componente.setBounds(posX, posY, widthSplash, heightSplash);
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
