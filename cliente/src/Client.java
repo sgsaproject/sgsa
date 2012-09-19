@@ -50,6 +50,7 @@ public class Client {
 
         this.l42.setDebugMode(true);
         this.mp4200.setDebugMode(true);
+        this.mp4200.setConectada(true);
 
         this.conectar(this.ip);
 
@@ -72,6 +73,8 @@ public class Client {
         } else if (this.mp4200.conectada()) {
             ps.println("CLIENT:PRINTER:RECIBO");
             logger.info("Impressora de recibo conectada");
+        }else {
+            ps.println("CLIENT:PRINTER:NONE");
         }
         //printer = new Printer("COM3", 7);
 

@@ -59,6 +59,12 @@ public class L42 extends Printer {
 
     @Override
     public boolean conectada() {
+        if (this.debug == true) {
+            return this.conectada;
+        }
+        //verificar se impressora esta conectada aqui
         return true;
     }
+    
+    
 }

@@ -133,6 +133,10 @@ public class MP4200TH extends Printer {
     
     @Override
     public boolean conectada() {
-        return false;
+        if (this.debug == true) {
+            return this.conectada;
+        }
+        //verificar se impressora esta conectada aqui
+        return true;
     }
 }
