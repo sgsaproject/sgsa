@@ -1,6 +1,6 @@
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 
 -- -----------------------------------------------------
@@ -42,7 +42,7 @@ CREATE  TABLE IF NOT EXISTS `usuario` (
   `senha` VARCHAR(45) NULL ,
   `id_tipo_usuario` INT NOT NULL ,
   PRIMARY KEY (`id_usuario`) ,
-  INDEX `fk_usuario_tipo_usuario1` (`id_tipo_usuario` ASC) ,
+  INDEX `fk_usuario_tipo_usuario1_idx` (`id_tipo_usuario` ASC) ,
   CONSTRAINT `fk_usuario_tipo_usuario1`
     FOREIGN KEY (`id_tipo_usuario` )
     REFERENCES `tipo_usuario` (`id_tipo_usuario` )
@@ -79,8 +79,8 @@ CREATE  TABLE IF NOT EXISTS `sessao` (
   `hora_entrada` DATETIME NULL ,
   `hora_saida` DATETIME NULL ,
   PRIMARY KEY (`id_sessao`) ,
-  INDEX `fk_sessao_ouvinte2` (`id_ouvinte` ASC) ,
-  INDEX `fk_sessao_palestra2` (`id_palestra` ASC) ,
+  INDEX `fk_sessao_ouvinte2_idx` (`id_ouvinte` ASC) ,
+  INDEX `fk_sessao_palestra2_idx` (`id_palestra` ASC) ,
   CONSTRAINT `fk_sessao_ouvinte2`
     FOREIGN KEY (`id_ouvinte` )
     REFERENCES `ouvinte` (`id_ouvinte` )
@@ -102,8 +102,8 @@ CREATE  TABLE IF NOT EXISTS `permissao` (
   `id_usuario` INT NOT NULL ,
   `id_palestra` INT NOT NULL ,
   PRIMARY KEY (`id_permissao`) ,
-  INDEX `fk_usuario_palestra_usuario1` (`id_usuario` ASC) ,
-  INDEX `fk_usuario_palestra_palestra1` (`id_palestra` ASC) ,
+  INDEX `fk_usuario_palestra_usuario1_idx` (`id_usuario` ASC) ,
+  INDEX `fk_usuario_palestra_palestra1_idx` (`id_palestra` ASC) ,
   CONSTRAINT `fk_usuario_palestra_usuario1`
     FOREIGN KEY (`id_usuario` )
     REFERENCES `usuario` (`id_usuario` )
@@ -125,6 +125,24 @@ CREATE  TABLE IF NOT EXISTS `email_pendente` (
   `id_ouvinte` INT NOT NULL ,
   `data` DATETIME NOT NULL ,
   PRIMARY KEY (`idemail_pendente`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Token`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `Token` (
+  `token` VARCHAR(100) NOT NULL ,
+  `data_criacao` DATETIME NULL ,
+  `usuario_id_usuario` INT NOT NULL ,
+  UNIQUE INDEX `token_UNIQUE` (`token` ASC) ,
+  PRIMARY KEY (`token`) ,
+  INDEX `fk_Token_usuario1_idx` (`usuario_id_usuario` ASC) ,
+  CONSTRAINT `fk_Token_usuario1`
+    FOREIGN KEY (`usuario_id_usuario` )
+    REFERENCES `usuario` (`id_usuario` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
