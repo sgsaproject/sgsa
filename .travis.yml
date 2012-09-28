@@ -9,4 +9,4 @@ branches:
 script: phpunit --configuration tests/phpunit.xml
 
 before_install:
-  - svn checkout http://framework.zend.com/svn/framework/standard/trunk
+  - svn checkout http://framework.zend.com/svn/framework/standard/trunk library/
