@@ -134,12 +134,12 @@ ENGINE = InnoDB;
 CREATE  TABLE IF NOT EXISTS `Token` (
   `token` VARCHAR(100) NOT NULL ,
   `data_criacao` DATETIME NULL ,
-  `usuario_id_usuario` INT NOT NULL ,
+  `id_usuario` INT NULL ,
   UNIQUE INDEX `token_UNIQUE` (`token` ASC) ,
   PRIMARY KEY (`token`) ,
-  INDEX `fk_Token_usuario1_idx` (`usuario_id_usuario` ASC) ,
+  INDEX `fk_Token_usuario1_idx` (`id_usuario` ASC) ,
   CONSTRAINT `fk_Token_usuario1`
-    FOREIGN KEY (`usuario_id_usuario` )
+    FOREIGN KEY (`id_usuario` )
     REFERENCES `usuario` (`id_usuario` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
