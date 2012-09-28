@@ -1,139 +1,137 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package model;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+import java.io.Serializable;
 import java.util.Date;
-import org.apache.log4j.Logger;
-import util.Data;
-import util.DataException;
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author thiago
+ * @author nasser
  */
-public class Sessao {
-    
-    public static Logger logger = Logger.getLogger(Sessao.class);
-    
-    private int id;
-    private Ouvinte ouvinte;
-    private Palestra palestra;
+@Entity
+@Table(name = "SESSAO")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Sessao.findAll", query = "SELECT s FROM Sessao s"),
+    @NamedQuery(name = "Sessao.findByIdSessao", query = "SELECT s FROM Sessao s WHERE s.idSessao = :idSessao"),
+    @NamedQuery(name = "Sessao.findByHoraEntrada", query = "SELECT s FROM Sessao s WHERE s.horaEntrada = :horaEntrada"),
+    @NamedQuery(name = "Sessao.findByHoraSaida", query = "SELECT s FROM Sessao s WHERE s.horaSaida = :horaSaida")})
+public class Sessao implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Basic(optional = false)
+    @Column(name = "ID_SESSAO")
+    private Integer idSessao;
+    @Column(name = "HORA_ENTRADA")
+    @Temporal(TemporalType.TIME)
     private Date horaEntrada;
+    @Column(name = "HORA_SAIDA")
+    @Temporal(TemporalType.TIME)
     private Date horaSaida;
+    @JoinColumn(name = "ID_PALESTRA", referencedColumnName = "ID_PALESTRA")
+    @ManyToOne(optional = false)
+    private Palestra idPalestra;
+    @JoinColumn(name = "ID_OUVINTE", referencedColumnName = "ID_OUVINTE")
+    @ManyToOne(optional = false)
+    private Ouvinte idOuvinte;
 
     public Sessao() {
     }
 
-    public Sessao(int id, Ouvinte ouvinte, Palestra palestra, Date horaEntrada, Date horaSaida) {
-        this.id = id;
-        this.ouvinte = ouvinte;
-        this.palestra = palestra;
-        this.horaEntrada = horaEntrada;
-        this.horaSaida = horaSaida;
+    public Sessao(Integer idSessao) {
+        this.idSessao = idSessao;
     }
 
-    /**
-     * @return the id
-     */
-    public int getId() {
-        return id;
+    public Integer getIdSessao() {
+        return idSessao;
     }
 
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
+    public void setIdSessao(Integer idSessao) {
+        Integer oldIdSessao = this.idSessao;
+        this.idSessao = idSessao;
+        changeSupport.firePropertyChange("idSessao", oldIdSessao, idSessao);
     }
 
-    /**
-     * @return the ouvinte
-     */
-    public Ouvinte getOuvinte() {
-        return ouvinte;
-    }
-
-    /**
-     * @param ouvinte the ouvinte to set
-     */
-    public void setOuvinte(Ouvinte ouvinte) {
-        this.ouvinte = ouvinte;
-    }
-
-    /**
-     * @return the palestra
-     */
-    public Palestra getPalestra() {
-        return palestra;
-    }
-
-    /**
-     * @param palestra the palestra to set
-     */
-    public void setPalestra(Palestra palestra) {
-        this.palestra = palestra;
-    }
-
-    /**
-     * @return the horaEntrada
-     */
     public Date getHoraEntrada() {
-        return this.horaEntrada;
-    }
-    
-    /**
-     * @return the horaEntrada
-     */
-    public String getHoraEntradaString() {
-        return Data.getTime(horaEntrada);
+        return horaEntrada;
     }
 
-    /**
-     * @param horaEntrada the horaEntrada to set
-     */
     public void setHoraEntrada(Date horaEntrada) {
+        Date oldHoraEntrada = this.horaEntrada;
         this.horaEntrada = horaEntrada;
-    }
-    
-    /**
-     * @param horaEntrada the horaEntrada to set
-     */
-    public void setHoraEntrada(String dia, String horaEntrada) {
-        try {
-            this.horaEntrada = Data.getDataHora(dia, horaEntrada);
-        } catch (DataException ex) {
-            logger.fatal(ex);
-        }
+        changeSupport.firePropertyChange("horaEntrada", oldHoraEntrada, horaEntrada);
     }
 
-    /**
-     * @return the horaSaida
-     */
     public Date getHoraSaida() {
-        return this.horaSaida;
-    }
-    
-    /**
-     * @return the horaSaida
-     */
-    public String getHoraSaidaString() {
-        return Data.getTime(horaSaida);
+        return horaSaida;
     }
 
-    /**
-     * @param horaSaida the horaSaida to set
-     */
     public void setHoraSaida(Date horaSaida) {
+        Date oldHoraSaida = this.horaSaida;
         this.horaSaida = horaSaida;
+        changeSupport.firePropertyChange("horaSaida", oldHoraSaida, horaSaida);
     }
-    
-    /**
-     * @param horaSaida the horaSaida to set
-     */
-    public void setHoraSaida(String dia, String horaSaida) {
-        try {
-            this.horaSaida = Data.getDataHora(dia, horaSaida);
-        } catch (DataException ex) {
-            logger.fatal(ex);
+
+    public Palestra getIdPalestra() {
+        return idPalestra;
+    }
+
+    public void setIdPalestra(Palestra idPalestra) {
+        Palestra oldIdPalestra = this.idPalestra;
+        this.idPalestra = idPalestra;
+        changeSupport.firePropertyChange("idPalestra", oldIdPalestra, idPalestra);
+    }
+
+    public Ouvinte getIdOuvinte() {
+        return idOuvinte;
+    }
+
+    public void setIdOuvinte(Ouvinte idOuvinte) {
+        Ouvinte oldIdOuvinte = this.idOuvinte;
+        this.idOuvinte = idOuvinte;
+        changeSupport.firePropertyChange("idOuvinte", oldIdOuvinte, idOuvinte);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idSessao != null ? idSessao.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Sessao)) {
+            return false;
         }
+        Sessao other = (Sessao) object;
+        if ((this.idSessao == null && other.idSessao != null) || (this.idSessao != null && !this.idSessao.equals(other.idSessao))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "model.Sessao[ idSessao=" + idSessao + " ]";
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
     
 }

@@ -1,176 +1,175 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package model;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import org.apache.log4j.Logger;
+import java.io.Serializable;
+import java.util.List;
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author thiago
+ * @author nasser
  */
-public class Ouvinte {
-    
-    public static Logger logger = Logger.getLogger(Ouvinte.class);
-    
-    private int id;
+@Entity
+@Table(name = "OUVINTE")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Ouvinte.findAll", query = "SELECT o FROM Ouvinte o"),
+    @NamedQuery(name = "Ouvinte.findByIdOuvinte", query = "SELECT o FROM Ouvinte o WHERE o.idOuvinte = :idOuvinte"),
+    @NamedQuery(name = "Ouvinte.findByNome", query = "SELECT o FROM Ouvinte o WHERE o.nome = :nome"),
+    @NamedQuery(name = "Ouvinte.findByRg", query = "SELECT o FROM Ouvinte o WHERE o.rg = :rg"),
+    @NamedQuery(name = "Ouvinte.findByEmail", query = "SELECT o FROM Ouvinte o WHERE o.email = :email"),
+    @NamedQuery(name = "Ouvinte.findByCurso", query = "SELECT o FROM Ouvinte o WHERE o.curso = :curso"),
+    @NamedQuery(name = "Ouvinte.findByInstituicao", query = "SELECT o FROM Ouvinte o WHERE o.instituicao = :instituicao"),
+    @NamedQuery(name = "Ouvinte.findByPagamento", query = "SELECT o FROM Ouvinte o WHERE o.pagamento = :pagamento"),
+    @NamedQuery(name = "Ouvinte.findByImpresso", query = "SELECT o FROM Ouvinte o WHERE o.impresso = :impresso"),
+    @NamedQuery(name = "Ouvinte.findByCodigoBarras", query = "SELECT o FROM Ouvinte o WHERE o.codigoBarras = :codigoBarras")})
+public class Ouvinte implements Serializable {
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Basic(optional = false)
+    @Column(name = "ID_OUVINTE")
+    private Integer idOuvinte;
+    @Column(name = "NOME")
     private String nome;
+    @Column(name = "RG")
     private String rg;
+    @Column(name = "EMAIL")
     private String email;
+    @Column(name = "CURSO")
     private String curso;
+    @Column(name = "INSTITUICAO")
     private String instituicao;
+    @Column(name = "PAGAMENTO")
     private String pagamento;
-    private boolean impresso;
-    private int codigoBarras;
-    private ArrayList<Sessao> sessoes;
+    @Column(name = "IMPRESSO")
+    private Integer impresso;
+    @Basic(optional = false)
+    @Column(name = "CODIGO_BARRAS")
+    private String codigoBarras;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOuvinte")
+    private List<Sessao> sessaoList;
 
-    /**
-     * @return the id
-     */
-    public int getId() {
-        return id;
+    public Ouvinte() {
     }
 
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
+    public Ouvinte(Integer idOuvinte) {
+        this.idOuvinte = idOuvinte;
     }
-    
-    /**
-     * @return the nome
-     */
+
+    public Ouvinte(Integer idOuvinte, String codigoBarras) {
+        this.idOuvinte = idOuvinte;
+        this.codigoBarras = codigoBarras;
+    }
+
+    public Integer getIdOuvinte() {
+        return idOuvinte;
+    }
+
+    public void setIdOuvinte(Integer idOuvinte) {
+        this.idOuvinte = idOuvinte;
+    }
+
     public String getNome() {
         return nome;
     }
 
-    /**
-     * @param nome the nome to set
-     */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    /**
-     * @return the rg
-     */
     public String getRg() {
         return rg;
     }
 
-    /**
-     * @param rg the rg to set
-     */
     public void setRg(String rg) {
         this.rg = rg;
     }
 
-    /**
-     * @return the email
-     */
     public String getEmail() {
         return email;
     }
 
-    /**
-     * @param email the email to set
-     */
     public void setEmail(String email) {
         this.email = email;
     }
 
-    /**
-     * @return the curso
-     */
     public String getCurso() {
         return curso;
     }
 
-    /**
-     * @param curso the curso to set
-     */
     public void setCurso(String curso) {
         this.curso = curso;
     }
 
-    /**
-     * @return the instituicao
-     */
     public String getInstituicao() {
         return instituicao;
     }
 
-    /**
-     * @param instituicao the instituicao to set
-     */
     public void setInstituicao(String instituicao) {
         this.instituicao = instituicao;
     }
 
-    /**
-     * @return the pagamento
-     */
     public String getPagamento() {
         return pagamento;
     }
 
-    /**
-     * @param pagamento the pagamento to set
-     */
     public void setPagamento(String pagamento) {
         this.pagamento = pagamento;
     }
-    
-    public boolean isImpresso() {
-        return this.impresso;
+
+    public Integer getImpresso() {
+        return impresso;
     }
 
-    public void setImpresso(boolean impresso) {
+    public void setImpresso(Integer impresso) {
         this.impresso = impresso;
     }
 
-    public int getCodigoBarras() {
-        return this.codigoBarras;
+    public String getCodigoBarras() {
+        return codigoBarras;
     }
 
-    public void setCodigoBarras(int codigoBarras) throws OuvinteException {
-        int tamanho = 5;
-        if (String.valueOf(codigoBarras).length() != tamanho) {
-            throw new OuvinteException("Tamanho do código de barras incorreto. Tamanho informado: " + String.valueOf(codigoBarras).length() + ". Tamanho correto: " + tamanho);
-        } else if (codigoBarras < 0) {
-            throw new OuvinteException("Código de barras inválido. O código de barras deve ser maior ou igual a 0.");
-        } else {
-            this.codigoBarras = codigoBarras;
+    public void setCodigoBarras(String codigoBarras) {
+        this.codigoBarras = codigoBarras;
+    }
+
+    @XmlTransient
+    public List<Sessao> getSessaoList() {
+        return sessaoList;
+    }
+
+    public void setSessaoList(List<Sessao> sessaoList) {
+        this.sessaoList = sessaoList;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idOuvinte != null ? idOuvinte.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Ouvinte)) {
+            return false;
         }
+        Ouvinte other = (Ouvinte) object;
+        if ((this.idOuvinte == null && other.idOuvinte != null) || (this.idOuvinte != null && !this.idOuvinte.equals(other.idOuvinte))) {
+            return false;
+        }
+        return true;
     }
 
-    /**
-     * @return the sessoes
-     */
-    public ArrayList<Sessao> getSessoes() {
-        return sessoes;
-    }
-
-    /**
-     * @param sessoes the sessoes to set
-     */
-    public void setSessoes(ArrayList<Sessao> sessoes) {
-        this.sessoes = sessoes;
+    @Override
+    public String toString() {
+        return "model.Ouvinte[ idOuvinte=" + idOuvinte + " ]";
     }
     
-    public boolean addSessao(Sessao sessao) {
-        return this.sessoes.add(sessao);
-    }
-    
-    public boolean addSessoes(Collection<? extends Sessao> sessoes) {
-        return this.sessoes.addAll(sessoes);
-    }
-    
-    public boolean removeSessao(Sessao sessao) {
-        return this.sessoes.remove(sessao);
-    }
-    
-    public boolean removeSessoes(Collection<? extends Sessao> sessoes) {
-        return this.sessoes.removeAll(sessoes);
-    }
 }

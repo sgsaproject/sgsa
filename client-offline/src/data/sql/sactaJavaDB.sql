@@ -8,6 +8,7 @@ CREATE TABLE palestra (
   hora_inicio TIME,
   hora_fim TIME,
   sala VARCHAR(30),
+  dia DATE,
   PRIMARY KEY (id_palestra)
 );
 

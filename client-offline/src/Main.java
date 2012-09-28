@@ -1,8 +1,8 @@
 
 import model.Palestra;
 import util.Data;
-import view.ListaPalestras;
-import view.Sessao;
+//import view.ListaPalestras;
+//import view.Sessao;
 
 /**
  *
@@ -10,7 +10,8 @@ import view.Sessao;
  */
 public class Main {
     public static void main(String[] args) {
-        String dataPalestra = Data.getDate(Data.getCurrentTime());
+ /*     
+   String dataPalestra = Data.getDate(Data.getCurrentTime());
         Palestra palestra = new Palestra();
         palestra.setId(1);
         palestra.setNome("Palestra sobre algo interessante mas com nome grande");
@@ -23,6 +24,6 @@ public class Main {
         palestra.setHoraInicioPrevista(dataPalestra, "13:30:00");
         
         //ListaPalestras.main(palestra); 
-        Sessao.main(palestra);
+        Sessao.main(palestra);*/
     }
 }
