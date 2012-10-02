@@ -12,6 +12,7 @@ script:
 
 before_install:
   - svn checkout --quiet http://framework.zend.com/svn/framework/standard/trunk/library/Zend/ library/Zend/
+  - svn checkout --quiet http://framework.zend.com/svn/framework/extras/trunk/library/ZendX/ library/ZendX/
   - cp application/configs/application.ini.dist application/configs/application.ini
 
   - sudo pear config-set auto_discover 1
