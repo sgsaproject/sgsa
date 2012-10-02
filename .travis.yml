@@ -6,7 +6,7 @@ branches:
   only:
     - v1.0
 
-script: phpunit --configuration tests/phpunit.xml --bootstrap tests/bootstrap.php
+script: phpunit --configuration tests/phpunit.xml 
 
 before_install:
   - svn checkout --quiet http://framework.zend.com/svn/framework/standard/trunk/library/Zend/ library/Zend/
