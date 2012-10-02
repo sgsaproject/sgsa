@@ -7,40 +7,14 @@ branches:
     - v1.0
 
 script:
-  - $PHPUNIT --version
+  - phpunit --version
   - phpunit --configuration tests/phpunit.xml 
 
 before_install:
   - svn checkout --quiet http://framework.zend.com/svn/framework/standard/trunk/library/Zend/ library/Zend/
   - cp application/configs/application.ini.dist application/configs/application.ini
 
-  - export BUILD_HOME=`pwd`
-  - git submodule update --init
-  - export PYRUS=`which pyrus`
-  - export PHPUNIT_HOME=`pwd`/../phpunit34/
-  
-  - mkdir $PHPUNIT_HOME
-  - mkdir ${PHPUNIT_HOME}/bin
-  - cd $PHPUNIT_HOME
-  - $PYRUS $PHPUNIT_HOME set bin_dir ./bin
-  - wget http://components.ez.no/get/Base-1.8.tgz
-  - wget http://components.ez.no/get/ConsoleTools-1.6.1.tgz
-
-  - $PYRUS $PHPUNIT_HOME channel-discover pear.phpunit.de
-  - $PYRUS $PHPUNIT_HOME channel-discover components.ez.no
-  - $PYRUS $PHPUNIT_HOME channel-discover pear.symfony-project.com
-  - $PYRUS $PHPUNIT_HOME install Base-1.8.tgz 
-  - $PYRUS $PHPUNIT_HOME install ConsoleTools-1.6.1.tgz 
-
-  - $PYRUS $PHPUNIT_HOME install pear.phpunit.de/File_Iterator-1.2.6
-  - $PYRUS $PHPUNIT_HOME install pear.phpunit.de/PHP_TokenStream-1.0.1
-  - $PYRUS $PHPUNIT_HOME install pear.phpunit.de/PHP_CodeCoverage-1.0.5
-  - $PYRUS $PHPUNIT_HOME install pear.phpunit.de/PHP_Timer
-  - $PYRUS $PHPUNIT_HOME install --optionaldeps pear.phpunit.de/PHPUnit-3.4.15
-
-  - awk '{if(NR==1){print $0,"-d include_path='$PHPUNIT_HOME'php"}else{print }}' ${PHPUNIT_HOME}bin/phpunit > ${PHPUNIT_HOME}bin/phpunit34
-  - cat ${PHPUNIT_HOME}bin/phpunit34
-  - chmod 755 ${PHPUNIT_HOME}bin/phpunit34
-  - PHPUNIT=${PHPUNIT_HOME}bin/phpunit34
-  - export PHPUNIT
-  - $PHPUNIT --version
+  - sudo pear config-set auto_discover 1
+  - sudo pear channel-discover pear.phpunit.de
+  - sudo pear uninstall pear.phpunit.de/PHPUnit
+  - sudo pear install --alldeps pear.phpunit.de/PHPUnit-3.4.15
