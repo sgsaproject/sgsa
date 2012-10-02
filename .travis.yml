@@ -20,5 +20,10 @@ before_install:
   - sudo pear uninstall pear.phpunit.de/PHPUnit
   - sudo pear install --alldeps pear.phpunit.de/PHPUnit-3.4.15
   
-  - pecl install apc
+  - curl -o APC-3.1.10.tgz http://pecl.php.net/get/APC-3.1.10.tgz
+  - tar -xzf APC-3.1.10.tgz
+  - sh -c "cd APC-3.1.10 && phpize && ./configure && make && sudo make install && cd .."
+  - rm -Rf APC-3.1.10
+  - rm APC-3.1.10.tgz
   - echo "extension=apc.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
+  - phpenv rehash
