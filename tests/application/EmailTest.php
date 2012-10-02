@@ -18,7 +18,7 @@ class EmailTest extends PHPUnit_Framework_TestCase {
         $this->assertSame($mail->getDefaultFrom()['email'], 'sactaunipampa@gmail.com');
         $this->assertSame($mail->getDefaultReplyTo()['email'], 'sactaunipampa@gmail.com');
     }
-
+    
     public function testSendMail() {
         Sistema_Test_Mail::clearMailFiles();
         $mail = new Zend_Mail('utf-8');

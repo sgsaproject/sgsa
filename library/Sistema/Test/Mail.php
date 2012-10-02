@@ -8,7 +8,7 @@
 class Sistema_Test_Mail {
 
     public static function getEmails() {
-        $directory = APPLICATION_PATH . "/../data/cache/sentmail";
+        $directory = realpath(APPLICATION_PATH . "/../data/cache/sentmail");
         //remove the pesky .. and .
         $files = array_diff(scandir($directory), array('..', '.'));
         sort($files);  //IMPORTANT - We need them in order!
@@ -24,7 +24,7 @@ class Sistema_Test_Mail {
 
     public static function clearMailFiles() {
         //delete all files in folder
-        $directory = APPLICATION_PATH . "/../data/cache/sentmail";
+        $directory = realpath(APPLICATION_PATH . "/../data/cache/sentmail");
         $files1 = array_diff(scandir($directory), array('..', '.'));
         foreach ($files1 as $val) {
             if ($val !== 'gitkeep') {
