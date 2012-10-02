@@ -131,7 +131,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Token`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `Token` (
+CREATE  TABLE IF NOT EXISTS `token` (
   `token` VARCHAR(100) NOT NULL ,
   `data_criacao` DATETIME NULL ,
   `id_usuario` INT NULL ,
