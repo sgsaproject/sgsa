@@ -1,5 +1,5 @@
 <?php
-
+chdir(__DIR__);
 // Define path to application directory
 defined('APPLICATION_PATH')
         || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application'));
@@ -13,7 +13,8 @@ set_include_path(implode(PATH_SEPARATOR, array(
             realpath(APPLICATION_PATH . '/../library'),
             get_include_path())
         ));
-//var_dump(get_include_path());die;
+
+
 require_once 'Zend/Loader/Autoloader.php';
 Zend_Loader_Autoloader::getInstance();
 
