@@ -27,5 +27,7 @@ before_install:
   - rm APC-3.1.10.tgz
   - echo "extension=apc.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
   - echo "apc.enable_cli = 1" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
+  - cat `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"` | grep "apc.enable_cli"
   - sed -i 's/memory_limit = .*/memory_limit = 512M/' `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
+  - cat `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"` | grep "memory_limit"
   - phpenv rehash
