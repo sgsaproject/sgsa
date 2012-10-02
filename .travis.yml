@@ -10,3 +10,4 @@ script: phpunit --configuration tests/phpunit.xml --bootstrap tests/bootstrap.ph
 
 before_install:
   - svn checkout --quiet http://framework.zend.com/svn/framework/standard/trunk/library/Zend/ library/Zend/
+  - cp application/configs/application.ini.dist application/configs/application.ini
