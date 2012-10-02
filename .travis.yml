@@ -19,3 +19,6 @@ before_install:
   - sudo pear channel-discover pear.phpunit.de
   - sudo pear uninstall pear.phpunit.de/PHPUnit
   - sudo pear install --alldeps pear.phpunit.de/PHPUnit-3.4.15
+  
+  - pecl install apc
+  - echo "extension=apc.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
