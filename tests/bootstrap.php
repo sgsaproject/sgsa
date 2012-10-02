@@ -1,7 +1,4 @@
 <?php
-chdir(__DIR__);
-var_dump(__DIR__);
-var_dump(scandir(realpath(__DIR__.'/../library')));
 // Define path to application directory
 defined('APPLICATION_PATH')
         || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application'));
@@ -16,7 +13,6 @@ set_include_path(implode(PATH_SEPARATOR, array(
             get_include_path())
         ));
 
-var_dump(get_include_path());
 require_once 'Zend/Loader/Autoloader.php';
 Zend_Loader_Autoloader::getInstance();
 
@@ -27,4 +23,4 @@ $application = new Zend_Application(
 );
 $application->getBootstrap()->bootstrap('mail');
 
-require_once '../script/setup-db.php';
+require_once realpath(__DIR__.'/../script/setup-db.php');
