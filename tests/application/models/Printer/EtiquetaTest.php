@@ -6,7 +6,7 @@
  * @author thiago
  */
 class EtiquetaTest extends PHPUnit_Framework_TestCase {
-    
+    /*
     public function testConectarImprimirDesconectar() {
         $etiqueta = new Application_Model_Printer_Etiqueta();
         $etiqueta->conectar();
@@ -78,5 +78,5 @@ class EtiquetaTest extends PHPUnit_Framework_TestCase {
         
         $this->assertEquals('Q122,16\n', $etiqueta->getTexto()[0]);
     }
-    
+     */
 }

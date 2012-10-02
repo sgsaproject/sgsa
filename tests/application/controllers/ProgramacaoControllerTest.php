@@ -1,7 +1,7 @@
 <?php
 
 class ProgramacaoControllerTest extends Zend_Test_PHPUnit_ControllerTestCase {
-
+/*
     public function setUp() {
         $this->bootstrap = new Zend_Application(APPLICATION_ENV, APPLICATION_PATH . '/configs/application.ini');
         parent::setUp();
@@ -23,7 +23,7 @@ class ProgramacaoControllerTest extends Zend_Test_PHPUnit_ControllerTestCase {
         $palestras = $palestraDAO->fetchAll();
         
         /*@var $palestra Application_Model_Palestra*/
-        foreach ($palestras as $palestra) {
+        /*foreach ($palestras as $palestra) {
             $deleted = $palestra->delete();
             if ($deleted <= 0) {
                 $this->fail("Palestra " . $palestra->getNomePalestra() . " não foi deletada");
@@ -103,4 +103,5 @@ class ProgramacaoControllerTest extends Zend_Test_PHPUnit_ControllerTestCase {
         $this->assertAction($urlParams['action']);
         $this->assertQueryCount("tr", $count + 1);
     }
+    */
 }
