@@ -9,4 +9,4 @@ branches:
 script: phpunit --configuration tests/phpunit.xml --bootstrap tests/bootstrap.php
 
 before_install:
-  - svn checkout --quiet http://framework.zend.com/svn/framework/standard/trunk library/Zend/
+  - svn checkout --quiet http://framework.zend.com/svn/framework/standard/trunk/library/Zend/ library/Zend/
