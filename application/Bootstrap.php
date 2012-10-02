@@ -67,7 +67,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
     public function _initTranslate() {
         $translator = new Zend_Translate(array(
                     'adapter' => 'array',
-                    'content' => '../library/resources/languages',
+                    'content' => realpath(APPLICATION_PATH. '/../library/resources/languages'),
                     'locale' => 'pt_BR',
                     'scan' => Zend_Translate::LOCALE_DIRECTORY)
         );
