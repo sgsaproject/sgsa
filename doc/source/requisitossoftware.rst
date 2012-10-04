@@ -1,12 +1,11 @@
-﻿Requisitos de Software
+Requisitos de Software
 ================================
 
 Para utilizar o SGSA é necessário que você instale:
 
 * Servidor `Apache`_
 * Linguagem `PHP`_
-* Banco de Dados `MongoDB`_
-* `Componente de ligação`_ do servidor Apache com o Banco de Dados MongoDB
+* Banco de Dados `MySQL`_
 
 Infraestrutura do projeto
 ================================
@@ -21,5 +20,4 @@ O SGSA está sendo feito em linguagem `PHP`_, juntamente com o `Framework Zend`_
 .. _LaTeX: http://www.latex-project.org/
 .. _Astah Community: http://astah.net/editions/community
 .. _Apache: http://www.apache.org/
-.. _MongoDB: http://www.mongodb.org/
-.. _Componente de ligação: http://www.php.net/manual/en/mongo.installation.php
+.. _MySQL: http://www.mysql.com/
