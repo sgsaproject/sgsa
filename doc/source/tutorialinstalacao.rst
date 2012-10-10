@@ -21,10 +21,13 @@ Apos instalado o Xampp na sua maquina, um painel de controle da ferramenta sera 
 
 2) Faca o download da ferramenta `TortoiseGit`_ para o seu computador, atraves da pagina `http://code.google.com/p/tortoisegit/wiki/Download`_, a fim de clonar o repositorio do projeto em seu computador, e instale ela em seu computador executando todos os passos.
 
-3) Procure o diretorio de instalacao do Xampp, e acesse a pasta 'xampp/htdocs' para colocar ali o clone da aplicacao no Repositorio. Clique com o botao direito no diretorio 'htdocs' e selecione a opcao 'Git Clone...'. Informe o caminho do repositorio (https://github.com/sgsaproject/sgsa.git) no campo URL confirme. Apos terminado o download e construido o clone do repositorio, clique com o botao direito sobre a pasta do projeto para acessar o menu de opcoes, selecione a opcao 'GitHub' e clique em 'Switch/Checkout...', Altere o Branch para 'v1.0' e confirme.
+3) Procure o diretorio de instalacao do Xampp, e acesse a pasta 'xampp/htdocs' para colocar ali o clone da aplicacao no Repositorio. Clique com o botao direito no diretorio 'htdocs' e selecione a opcao 'Git Clone...'. Informe o caminho do repositorio (https://github.com/sgsaproject/sgsa.git) no campo URL confirme. Apos terminado o download e construido o clone do repositorio, clique com o botao direito sobre a pasta do projeto para acessar o menu de opcoes, selecione a opcao 'TortoiseGit' e clique em 'Switch/Checkout...', Altere o Branch para 'v1.0' e confirme.
 
-4) Entre o no diretorio do projeto, e acesse o diretorio 'application/configs' para ajustar algumas configuracoes. duplique o arquivo 'application.ini.dist', mantendo o mesmo nome, e remova as extensao '.dist'. Acesse o arquivo e mude o usuario ou senha do banco de dados se tiver sido cadastrado um usuario ou senha diferentes para o usuario root do MySql. Caso o usuario 'root' nao tenha sido alterado no banco de dados, mantenha o arquivo com as configuracoes encontradas. 
+4) Abra o prompt de Comando e procure o diretorio de instalacao do Xampp. Acesse o diretorio do projeto na pasta htdocs, e entre na pasta 'script' para executar o comando 'php setup-db.php', e configurar o ambiente do banco de dados, criar as tabelas e inserir alguns dados.
 
+5) Retorne ao diretorio do projeto, e acesse a pasta 'application/configs' para ajustar algumas configuracoes. duplique o arquivo 'application.ini.dist', mantendo o mesmo nome, e remova as extensao '.dist'. Acesse o arquivo e mude o usuario ou senha do banco de dados se deseja cadastrador um usuario ou senha diferentes para o banco de dados do MySql. Caso seja adotado o usuario 'root' padrao do MySql, mantenha o arquivo com as configuracoes encontradas. 
+
+6) 
 
 Ubuntu Linux
 ================================
