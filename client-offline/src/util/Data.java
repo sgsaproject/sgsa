@@ -17,7 +17,7 @@ import java.util.GregorianCalendar;
 public class Data {
 
     private static String DATE = "dd/MM/yyyy";
-    private static String TIME = "HH:mm:ss";
+    private static String TIME = "HHH:mm:ss";
     private static String HOUR = "H";
     private static String MINUTE = "m";
     private static String DATE_DATABASE = "yyyy-MM-dd";
@@ -32,6 +32,16 @@ public class Data {
     public static String getDate(Date data) {
         DateFormat date = new SimpleDateFormat(DATE);
         return date.format(data);
+    }
+    
+    /**
+     * Retorna a hora atual no formato hh:mm
+     * @return  retorna uma string com a hora formatada
+     */
+    public static String getHoraToString(){
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+        String hora = format.format(new Date());
+        return hora;
     }
 
     /**
@@ -155,4 +165,13 @@ public class Data {
     public static Date getCurrentTime() {
         return new Date(System.currentTimeMillis());
     }
+    
+    
+    public static String getDiferenca(long d) {
+        DateFormat date = new SimpleDateFormat(TIME);
+        return date.format(d);
+    }
+
+     
+    
 }

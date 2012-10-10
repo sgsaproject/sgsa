@@ -4,33 +4,50 @@
  */
 package view;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.persistence.Query;
+import model.Ouvinte;
 import model.Palestra;
+import model.Sessao;
+import org.jdesktop.beansbinding.BindingGroup;
+import util.Data;
 
 /**
  *
  * @author nasser
  */
 public class ViewPalestra extends javax.swing.JFrame {
+
     Palestra p = new Palestra();
+    Date horarioInicio = new Date();
+    List<Ouvinte> listOuvinte = new ArrayList();
+
     /**
      * Creates new form ViewPalestra
      */
     public ViewPalestra() {
         initComponents();
     }
-    
+
     public ViewPalestra(Palestra pa) {
         initComponents();
+        horarioInicio = null;
+        ThreadHora t = new ThreadHora();
+        t.start();
+
         this.p = pa;
         jlblNomePalestra.setText(p.getNomePalestra().toString());
         jlblNomePalestrante.setText(p.getNomePalestrante().toString());
         jlblInstituicao.setText(p.getInstituicao().toString());
         //jlblHoraInicioPrevista.setText(p.getHoraInicioPrevista().toString());
         //jlblHoraTerminoPrevista.setText(p.getHoraFimPrevista().toString());
-        
+
         jlblHoraInicioPrevistaHora.setText(p.getHoraInicioPrevista().toString());
         jlblHoraTerminoPrevistoHora.setText(p.getHoraFimPrevista().toString());
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,7 +60,7 @@ public class ViewPalestra extends javax.swing.JFrame {
 
         entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("client-offlinePU").createEntityManager();
         sessaoQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT s FROM Sessao s");
-        sessaoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : sessaoQuery.getResultList();
+        sessaoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(sessaoQuery.getResultList());
         jPanel1 = new javax.swing.JPanel();
         jbtnIniciarPalestra = new javax.swing.JButton();
         jbtnFinalizarPalestra = new javax.swing.JButton();
@@ -65,15 +82,15 @@ public class ViewPalestra extends javax.swing.JFrame {
         jlblTempoDecorrido = new javax.swing.JLabel();
         jlblTempoDecorridoHora = new javax.swing.JLabel();
         jlblHoraAtual = new javax.swing.JLabel();
-        jlblHoraAtualHora = new javax.swing.JLabel();
         jbtnAdd1 = new javax.swing.JButton();
         jlblNomePalestra = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jlblInstituicao = new javax.swing.JLabel();
+        JLabelFieldHora = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -125,42 +142,38 @@ public class ViewPalestra extends javax.swing.JFrame {
         jlblHoraInicio.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jlblHoraInicio.setText("Hora de início:");
 
-        jlblHoraInicioHora.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
+        jlblHoraInicioHora.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jlblHoraInicioHora.setForeground(new java.awt.Color(0, 125, 0));
-        jlblHoraInicioHora.setText("08:03:51");
+        jlblHoraInicioHora.setText("::");
 
         jlblHoraTermino.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jlblHoraTermino.setText("Hora de término:");
 
-        jlblHoraTerminoHora.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
+        jlblHoraTerminoHora.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jlblHoraTerminoHora.setForeground(new java.awt.Color(125, 0, 0));
         jlblHoraTerminoHora.setText("::");
 
         jlblHoraInicioPrevista.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jlblHoraInicioPrevista.setText("Início previsto:");
 
-        jlblHoraInicioPrevistaHora.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
+        jlblHoraInicioPrevistaHora.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jlblHoraInicioPrevistaHora.setText("08:00:00");
 
         jlblHoraTerminoPrevista.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jlblHoraTerminoPrevista.setText("Término previsto:");
 
-        jlblHoraTerminoPrevistoHora.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
+        jlblHoraTerminoPrevistoHora.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jlblHoraTerminoPrevistoHora.setText("10:30:00");
 
         jlblTempoDecorrido.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jlblTempoDecorrido.setText("Tempo decorrido:");
 
-        jlblTempoDecorridoHora.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
+        jlblTempoDecorridoHora.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jlblTempoDecorridoHora.setForeground(new java.awt.Color(0, 0, 125));
-        jlblTempoDecorridoHora.setText("02:15:22");
+        jlblTempoDecorridoHora.setText("::");
 
         jlblHoraAtual.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jlblHoraAtual.setText("Hora Atual:");
-
-        jlblHoraAtualHora.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
-        jlblHoraAtualHora.setForeground(new java.awt.Color(0, 0, 125));
-        jlblHoraAtualHora.setText("10:19:13");
 
         jbtnAdd1.setText("Voltar");
         jbtnAdd1.addActionListener(new java.awt.event.ActionListener() {
@@ -183,6 +196,10 @@ public class ViewPalestra extends javax.swing.JFrame {
 
         jlblInstituicao.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jlblInstituicao.setText("Instituicao");
+
+        JLabelFieldHora.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        JLabelFieldHora.setForeground(new java.awt.Color(0, 0, 125));
+        JLabelFieldHora.setText("Hora");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -207,36 +224,35 @@ public class ViewPalestra extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jlblHoraInicioPrevistaHora, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jlblTempoDecorrido, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jlblHoraAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(jftfCodigoBarras, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbtnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jlblHoraInicioPrevista, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jlblHoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jlblHoraInicioHora, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jlblHoraTerminoHora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jlblHoraTerminoPrevista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jlblHoraTerminoPrevistoHora, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                                    .addComponent(jlblHoraTermino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jlblTempoDecorridoHora, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jbtnAdd1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jlblHoraInicioPrevistaHora, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jftfCodigoBarras, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jbtnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jlblHoraInicioPrevista, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jlblHoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jlblHoraInicioHora, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jlblHoraTerminoHora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jlblHoraTerminoPrevista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jlblHoraTerminoPrevistoHora, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-                                        .addComponent(jlblHoraTermino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jlblTempoDecorridoHora, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(82, 82, 82)
-                                    .addComponent(jlblHoraAtualHora, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap())))
+                                    .addComponent(jlblTempoDecorrido, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jlblHoraAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jbtnAdd1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(JLabelFieldHora, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -253,7 +269,7 @@ public class ViewPalestra extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jlblHoraAtualHora, jlblHoraInicioHora, jlblHoraInicioPrevistaHora, jlblHoraTerminoHora, jlblHoraTerminoPrevistoHora, jlblTempoDecorridoHora});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jlblHoraInicioHora, jlblHoraInicioPrevistaHora, jlblHoraTerminoHora, jlblHoraTerminoPrevistoHora, jlblTempoDecorridoHora});
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jlblHoraInicio, jlblHoraInicioPrevista, jlblTempoDecorrido});
 
@@ -281,8 +297,7 @@ public class ViewPalestra extends javax.swing.JFrame {
                     .addComponent(jlblOuvintes)
                     .addComponent(jlblInformeCodigoBarras))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jbtnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -307,15 +322,19 @@ public class ViewPalestra extends javax.swing.JFrame {
                             .addComponent(jlblTempoDecorrido, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlblHoraAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jlblTempoDecorridoHora)
-                            .addComponent(jlblHoraAtualHora))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jbtnAdd1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(53, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(JLabelFieldHora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbtnAdd1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(61, Short.MAX_VALUE))))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jlblHoraAtualHora, jlblHoraInicioHora, jlblHoraInicioPrevistaHora, jlblHoraTerminoHora, jlblHoraTerminoPrevistoHora, jlblTempoDecorridoHora});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jlblHoraInicioHora, jlblHoraInicioPrevistaHora, jlblHoraTerminoHora, jlblHoraTerminoPrevistoHora, jlblTempoDecorridoHora});
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jlblHoraAtual, jlblHoraInicio, jlblHoraInicioPrevista, jlblHoraTermino, jlblHoraTerminoPrevista, jlblTempoDecorrido});
 
@@ -325,7 +344,7 @@ public class ViewPalestra extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -334,21 +353,118 @@ public class ViewPalestra extends javax.swing.JFrame {
 
         bindingGroup.bind();
 
-        pack();
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-1010)/2, (screenSize.height-766)/2, 1010, 766);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnIniciarPalestraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnIniciarPalestraActionPerformed
 
+        jlblHoraInicioHora.setText(Data.getHoraToString());
+        horarioInicio = Data.getCurrentTime();
+        jbtnIniciarPalestra.setEnabled(false);
 
   }//GEN-LAST:event_jbtnIniciarPalestraActionPerformed
 
     private void jbtnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAddActionPerformed
-       
+        if (existeOuvinte(jftfCodigoBarras.getText())) {
+            Ouvinte o = new Ouvinte();
+            o = listOuvinte.get(0);
+            Sessao s = new Sessao();
+            s.setIdOuvinte(o);
+            s.setHoraEntrada(Data.getCurrentTime());
+            s.setIdPalestra(p);
+            sessaoList.add(s);
+         //   entityManager.getTransaction().begin();
+         //   entityManager.persist(s);
+         //   entityManager.getTransaction().commit();
+        }
+
+
     }//GEN-LAST:event_jbtnAddActionPerformed
 
+    /**
+     *
+     * @param o ouvinte
+     * @return true se ouvinte está na sala false se ouvinte não está na sala
+     */
+    private boolean entrou(Ouvinte o) {
+        for (int i = 0; i < sessaoList.size(); i++) {
+            if (sessaoList.get(i).getIdOuvinte() == o) {
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+    /**
+     *
+     * @param o
+     * @return true se o ouvinte saiu false se o ouvinte não saiu
+     */
+    private boolean saiu(Ouvinte o) {
+        boolean saiu = false;
+        for (int i = 0; i < sessaoList.size(); i++) {
+            if (sessaoList.get(i).getIdOuvinte() == o) {
+                if (sessaoList.get(i).getHoraSaida() != null) {
+                    saiu = true;
+                } else {
+                    saiu = false;
+                }
+            }
+        }
+        return saiu;
+
+    }
+
+    private boolean existeOuvinte(String codBarras) {
+        BindingGroup bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
+        javax.persistence.EntityManager entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("client-offlinePU").createEntityManager();
+        javax.persistence.Query queryUsuario = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT o FROM Ouvinte o WHERE o.codigoBarras = :codigoBarras");
+
+        queryUsuario = entityManager.createNamedQuery("Ouvinte.findByCodigoBarras");
+        Query setParameter = queryUsuario.setParameter("codigoBarras", codBarras);
+        listOuvinte = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(queryUsuario.getResultList());
+
+        if (listOuvinte.size() != 0) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
     private void jbtnAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAdd1ActionPerformed
-        // TODO add your handling code here:
+        RelacaoPalestras rp = new RelacaoPalestras();
+        rp.setVisible(true);
+        this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_jbtnAdd1ActionPerformed
+
+    private class ThreadHora extends Thread {
+
+        public void run() {
+            long diferenca = 0;
+            while (true) {
+
+                JLabelFieldHora.setText(Data.getHoraToString());
+
+                // Diminui 75600000 milisegundos, não me pergunte pq
+                if (horarioInicio != null) {
+                    diferenca = Data.getCurrentTime().getTime() - horarioInicio.getTime() - 75600000;
+                    jlblTempoDecorridoHora.setText(Data.getDiferenca(diferenca));
+                }
+
+                try {
+                    this.sleep(1000);
+                } catch (InterruptedException ex) {
+                    //logger.error("Não foi possível pausar a thread",ex);
+                }
+
+
+            }
+
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -392,6 +508,7 @@ public class ViewPalestra extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel JLabelFieldHora;
     private javax.persistence.EntityManager entityManager;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -405,7 +522,6 @@ public class ViewPalestra extends javax.swing.JFrame {
     private javax.swing.JButton jbtnIniciarPalestra;
     private javax.swing.JFormattedTextField jftfCodigoBarras;
     private javax.swing.JLabel jlblHoraAtual;
-    private javax.swing.JLabel jlblHoraAtualHora;
     private javax.swing.JLabel jlblHoraInicio;
     private javax.swing.JLabel jlblHoraInicioHora;
     private javax.swing.JLabel jlblHoraInicioPrevista;
