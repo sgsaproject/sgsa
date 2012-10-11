@@ -30,10 +30,15 @@ Para instalar a aplicação SGSA em um Windows SO, primeiramente e necessário i
 
 5) Acesse o diretório do framework e entre na pasta *'extras/library/'* e copie a biblioteca **ZendX** para a pasta *'library/'* dentro do diretório do Zend Framework.
 
-6) Acesse o arquivo **php.ini** que pode ser encrontrado dentro do Xampp na pasta *'etc/'*, para integrar o Zend com o php.
+6) Acesse o arquivo **php.ini** que pode ser encrontrado dentro do Xampp na pasta *'php/'*, para integrar o Zend com o php.
 
 - procure o atributo **include_path** dentro do arquivo, e remova o caracter *';'* no início da linha logo apos a referência ao *'Windows'*.
-- no final do caminho indicado pela string, acrescente o caracter *':'*  e informe o caminho para a pasta *'library/'* da instalação do Zend Framework realizada no passo 4.
+- no final do caminho indicado pela string, acrescente o caracter *';'*  e informe o caminho para a pasta *'library/'* da instalação do Zend Framework realizada no passo 4.
+
+.. figure:: include_path.png
+   :align: center
+
+   *Include Path do PHP.*
 
 7) Faça o download da ferramenta `TortoiseGit`_ para o seu computador, através da página `http://code.google.com/p/tortoisegit/wiki/Download`_, a fim de clonar o repositório do projeto em seu computador. e instale ela em seu computador executando todos os passos.
 
@@ -43,6 +48,16 @@ Para instalar a aplicação SGSA em um Windows SO, primeiramente e necessário i
 - informe o caminho do repositório *https://github.com/sgsaproject/sgsa.git* no campo URL e confirme. 
 - após terminado o download e construído o clone do repositório, clique com o botão direito sobre a pasta do projeto para acessar o menu de opções.
 - selecione a opção **TortoiseGit** e clique em **Switch/Checkout...**, Altere o Branch para *'v1.0'* e confirme.
+
+.. figure:: tortoisegit.png
+   :align: center
+
+   *TortoiseGit Opções.*
+   
+.. figure:: switch-branch.png
+   :align: center
+
+   *Trocando para o Branch da Versão 1.0.*
 
 9) Abra o **Prompt de Comando** e procure o diretório de instalação do Xampp instalado no seu computador. 
 
