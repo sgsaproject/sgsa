@@ -17,7 +17,12 @@ Para instalar a aplicação SGSA em um Windows SO, primeiramente e necessário i
 - Se baixar o Xampp em um arquivo compactado, simplesmente descompacte ele em seu disco rígido aonde preferir.
 - Se baixar o instalador do Xampp, execute-o e siga os passos até instalar a ferramenta em seu computador.
 
-2) Após instalado o Xampp na sua máquina, um painel de controle da ferramenta sera aberto, com algumas funcionalidades de gerenciamento dos servicos disponíveis. Peça para iniciar o Apache e o MySql clicando no botão '**Start**'.
+2) Após instalado o Xampp na sua máquina, um painel de controle da ferramenta sera aberto, com algumas funcionalidades de gerenciamento dos servicos disponíveis. Peça para iniciar o Apache e o MySql clicando no botão **Start**.
+
+.. figure:: images/xampp-control.png
+   :align: center
+
+   *O Painel de Controle do Xampp.*
 
 3) Faça o download do `Zend Framework 1`_ versão *full* para o seu computador, através da página `http://framework.zend.com/downloads/latest`_, para disponibilizar a tecnologia junto com o php.
 
