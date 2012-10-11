@@ -19,7 +19,7 @@ Para instalar a aplicação SGSA em um Windows SO, primeiramente e necessário i
 
 2) Após instalado o Xampp na sua máquina, um painel de controle da ferramenta sera aberto, com algumas funcionalidades de gerenciamento dos servicos disponíveis. Peça para iniciar o Apache e o MySql clicando no botão **Start**.
 
-.. figure:: images/xampp-control.png
+.. figure:: xampp-control.png
    :align: center
 
    *O Painel de Controle do Xampp.*
