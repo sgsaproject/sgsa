@@ -22,7 +22,7 @@ Para instalar a aplicação SGSA em um Windows SO, primeiramente e necessário i
 .. figure:: xampp-control.png
    :align: center
 
-   *O Painel de Controle do Xampp.*
+- *O Painel de Controle do Xampp.*
 
 #. Faça o download do `Zend Framework 1`_ versão *full* para o seu computador, através da página `http://framework.zend.com/downloads/latest`_, para disponibilizar a tecnologia junto com o php.
 
@@ -37,7 +37,7 @@ Para instalar a aplicação SGSA em um Windows SO, primeiramente e necessário i
 .. figure:: include_path.png
    :align: center
 
-   *Include Path do PHP.*
+- *Include Path do PHP.*
 
 #. Faça o download da ferramenta `TortoiseGit`_ para o seu computador, através da página `http://code.google.com/p/tortoisegit/wiki/Download`_, a fim de clonar o repositório do projeto em seu computador. e instale ela em seu computador executando todos os passos.
 
@@ -51,12 +51,12 @@ Para instalar a aplicação SGSA em um Windows SO, primeiramente e necessário i
 .. figure:: tortoisegit.png
    :align: center
 
-   *TortoiseGit Opções.*
+- *TortoiseGit Opções.*
    
 .. figure:: switch-branch.png
    :align: center
 
-   *Trocando para o Branch da Versão 1.0.*
+- *Trocando para o Branch da Versão 1.0.*
 
 #. Abra o **Prompt de Comando** e procure o diretório de instalação do Xampp instalado no seu computador. 
 
@@ -64,7 +64,7 @@ Para instalar a aplicação SGSA em um Windows SO, primeiramente e necessário i
 
 	php setup-db.php
 	
-Esse script php é responsável por configurar o ambiente do banco de dados, criando as tabelas e inserindo alguns dados.
+- Esse script php é responsável por configurar o ambiente do banco de dados, criando as tabelas e inserindo alguns dados.
 
 #. Retorne ao diretório do projeto, e acesse a pasta *'application/configs/'* para ajustar algumas configurações. 
 
