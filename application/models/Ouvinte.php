@@ -95,7 +95,7 @@ class Application_Model_Ouvinte extends Zend_Db_Table_Row_Abstract {
         return $this->sessoes;
     }
 
-    public function enviarEmailConfirmacao() {
+    public function enviarEmailConfirmacao(Zend_Mail_Transport_Abstract $transport = null) {
         $view = new Zend_View();
         $view->setScriptPath(APPLICATION_PATH . '/views/scripts');
         $msg = $view->partial('/layout/templates/emailConfirmacao.phtml', array(
@@ -109,7 +109,8 @@ class Application_Model_Ouvinte extends Zend_Db_Table_Row_Abstract {
             $mail->addTo($this->email)
                     ->setBodyHtml($msg)
                     ->setSubject('Inscrição na ' . $config->evento->nome . ' de ' . $config->evento->ano)
-                    ->send();
+                    ->send($transport);
+            
         } catch (Exception $e) {
             $date = new Zend_Date();
             $emailPendenteModel = new Application_Model_DbTable_EmailPendente();
