@@ -6,7 +6,7 @@
  * @author Rafael
  */
 class EmailTest extends PHPUnit_Framework_TestCase {
-/*
+
     public function setUp() {
         $this->bootstrap = new Zend_Application(APPLICATION_ENV, APPLICATION_PATH . '/configs/application.ini');
         parent::setUp();
@@ -18,7 +18,7 @@ class EmailTest extends PHPUnit_Framework_TestCase {
         $this->assertSame($mail->getDefaultFrom()['email'], 'sactaunipampa@gmail.com');
         $this->assertSame($mail->getDefaultReplyTo()['email'], 'sactaunipampa@gmail.com');
     }
-    
+
     public function testSendMail() {
         Sistema_Test_Mail::clearMailFiles();
         $mail = new Zend_Mail('utf-8');
@@ -27,21 +27,18 @@ class EmailTest extends PHPUnit_Framework_TestCase {
         $mail->setSubject('This is second test email');
         $mail->setBodyHtml('1st email');
         $mail->send();
-        
+
         $fileMail = Sistema_Test_Mail::getEmails();
         $this->assertContains('sactaunipampa@gmail.com', $fileMail[0]->getHeader('from'));
         $this->assertContains('recipient3@yahoo.com', $fileMail[0]->getHeader('to'));
         $this->assertContains('recipient4@yahoo.com', $fileMail[0]->getHeader('cc'));
         $this->assertContains('This is second test email', $fileMail[0]->getHeader('subject'));
         $this->assertContains('1st email', $fileMail[0]->getContent());
-
     }
-    
-    protected function tearDown()
-    {
+
+    protected function tearDown() {
         Sistema_Test_Mail::clearMailFiles();
         parent::tearDown();
     }
 
- */
 }
