@@ -15,8 +15,8 @@ class EmailTest extends PHPUnit_Framework_TestCase {
     public function testCheckTransport() {
         $mail = new Zend_Mail();
         $this->assertTrue($mail->getDefaultTransport() instanceof Zend_Mail_Transport_File);
-        $this->assertSame($mail->getDefaultFrom()['email'], 'sactaunipampa@gmail.com');
-        $this->assertSame($mail->getDefaultReplyTo()['email'], 'sactaunipampa@gmail.com');
+        $this->assertSame($mail->getDefaultFrom()['email'], 'sacta@sacta.com');
+        $this->assertSame($mail->getDefaultReplyTo()['email'], 'sacta@sacta.com');
     }
 
     public function testSendMail() {
@@ -29,7 +29,7 @@ class EmailTest extends PHPUnit_Framework_TestCase {
         $mail->send();
 
         $fileMail = Sistema_Test_Mail::getEmails();
-        $this->assertContains('sactaunipampa@gmail.com', $fileMail[0]->getHeader('from'));
+        $this->assertContains('sacta@sacta.com', $fileMail[0]->getHeader('from'));
         $this->assertContains('recipient3@yahoo.com', $fileMail[0]->getHeader('to'));
         $this->assertContains('recipient4@yahoo.com', $fileMail[0]->getHeader('cc'));
         $this->assertContains('This is second test email', $fileMail[0]->getHeader('subject'));
