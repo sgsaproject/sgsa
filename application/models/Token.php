@@ -64,11 +64,12 @@ class Application_Model_Token extends Zend_Db_Table_Row_Abstract {
             $chars = array_merge($chars, range(0, 9));
         }
         shuffle($chars);
-        $code = '';
-        for ($index = 0; $index < $size; $index++) {
-            $code .=$chars[$index];
-        }
-        return $code;
+        //$code = '';
+        //for ($index = 0; $index < $size; $index++) {
+        //    $code .=$chars[$index];
+        //}
+        return substr(implode('', $chars), 0, $size);
+        //return $code;
     }
 
 }
