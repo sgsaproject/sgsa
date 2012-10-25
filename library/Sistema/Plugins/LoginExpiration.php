@@ -11,7 +11,7 @@ class Sistema_Plugins_LoginExpiration extends Zend_Controller_Plugin_Abstract {
                 $session->setExpirationSeconds(60 * 60);
         }
         //expira a sessão de configuração de projeto
-        $session = new Zend_Session_Namespace('rmanager');
+        $session = new Zend_Session_Namespace('sgsa');
         $session->setExpirationSeconds(60 * 60);
         
     }

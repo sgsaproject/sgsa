@@ -32,7 +32,7 @@ class WebServiceTest extends PHPUnit_Framework_TestCase {
         $this->getToken();
         $result = $this->webservice->getPalestras($this->token);
         $this->assertTrue(is_array($result));
-        $this->assertTrue(sizeof($result) == 0);
+        $this->assertEquals(sizeof($result), 7);
     }
     
     private function getToken(){
