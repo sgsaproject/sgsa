@@ -6,7 +6,7 @@ class Application_Form_Login extends Zend_Form {
 
         $this->setMethod('post');
 
-        $usuario = new Zend_Form_Element_Text('login');
+        $usuario = new Zend_Form_Element_Text('usuario');
         $usuario->setLabel('Nome de Usuário: ')
                 ->setAttrib('size', '30')
                 ->addFilters(array('StripTags', 'HtmlEntities', 'alnum'))

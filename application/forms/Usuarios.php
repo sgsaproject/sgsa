@@ -26,15 +26,15 @@
                   ->setRequired(TRUE);
             $this->addElement($email);
             
-            $login = new Zend_Form_Element_Text('login');
-            $login->setLabel('Login:')
+            $usuario = new Zend_Form_Element_Text('usuario');
+            $usuario->setLabel('Login:')
                   ->addValidator('alnum', false, array('allowWhiteSpace' => true))
                   ->addFilter('StripTags')
                   ->setAttrib('rel', 'tooltip')
-                  ->setAttrib('title', 'Digite um login de acesso ao sistema para o usuário')
+                  ->setAttrib('title', 'Digite um usuario de acesso ao sistema para o usuário')
                   ->setAttrib('size', '60')
                   ->setRequired(TRUE);
-            $this->addElement($login);
+            $this->addElement($usuario);
             
             $tipo[] = isset($tipo) ? '' : '';
             $tipoModel = new Application_Model_DbTable_TipoUsuario();

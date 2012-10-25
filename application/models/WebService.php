@@ -9,15 +9,15 @@ class Application_Model_WebService {
 
     /**
      * Faz pedido de um token
-     * @param string $login
+     * @param string $usuario
      * @param string $senha
      * @return string token
      */
-    public function getToken($login, $senha) {
+    public function getToken($usuario, $senha) {
         try {
             $userDbTable = new Application_Model_DbTable_Usuario();
             $select = $userDbTable->select()
-                    ->where('login = ?', $login)
+                    ->where('usuario = ?', $usuario)
                     ->where('senha = ?', $senha);
             $user = $userDbTable->fetchRow($select);
             if (is_null($user)) {

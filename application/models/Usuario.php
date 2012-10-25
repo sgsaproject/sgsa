@@ -31,12 +31,12 @@ class Application_Model_Usuario extends Zend_Db_Table_Row_Abstract {
         $this->email = $email;
     }
     
-    public function getLogin() {
-        return $this->login;
+    public function getUsuario() {
+        return $this->usuario;
     }
     
-    public function setLogin($login) {
-        $this->login = $login;
+    public function setUsuario($usuario) {
+        $this->usuario = $usuario;
     }
     
     public function getSenha() {

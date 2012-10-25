@@ -20,7 +20,7 @@
             <?foreach($this->usuarios as $usuario):?>
             <tr>
                 <td><?=$usuario->nome?></td>
-                <td><?=$usuario->login?></td>
+                <td><?=$usuario->usuario?></td>
                 <td><?=$usuario->email?></td>
                 <td><?=$usuario->findDependentRowset('Application_Model_DbTable_TipoUsuario')->current()->nome?></td>
                 <td>
