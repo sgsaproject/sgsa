@@ -27,7 +27,7 @@ class AdminController extends Zend_Controller_Action {
                 $authAdapter = new Zend_Auth_Adapter_DbTable(
                                 $db,
                                 'usuario',
-                                'login',
+                                'usuario',
                                 'senha');
 
                 $authAdapter->setIdentity($dados['usuario']);

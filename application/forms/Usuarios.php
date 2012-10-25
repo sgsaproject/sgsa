@@ -27,7 +27,7 @@
             $this->addElement($email);
             
             $usuario = new Zend_Form_Element_Text('usuario');
-            $usuario->setLabel('Login:')
+            $usuario->setLabel('Usuário:')
                   ->addValidator('alnum', false, array('allowWhiteSpace' => true))
                   ->addFilter('StripTags')
                   ->setAttrib('rel', 'tooltip')
