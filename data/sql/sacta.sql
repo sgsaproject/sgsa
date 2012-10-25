@@ -38,7 +38,6 @@ CREATE  TABLE IF NOT EXISTS `usuario` (
   `id_usuario` INT NOT NULL AUTO_INCREMENT ,
   `nome` VARCHAR(100) NULL ,
   `email` VARCHAR(50) NULL ,
-  `usuario` VARCHAR(45) NULL ,
   `senha` VARCHAR(45) NULL ,
   `rg` VARCHAR(15) NULL ,
   `curso` VARCHAR(50) NULL ,
