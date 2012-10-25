@@ -39,8 +39,16 @@ class Application_Form_Inscricao extends Zend_Form {
                 ->setAttrib('rel', 'tooltip')
                 ->setAttrib('title', 'Digite um e-mail válido. Você receberá as informações neste e-mail')
                 ->addFilters(array('StringTrim', 'StringtoLower'))
-                ->setRequired(TRUE);
+                ->setRequired(true);
         $this->addElement($email);
+        
+        $element = new Zend_Form_Element_Password('senha');
+        $element->setLabel('Senha:')
+                ->setAttrib('size', '60')
+                ->setAttrib('rel', 'tooltip')
+                ->setAttrib('title', 'Digite uma senha')
+                ->setRequired(true);
+        $this->addElement($element);
 
         $curso = new Zend_Form_Element_Text('curso');
         $curso->setLabel('Curso: ')
