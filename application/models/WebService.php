@@ -50,7 +50,10 @@ class Application_Model_WebService {
             foreach ($usuarioRowSet as $usuarioRow) {
                 $usuario = new stdClass();
                 $usuario->nome = $usuarioRow->nome;
+                $usuario->email = $usuarioRow->email;
+                $usuario->usuario = $usuarioRow->usuario;
                 $usuario->codigo_barras = $usuarioRow->codigo_barras;
+                $usuario->pagamento = $usuarioRow->pagamento;
                 $usuarios[] = $usuario;
             }
             return $usuarios;
@@ -104,10 +107,10 @@ class Application_Model_WebService {
      */
     public function uploadSessions($token, array $sessions) {
         try {
-            //$this->checkToken($token);
+            $this->checkToken($token);
             return var_export($sessions, true);
         } catch (Exception $e) {
-            return array($e->getMessage(), $e->getCode());
+            return $e->getMessage();
         }
     }
 

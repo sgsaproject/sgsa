@@ -45,6 +45,9 @@
         <controllerFile controllerName="Objetivo">
           <actionMethod actionName="index"/>
         </controllerFile>
+        <controllerFile controllerName="AreaParticipante">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory>
         <formFile formName="Teste"/>
@@ -151,6 +154,9 @@
           <viewControllerScriptsDirectory forControllerName="Index">
             <viewScriptFile forActionName="cron"/>
           </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="AreaParticipante">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
         <viewFiltersDirectory enabled="false"/>
@@ -186,6 +192,9 @@
       <testApplicationDirectory>
         <testApplicationControllerDirectory>
           <testApplicationControllerFile forControllerName="Index"/>
+          <testApplicationControllerFile forControllerName="AreaParticipante">
+            <testApplicationActionMethod forActionName="index"/>
+          </testApplicationControllerFile>
         </testApplicationControllerDirectory>
       </testApplicationDirectory>
       <testLibraryDirectory/>
