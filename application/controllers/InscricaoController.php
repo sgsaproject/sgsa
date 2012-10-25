@@ -26,6 +26,7 @@ class InscricaoController extends Zend_Controller_Action {
                 $usuario = $usuarioModel->createRow();
                 $usuario->setCodigoBarras($codigoBarras->gerarCodigoBarras());
                 $usuario->setAttributes($dados);
+                $usuario->setIdTipoUsuario(4);
                 $usuario->save();
                 $usuario->enviarEmailConfirmacao();
 
