@@ -1,7 +1,7 @@
 <?php
 
 class InscricaoControllerTest extends Zend_Test_PHPUnit_ControllerTestCase {
-/*
+
     public function setUp() {
         $this->bootstrap = new Zend_Application(APPLICATION_ENV, APPLICATION_PATH . '/configs/application.ini');
         parent::setUp();
@@ -33,14 +33,14 @@ class InscricaoControllerTest extends Zend_Test_PHPUnit_ControllerTestCase {
                     'instituicao' => 'Unipampa'));
 
         $this->dispatch($url);
-        
+
         // assertions
         $this->assertRedirectTo('/inscricao/sucesso');
         $this->assertModule($urlParams['module']);
         $this->assertController($urlParams['controller']);
         $this->assertAction('inscrever');
     }
-    
+
     public function testSucessoAction() {
         $params = array('action' => 'sucesso', 'controller' => 'inscricao', 'module' => 'default');
         $urlParams = $this->urlizeOptions($params);
@@ -54,6 +54,5 @@ class InscricaoControllerTest extends Zend_Test_PHPUnit_ControllerTestCase {
         $this->assertAction($urlParams['action']);
         $this->assertQueryContentContains("div#conteudo h2", "Inscrição");
     }
-*/
-}
 
+}

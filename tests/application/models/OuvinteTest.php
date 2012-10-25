@@ -120,7 +120,8 @@ class OuvinteTest extends PHPUnit_Framework_TestCase {
         $ouvinte->setCodigoBarras($codigoBarras->gerarCodigoBarras());
         $id = $ouvinte->save();
         
-        $ouvinte->enviarEmailConfirmacao();
+        $transport = new Zend_Mail_Transport_Smtp();
+        $ouvinte->enviarEmailConfirmacao($transport);
         
         $email = new Application_Model_DbTable_EmailPendente();
         $emails = $email->getEmailsOfOuvinte($id);
