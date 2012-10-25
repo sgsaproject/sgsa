@@ -391,3 +391,7 @@ input[type="text"],input[type=password], .inputbox{
     font-size: 12px;
     text-align: center;
 }
+
+div.ui-datepicker{
+    font-size:12px;
+}
