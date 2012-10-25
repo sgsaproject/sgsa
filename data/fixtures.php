@@ -22,6 +22,21 @@ if (APPLICATION_ENV == 'development' || APPLICATION_ENV == 'testing'):
     
     $db->insert('palestra', array('nome_palestra' => 'Github', 'nome_palestrante' => 'João Neto', 'instituicao' => 'imasters', 'hora_inicio_prevista' => '2012-11-03 13:30:00', 'hora_fim_prevista' => '2012-11-03 15:30:00', 'hora_inicio' => '2012-11-03 13:34:32', 'hora_fim' => '2012-11-03 15:17:23', 'sala' => 101));
     $db->insert('palestra', array('nome_palestra' => 'Redmine', 'nome_palestrante' => 'João Filho', 'instituicao' => 'Redmine', 'hora_inicio_prevista' => '2012-11-03 16:00:00', 'hora_fim_prevista' => '2012-11-03 18:00:00', 'hora_inicio' => '2012-11-03 16:12:12', 'hora_fim' => '2012-11-03 18:29:31', 'sala' => 101));
+    $db->insert('palestra', array('nome_palestra' => 'Netbeans', 'nome_palestrante' => 'João Pai', 'instituicao' => 'Oracle', 'hora_inicio_prevista' => '2012-11-03 18:30:00', 'hora_fim_prevista' => '2012-11-03 20:30:00', 'hora_inicio' => '2012-11-03 18:31:43', 'hora_fim' => '2012-11-03 20:33:12', 'sala' => 101));
+    
+    $db->insert('sessao', array('id_usuario' => 2, 'id_palestra' => 1, 'hora_entrada' => '2012-11-03 13:34:55', 'hora_saida' => '2012-11-03 15:17:23'));
+    $db->insert('sessao', array('id_usuario' => 3, 'id_palestra' => 1, 'hora_entrada' => '2012-11-03 13:34:59', 'hora_saida' => '2012-11-03 15:17:30'));
+    $db->insert('sessao', array('id_usuario' => 4, 'id_palestra' => 1, 'hora_entrada' => '2012-11-03 13:34:43', 'hora_saida' => '2012-11-03 15:17:38'));
+    
+    $db->insert('permissao', array('id_usuario' => 5, 'id_palestra' => 1));
+    $db->insert('permissao', array('id_usuario' => 5, 'id_palestra' => 2));
+    $db->insert('permissao', array('id_usuario' => 5, 'id_palestra' => 3));
+    $db->insert('permissao', array('id_usuario' => 1, 'id_palestra' => 1));
+    $db->insert('permissao', array('id_usuario' => 1, 'id_palestra' => 2));
+    $db->insert('permissao', array('id_usuario' => 1, 'id_palestra' => 3));
+    $db->insert('permissao', array('id_usuario' => 6, 'id_palestra' => 1));
+    $db->insert('permissao', array('id_usuario' => 6, 'id_palestra' => 2));
+    $db->insert('permissao', array('id_usuario' => 6, 'id_palestra' => 3));
     
 endif;
 
