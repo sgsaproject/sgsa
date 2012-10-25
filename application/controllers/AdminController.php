@@ -138,10 +138,10 @@ class AdminController extends Zend_Controller_Action {
         
     }
 
-    public function usuariosAction() {
+    /*public function usuariosAction() {
         $usuarioModel = new Application_Model_DbTable_Usuario();
         $this->view->usuarios = $usuarioModel->getUsuarios();
-    }
+    }*/
 
     public function inserirEditarUsuarioAction() {
         $form = new Application_Form_Usuarios();
@@ -220,7 +220,7 @@ class AdminController extends Zend_Controller_Action {
         }
 
         $sessaoModel = new Application_Model_DbTable_Sessao();
-        $sessoes = $sessaoModel->getOuvintesSessao($id_palestra);
+        $sessoes = $sessaoModel->getUsuariosSessao($id_palestra);
         $this->view->sessoes = $sessoes;
     }
 
@@ -262,28 +262,28 @@ class AdminController extends Zend_Controller_Action {
         }
     }
 
-    public function ouvintesAction() {
+    public function usuariosAction() {
         $filtro = $this->getRequest()->getParam('filtro');
-        $ouvintesModel = new Application_Model_DbTable_Ouvinte();
+        $usuariosModel = new Application_Model_DbTable_Usuario();
 
         switch ($filtro) {
             case 'nao-pago':
-                $this->view->ouvintes = $ouvintesModel->getOuvintesNaoPagos();
-                $this->view->filtro = 'Ouvintes Não Pagos';
+                $this->view->usuarios = $usuariosModel->getUsuariosNaoPagos();
+                $this->view->filtro = 'Usuarios Não Pagos';
                 break;
             case 'pago':
 
-                $this->view->ouvintes = $ouvintesModel->getOuvintesPagos();
-                $this->view->filtro = 'Ouvintes Pagos';
+                $this->view->usuarios = $usuariosModel->getUsuariosPagos();
+                $this->view->filtro = 'Usuarios Pagos';
                 break;
             case 'isento':
 
-                $this->view->ouvintes = $ouvintesModel->getOuvintesIsentos();
-                $this->view->filtro = 'Ouvintes Isentos';
+                $this->view->usuarios = $usuariosModel->getUsuariosIsentos();
+                $this->view->filtro = 'Usuarios Isentos';
                 break;
 
             default:
-                $this->view->ouvintes = $ouvintesModel->getOuvintes();
+                $this->view->usuarios = $usuariosModel->getUsuarios();
                 break;
         }
     }
@@ -292,96 +292,96 @@ class AdminController extends Zend_Controller_Action {
 
         $dados = $this->getRequest()->getParams();
 
-        $ouvintesModel = new Application_Model_DbTable_Ouvinte();
-        $ouvinte = $ouvintesModel->find($dados['id_ouvinte'])->current();
-        $ouvinte->pagamento = $dados['pagamento'];
-        $ouvinte->save();
+        $usuariosModel = new Application_Model_DbTable_Usuario();
+        $usuario = $usuariosModel->find($dados['id_usuario'])->current();
+        $usuario->pagamento = $dados['pagamento'];
+        $usuario->save();
 
         $info = new Zend_Session_Namespace('sacta');
-        $info->mensagem = 'O pagamento do ouvinte ' . $ouvinte->nome . ' foi alterado com sucesso para ' . $this->view->FormatarPagamento($ouvinte->pagamento);
-        $this->_redirect('/admin/ouvintes');
+        $info->mensagem = 'O pagamento do usuario ' . $usuario->nome . ' foi alterado com sucesso para ' . $this->view->FormatarPagamento($usuario->pagamento);
+        $this->_redirect('/admin/usuarios');
     }
 
-    public function editarOuvinteAction() {
+    public function editarUsuarioAction() {
 
-        $id_ouvinte = $this->getRequest()->getParam('id_ouvinte');
-        $ouvintesModel = new Application_Model_DbTable_Ouvinte();
-        $ouvinte = $ouvintesModel->find($id_ouvinte)->current();
+        $id_usuario = $this->getRequest()->getParam('id_usuario');
+        $usuariosModel = new Application_Model_DbTable_Usuario();
+        $usuario = $usuariosModel->find($id_usuario)->current();
 
         $form = new Application_Form_Inscricao();
-        $form->populate($ouvinte->toArray());
+        $form->populate($usuario->toArray());
         $form->getElement('email')->clearValidators();
         $form->getElement('enviar')->setLabel('Salvar');
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($_POST)) {
                 $dados = $form->getValues();
-                $ouvinte->setFromArray($dados);
-                $ouvinte->save();
+                $usuario->setFromArray($dados);
+                $usuario->save();
                 $info = new Zend_Session_Namespace('sacta');
-                $info->mensagem = 'O ouvinte ' . $ouvinte->nome . ' teve seus dados alterados com sucesso!';
-                $this->_redirect('/admin/ouvintes');
+                $info->mensagem = 'O usuario ' . $usuario->nome . ' teve seus dados alterados com sucesso!';
+                $this->_redirect('/admin/usuarios');
             }
         }
         $this->view->form = $form;
     }
 
-    public function verDadosOuvinteAction() {
-        $id_ouvinte = $this->getRequest()->getParam('id_ouvinte');
-        $ouvinteModel = new Application_Model_DbTable_Ouvinte();
-        $this->view->ouvinte = $ouvinteModel->find($id_ouvinte)->current();
+    public function verDadosUsuarioAction() {
+        $id_usuario = $this->getRequest()->getParam('id_usuario');
+        $usuarioModel = new Application_Model_DbTable_Usuario();
+        $this->view->usuario = $usuarioModel->find($id_usuario)->current();
     }
 
     public function relatorioCodigoBarrasNaoImpressoAction() {
         //$this->_helper->layout->disableLayout();
-        $ouvinteModel = new Application_Model_DbTable_Ouvinte();
-        $this->view->ouvintes = $ouvinteModel->getOuvintesNaoImpresso();
+        $usuarioModel = new Application_Model_DbTable_Usuario();
+        $this->view->usuarios = $usuarioModel->getUsuariosNaoImpresso();
     }
 
     public function relatorioCodigoBarrasImpressoAction() {
         // action body
     }
 
-    public function registrarOuvintePalestraAction() {
+    public function registrarUsuarioPalestraAction() {
         $this->_helper->layout->disableLayout();
         $dados = $this->getRequest()->getParams();
         $sessaoModel = new Application_Model_DbTable_Sessao();
-        $ouvinteModel = new Application_Model_DbTable_Ouvinte();
+        $usuarioModel = new Application_Model_DbTable_Usuario();
         $palestraModel = new Application_Model_DbTable_Palestra();
-        $ouvinte = $ouvinteModel->getByCodigoBarras($dados['codigo_barras']);
-        if (is_null($ouvinte)) {
-            $this->view->mensagem = 'Codigo de Barras do Ouvinte inexistente!';
+        $usuario = $usuarioModel->getByCodigoBarras($dados['codigo_barras']);
+        if (is_null($usuario)) {
+            $this->view->mensagem = 'Codigo de Barras do Usuario inexistente!';
         } else {
-            if ($sessaoModel->existeSessaoAbertaOuvinte($ouvinte->id_ouvinte) && $dados['id_palestra'] != $sessaoModel->getSessaoAbertaOuvinte($ouvinte->id_ouvinte)) {
-                $this->view->mensagem = 'Ouvinte já está em outra palestra!';
+            if ($sessaoModel->existeSessaoAbertaUsuario($usuario->id_usuario) && $dados['id_palestra'] != $sessaoModel->getSessaoAbertaUsuario($usuario->id_usuario)) {
+                $this->view->mensagem = 'Usuario já está em outra palestra!';
             } else if ($palestraModel->palestraFechada($dados['id_palestra'])) {
                 $this->view->mensagem = 'Esta palestra já foi finalizada!';
             } else {
                 $date = new Zend_Date();
-                if (!$sessaoModel->existeEntrada($dados['id_palestra'], $ouvinte->id_ouvinte)) {
+                if (!$sessaoModel->existeEntrada($dados['id_palestra'], $usuario->id_usuario)) {
                     $sessaoModel->insert(array(
                         'id_palestra' => $dados['id_palestra'],
-                        'id_ouvinte' => $ouvinte->id_ouvinte,
+                        'id_usuario' => $usuario->id_usuario,
                         'hora_entrada' => $date->get(Sistema_Data::ZEND_DATABASE_DATETIME)
                     ));
-                    $this->view->mensagem = 'Entrada do Ouvinte ' . $ouvinte->nome . ' Registrada!';
-                } else if (!$sessaoModel->existeSaida($dados['id_palestra'], $ouvinte->id_ouvinte)) {
-                    $sessao = $sessaoModel->getSessao($dados['id_palestra'], $ouvinte->id_ouvinte);
+                    $this->view->mensagem = 'Entrada do Usuario ' . $usuario->nome . ' Registrada!';
+                } else if (!$sessaoModel->existeSaida($dados['id_palestra'], $usuario->id_usuario)) {
+                    $sessao = $sessaoModel->getSessao($dados['id_palestra'], $usuario->id_usuario);
                     $sessao->hora_saida = $date->get(Sistema_Data::ZEND_DATABASE_DATETIME);
                     $sessao->save();
-                    $this->view->mensagem = 'Saída do Ouvinte ' . $ouvinte->nome . ' Registrada!';
+                    $this->view->mensagem = 'Saída do Usuario ' . $usuario->nome . ' Registrada!';
                 } else {
-                    $this->view->mensagem = 'Saída do Ouvinte ' . $ouvinte->nome . ' Já Registrada!';
+                    $this->view->mensagem = 'Saída do Usuario ' . $usuario->nome . ' Já Registrada!';
                 }
             }
         }
     }
 
-    public function ouvintesPalestraAction() {
+    public function usuariosPalestraAction() {
         $this->_helper->layout->disableLayout();
         $dados = $this->getRequest()->getParams();
         $sessaoModel = new Application_Model_DbTable_Sessao();
-        $sessoes = $sessaoModel->getOuvintesSessao($dados['id_palestra']);
+        $sessoes = $sessaoModel->getUsuariosSessao($dados['id_palestra']);
         $this->view->sessoes = $sessoes;
     }
 
@@ -397,7 +397,7 @@ class AdminController extends Zend_Controller_Action {
                 $palestra->hora_inicio = $date->get(Sistema_Data::ZEND_DATABASE_DATETIME);
                 $palestra->save();
                 $sessaoModel = new Application_Model_DbTable_Sessao();
-                $sessaoModel->zerarEntradaOuvintes($id_palestra);
+                $sessaoModel->zerarEntradaUsuarios($id_palestra);
 
                 $info = new Zend_Session_Namespace('sacta');
                 $info->mensagem = 'Palestra Iniciada com sucesso!';
@@ -422,7 +422,7 @@ class AdminController extends Zend_Controller_Action {
                 $palestra->hora_fim = $date->get(Sistema_Data::ZEND_DATABASE_DATETIME);
                 $palestra->save();
                 $sessaoModel = new Application_Model_DbTable_Sessao();
-                $sessaoModel->fechaSaidaOuvintes($id_palestra);
+                $sessaoModel->fechaSaidaUsuarios($id_palestra);
                 $info = new Zend_Session_Namespace('sacta');
                 $info->mensagem = 'Palestra Finalizada com sucesso!';
                 $this->_redirect('/admin/gerenciar-palestra/id_palestra/' . $id_palestra);
@@ -453,34 +453,34 @@ class AdminController extends Zend_Controller_Action {
         }
     }
 
-    public function relatorioOuvintesPalestrasAction() {
+    public function relatorioUsuariosPalestrasAction() {
 
-        $ouvintesModel = new Application_Model_DbTable_Ouvinte();
-        $this->view->ouvintes = $ouvintesModel->getOuvintes();
+        $usuariosModel = new Application_Model_DbTable_Usuario();
+        $this->view->usuarios = $usuariosModel->getUsuarios();
     }
 
-    public function deletarOuvinteAction() {
+    public function deletarUsuarioAction() {
 
-        $id_ouvinte = $this->getRequest()->getParam('id_ouvinte');
-        $ouvintesModel = new Application_Model_DbTable_Ouvinte();
-        $ouvinte = $ouvintesModel->find($id_ouvinte)->current();
-        $ouvinte->delete();
+        $id_usuario = $this->getRequest()->getParam('id_usuario');
+        $usuariosModel = new Application_Model_DbTable_Usuario();
+        $usuario = $usuariosModel->find($id_usuario)->current();
+        $usuario->delete();
         $info = new Zend_Session_Namespace('sacta');
-        $info->mensagem = 'Ouvinte deletado com sucesso!';
-        $this->_redirect('/admin/ouvintes');
+        $info->mensagem = 'Usuario deletado com sucesso!';
+        $this->_redirect('/admin/usuarios');
     }
 
-    public function relatorioPalestrasOuvintesAction() {
+    public function relatorioPalestrasUsuariosAction() {
         $palestraModel = new Application_Model_DbTable_Palestra();
         $this->view->palestras = $palestraModel->getPalestras();
     }
 
     public function relatorioFinalAction() {
         $dbAdapter = Zend_Db_Table::getDefaultAdapter();
-        $select = 'select o.nome, (2 * count( * )  + 4) as total, o.id_ouvinte, o.email
-                    from ouvinte o, sessao s, palestra p
+        $select = 'select o.nome, (2 * count( * )  + 4) as total, o.id_usuario, o.email
+                    from usuario o, sessao s, palestra p
                     where
-                    o.id_ouvinte = s.id_ouvinte and
+                    o.id_usuario = s.id_usuario and
                     p.id_palestra = s.id_palestra
                     and s.id_palestra != 71
                     and s.id_palestra != 102
@@ -492,10 +492,10 @@ class AdminController extends Zend_Controller_Action {
         $dbAdapter->beginTransaction();
         $result = $dbAdapter->fetchAll($select);
 
-        $select2 = 'select o.id_ouvinte
-            from ouvinte o, sessao s, palestra p
+        $select2 = 'select o.id_usuario
+            from usuario o, sessao s, palestra p
             where
-            o.id_ouvinte = s.id_ouvinte and
+            o.id_usuario = s.id_usuario and
             p.id_palestra = s.id_palestra and
             s.id_palestra = 102
             group by
@@ -505,16 +505,16 @@ class AdminController extends Zend_Controller_Action {
         
         $result2 = $dbAdapter->fetchAll($select2);
 
-	foreach ($result as $key => $ouvinte) {
-            foreach ($result2 as $ouvinteAlmir) {
-                if ($ouvinte['id_ouvinte'] == $ouvinteAlmir['id_ouvinte']) {
-		    $result[$key]['total'] = $ouvinte['total'] + 4;
+	foreach ($result as $key => $usuario) {
+            foreach ($result2 as $usuarioAlmir) {
+                if ($usuario['id_usuario'] == $usuarioAlmir['id_usuario']) {
+		    $result[$key]['total'] = $usuario['total'] + 4;
 		}
             }
         }
         
-//        foreach ($result as $ouvinte2) {
-//            echo $ouvinte2['nome'].",".$ouvinte2['total'].",".$ouvinte2['email'];
+//        foreach ($result as $usuario2) {
+//            echo $usuario2['nome'].",".$usuario2['total'].",".$usuario2['email'];
 //        }
 
         $this->view->result = $result;

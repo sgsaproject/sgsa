@@ -1,4 +1,4 @@
-<h2>Ouvintes Palestras</h2>
+<h2>Usuarios Palestras</h2>
 <br />
 <script type="text/javascript">
     function imprimir(){
@@ -24,9 +24,9 @@
 
 <!--<div id="relatorio">
     <ul>
-<? // foreach ($this->ouvintes as $ouvinte): ?>
-            <li style="font-size: 12pt;font-weight: 100;">Nome:<? //= $this->FormatarNome($ouvinte->nome)    ?> - Instituição: <? //= $this->FormatarNome($ouvinte->instituicao)    ?> - Curso: <? //= $this->FormatarNome($ouvinte->curso)    ?>
-<? // $sessoes = $ouvinte->findDependentRowset('Application_Model_DbTable_Sessao') ?>
+<? // foreach ($this->usuarios as $usuario): ?>
+            <li style="font-size: 12pt;font-weight: 100;">Nome:<? //= $this->FormatarNome($usuario->nome)    ?> - Instituição: <? //= $this->FormatarNome($usuario->instituicao)    ?> - Curso: <? //= $this->FormatarNome($usuario->curso)    ?>
+<? // $sessoes = $usuario->findDependentRowset('Application_Model_DbTable_Sessao') ?>
                 <ul>
 <? // foreach ($sessoes as $sessao): ?>
                         <li style="font-size: 10pt;font-style: italic;"><? //= $sessao->findDependentRowset('Application_Model_DbTable_Palestra')->current()->nome_palestra    ?> - Data Entrada: <? //= $this->formatarDataHora($sessao->hora_entrada)    ?> - Data Saída: <? //= $this->formatarDataHora($sessao->hora_saida)    ?> - Tempo de permanência: <? //= $this->CalcularTempo($sessao->hora_entrada, $sessao->hora_saida)    ?></li>
@@ -39,11 +39,11 @@
 
 <div id="relatorio">
 
-    <? foreach ($this->ouvintes as $ouvinte): ?>
-        <h2>Nome do Ouvinte: <?= $this->FormatarNome($ouvinte->nome) ?></h2>
-        <h3>Instituição: <?= $this->FormatarNome($ouvinte->instituicao) ?></h3>
-        <h3>Curso: <?= $this->FormatarNome($ouvinte->curso) ?></h3>
-        <table class="tabela" name="<?= $this->FormatarNome($ouvinte->nome) ?>">
+    <? foreach ($this->usuarios as $usuario): ?>
+        <h2>Nome do Usuario: <?= $this->FormatarNome($usuario->nome) ?></h2>
+        <h3>Instituição: <?= $this->FormatarNome($usuario->instituicao) ?></h3>
+        <h3>Curso: <?= $this->FormatarNome($usuario->curso) ?></h3>
+        <table class="tabela" name="<?= $this->FormatarNome($usuario->nome) ?>">
             <thead>
                 <tr>
                     <td width="">Nome da Palestra</td>
@@ -54,12 +54,12 @@
                     <td width="">Fim Previsto</td>
                     <td width="">Início Real</td>
                     <td width="">Fim Real</td>
-                    <td width="">Entrada do Ouvinte</td>
-                    <td width="">Saída do Ouvinte</td>
+                    <td width="">Entrada do Usuario</td>
+                    <td width="">Saída do Usuario</td>
                     <td width="">Tempo de Permanência</td>
                 </tr>
             </thead>
-            <? $sessoes = $ouvinte->findDependentRowset('Application_Model_DbTable_Sessao') ?>
+            <? $sessoes = $usuario->findDependentRowset('Application_Model_DbTable_Sessao') ?>
             <? foreach ($sessoes as $sessao): ?>
                 <? $palestra = $sessao->findDependentRowset('Application_Model_DbTable_Palestra')->current(); ?>
                 <tbody>

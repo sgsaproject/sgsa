@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_FiltroOuvinte extends Zend_Form {
+class Application_Form_FiltroUsuario extends Zend_Form {
 
     public function init() {
 

@@ -8,9 +8,11 @@ class PermissaoTest extends PHPUnit_Framework_TestCase
         parent::setUp();
     }
     
+    /* @var $usuario Application_Model_Usuario */
     public function testDeletar() {
         $usuarioDAO = new Application_Model_DbTable_Usuario();
         $usuario = $usuarioDAO->createRow();
+        $usuario->setCodigoBarras(74987);
         $usuario->setIdTipoUsuario(1);
         $idUsuario = $usuario->save();
         
@@ -33,6 +35,7 @@ class PermissaoTest extends PHPUnit_Framework_TestCase
         $usuarioDAO = new Application_Model_DbTable_Usuario();
         $usuario = $usuarioDAO->createRow();
         $usuario->setIdTipoUsuario(1);
+        $usuario->setCodigoBarras(74917);
         $idUsuario = $usuario->save();
         
         $palestraDAO = new Application_Model_DbTable_Palestra();
@@ -53,6 +56,7 @@ class PermissaoTest extends PHPUnit_Framework_TestCase
         $usuarioDAO = new Application_Model_DbTable_Usuario();
         $usuario = $usuarioDAO->createRow();
         $usuario->setIdTipoUsuario(1);
+        $usuario->setCodigoBarras(74981);
         $idUsuario = $usuario->save();
         
         $palestraDAO = new Application_Model_DbTable_Palestra();

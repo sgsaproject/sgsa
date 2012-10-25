@@ -57,22 +57,22 @@ class Sistema_Model_UtilsTest extends PHPUnit_Framework_TestCase {
         $this->email = $email;
     }
 
-    public function testSetAttributesOuvinte() {
+    public function testSetAttributesUsuario() {
         $dados = array('nome' => 'Thiago Cassio Krug',
             'rg' => '3093746001',
             'email' => 'thiagockrug@gmail.com',
             'curso' => 'Engenharia de Software',
             'instituicao' => 'Unipampa');
         
-        $ouvinteDAO = new Application_Model_DbTable_Ouvinte();
-        $ouvinte = $ouvinteDAO->createRow();
-        $ouvinte->setAttributes($dados);
+        $usuarioDAO = new Application_Model_DbTable_Usuario();
+        $usuario = $usuarioDAO->createRow();
+        $usuario->setAttributes($dados);
         
-        $this->assertEquals($ouvinte->getNome(), $dados['nome']);
-        $this->assertEquals($ouvinte->getRg(), $dados['rg']);
-        $this->assertEquals($ouvinte->getEmail(), $dados['email']);
-        $this->assertEquals($ouvinte->getCurso(), $dados['curso']);
-        $this->assertEquals($ouvinte->getInstituicao(), $dados['instituicao']);
+        $this->assertEquals($usuario->getNome(), $dados['nome']);
+        $this->assertEquals($usuario->getRg(), $dados['rg']);
+        $this->assertEquals($usuario->getEmail(), $dados['email']);
+        $this->assertEquals($usuario->getCurso(), $dados['curso']);
+        $this->assertEquals($usuario->getInstituicao(), $dados['instituicao']);
     }
 
 }

@@ -1,4 +1,4 @@
-<h2>Palestras Ouvintes</h2>
+<h2>Palestras Usuarios</h2>
 <br />
 <script type="text/javascript">
     /*function imprimir(){
@@ -37,8 +37,8 @@
 <? // $sessoes = $palestra->findDependentRowset('Application_Model_DbTable_Sessao') ?>
 <? // foreach ($sessoes as $sessao): ?>
                     <ul>
-<? // $ouvinte = $sessao->findDependentRowset('Application_Model_DbTable_Ouvinte')->current(); ?>
-                        <li><? //= $ouvinte->nome  ?> - Instituição: <? //= $ouvinte->instituicao  ?> - Curso: <? //= $ouvinte->curso  ?> - Data Entrada: <? //= $this->formatarDataHora($sessao->hora_entrada)  ?> - Data Saída: <? //= $this->formatarDataHora($sessao->hora_saida)  ?> - Tempo de permanência: <? //= $this->CalcularTempo($sessao->hora_entrada, $sessao->hora_saida)  ?></li>
+<? // $usuario = $sessao->findDependentRowset('Application_Model_DbTable_Usuario')->current(); ?>
+                        <li><? //= $usuario->nome  ?> - Instituição: <? //= $usuario->instituicao  ?> - Curso: <? //= $usuario->curso  ?> - Data Entrada: <? //= $this->formatarDataHora($sessao->hora_entrada)  ?> - Data Saída: <? //= $this->formatarDataHora($sessao->hora_saida)  ?> - Tempo de permanência: <? //= $this->CalcularTempo($sessao->hora_entrada, $sessao->hora_saida)  ?></li>
                     </ul>
 <? // endforeach; ?>
             </li>
@@ -65,12 +65,12 @@
             </thead>
             <? $sessoes = $palestra->findDependentRowset('Application_Model_DbTable_Sessao') ?>
             <? foreach ($sessoes as $sessao): ?>
-                <? $ouvinte = $sessao->findDependentRowset('Application_Model_DbTable_Ouvinte')->current(); ?>
+                <? $usuario = $sessao->findDependentRowset('Application_Model_DbTable_Usuario')->current(); ?>
                 <tbody>
                     <tr>
-                        <td><?= $ouvinte->nome ?></td>
-                        <td><?= $ouvinte->instituicao ?></td>
-                        <td><?= $ouvinte->curso ?></td>
+                        <td><?= $usuario->nome ?></td>
+                        <td><?= $usuario->instituicao ?></td>
+                        <td><?= $usuario->curso ?></td>
                         <td><?= $this->formatarDataHora($sessao->hora_entrada) ?></td>
                         <td><?= $this->formatarDataHora($sessao->hora_saida) ?></td>
                         <td><?= $this->CalcularTempo($sessao->hora_entrada, $sessao->hora_saida) ?></td>

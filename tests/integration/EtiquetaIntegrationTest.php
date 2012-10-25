@@ -14,7 +14,7 @@ class EtiquetaIntegrationTest extends PHPUnit_Framework_TestCase {
         $etiqueta->N();
         $etiqueta->Z('B');
         $etiqueta->Q(122, 16);
-        $etiqueta->A(50, 150, 0, 4, 1, 1, 'N', 'NOME Do ouvinte Fica AQUI');
+        $etiqueta->A(50, 150, 0, 4, 1, 1, 'N', 'NOME Do usuario Fica AQUI');
         $etiqueta->B(100, 450, 0, 3, 5, 11, 50, 'B', '12345');
         $etiqueta->P1(1);
 
@@ -22,7 +22,7 @@ class EtiquetaIntegrationTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('N\n', $etiqueta->getTexto()[1]);
         $this->assertEquals('ZB\n', $etiqueta->getTexto()[2]);
         $this->assertEquals('Q122,16\n', $etiqueta->getTexto()[3]);
-        $this->assertEquals('A50,150,0,4,1,1,N,"NOME Do ouvinte Fica AQUI"\n', $etiqueta->getTexto()[4]);
+        $this->assertEquals('A50,150,0,4,1,1,N,"NOME Do usuario Fica AQUI"\n', $etiqueta->getTexto()[4]);
         $this->assertEquals('B100,450,0,3,5,11,50,B,"12345"\n', $etiqueta->getTexto()[5]);
         $this->assertEquals('P1\n', $etiqueta->getTexto()[6]);
 

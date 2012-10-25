@@ -1,9 +1,9 @@
 <br />
 <div class="box-topo">
-    <h2>Ouvintes na sala</h2>
+    <h2>Usuarios na sala</h2>
 </div>
-<div class="tabela" id="tabela-ouvintes">
-    <table class="tabela" name="ouvintes">
+<div class="tabela" id="tabela-usuarios">
+    <table class="tabela" name="usuarios">
 
         <thead>
             <tr>
@@ -16,10 +16,10 @@
 
         <tbody>
             <? foreach ($this->sessoes as $sessao): ?>
-                <? $ouvinte = $sessao->findDependentRowset('Application_Model_DbTable_Ouvinte')->current() ?>
+                <? $usuario = $sessao->findDependentRowset('Application_Model_DbTable_Usuario')->current() ?>
                 <tr>
-                    <td><?= $ouvinte->codigo_barras ?></td>
-                    <td><?= $ouvinte->nome ?></td>
+                    <td><?= $usuario->codigo_barras ?></td>
+                    <td><?= $usuario->nome ?></td>
                     <td style="color:green;"><?=$this->FormatarHora($sessao->hora_entrada) ?></td>
                     <td style="color:red;"><?= $this->FormatarHora($sessao->hora_saida) ?></td>
                 </tr>
@@ -32,5 +32,5 @@
 
 </div>
 <div class="box-footer">
-    <span class="txt_pequeno txt_light">No momento estão <?= count($this->sessoes) ?> ouvintes na sala.</span>
+    <span class="txt_pequeno txt_light">No momento estão <?= count($this->sessoes) ?> usuarios na sala.</span>
 </div>

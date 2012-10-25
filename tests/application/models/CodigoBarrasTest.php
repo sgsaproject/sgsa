@@ -18,12 +18,13 @@ class CodigoBarrasTest extends PHPUnit_Framework_TestCase {
         $this->assertSame(strlen($codigoBarras), 5);
     }
     
-    /*@var $ouvinte Application_Model_Ouvinte*/
+    /*@var $usuario Application_Model_Usuario*/
     public function testExisteCodigoBarras() {
-        $ouvinteDAO = new Application_Model_DbTable_Ouvinte();
-        $ouvinte = $ouvinteDAO->createRow();
-        $ouvinte->setCodigoBarras(12345);
-        $ouvinte->save();
+        $usuarioDAO = new Application_Model_DbTable_Usuario();
+        $usuario = $usuarioDAO->createRow();
+        $usuario->setCodigoBarras(12345);
+        $usuario->setIdTipoUsuario(1);
+        $usuario->save();
         
         $codigoBarrasModel = new Application_Model_CodigoBarra();
         $existeCodigoBarras = $codigoBarrasModel->existeCodigoBarras(12345);
@@ -31,10 +32,10 @@ class CodigoBarrasTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue($existeCodigoBarras);
     }
     
-    /*@var $ouvinte Application_Model_Ouvinte*/
+    /*@var $usuario Application_Model_Usuario*/
     public function testNaoExisteCodigoBarras() {
-        $ouvinteDAO = new Application_Model_DbTable_Ouvinte();
-        $ouvinteDAO->delete('codigo_barras = 12345');
+        $usuarioDAO = new Application_Model_DbTable_Usuario();
+        $usuarioDAO->delete('codigo_barras = 12345');
         
         $codigoBarrasModel = new Application_Model_CodigoBarra();
         $existeCodigoBarras = $codigoBarrasModel->existeCodigoBarras(12345);

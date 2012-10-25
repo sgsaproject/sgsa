@@ -2,7 +2,7 @@
 
 class Application_Model_Sessao extends Zend_Db_Table_Row_Abstract
 {
-    private $ouvinte;
+    private $usuario;
     private $palestra;
     
     public function getId() {
@@ -13,25 +13,25 @@ class Application_Model_Sessao extends Zend_Db_Table_Row_Abstract
         $this->id_sessao = $idSessao;
     }
     
-    public function getIdOuvinte() {
-        return $this->id_ouvinte;
+    public function getIdUsuario() {
+        return $this->id_usuario;
     }
     
-    public function setIdOuvinte($idOuvinte) {
-        return $this->id_ouvinte = $idOuvinte;
+    public function setIdUsuario($idUsuario) {
+        return $this->id_usuario = $idUsuario;
     }
     
-    public function getOuvinte() {
-        if (is_null($this->ouvinte)) {
-            $ouvinteDAO = new Application_Model_DbTable_Ouvinte();
-            $this->ouvinte = $ouvinteDAO->getOuvinteById($this->id_ouvinte);
+    public function getUsuario() {
+        if (is_null($this->usuario)) {
+            $usuarioDAO = new Application_Model_DbTable_Usuario();
+            $this->usuario = $usuarioDAO->getUsuarioById($this->id_usuario);
         }
-        return $this->ouvinte;
+        return $this->usuario;
     }
     
-    public function setOuvinte(Application_Model_Ouvinte $ouvinte) {
-        $this->ouvinte = $ouvinte;
-        $this->id_ouvinte = $ouvinte->getId();
+    public function setUsuario(Application_Model_Usuario $usuario) {
+        $this->usuario = $usuario;
+        $this->id_usuario = $usuario->getId();
     }
 
     public function getIdPalestra() {

@@ -37,23 +37,23 @@ class Application_Model_WebService {
     }
 
     /**
-     * Retorna uma lista de ouvintes
+     * Retorna uma lista de usuarios
      * @param string $token
-     * @return array ouvintes
+     * @return array usuarios
      */
-    public function getOuvintes($token) {
+    public function getUsuarios($token) {
         try {
             $this->checkToken($token);
-            $ouvinteDbTable = new Application_Model_DbTable_Ouvinte();
-            $ouvinteRowSet = $ouvinteDbTable->fetchAll();
-            $ouvintes = array();
-            foreach ($ouvinteRowSet as $ouvinteRow) {
-                $ouvinte = new stdClass();
-                $ouvinte->nome = $ouvinteRow->nome;
-                $ouvinte->codigo_barras = $ouvinteRow->codigo_barras;
-                $ouvintes[] = $ouvinte;
+            $usuarioDbTable = new Application_Model_DbTable_Usuario();
+            $usuarioRowSet = $usuarioDbTable->fetchAll();
+            $usuarios = array();
+            foreach ($usuarioRowSet as $usuarioRow) {
+                $usuario = new stdClass();
+                $usuario->nome = $usuarioRow->nome;
+                $usuario->codigo_barras = $usuarioRow->codigo_barras;
+                $usuarios[] = $usuario;
             }
-            return $ouvintes;
+            return $usuarios;
         } catch (Exception $e) {
             return array($e->getMessage(), $e->getCode());
         }

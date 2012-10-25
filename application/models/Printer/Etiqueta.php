@@ -106,7 +106,7 @@ class Application_Model_Printer_Etiqueta extends Application_Model_Printer_Abstr
      */
     public function A($p1, $p2, $p3, $p4, $p5, $p6, $p7, $data) {
         parent::adicionarTexto('A' . $p1 . ',' . $p2 . ',' . $p3 . ',' . $p4 . ',' . $p5 . ',' . $p6 . ',' . $p7 . ',"' . $data . '"\n');
-        // exemplo de como fica: "A50,150,0,4,1,1,N,\"NOME DO ouvinte FICA AQUI\"\n"
+        // exemplo de como fica: "A50,150,0,4,1,1,N,\"NOME DO usuario FICA AQUI\"\n"
     }
 
     /**

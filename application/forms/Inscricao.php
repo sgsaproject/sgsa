@@ -28,7 +28,7 @@ class Application_Form_Inscricao extends Zend_Form {
         $this->addElement($rg);
 
         
-        $validator = new Zend_Validate_Db_NoRecordExists('ouvinte', 'email'); // ouvintes is the table name, and email is the column
+        $validator = new Zend_Validate_Db_NoRecordExists('usuario', 'email'); // usuarios is the table name, and email is the column
         $validator->setMessage("Erro: Já foi feita uma inscrição neste email.");
 
         $email = new Zend_Form_Element_Text('email');

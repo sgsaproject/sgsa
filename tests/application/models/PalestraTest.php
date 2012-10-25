@@ -97,6 +97,7 @@ class PalestraTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals("2012-02-01 20:00:00", $palestra->hora_fim);
     }
 
+    /* @var $usuario Application_Model_Usuario */
     public function testGetUsuariosComPermissao() {
         $palestraDAO = new Application_Model_DbTable_Palestra();
         $palestra = $palestraDAO->createRow();
@@ -106,6 +107,7 @@ class PalestraTest extends PHPUnit_Framework_TestCase {
         for ($i = 0; $i < $num; $i++) {
             $usuarioDAO = new Application_Model_DbTable_Usuario();
             $usuario = $usuarioDAO->createRow();
+            $usuario->setCodigoBarras((12220 + $i));
             $usuario->setIdTipoUsuario(1);
             $idUsuario = $usuario->save();
 
@@ -122,16 +124,18 @@ class PalestraTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testGetSessoes() {
-        $ouvinteDAO = new Application_Model_DbTable_Ouvinte();
-        $ouvinte = $ouvinteDAO->createRow();
-        $ouvinte->setNome("Catanduva Moreira");
-        $ouvinte->setCodigoBarras(31246);
-        $ouvinte->save();
+        $usuarioDAO = new Application_Model_DbTable_Usuario();
+        $usuario = $usuarioDAO->createRow();
+        $usuario->setNome("Catanduva Moreira");
+        $usuario->setIdTipoUsuario(1);
+        $usuario->setCodigoBarras(31246);
+        $usuario->save();
         
-        $ouvinte2 = $ouvinteDAO->createRow();
-        $ouvinte2->setNome("Perneta da Tijuca");
-        $ouvinte2->setCodigoBarras(23451);
-        $ouvinte2->save();
+        $usuario2 = $usuarioDAO->createRow();
+        $usuario2->setNome("Perneta da Tijuca");
+        $usuario2->setIdTipoUsuario(1);
+        $usuario2->setCodigoBarras(23451);
+        $usuario2->save();
         
         $palestraDAO = new Application_Model_DbTable_Palestra();
         $palestra = $palestraDAO->createRow();
@@ -140,14 +144,14 @@ class PalestraTest extends PHPUnit_Framework_TestCase {
         
         $sessaoDAO = new Application_Model_DbTable_Sessao();
         $sessao1 = $sessaoDAO->createRow();
-        $sessao1->setOuvinte($ouvinte);
+        $sessao1->setUsuario($usuario);
         $sessao1->setPalestra($palestra);
         $sessao1->setHoraEntrada("30/07/2012 08:01:52");
         $sessao1->setHoraSaida("30/07/2012 09:56:31");
         $idSessao1 = $sessao1->save();
         
         $sessao2 = $sessaoDAO->createRow();
-        $sessao2->setOuvinte($ouvinte2);
+        $sessao2->setUsuario($usuario2);
         $sessao2->setPalestra($palestra);
         $sessao2->setHoraEntrada("30/07/2012 08:02:01");
         $sessao2->setHoraSaida("30/07/2012 09:56:40");
@@ -162,13 +166,13 @@ class PalestraTest extends PHPUnit_Framework_TestCase {
             //$this->assertInstanceOf('Application_Model_Sessao', $sessao);
                 
             if ($sessao->getId() == $idSessao1) {
-                $this->assertEquals($sessao1->getOuvinte(), $sessao->getOuvinte());
+                $this->assertEquals($sessao1->getUsuario(), $sessao->getUsuario());
                 $this->assertEquals($sessao1->getPalestra()->getNomePalestra(), $sessao->getPalestra()->getNomePalestra());
                 $this->assertEquals($sessao1->getHoraEntrada(), $sessao->getHoraEntrada());
                 $this->assertEquals($sessao1->getHoraSaida(), $sessao->getHoraSaida());
                 
             } else if ($sessao->getId() == $idSessao2) {
-                $this->assertEquals($sessao2->getOuvinte(), $sessao->getOuvinte());
+                $this->assertEquals($sessao2->getUsuario(), $sessao->getUsuario());
                 $this->assertEquals($sessao2->getPalestra()->getNomePalestra(), $sessao->getPalestra()->getNomePalestra());
                 $this->assertEquals($sessao2->getHoraEntrada(), $sessao->getHoraEntrada());
                 $this->assertEquals($sessao2->getHoraSaida(), $sessao->getHoraSaida());

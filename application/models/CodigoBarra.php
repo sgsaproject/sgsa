@@ -3,9 +3,9 @@
 class Application_Model_CodigoBarra {
 
     public function existeCodigoBarras($codigo) {
-        $ouvinteDbTable = new Application_Model_DbTable_Ouvinte();
-        $select = $ouvinteDbTable->select()->where('codigo_barras = ?', $codigo);
-        $row = $ouvinteDbTable->fetchRow($select);
+        $usuarioDbTable = new Application_Model_DbTable_Usuario();
+        $select = $usuarioDbTable->select()->where('codigo_barras = ?', $codigo);
+        $row = $usuarioDbTable->fetchRow($select);
         if (is_null($row)) {
             return false;
         } else {
@@ -15,7 +15,7 @@ class Application_Model_CodigoBarra {
 
     public function gerarCodigoBarras() {
         do {
-            //gera o numero de codigo de barras do ouvinte
+            //gera o numero de codigo de barras do usuario
             $codigoBarras = '';
             $numeros = range(0, 9);
             for ($index = 0; $index < 5; $index++) {

@@ -38,7 +38,7 @@ class Sistema_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract {
         $acl->deny('colaborador', 'admin');
         $acl->allow('colaborador', 'admin', array('login', 'sair', 'acesso-negado',
             'palestras', 'gerenciar-palestra', 'index', 'iniciar-palestra', 'finalizar-palestra', 'tempo-corrente',
-            'registrar-ouvinte-palestra', 'ouvintes', 'ver-dados-ouvinte','ouvintes-palestra'
+            'registrar-usuario-palestra', 'usuarios', 'ver-dados-usuario','usuarios-palestra'
         ));
 
         //Organizador
@@ -47,7 +47,7 @@ class Sistema_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract {
         $acl->deny('organizador', 'admin');
         $acl->allow('organizador', 'admin', array('login', 'sair', 'acesso-negado',
             'palestras', 'gerenciar-palestra', 'index', 'iniciar-palestra', 'finalizar-palestra', 'tempo-corrente',
-            'registrar-ouvinte-palestra', 'ouvintes', 'ver-dados-ouvinte','ouvintes-palestra','adicionar-fiscal-palestra',
+            'registrar-usuario-palestra', 'usuarios', 'ver-dados-usuario','usuarios-palestra','adicionar-fiscal-palestra',
             'apagar-fiscal'
         ));
         

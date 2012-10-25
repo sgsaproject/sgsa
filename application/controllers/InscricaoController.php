@@ -20,14 +20,14 @@ class InscricaoController extends Zend_Controller_Action {
                 //pega os dados do post do formulario
                 $dados = $inscricao->getValues();
                 //Inicia o modelo, insere os dados e redireciona
-                $ouvinteModel = new Application_Model_DbTable_Ouvinte();
+                $usuarioModel = new Application_Model_DbTable_Usuario();
                 $codigoBarras = new Application_Model_CodigoBarra();
-                /*@var $ouvinte Application_Model_Ouvinte*/
-                $ouvinte = $ouvinteModel->createRow();
-                $ouvinte->setCodigoBarras($codigoBarras->gerarCodigoBarras());
-                $ouvinte->setAttributes($dados);
-                $ouvinte->save();
-                $ouvinte->enviarEmailConfirmacao();
+                /*@var $usuario Application_Model_Usuario*/
+                $usuario = $usuarioModel->createRow();
+                $usuario->setCodigoBarras($codigoBarras->gerarCodigoBarras());
+                $usuario->setAttributes($dados);
+                $usuario->save();
+                $usuario->enviarEmailConfirmacao();
 
                 $this->_redirect('/inscricao/sucesso');
             }

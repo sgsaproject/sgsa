@@ -107,27 +107,27 @@ class IndexController extends Zend_Controller_Action {
         $pdf->resetColumns();
 
         $pdf->setEqualColumns(3, 100);
-        $ouvintesModel = new Application_Model_DbTable_Ouvinte();
+        $usuariosModel = new Application_Model_DbTable_Usuario();
         $tipo = $this->getRequest()->getParam('tipo');
         if ($tipo == 'naoimpresso') {
-            $ouvintes = $ouvintesModel->getOuvintesNaoImpresso();
+            $usuarios = $usuariosModel->getUsuariosNaoImpresso();
         } else if ($tipo == 'impresso') {
-            $ouvintes = $ouvintesModel->getOuvintesImpresso();
+            $usuarios = $usuariosModel->getUsuariosImpresso();
         }
 
-        foreach ($ouvintes as $ouvinte) {
+        foreach ($usuarios as $usuario) {
             $style['position'] = 'C';
-            $pdf->Write(1, $this->view->FormatarNome($ouvinte->nome), '', '', 'C', true);
-            $pdf->Write(6, $this->view->FormatarNome($ouvinte->instituicao), '', '', 'C', true);
-            $pdf->Write(6, $this->view->FormatarNome($ouvinte->curso), '', '', 'C', true);
-            $pdf->write1DBarcode($ouvinte->codigo_barras, 'C39', '', '', '', 0, 0.4, $style, 'T');
+            $pdf->Write(1, $this->view->FormatarNome($usuario->nome), '', '', 'C', true);
+            $pdf->Write(6, $this->view->FormatarNome($usuario->instituicao), '', '', 'C', true);
+            $pdf->Write(6, $this->view->FormatarNome($usuario->curso), '', '', 'C', true);
+            $pdf->write1DBarcode($usuario->codigo_barras, 'C39', '', '', '', 0, 0.4, $style, 'T');
             $pdf->Ln(25);
         }
 
         if ($tipo == 'naoimpresso') {
-            foreach ($ouvintes as $ouvinte) {
-                $ouvinte->impresso = 1;
-                $ouvinte->save();
+            foreach ($usuarios as $usuario) {
+                $usuario->impresso = 1;
+                $usuario->save();
             }
         }
 
@@ -139,20 +139,20 @@ class IndexController extends Zend_Controller_Action {
         $row = $emailPendenteModel->getEmail();
         if (!is_null($row)) {
 
-            $ouvinteModel = new Application_Model_DbTable_Ouvinte();
-            $ouvinte = $ouvinteModel->find($row->id_ouvinte)->current();
-            echo $row->id_ouvinte . '<br/>';
-            echo 'Ouvinte: ' . $ouvinte->nome . ' email: ' . $ouvinte->email . '<br/>';
+            $usuarioModel = new Application_Model_DbTable_Usuario();
+            $usuario = $usuarioModel->find($row->id_usuario)->current();
+            echo $row->id_usuario . '<br/>';
+            echo 'Usuario: ' . $usuario->nome . ' email: ' . $usuario->email . '<br/>';
 
             $msg = $this->view->partial('/layout/templates/emailConfirmacao.phtml', array(
-                'nome' => $ouvinte->nome
+                'nome' => $usuario->nome
                     ));
 
             try {
                 $mail = new Zend_Mail('utf-8');
                 $mail->setFrom('saadmlivramento@gmail.com')
                         ->setReplyTo('saadmlivramento@gmail.com')
-                        ->addTo($ouvinte->email)
+                        ->addTo($usuario->email)
                         ->setBodyHtml($msg)
                         ->setSubject('Inscrição Semana Acadêmica 2011')
                         ->send(Zend_Registry::get('transport'));

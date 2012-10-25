@@ -13,47 +13,49 @@ class SessaoTest extends PHPUnit_Framework_TestCase {
         //$this->assertInstanceOf('Application_Model_Sessao', $sessao);
     }
     
-    public function testGetOuvinte() {
-        $ouvinteDAO = new Application_Model_DbTable_Ouvinte();
-        $ouvinte = $ouvinteDAO->createRow();
-        $ouvinte->setNome("Rafael Tavares Amorim");
-        $ouvinte->setRg(12345678);
-        $ouvinte->setEmail("zend@gmail.com");
-        $ouvinte->setCurso("Engenharia de softs");
-        $ouvinte->setInstituicao("Unipampa - Alegrete");
-        $ouvinte->setCodigoBarras(11111);
-        $id = $ouvinte->save();
+    /* @var $usuario Application_Model_Usuario */
+    public function testGetUsuario() {
+        $usuarioDAO = new Application_Model_DbTable_Usuario();
+        $usuario = $usuarioDAO->createRow();
+        $usuario->setNome("Rafael Tavares Amorim");
+        $usuario->setRg(12345678);
+        $usuario->setEmail("zend@gmail.com");
+        $usuario->setCurso("Engenharia de softs");
+        $usuario->setInstituicao("Unipampa - Alegrete");
+        $usuario->setCodigoBarras(11111);
+        $usuario->setIdTipoUsuario(1);
+        $id = $usuario->save();
         
         $sessaoDAO = new Application_Model_DbTable_Sessao();
         $sessao = $sessaoDAO->createRow();
-        $sessao->setIdOuvinte($id);
-        $ouvinte2 = $sessao->getOuvinte();
+        $sessao->setIdUsuario($id);
+        $usuario2 = $sessao->getUsuario();
         
-        $this->assertNotNull($ouvinte2);
-        //$this->assertInstanceOf('Zend_Db_Table_Row_Abstract', $ouvinte2);
-        //$this->assertInstanceOf('Application_Model_Ouvinte', $ouvinte2);
-        $this->assertEquals($id, $ouvinte2->getId());
+        $this->assertNotNull($usuario2);
+        //$this->assertInstanceOf('Zend_Db_Table_Row_Abstract', $usuario2);
+        //$this->assertInstanceOf('Application_Model_Usuario', $usuario2);
+        $this->assertEquals($id, $usuario2->getId());
     }
     
-    public function testSetOuvinte() {
-        $ouvinteDAO = new Application_Model_DbTable_Ouvinte();
-        $ouvinte = $ouvinteDAO->createRow();
-        $ouvinte->setNome("Marcelo Maia Lopes");
-        $ouvinte->setRg(87654321);
-        $ouvinte->setEmail("minero.safado@gmail.com");
-        $ouvinte->setCurso("Engenharia de Softs");
-        $ouvinte->setInstituicao("Unipampa - Alegretchê!");
-        $ouvinte->setCodigoBarras(22222);
+    public function testSetUsuario() {
+        $usuarioDAO = new Application_Model_DbTable_Usuario();
+        $usuario = $usuarioDAO->createRow();
+        $usuario->setNome("Marcelo Maia Lopes");
+        $usuario->setRg(87654321);
+        $usuario->setEmail("minero.safado@gmail.com");
+        $usuario->setCurso("Engenharia de Softs");
+        $usuario->setInstituicao("Unipampa - Alegretchê!");
+        $usuario->setCodigoBarras(22222);
         
         $sessaoDAO = new Application_Model_DbTable_Sessao();
         $sessao = $sessaoDAO->createRow();
-        $sessao->setOuvinte($ouvinte);
-        $ouvinte2 = $sessao->getOuvinte();
+        $sessao->setUsuario($usuario);
+        $usuario2 = $sessao->getUsuario();
         
-        $this->assertNotNull($ouvinte2);
-        //$this->assertInstanceOf('Zend_Db_Table_Row_Abstract', $ouvinte2);
-        //$this->assertInstanceOf('Application_Model_Ouvinte', $ouvinte2);
-        $this->assertEquals($ouvinte, $ouvinte2);
+        $this->assertNotNull($usuario2);
+        //$this->assertInstanceOf('Zend_Db_Table_Row_Abstract', $usuario2);
+        //$this->assertInstanceOf('Application_Model_Usuario', $usuario2);
+        $this->assertEquals($usuario, $usuario2);
     }
     
     public function testGetPalestra() {
