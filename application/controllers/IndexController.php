@@ -7,11 +7,6 @@ class IndexController extends Zend_Controller_Action {
     }
 
     public function indexAction() {
-        $userDbTable = new Application_Model_DbTable_Usuario();
-        $select = $userDbTable->select()
-                ->where('login = ?', 'jose')
-                ->where('senha = ?', '123');
-        $user = $userDbTable->fetchRow($select);
     }
 
     public function gerarCodigoBarrasAction() {
