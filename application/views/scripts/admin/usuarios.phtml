@@ -56,5 +56,8 @@
 <div class="box-footer">
     <span class="txt_pequeno txt_light">Existem <?=count($this->usuarios)?> usuarios cadastrados no sistema.</span>
     <br />
-    <span class="txt_pequeno txt_light" style="font-weight: bold;"><?=empty($this->filtro) ? '':'Filtrado por '.$this->filtro?></span>
+    <?if(empty($this->filtro) == false):?>
+        <span class="txt_pequeno txt_light" style="font-weight: bold;"><?=empty($this->filtro) ? '':'Filtrado por '.$this->filtro?></span>
+        <span class="txt_pequeno txt_light" style="font-weight: bold;"><a href="<?=$this->baseUrl('/admin/usuarios')?>">Remover Filtro</a></span>
+    <?endif;?>
 </div>
