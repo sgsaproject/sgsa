@@ -35,7 +35,7 @@ resources.db.params.charset = "utf8"
 resources.mail.transport.register = true
 resources.mail.defaultfrom.email = "sacta@sacta.com"
 ; resources.mail.defaultfrom.name = <NAME>
-; resources.mail.defaultreplyTo.email = <EMAIL>
+resources.mail.defaultreplyTo.email = "sacta@sacta.com"
 ; resources.mail.defaultreplyTo.name = <NAME>
 ; 
 ;
