@@ -267,7 +267,7 @@ class AdminController extends Zend_Controller_Action {
         $usuariosModel = new Application_Model_DbTable_Usuario();
 
         switch ($filtro) {
-            case 'nao-pago':
+            case 'naopago':
                 $this->view->usuarios = $usuariosModel->getUsuariosNaoPagos();
                 $this->view->filtro = 'Usuarios Não Pagos';
                 break;
