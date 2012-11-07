@@ -27,10 +27,10 @@ class AdminController extends Zend_Controller_Action {
                 $authAdapter = new Zend_Auth_Adapter_DbTable(
                                 $db,
                                 'usuario',
-                                'usuario',
+                                'email',
                                 'senha');
 
-                $authAdapter->setIdentity($dados['usuario']);
+                $authAdapter->setIdentity($dados['email']);
                 $authAdapter->setCredential($dados['senha']);
 
                 $result = $authAdapter->authenticate();
@@ -38,7 +38,7 @@ class AdminController extends Zend_Controller_Action {
 
                     $auth = Zend_Auth::getInstance();
                     $storage = $auth->getStorage();
-                    $storage->write($authAdapter->getResultRowObject(array('id_usuario', 'nome', 'usuario', 'email', 'id_tipo_usuario')));
+                    $storage->write($authAdapter->getResultRowObject(array('id_usuario', 'nome', 'email', 'id_tipo_usuario')));
                 } else {
 
                     $this->view->error = "Usuário ou senha incorreta!";

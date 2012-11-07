@@ -17,7 +17,7 @@ class WebServiceTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testGetToken(){
-        $this->token = $this->webservice->getToken('admin', 'admin');
+        $this->token = $this->webservice->getToken('admin@admin.com', 'admin');
         $this->assertEquals(strlen($this->token), 10);
         
     }
@@ -36,7 +36,7 @@ class WebServiceTest extends PHPUnit_Framework_TestCase {
     }
     
     private function getToken(){
-        $this->token = $this->webservice->getToken('admin', 'admin');
+        $this->token = $this->webservice->getToken('admin@admin.com', 'admin');
     }
 }
 

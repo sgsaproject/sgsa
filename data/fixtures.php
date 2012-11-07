@@ -10,7 +10,7 @@ $db->insert('tipo_usuario', array('id_tipo_usuario' => 2, 'nome' => 'Colaborador
 $db->insert('tipo_usuario', array('id_tipo_usuario' => 3, 'nome' => 'Administrador', 'alias' => 'administrador'));
 $db->insert('tipo_usuario', array('id_tipo_usuario' => 4, 'nome' => 'Participante', 'alias' => 'participante'));
 
-$db->insert('usuario', array('nome' => 'Administrador', 'senha' => 'admin', 'codigo_barras' => '', 'id_tipo_usuario' => 3));
+$db->insert('usuario', array('nome' => 'Administrador', 'email' => 'admin@admin.com', 'senha' => 'admin', 'codigo_barras' => '', 'id_tipo_usuario' => 3));
 
 if (APPLICATION_ENV == 'development' || APPLICATION_ENV == 'testing'):
     
