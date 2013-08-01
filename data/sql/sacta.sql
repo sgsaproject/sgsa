@@ -1,6 +1,6 @@
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 
 -- -----------------------------------------------------
@@ -68,7 +68,7 @@ CREATE  TABLE IF NOT EXISTS `sessao` (
   `hora_saida` DATETIME NULL ,
   PRIMARY KEY (`id_sessao`) ,
   INDEX `fk_sessao_palestra2_idx` (`id_palestra` ASC) ,
-  INDEX `fk_sessao_usuario1` (`id_usuario` ASC) ,
+  INDEX `fk_sessao_usuario1_idx` (`id_usuario` ASC) ,
   CONSTRAINT `fk_sessao_palestra2`
     FOREIGN KEY (`id_palestra` )
     REFERENCES `palestra` (`id_palestra` )
@@ -129,6 +129,43 @@ CREATE  TABLE IF NOT EXISTS `Token` (
   CONSTRAINT `fk_Token_usuario1`
     FOREIGN KEY (`id_usuario` )
     REFERENCES `usuario` (`id_usuario` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `forma_pagamento`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `forma_pagamento` (
+  `id_forma_pagamento` INT NOT NULL AUTO_INCREMENT ,
+  `descricao` VARCHAR(50) NULL ,
+  PRIMARY KEY (`id_forma_pagamento`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `pagamento`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `pagamento` (
+  `id_pagamento` INT NOT NULL AUTO_INCREMENT ,
+  `valor` DECIMAL(10,2) NULL ,
+  `data` DATETIME NULL ,
+  `isento` TINYINT(1) NULL ,
+  `obs` VARCHAR(45) NULL ,
+  `id_usuario` INT NOT NULL ,
+  `id_forma_pagamento` INT NOT NULL ,
+  PRIMARY KEY (`id_pagamento`) ,
+  INDEX `fk_pagamento_usuario1_idx` (`id_usuario` ASC) ,
+  INDEX `fk_pagamento_forma_pagamento1_idx` (`id_forma_pagamento` ASC) ,
+  CONSTRAINT `fk_pagamento_usuario1`
+    FOREIGN KEY (`id_usuario` )
+    REFERENCES `usuario` (`id_usuario` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_pagamento_forma_pagamento1`
+    FOREIGN KEY (`id_forma_pagamento` )
+    REFERENCES `forma_pagamento` (`id_forma_pagamento` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

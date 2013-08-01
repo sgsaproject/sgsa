@@ -1,0 +1,22 @@
+<div id="view-content">
+    <?//= $this->usuario->getNome() ?><br />
+    <div id="pagar">
+        <form method="POST" action>
+            <p>Valor: <input name="valor" type="text" value=""></p>
+            <p>Forma de pagamento: 
+                <select name="formaPagamento">
+                    <? foreach ($this->formasPagamento as $formaPagamento) : ?>
+                        <option><?= $formaPagamento->getDescricao() ?></option>
+                    <? endforeach; ?>
+                </select>
+            </p>
+            <p><input type="submit" value="Pagar"/></p>
+        </form>
+    </div>
+    <div id="isentar">
+        <form method="POST" action>
+            <p>Motivo: <textarea name="motivo" cols="60" rows="10"></textarea></p>
+            <p><input type="submit" value="Isentar"/></p>
+        </form>
+    </div>
+</div>
