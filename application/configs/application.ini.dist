@@ -51,8 +51,8 @@ resources.mail.defaultreplyTo.email = "sacta@sacta.com"
 ; resources.mail.transport.ssl = 'ssl' or 'tls'
 ; resources.mail.transport.port = <PORT>
 
-evento.nome = ""
-evento.ano = ""
+evento.nome = "Semana Acadêmica do Campus Tecnológico de Alegrete"
+evento.ano = "2013"
 
 impressao.servidor.host = "cec-alegrete.com"
 impressao.servidor.port = 5588

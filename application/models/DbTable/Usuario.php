@@ -31,6 +31,12 @@ class Application_Model_DbTable_Usuario extends Zend_Db_Table_Abstract {
                 ->order('nome asc');
         return $this->fetchAll($select);
     }
+    
+    public function getUsuariosOrganizador() {
+        $select = $this->select()->where('id_tipo_usuario = 1')
+                ->order('nome asc');
+        return $this->fetchAll($select);
+    }
 
     public function getUsuarioById($idUsuario) {
         return $this->find($idUsuario)->current();

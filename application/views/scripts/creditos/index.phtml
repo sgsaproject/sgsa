@@ -1,32 +1,40 @@
 <div id="creditos">
-    
+
     <h2>Créditos</h2>
-    
+    <p>O sistema da <?= $this->title ?> foi desenvolvido inteiramente em PHP utilizando o framework de desenvolvimento
+        Zend, MySQL, jQuery e Ajax.</p><br />
+
     <h4>Organizadores</h4>
-    
+    <p><? foreach ($this->organizadores as $organizador): ?>
+            <?= $organizador->getNome() ?> (<?= $organizador->getCurso() ?>) <br />
+        <? endforeach; ?></p>
+
     <h4>Colaboradores</h4>
-    
-    <p>O sistema da Semana Acadêmica 2011 foi desenvolvido inteiramente em PHP utilizando o framework de desenvolvimento
-    Zend, MySQL, jQuery e Ajax.</p>
-    
+    <p><? foreach ($this->colaboradores as $colaboradores): ?>
+            <?= $colaboradores->getNome() ?> (<?= $colaboradores->getCurso() ?>) <br />
+        <? endforeach; ?></p>
+
     <h4>Modelagem</h4>
-    <p>Jeferson Lemes (TA) <br />
-    Thiago Krug (ES) <br />
-    Lucas Capanelli (ES) <br />
-    Thiago Lima (ES) <br />
-    Maicon Venes (EE)<br /></p>
-    
+    <p>Juliano Rodovalho (ES) <br />
+        Maicon Venes (EE) <br />
+        Nasser Othman Rahman (ES) <br />
+        Rafael Tavares Amorim (ES) <br />
+        Thiago Krug (ES) <br /></p>
+
     <h4>Layout</h4>
     <p>Thiago Lima (ES)</p>
-    
+
     <h4>Design de Logo</h4>
-    <p>Lucas Arbiza (CC)</p>
-    
+    <p>Caio Alexandre Moura (CC)</p>
+
     <h4>Banco de Dados</h4>
-    <p>Thiago Krug (ES)</p>
-    
+    <p>Juliano Rodovalho (ES) <br />
+        Nasser Othman Rahman (ES) <br />
+        Rafael Tavares Amorim (ES) <br />
+        Thiago Krug (ES)</p>
+
     <h4>Codificação</h4>
-    <p>Rafael Tavares (ES) <br />
-    Thiago Lima (ES)</p>
-    
+    <p>Rafael Tavares Amorim (ES) <br />
+        Thiago Krug (ES)</p>
+
 </div>

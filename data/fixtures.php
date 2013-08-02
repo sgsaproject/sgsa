@@ -38,6 +38,10 @@ if (APPLICATION_ENV == 'development' || APPLICATION_ENV == 'testing'):
     $db->insert('permissao', array('id_usuario' => 6, 'id_palestra' => 2));
     $db->insert('permissao', array('id_usuario' => 6, 'id_palestra' => 3));
     
+    $db->insert('forma_pagamento', array('descricao' => 'Dinheiro'));
+    $db->insert('forma_pagamento', array('descricao' => 'Cheque'));
+    $db->insert('forma_pagamento', array('descricao' => 'Cartão de Crédito'));
+    
 endif;
 
 if (APPLICATION_ENV == 'staging' || APPLICATION_ENV == 'production'):

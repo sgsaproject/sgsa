@@ -125,15 +125,15 @@ input[type="text"],input[type=password], .inputbox{
 
 #topo {
     width: 980px;
-    height: 172px;
+    height: 203px;
 }
 #topo h1 {
     font: 22px;
     float: left;
     background-image: url("../img/logo.png");
     margin-left: 10px;
-    height: 172px;
-    width: 633px;
+    height: 203px;
+    width: 433px;
 }
 #topo #logoUnipampa {
     float: right;
