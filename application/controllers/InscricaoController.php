@@ -11,6 +11,9 @@ class InscricaoController extends Zend_Controller_Action {
     }
 
     public function inscreverAction() {
+        $configuracaoModel = new Application_Model_DbTable_Configuracao();
+        $this->view->configuracao = $configuracaoModel->find(1)->current();
+        
         $inscricao = new Application_Form_Inscricao();
        
         //verifica se há post

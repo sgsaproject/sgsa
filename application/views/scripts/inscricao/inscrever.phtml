@@ -1,2 +1,6 @@
-<h1>Efetue sua Pré-Inscrição na Semana Acadêmica 2011</h1>
-<?= $this->inscricao ?>
+<h1>Efetue sua Pré-Inscrição na Semana Acadêmica 2013</h1>
+<?if($this->configuracao->inscricoes_abertas == true):?>
+    <?= $this->inscricao ?>
+<?else:?>
+        <p>O período de inscrições não se encontra aberto no momento. </p>
+<?endif;?>

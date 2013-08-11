@@ -127,6 +127,32 @@ class Application_Model_Usuario extends Zend_Db_Table_Row_Abstract {
         }
     }
     
+    public function enviarEmailAtivacao(Zend_Mail_Transport_Abstract $transport = null) {
+        $view = new Zend_View();
+        $view->setScriptPath(APPLICATION_PATH . '/views/scripts');
+        $msg = $view->partial('/layout/templates/emailConfirmacao.phtml', array(
+            'nome' => $this->nome
+                ));
+
+        try {
+            $config = new Zend_Config_Ini(APPLICATION_PATH.'/configs/application.ini', APPLICATION_ENV);
+            
+            $mail = new Zend_Mail('utf-8');
+            $mail->addTo($this->email)
+                    ->setBodyHtml($msg)
+                    ->setSubject('Inscrição na ' . $config->evento->nome . ' de ' . $config->evento->ano)
+                    ->send($transport);
+            
+        } catch (Exception $e) {
+            $date = new Zend_Date();
+            $emailPendenteModel = new Application_Model_DbTable_EmailPendente();
+            $emailPendenteModel->insert(array(
+                'id_usuario' => $this->id_usuario,
+                'data' => $date->get(Sistema_Data::ZEND_DATABASE_DATETIME)
+            ));
+        }
+    }
+    
     public function setSenha($senha) {
         $this->senha = $senha;
     }

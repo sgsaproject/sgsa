@@ -12,6 +12,8 @@ $db->insert('tipo_usuario', array('id_tipo_usuario' => 4, 'nome' => 'Participant
 
 $db->insert('usuario', array('nome' => 'Administrador', 'email' => 'admin@admin.com', 'senha' => 'admin', 'codigo_barras' => '', 'id_tipo_usuario' => 3));
 
+$db->insert('configuracao', array('inscricoes_abertas' => false));
+
 if (APPLICATION_ENV == 'development' || APPLICATION_ENV == 'testing'):
     
     $db->insert('usuario', array('nome' => 'João da Silva', 'email' => 'joaodasilva@sacta.com', 'senha' => '12345', 'rg' => '1234554321', 'curso' => 'Engenhria Mecânica', 'instituicao' => 'Unipampa', 'pagamento' => 'naopago', 'impresso' => 0, 'codigo_barras' => 97885, 'id_tipo_usuario' => 4));

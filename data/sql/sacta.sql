@@ -171,6 +171,16 @@ CREATE  TABLE IF NOT EXISTS `pagamento` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `configuracao`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `configuracao` (
+  `id_configuracao` INT NOT NULL AUTO_INCREMENT ,
+  `inscricoes_abertas` TINYINT(1) NULL DEFAULT false ,
+  PRIMARY KEY (`id_configuracao`) )
+ENGINE = InnoDB;
+
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
