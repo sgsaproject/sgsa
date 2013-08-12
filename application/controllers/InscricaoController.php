@@ -44,7 +44,26 @@ class InscricaoController extends Zend_Controller_Action {
     public function ativarContaAction() {
         $this->view->headTitle()->prepend('Ativação de Conta');
         
-        //$this->getRequest()->
+        $email = $this->getRequest()->getParam('email');
+        $codigo = $this->getRequest()->getParam('codigo');
+        
+        $usuarioModel = new Application_Model_DbTable_Usuario();
+        $usuario = $usuarioModel->fetchRow(array('email' => $email));
+        if($usuario == null){
+            /*usuario não encontrado*/
+            
+        }
+        /*@var $usuario Application_Model_Usuario*/
+        if($usuario->checkHash($codigo) == true){
+            /*Usuário com email confirmado!*/
+            $usuario->email_confirmado = true;
+            $usuario->enviarEmailConfirmacao();
+            $usuario->save();
+            $this->view->confirmado = true;
+        }else{
+            /*Não confirmado!*/
+             $this->view->confirmado = false;
+        }
         
     }
 

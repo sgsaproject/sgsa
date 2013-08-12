@@ -131,7 +131,7 @@ class Application_Model_Usuario extends Zend_Db_Table_Row_Abstract {
         $view = new Zend_View();
         $view->setScriptPath(APPLICATION_PATH . '/views/scripts');
         
-        $link =  $this->serverUrl() . $this->baseUrl('/inscricao/ativar-conta/codigo/'.$this->getHash());
+        $link =  $this->serverUrl() . $this->baseUrl('/inscricao/ativar-conta/email/'.$this->email.'/codigo/'.$this->getHash());
         
         
         $msg = $view->partial('/layout/templates/emailAtivacao.phtml', array(
