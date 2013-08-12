@@ -154,7 +154,7 @@ class IndexController extends Zend_Controller_Action {
                         ->setReplyTo('saadmlivramento@gmail.com')
                         ->addTo($usuario->email)
                         ->setBodyHtml($msg)
-                        ->setSubject('Inscrição Semana Acadêmica 2011')
+                        ->setSubject('Inscrição Semana Acadêmica 2013')
                         ->send(Zend_Registry::get('transport'));
                 echo 'Status: Enviado';
                 $row->delete();

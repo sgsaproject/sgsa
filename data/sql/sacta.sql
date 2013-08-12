@@ -46,6 +46,9 @@ CREATE  TABLE IF NOT EXISTS `usuario` (
   `impresso` TINYINT(1) NULL DEFAULT 0 ,
   `codigo_barras` CHAR(6) NOT NULL ,
   `id_tipo_usuario` INT NOT NULL ,
+  `email_confirmado` TINYINT(1) NOT NULL DEFAULT 0 ,
+  `data_criacao` DATETIME NOT NULL ,
+  `data_modificacao` DATETIME NOT NULL ,
   PRIMARY KEY (`id_usuario`) ,
   INDEX `fk_usuario_tipo_usuario1_idx` (`id_tipo_usuario` ASC) ,
   UNIQUE INDEX `codigo_barras_UNIQUE` (`codigo_barras` ASC) ,
@@ -176,7 +179,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `configuracao` (
   `id_configuracao` INT NOT NULL AUTO_INCREMENT ,
-  `inscricoes_abertas` TINYINT(1) NULL DEFAULT false ,
+  `inscricoes_abertas` TINYINT(1) NOT NULL DEFAULT 0 ,
   PRIMARY KEY (`id_configuracao`) )
 ENGINE = InnoDB;
 

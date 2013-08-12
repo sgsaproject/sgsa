@@ -130,8 +130,14 @@ class Application_Model_Usuario extends Zend_Db_Table_Row_Abstract {
     public function enviarEmailAtivacao(Zend_Mail_Transport_Abstract $transport = null) {
         $view = new Zend_View();
         $view->setScriptPath(APPLICATION_PATH . '/views/scripts');
-        $msg = $view->partial('/layout/templates/emailConfirmacao.phtml', array(
-            'nome' => $this->nome
+        
+        $link =  $this->serverUrl() . $this->baseUrl('/inscricao/ativar-conta/codigo/'.$this->getHash());
+        
+        
+        $msg = $view->partial('/layout/templates/emailAtivacao.phtml', array(
+            'nome' => $this->nome,
+            'email' => $this->email,
+            'link' => $link
                 ));
 
         try {
@@ -184,6 +190,24 @@ class Application_Model_Usuario extends Zend_Db_Table_Row_Abstract {
                     'Application_Model_DbTable_Permissao');
         }
         return $this->palestras;
+    }
+    /**
+     * Retorna hash do usuário
+     * @return sring hash
+     */
+    public function getHash(){
+        return hash('sha512', $this->email.$this->data_criacao);
+    }
+    /**
+     *  Verifica se a hash corresponde
+     * @param type $hash
+     * @return boolean
+     */
+    public function checkHash($hash){
+        if($hash == $this->getHash()){
+            return true;
+        }
+        return false;
     }
 
 }

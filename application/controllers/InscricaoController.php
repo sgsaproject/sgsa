@@ -30,13 +30,22 @@ class InscricaoController extends Zend_Controller_Action {
                 $usuario->setCodigoBarras($codigoBarras->gerarCodigoBarras());
                 $usuario->setAttributes($dados);
                 $usuario->setIdTipoUsuario(4);
+                $usuario->data_criacao = (new \DateTime())->format('Y-m-d H:i:s');
+                $usuario->data_modificacao = (new \DateTime())->format('Y-m-d H:i:s');
                 $usuario->save();
-                $usuario->enviarEmailConfirmacao();
+                $usuario->enviarEmailAtivacao();
 
                 $this->_redirect('/inscricao/sucesso');
             }
         }
         $this->view->inscricao = $inscricao;
+    }
+    
+    public function ativarContaAction() {
+        $this->view->headTitle()->prepend('Ativação de Conta');
+        
+        //$this->getRequest()->
+        
     }
 
     public function sucessoAction() {
