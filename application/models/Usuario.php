@@ -129,9 +129,8 @@ class Application_Model_Usuario extends Zend_Db_Table_Row_Abstract {
     }
     
     public function enviarEmailAtivacao(Zend_Mail_Transport_Abstract $transport = null) {
-        $view = new Zend_View();
-        $view->setScriptPath(APPLICATION_PATH . '/views/scripts');
         $view = Zend_Layout::getMvcInstance()->getView();
+        $view->setScriptPath(APPLICATION_PATH . '/views/scripts');
         $link =  $view->serverUrl() . $view->baseUrl('/inscricao/ativar-conta/email/'.$this->email.'/codigo/'.$this->getHash());
         
         
@@ -148,7 +147,7 @@ class Application_Model_Usuario extends Zend_Db_Table_Row_Abstract {
             $mail = new Zend_Mail('utf-8');
             $mail->addTo($this->email)
                     ->setBodyHtml($msg)
-                    ->setSubject('Inscrição na ' . $config->evento->nome . ' de ' . $config->evento->ano)
+                    ->setSubject('Ativação de Conta na ' . $config->evento->nome . ' de ' . $config->evento->ano)
                     ->send($transport);
             
         } catch (Exception $e) {
