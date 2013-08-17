@@ -75,5 +75,29 @@ class InscricaoController extends Zend_Controller_Action {
         $this->view->headTitle()->prepend('Inscrição');
     }
 
-}
+    public function reenviarAction() {
+        $reenvio = new Application_Form_Reenviar();
 
+        //verifica se há post
+        if ($this->_request->isPost()) {
+            //verifica se o formulario é valido, se não renderiza com os erros
+            if ($reenvio->isValid($_POST)) {
+                $email = $this->getRequest()->getParam('email');
+
+                $usuarioModel = new Application_Model_DbTable_Usuario();
+
+                $usuario = $usuarioModel->fetchRow($usuarioModel->getAdapter()->quoteInto('email = ?', $email));
+                if ($usuario == null) {
+                    /* usuario não encontrado */
+                    $this->view->confirmado = false;
+                    $this->view->mensagem = 'O endereço de email não foi encontrado.';
+                } else {
+                    $usuario->enviarEmailAtivacao();
+                    $this->_redirect('/inscricao/sucesso');
+                }
+            }
+        }
+        $this->view->reenvio = $reenvio;
+    }
+
+}
