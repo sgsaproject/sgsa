@@ -24,6 +24,7 @@
                 <td width="17%">Instituição</td>
                 <td width="27%">Nome</td>
                 <td width="10%">Cód. Barras</td>
+                <td width="15%">Email Confirmado</td>
                 <td width="15%">Pagamento</td>
                 <td width="13%">Opções</td>
             </tr>
@@ -37,14 +38,16 @@
                 <td><?=$usuario->instituicao?></td>
                 <td><?=$usuario->nome?></td>
                 <td><?=$usuario->codigo_barras?></td>
+                <td><?=$this->email_confirmado ? 'Sim' : 'Não'?></td>
                 <td><?=$this->FormatarPagamento($usuario->pagamento)?></td>
                 <td>
                     <a href="<?=$this->baseUrl('/admin/ver-dados-usuario/id_usuario/'.$usuario->id_usuario)?>" rel="tooltip" title="Ver dados do usuario"><img alt="Ver Dados do Usuario" width="16" height="16" src="<?=$this->baseUrl('img/editar.ico')?>" /></a>
-                    <a onClick="return confirm('Deseja deletar esse usuario?');" href="<?=$this->baseUrl('admin/deletar-usuario/id_usuario/'.$usuario->id_usuario)?>" rel="tooltip" title="Deletar Usuario"><img alt="Deletar Usuario" width="16" height="16" src="<?=$this->baseUrl('img/apagar.png')?>" /></a>
+                    <!--<a onClick="return confirm('Deseja deletar esse usuario?');" href="<?=$this->baseUrl('admin/deletar-usuario/id_usuario/'.$usuario->id_usuario)?>" rel="tooltip" title="Deletar Usuario"><img alt="Deletar Usuario" width="16" height="16" src="<?=$this->baseUrl('img/apagar.png')?>" /></a> -->
                     <a onClick="return confirm('Deseja editar os dados desse usuario?');" href="<?=$this->baseUrl('admin/editar-usuario/id_usuario/'.$usuario->id_usuario)?>" rel="tooltip" title="Editar dados do usuario"><img alt="Editar Usuario" width="16" height="16" src="<?=$this->baseUrl('img/editar.png')?>" /></a>
+                    <a href="<?=$this->baseUrl('credenciamento/credenciar/id_usuario/'.$usuario->id_usuario)?>" rel="tooltip" title="Credenciar usuário (Pagar e Imprimir)"><img width="16" height="16" src="<?=$this->baseUrl('img/marcarpago.ico')?>" /></a>
                     <a onClick="return confirm('Deseja marcar este usuario como Não-Pago?');" href="<?=$this->baseUrl('admin/alterar-pagamento/pagamento/naopago/id_usuario/'.$usuario->id_usuario)?>" rel="tooltip" title="Marcar Usuario como não pago"><img alt="Marcar Usuario como não pago" width="16" height="16" src="<?=$this->baseUrl('img/marcarnaopago.ico')?>" /></a>
-                    <a onClick="return confirm('Deseja marcar este usuario como Pago?');" href="<?=$this->baseUrl('admin/alterar-pagamento/pagamento/pago/id_usuario/'.$usuario->id_usuario)?>" rel="tooltip" title="Marcar Usuario como Pago"><img alt="Marcar Usuario como pago" width="16" height="16" src="<?=$this->baseUrl('img/marcarpago.ico')?>" /></a>
-                    <a onClick="return confirm('Deseja marcar este usuario como Isento?');" href="<?=$this->baseUrl('admin/alterar-pagamento/pagamento/isento/id_usuario/'.$usuario->id_usuario)?>" rel="tooltip" title="Marcar Usuario como Isento"><img alt="Marcar Usuario como isento" width="16" height="16" src="<?=$this->baseUrl('img/marcarisento.ico')?>" /></a>
+                    <!--<a onClick="return confirm('Deseja marcar este usuario como Pago?');" href="<?=$this->baseUrl('admin/alterar-pagamento/pagamento/pago/id_usuario/'.$usuario->id_usuario)?>" rel="tooltip" title="Marcar Usuario como Pago"><img alt="Marcar Usuario como pago" width="16" height="16" src="<?=$this->baseUrl('img/marcarpago.ico')?>" /></a>
+                    <a onClick="return confirm('Deseja marcar este usuario como Isento?');" href="<?=$this->baseUrl('admin/alterar-pagamento/pagamento/isento/id_usuario/'.$usuario->id_usuario)?>" rel="tooltip" title="Marcar Usuario como Isento"><img alt="Marcar Usuario como isento" width="16" height="16" src="<?=$this->baseUrl('img/marcarisento.ico')?>" /></a> -->
                 </td>
             </tr>
             <?endforeach;?>

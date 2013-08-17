@@ -2,6 +2,7 @@
     <p>Nome: <?= $this->usuario->nome ?></p>
     <p>Email: <?=$this->usuario->email?></p>
     <p>Instituição: <?=$this->usuario->instituicao?></p>
+    <p>Curso: <?=$this->usuario->curso?></p>
     <p>Codigo de Barras: <?=$this->usuario->codigo_barras?></p>
     <p style="margin-top:5px;"><img src="<?= $this->baseUrl('/index/codigo-barras/code/' . $this->usuario->codigo_barras) ?>" alt="<?= $this->usuario->codigo_barras ?>" /></p>
 </div>
