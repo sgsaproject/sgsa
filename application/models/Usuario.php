@@ -102,10 +102,11 @@ class Application_Model_Usuario extends Zend_Db_Table_Row_Abstract {
     }
 
     public function enviarEmailConfirmacao(Zend_Mail_Transport_Abstract $transport = null) {
-        $view = new Zend_View();
+        $view = Zend_Layout::getMvcInstance()->getView();
         $view->setScriptPath(APPLICATION_PATH . '/views/scripts');
         $msg = $view->partial('/layout/templates/emailConfirmacao.phtml', array(
-            'nome' => $this->nome
+            'nome' => $this->nome,
+            'title' => $view->title
                 ));
 
         try {
@@ -137,7 +138,8 @@ class Application_Model_Usuario extends Zend_Db_Table_Row_Abstract {
         $msg = $view->partial('/layout/templates/emailAtivacao.phtml', array(
             'nome' => $this->nome,
             'email' => $this->email,
-            'link' => $link
+            'link' => $link,
+            'title' => $view->title
                 ));
 
         try {
@@ -196,7 +198,7 @@ class Application_Model_Usuario extends Zend_Db_Table_Row_Abstract {
      * @return sring hash
      */
     public function getHash(){
-        return hash('sha512', $this->email.$this->data_criacao);
+        return hash('sha1', $this->email.$this->data_criacao);
     }
     /**
      *  Verifica se a hash corresponde
