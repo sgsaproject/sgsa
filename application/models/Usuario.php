@@ -130,8 +130,8 @@ class Application_Model_Usuario extends Zend_Db_Table_Row_Abstract {
     public function enviarEmailAtivacao(Zend_Mail_Transport_Abstract $transport = null) {
         $view = new Zend_View();
         $view->setScriptPath(APPLICATION_PATH . '/views/scripts');
-        
-        $link =  $this->serverUrl() . $this->baseUrl('/inscricao/ativar-conta/email/'.$this->email.'/codigo/'.$this->getHash());
+        $view = Zend_Layout::getMvcInstance()->getView();
+        $link =  $view->serverUrl() . $view->baseUrl('/inscricao/ativar-conta/email/'.$this->email.'/codigo/'.$this->getHash());
         
         
         $msg = $view->partial('/layout/templates/emailAtivacao.phtml', array(

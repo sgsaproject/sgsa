@@ -1,0 +1,12 @@
+<?if($this->confirmado == true):?>
+        <center>
+    <h2>Ativação de Conta</h2>
+    <h3>Parabéns! Sua conta foi ativada!</h3>
+    </center><br />
+<?else:?>
+    <center>
+    <h2>Ativação de Conta</h2>
+    <h3>Erro ao ativar sua inscrição</h3>
+    <p><?=$this->mensagem?></p>
+    </center><br />
+<?endif;?>

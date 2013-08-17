@@ -7,15 +7,15 @@ class InscricaoController extends Zend_Controller_Action {
     }
 
     public function indexAction() {
-         
+        
     }
 
     public function inscreverAction() {
         $configuracaoModel = new Application_Model_DbTable_Configuracao();
         $this->view->configuracao = $configuracaoModel->find(1)->current();
-        
+
         $inscricao = new Application_Form_Inscricao();
-       
+
         //verifica se há post
         if ($this->_request->isPost()) {
             //verifica se o formulario é valido, se não renderiza com os erros
@@ -25,7 +25,7 @@ class InscricaoController extends Zend_Controller_Action {
                 //Inicia o modelo, insere os dados e redireciona
                 $usuarioModel = new Application_Model_DbTable_Usuario();
                 $codigoBarras = new Application_Model_CodigoBarra();
-                /*@var $usuario Application_Model_Usuario*/
+                /* @var $usuario Application_Model_Usuario */
                 $usuario = $usuarioModel->createRow();
                 $usuario->setCodigoBarras($codigoBarras->gerarCodigoBarras());
                 $usuario->setAttributes($dados);
@@ -40,31 +40,35 @@ class InscricaoController extends Zend_Controller_Action {
         }
         $this->view->inscricao = $inscricao;
     }
-    
+
     public function ativarContaAction() {
         $this->view->headTitle()->prepend('Ativação de Conta');
-        
+
         $email = $this->getRequest()->getParam('email');
         $codigo = $this->getRequest()->getParam('codigo');
-        
+
         $usuarioModel = new Application_Model_DbTable_Usuario();
-        $usuario = $usuarioModel->fetchRow(array('email' => $email));
-        if($usuario == null){
-            /*usuario não encontrado*/
-            
+
+        $usuario = $usuarioModel->fetchRow($usuarioModel->getAdapter()->quoteInto('email = ?', $email));
+        if ($usuario == null) {
+            /* usuario não encontrado */
+            $this->view->confirmado = false;
+            $this->view->mensagem = 'O endereço de email não foi encontrado.';
+        } else {
+            /* @var $usuario Application_Model_Usuario */
+            if ($usuario->checkHash($codigo) == true) {
+                /* Usuário com email confirmado! */
+                $usuario->email_confirmado = true;
+                $usuario->enviarEmailConfirmacao();
+                $usuario->save();
+                $this->view->confirmado = true;
+                $this->view->mensagem = '';
+            } else {
+                /* Não confirmado! */
+                $this->view->confirmado = false;
+                $this->view->mensagem = 'O codigo de ativação está incorreto.';
+            }
         }
-        /*@var $usuario Application_Model_Usuario*/
-        if($usuario->checkHash($codigo) == true){
-            /*Usuário com email confirmado!*/
-            $usuario->email_confirmado = true;
-            $usuario->enviarEmailConfirmacao();
-            $usuario->save();
-            $this->view->confirmado = true;
-        }else{
-            /*Não confirmado!*/
-             $this->view->confirmado = false;
-        }
-        
     }
 
     public function sucessoAction() {
