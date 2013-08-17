@@ -12,7 +12,10 @@
         ?>
 
         <? $this->headScript()->appendFile($this->baseUrl('/js/tooltip.js'))
-                ->appendFile($this->baseUrl('/js/jquery.ui.datepicker-pt-BR.js')) ?>
+                ->appendFile($this->baseUrl('/js/jquery.ui.datepicker-pt-BR.js')) 
+                ->appendFile($this->baseUrl('/js/jquery.mask.min.js')) 
+                ->appendFile($this->baseUrl('/js/script.js')) 
+        ?>
 
         <?= $this->headLink(); ?>
 

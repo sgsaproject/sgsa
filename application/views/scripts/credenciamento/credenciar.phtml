@@ -2,7 +2,8 @@
     <h1>Credenciar Ouvinte: <?= $this->usuario->getNome()?></h1> 
     <div id="pagar">
         <form method="POST" action>
-            <p>Valor: <input name="valor" type="text" value=""></p>
+            <input type="hidden" name="acao" value="pagar">
+            <p>Valor: <input name="valor" type="text" value="" class="money"></p>
             <p>Forma de pagamento: 
                 <select name="formaPagamento">
                     <? foreach ($this->formasPagamento as $formaPagamento) : ?>
@@ -15,6 +16,7 @@
     </div>
     <div id="isentar">
         <form method="POST" action>
+            <input type="hidden" name="acao" value="isentar">
             <p>Motivo: <textarea name="motivo" cols="60" rows="10"></textarea></p>
             <p><input type="submit" value="Isentar" class="button"/></p>
         </form>

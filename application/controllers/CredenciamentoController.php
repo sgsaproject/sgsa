@@ -19,15 +19,23 @@ class CredenciamentoController extends Zend_Controller_Action {
         
         
         if($this->getRequest()->isPost()){
-            
+            $data = $this->getRequest()->getParams();
+            if($data['acao'] == 'pagar'){
+                
+            }else if($data['acao'] == 'isentar'){
+                
+            }
         }
-        
         
         $this->view->formasPagamento = $formasPagamento;
         $this->view->usuario = $usuario;
     }
 
     public function pagarAction() {
+        
+    }
+    
+    public function isentarAction() {
         
     }
 
