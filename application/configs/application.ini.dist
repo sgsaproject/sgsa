@@ -33,10 +33,10 @@ resources.db.params.charset = "utf8"
 ; http://framework.zend.com/manual/en/zend.mail.html
 ;
 resources.mail.transport.register = true
-resources.mail.defaultfrom.email = "sacta@sacta.com"
-; resources.mail.defaultfrom.name = <NAME>
-resources.mail.defaultreplyTo.email = "sacta@sacta.com"
-; resources.mail.defaultreplyTo.name = <NAME>
+resources.mail.defaultFrom.email = "sacta@sacta.com"
+; resources.mail.defaultFrom.name = <NAME>
+resources.mail.defaultReplyTo.email = "sacta@sacta.com"
+; resources.mail.defaultReplyTo.name = <NAME>
 ; 
 ;
 ;resources.mail.transport.type = "sendmail"
