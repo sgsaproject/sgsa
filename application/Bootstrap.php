@@ -49,15 +49,17 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		}
     }
 
-    /*public function _initZendMail() {
-        $config = array('ssl' => 'tls',
-            'port' => 587,
-            'auth' => 'login',
-            'username' => '',
-            'password' => '');
-        $transport = new Zend_Mail_Transport_Smtp('smtp.gmail.com', $config);
-        Zend_Registry::set('transport', $transport);
-    }*/
+    public function _initZendMail() {
+//        $config = array('ssl' => 'tls',
+//            'port' => 587,
+//            'auth' => 'login',
+//            'username' => '',
+//            'password' => '');
+//        $transport = new Zend_Mail_Transport_Smtp('smtp.gmail.com', $config);
+//        Zend_Registry::set('transport', $transport);
+        $config = new Zend_Config_Ini(APPLICATION_PATH.'/configs/application.ini', APPLICATION_ENV);
+        Zend_Mail::setDefaultFrom($config->resources->mail->defaultFrom->email, $config->resources->mail->defaultFrom->name);
+    }
 
     protected function _initPlugins() {
         $front = Zend_Controller_Front::getInstance();
