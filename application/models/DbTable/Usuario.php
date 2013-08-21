@@ -31,7 +31,7 @@ class Application_Model_DbTable_Usuario extends Zend_Db_Table_Abstract {
                 ->order('nome asc');
         return $this->fetchAll($select);
     }
-    
+
     public function getUsuariosOrganizador() {
         $select = $this->select()->where('id_tipo_usuario = 1')
                 ->order('nome asc');
@@ -94,6 +94,11 @@ class Application_Model_DbTable_Usuario extends Zend_Db_Table_Abstract {
 
     public function inserirUsuario(array $dados) {
         parent::insert($dados);
+    }
+
+    public function getUsuariosEmailNaoConfirmado() {
+        $select = $this->select()->where('email_confirmado = 0');
+        return $this->fetchAll($select);
     }
 
 }

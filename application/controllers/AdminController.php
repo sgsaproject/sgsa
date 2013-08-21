@@ -519,6 +519,16 @@ class AdminController extends Zend_Controller_Action {
 
         $this->view->result = $result;
     }
+    
+    public function enviarEmailsNaoConfirmadosAction() {
+        $usuarioModel = new Application_Model_DbTable_Usuario();
+        $usuarios = $usuarioModel->getUsuariosEmailNaoConfirmado();
+        
+        /* @var $usuario Application_Model_Usuario */
+        foreach ($usuarios as $usuario) {
+            $usuario->enviarEmailAtivacao();
+        }
+    }
 
 }
 
