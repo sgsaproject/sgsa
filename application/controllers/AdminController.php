@@ -521,6 +521,7 @@ class AdminController extends Zend_Controller_Action {
     }
     
     public function enviarEmailsNaoConfirmadosAction() {
+		set_time_limit( 5 * 60 );
         $usuarioModel = new Application_Model_DbTable_Usuario();
         $usuarios = $usuarioModel->getUsuariosEmailNaoConfirmado();
         
