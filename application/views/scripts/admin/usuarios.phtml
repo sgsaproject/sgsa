@@ -38,7 +38,7 @@
                 <td><?=$usuario->instituicao?></td>
                 <td><?=$usuario->nome?></td>
                 <td><?=$usuario->codigo_barras?></td>
-                <td><?=$this->email_confirmado ? 'Sim' : 'Não'?></td>
+                <td><?=$usuario->email_confirmado ? 'Sim' : 'Não'?></td>
                 <td><?=$this->FormatarPagamento($usuario->pagamento)?></td>
                 <td>
                     <a href="<?=$this->baseUrl('/admin/ver-dados-usuario/id_usuario/'.$usuario->id_usuario)?>" rel="tooltip" title="Ver dados do usuario"><img alt="Ver Dados do Usuario" width="16" height="16" src="<?=$this->baseUrl('img/editar.ico')?>" /></a>
