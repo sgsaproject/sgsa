@@ -15,5 +15,10 @@ class Application_Model_DbTable_FormaPagamento extends Zend_Db_Table_Abstract
         return $this->find($idFormaPagamento)->current();
     }
     
+    public function getFormaPagamentoByName($name) {
+        $select = $this->select()->where("descricao like '" . $name . "'");
+        //echo $select->__toString();die();
+        return $this->fetchAll($select)->current();
+    }
 }
 

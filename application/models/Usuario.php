@@ -23,6 +23,16 @@ class Application_Model_Usuario extends Zend_Db_Table_Row_Abstract {
         $this->nome = $nome;
     }
     
+    public function getNomeSobrenome() {
+        $palavras = explode(" ", $this->nome);
+        $nome = $palavras[0];
+        $sobrenome = end($palavras);
+        if ($nome == $sobrenome) {
+            return $nome;
+        }
+        return $nome . " " . $sobrenome;
+    }
+    
     public function getEmail() {
         return $this->email;
     }

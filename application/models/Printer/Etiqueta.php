@@ -50,7 +50,7 @@ class Application_Model_Printer_Etiqueta extends Application_Model_Printer_Abstr
      * @param string $texto
      * @throws Exception
      */
-    private function enviarTexto($texto) {
+    public function enviarTexto($texto) {
         if (socket_write($this->socket, $texto, strlen($texto)) == false) {
             throw new Exception("Could not write output: " . socket_strerror(socket_last_error($this->socket)));
         }

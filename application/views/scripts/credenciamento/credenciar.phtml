@@ -1,24 +1,388 @@
-<div id="view-content">
-    <h1>Credenciar Ouvinte: <?= $this->usuario->getNome()?></h1> 
-    <div id="pagar">
-        <form method="POST" action>
-            <input type="hidden" name="acao" value="pagar">
-            <p>Valor: <input name="valor" type="text" value="" class="money"></p>
-            <p>Forma de pagamento: 
-                <select name="formaPagamento">
-                    <? foreach ($this->formasPagamento as $formaPagamento) : ?>
-                        <option><?= $formaPagamento->getDescricao() ?></option>
-                    <? endforeach; ?>
-                </select>
-            </p>
-            <p><input type="submit" value="Pagar" class="button"/></p>
-        </form>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#FormPrinter").hide()
+    });
+    
+    function switchConfiguracao() {
+        $("#FormPrinter").toggle();
+    }
+</script>
+<INPUT type="button" onclick="switchConfiguracao()" value="Configuração" id="btnconfiguracao">
+
+<OBJECT id="BemaPrinter1" height="14" width="14" classid="clsid:310DBDAC-85FF-4008-82A8-E22A09F9460B"  VIEWASTEXT></OBJECT>
+    <SCRIPT language="VBScript">
+
+        function CaracterGrafico
+        dim cmd
+
+        '                  DESENHO
+
+        '	    	         1 2 3 4 5 6 7 8 9
+        '		bit 7 = 128  *               *
+        '		bit 6 = 064  * *             *
+        '		bit 5 = 032  * * *           *
+        '		bit 4 = 016  * * * *         *
+        '		bit 3 = 008  * * * * *       *
+        '		bit 2 = 004  * * * * * *     *
+        '		bit 1 = 002  * * * * * * *   *
+        '		bit 0 = 001  * * * * * * * * *
+
+        ' Sequencia de bytes para a montagem do desenho acima
+        cmd = chr(27) + chr(94) + chr(18) + chr(0)
+        iRetorno = BemaPrinter1.ComandoTX( cmd, Len(cmd) )
+
+        cmd = chr( 255 ) + chr( 0 ) + chr(   0 ) + chr( 0 ) + chr( 127 ) + chr( 0 ) + _
+        chr(   0 ) + chr( 0 ) + chr(  63 ) + chr( 0 ) + chr(   0 ) + chr( 0 ) + _
+        chr( 031 ) + chr( 0 ) + chr(   0 ) + chr( 0 ) + chr(  15 ) + chr( 0 ) + _
+        chr(   0 ) + chr( 0 ) + chr(   7 ) + chr( 0 ) + chr(   0 ) + chr( 0 ) + _
+        chr(   3 ) + chr( 0 ) + chr(   0 ) + chr( 0 ) + chr(   1 ) + chr( 0 ) + _
+        chr(   0 ) + chr( 0 ) + chr( 255 ) + chr( 0 ) + chr(   0 ) + chr( 0 )
+
+        cmd = cmd + chr( 13 ) + chr( 10 )		        	                
+
+        iRetorno = BemaPrinter1.CaracterGrafico( cmd, Len(cmd) )				
+        end function		
+
+    </SCRIPT>
+	<script type="text/javascript">
+	function CaracteresAcentuados() { // Insere todos os caracteres acentuados	
+    document.FormPrinter.EdTxtImpressao.value = " âäàáãÃÂÄÁÀ êëèéÊËÉÈ ïíìîÎÍÌÏ öóòôõÖÓÒÔÕ üúùûÜÙÚÛ Çç ÿ Ññ  ";
+}
+function ImprimeTextoSemFormatacao() {
+    sNumeroVezes = window.prompt("Quantas vezes você deseja imprimir?", "");
+    if (sNumeroVezes != null)
+    {
+        iNumeroVezes = parseInt(sNumeroVezes);
+        for (i = 0; i < iNumeroVezes; i++) {
+            var retorno = BemaPrinter1.FormataTX(document.FormPrinter.EdTxtImpressao.value + "\n", 3, 0, 0, 0, 0);
+        }
+    }
+}
+function Inicializa() {
+    // Abre a porta de comunicacao
+    iRetorno = BemaPrinter1.IniciaPorta("USB");
+    if (iRetorno <= 0) {
+        alert("Problemas ao abrir a porta de Comunicação USB. " + iRetorno);
+    } else {
+		// Configura o modelo da impressora para MP 4200 TH
+		ModeloImpressora(7);
+	}
+}
+
+function Finaliza() {
+    BemaPrinter1.FechaPorta();
+}
+
+function AbrePorta(valor) {
+    iRetorno = BemaPrinter1.IniciaPorta(valor);
+    if (iRetorno <= 0)
+        alert("Problemas ao abrir a porta de Comunicação " + valor + ". " + iRetorno);
+}
+
+function ModeloImpressora(valor) {
+    iRetorno = BemaPrinter1.ConfiguraModeloImpressora(valor)
+    if (iRetorno == -2)
+        alert("Parâmetro inválido na função ConfiguraModeloImpressora.");
+
+}
+function ImprimeTextoFormatado() {
+    sNumeroVezes = window.prompt("Quantas vezes você deseja imprimir?", "");
+    if (sNumeroVezes != null)
+    {
+        iNumeroVezes = parseInt(sNumeroVezes);
+        if (document.FormPrinter.MImpressao[0].checked)
+            modo = 2; // Normal
+        else
+        if (document.FormPrinter.MImpressao[1].checked)
+            modo = 3; // elite
+        else
+            modo = 1; // condensado
+
+        Expandido = 0;
+        Italico = 0;
+        Negrito = 0;
+        Sublinhado = 0;
+
+        if (document.FormPrinter.CbExpandido.checked)
+            Expandido = 1;
+
+        if (document.FormPrinter.CbItalico.checked)
+            Italico = 1;
+
+        if (document.FormPrinter.CbNegrito.checked)
+            Negrito = 1;
+
+        if (document.FormPrinter.CbSublinhado.checked)
+            Sublinhado = 1;
+
+        for (i = 0; i < iNumeroVezes; i++) {
+            BemaPrinter1.FormataTX(document.FormPrinter.EdTxtImpressao.value + "\n", modo, Italico, Sublinhado, Expandido, Negrito);
+        }
+    }
+}
+
+function ProgramarPresenter() {
+    NumeroLinha = parseInt(document.FormPrinter.EdTimePresenter.value);
+    iRetorno = BemaPrinter1.ProgramaPresenterRetratil(NumeroLinha);
+    if (iRetorno == 0)
+        alert("Problemas na programação do presenter. /n Possíveis causas: Impressora desligada, off-line ou sem papel");
+}
+
+function HabilitarPresenter() {
+    if (document.FormPrinter.BtnDesabilitarPresenter.value == "Habilitar") {
+        document.FormPrinter.BtnDesabilitarPresenter.value = "Desabilitar";
+        iRetorno = BemaPrinter1.HabilitaPresenterRetratil(1);
+        if (iRetorno == 0)
+            alert("Problemas na programação do presenter./n Possíveis causas: Impressora desligada, off-line ou sem papel");
+    }
+    else {
+        document.FormPrinter.BtnDesabilitarPresenter.value = "Habilitar";
+        iRetorno = BemaPrinter1.HabilitaPresenterRetratil(0);
+        if (iRetorno == 0)
+            alert("Problemas na programação do presenter./nPossíveis causas: Impressora desligada, off-line ou sem papel");
+    }
+}
+
+function ProgramarTamanhoExtrato() {
+    NumeroLinha = parseInt(document.FormPrinter.EdNumeroLinha.value);
+    iRetorno = BemaPrinter1.ProgramaPresenterRetratil(NumeroLinha);
+    if (iRetorno == 0)
+        alert("Problemas na programação do tamanho do extrato./nPossíveis causas: Impressora desligada, off-line ou sem papel");
+}
+
+function HabilitarExtratoLongo() {
+    if (document.FormPrinter.BtnHabilitarNLinhas.value == "Habilitar") {
+        document.FormPrinter.BtnHabilitarNLinhas.value = "Desabilitar";
+        iRetorno = BemaPrinter1.HabilitaExtratoLongo(1);
+        if (iRetorno == 0)
+            alert("Problemas na programação do tamanho do extrato./n Possíveis causas: Impressora desligada, off-line ou sem papel");
+    }
+    else {
+        document.FormPrinter.BtnHabilitarNLinhas.value = "Habilitar";
+        iRetorno = BemaPrinter1.HabilitaExtratoLongo(0);
+        if (iRetorno == 0)
+            alert("Problemas na programação do tamanho do extrato./nPossíveis causas: Impressora desligada, off-line ou sem papel");
+    }
+}
+
+function PrinterStatus() {
+    iRetorno = BemaPrinter1.Le_Status();
+    switch (iRetorno)
+    {
+        case 0 :
+            alert("Desligada ou cabo desconectado");
+            break;
+        case 32 : // pouco papel e off-line na LPT
+            if (document.FormPrinter.PortaComunicacao.selectedIndex == 0)
+                alert("Pouco papel e off-line");
+            else
+                alert("Off-line ou Fim de papel");
+            break;
+        case 4 : // pouco papel e off-line na serial
+            alert("Pouco papel e off-line");
+            break;
+        case 40 : // fim de papel na LPT
+            alert("Fim de papel");
+            break;
+        case 5:
+        case 48 : // 5 = pouco papel serial e 48 na LPT
+            alert("Pouco papel e on-line");
+            break;
+        case 79 : // off-line na LPT
+            alert("Off-line");
+            break;
+        case 9:
+        case 128 : // 9 = head-up na serial e 128 na LPT
+            alert("Head Up");
+            break
+        case 24:
+        case 144 : // 24 = on-line na serial e 144 na LPT
+            alert("Impressora ok"); // 24 (COM) e 144 (LPT)
+            break;
+        default:
+            alert("Status desconhecido: " + iRetorno);
+            break;
+    }
+}
+function FullCut() {
+    iRetorno = BemaPrinter1.AcionaGuilhotina(1);  // modo total (full cut)
+    if (iRetorno != 1)
+        alert("Problemas no corte do papel../nPossíveis causas: Impressora desligada, off-line ou sem papel");
+}
+
+function PartialCut() {
+    iRetorno = BemaPrinter1.AcionaGuilhotina(0);  // modo total (full cut)
+    if (iRetorno != 1)
+        alert("Problemas no corte do papel../nPossíveis causas: Impressora desligada, off-line ou sem papel");
+}
+
+function PapelNoPresenter() {
+    iRetorno = BemaPrinter1.VerificaPapelPresenter();
+    switch (iRetorno)
+    {
+        case -1 :
+            alert("Erro de execução da função.");
+            break;
+        case 0 :
+            alert("Problemas da verificação do papel no presenter./nPossíveis causas: Impressora desligada, off-line ou sem papel.");
+            break;
+        case 1 :
+            alert("Papel posicionado no presenter.");
+            break;
+        case 2 :
+            alert("Papel não posicionado no presenter.");
+            break;
+        case 3 :
+            alert("Erro desconhecido.");
+            break;
+        default:
+            alert("Unknown error.");
+            break;
+    }
+}
+function Autenticar() {
+    tempo = parseInt(document.FormPrinter.EdAutenticarTempo.value) * 1000;
+    iRetorno = BemaPrinter1.AutenticaDoc(document.FormPrinter.EdAutenticarTexto.value, tempo)
+    if (iRetorno == 0)
+        alert("Problemas na autenticação do documento.\nPossíveis causas: Impressora desligada, off-line ou sem papel");
+    else
+    if (iRetorno == -1)
+        alert("Tempo maior que o permitido.");
+}
+
+function DocInserido() {
+    iRetorno = BemaPrinter1.DocumentInserted();
+    if (iRetorno == 1)
+        alert("Documento inserido.");
+    else
+        alert("Documento não inserido.");
+
+}
+
+function pagar(valor) {
+    BemaPrinter1.FormataTX(document.FormPrinter.EdTxtImpressao.value + "\n", 3, 0, 0, 0, 0);
+    FullCut();
+    document.forms["formPagar"].submit();
+}
+	</script>
+	<script type="text/javascript">
+		window.onload = function () {
+			Inicializa();
+		};
+		window.onunload = function () {
+			Finaliza();
+		};
+	</script>
+        <FORM name="FormPrinter" id="FormPrinter">
+        <DIV align="center">
+            <TABLE class="kltable" width="889">
+                <TR>
+                    <TD class="title1"><span class="style1"><B>Porta de comunicação:</B></span><B>
+                            <span class="style1">
+                                <SELECT size="1" name="PortaComunicacao" onChange="AbrePorta(this.value)">
+                                    <OPTION value="LPT1">LPT1</OPTION>
+                                    <OPTION value="COM1">COM1</OPTION>
+                                    <OPTION value="COM2">COM2</OPTION>
+                                    <option value="COM3">COM3</option>
+                                    <option value="COM4">COM4</option>
+                                    <option value="COM5">COM5</option>
+                                    <option value="USB" selected>USB</option>
+                                    <option value="COM8">COM8</option>
+                                </SELECT>
+                            </span></B></TD>
+                    <TD class="style2"><B>Modelo da impressora:
+                            <SELECT size="1" name="ModeImpressora" onChange="ModeloImpressora(this.value)">
+                                <OPTION value="1">MP-20 CI</OPTION>
+                                <OPTION value="1">MP-20 MI</OPTION>
+                                <OPTION value="3">MP-20 TH</OPTION>
+                                <OPTION value="2">MP-2000 CI</OPTION>
+                                <OPTION value="3">MP-2000 TH</OPTION>
+                                <OPTION value="4">58mm Kiosk Printer</OPTION>
+                                <OPTION value="4">76/80mm Kiosk Printer</OPTION>
+                                <OPTION value="4">112mm Kiosk Printer</OPTION>
+                                <option value="5">MP 4000 TH</option>
+                                <option value="7" selected>MP 4200 TH</option>
+                                <option value="8">MP 2500 TH</option>
+                            </SELECT></B></TD>
+                </TR>
+                <TR>
+                    <TD width="879" height="69" colspan="2" class="style1">
+                        <TEXTAREA rows="20" cols="50" name="EdTxtImpressao"><?= $this->usuario->getNomeSobrenome() ?>
+</TEXTAREA>
+                        <!--INPUT name="EdTxtImpressao" type="text" class="style4" value="" size="62"-->
+                        <INPUT type="button" class="Buttom" value="Caracteres Acentuados" name="BtnCarcAcentuados"
+                               onclick="CaracteresAcentuados()">						</TD>
+                </TR>
+                <TR>
+                    <TD width="380" height="54" align="left" valign="top" class="style2">
+                        <B>Modos de Impressão</B><BR>
+                        <FONT class="style3">
+                        <INPUT type="radio" value="2" name="MImpressao" checked>
+                        </FONT>Normal<FONT class="style3"> 
+                        <INPUT type="radio" value="3" name="MImpressao">
+                        </FONT><span class="style3">Elite</span><FONT class="style3">
+                        <INPUT type="radio" value="1" name="MImpressao">
+                        Condensado </FONT> </TD>
+                    <TD width="493" height="54" align="left" valign="top" class="style2">
+                        <B>Modos de formatação</B>
+                        <TABLE border="0" cellpadding="0" cellspacing="0" width="100%">
+                            <TR>
+                                <TD width="50%" class="style3"><INPUT type="checkbox" name="CbNegrito" value="ON">Negrito</TD>
+                                <TD width="50%" class="style3"><INPUT type="checkbox" name="CbItalico" value="ON">Itálico</TD>
+                            </TR>
+                            <TR>
+                                <TD width="50%" class="style3"><INPUT type="checkbox" name="CbSublinhado" value="ON">Sublinhado</TD>
+                                <TD width="50%" class="style3"><INPUT type="checkbox" name="CbExpandido" value="ON">Expandido</TD>
+                            </TR>
+                        </TABLE>
+					</TD>
+                </TR>
+                <TR>
+                    <TD width="879" height="27" colspan="2" align="center" class="style1">
+                        <INPUT type="button" class="Buttom" value="Imprime Texto sem Formatação" name="BtnTextoSemFormatacao" onclick="ImprimeTextoSemFormatacao()">
+						<INPUT type="button" class="Buttom" value="Imprime Texto com Formatação" name="BtnTextoComFormatacao" onclick="ImprimeTextoFormatado()">
+					</TD>
+                </TR>
+            </TABLE>
+            <span class="style1"><BR>
+            </span><TABLE class="kltable">
+                <TR>
+                    <TD align="center" class="style1">
+                        <INPUT type="button" class="Buttom" value="Status da impressora" name="BtnStatusImpressora" onclick="PrinterStatus()">
+                        <INPUT type="button" class="Buttom" value="Imprimir caracter gráfico" name="BtnCaracGrafico" onClick="CaracterGrafico()"><BR>
+                        <INPUT type="button" class="Buttom" value="Corte Total do Papel" name="BtnCorteTotal" onClick="FullCut()">
+						<INPUT type="button" class="Buttom" value="Corte Parcial do Papel" name="BtnCorteParcial" onclick="PartialCut()"><BR>
+                        <INPUT type="button" class="Buttom" value="Aguardar impressão texto" name="BtnAguardarTexto">
+                        <INPUT type="button" class="Buttom" value="Verificar Papel Presenter" name="BtnPapelPresenter" onclick="PapelNoPresenter()">
+                    </TD>
+                </TR>
+            </TABLE>
+        </DIV>
+    </FORM>
+
+    <!-- ------------------------------- Código da página -------------------------- -->
+
+    <div id="view-content">
+        <h1>Credenciar Ouvinte: <?= $this->usuario->getNome() ?></h1>
+        <div id="pagar">
+            <form id="formPagar" method="POST" action>
+                <input type="hidden" name="acao" value="pagar">
+                <p>Valor: <input id="valor" name="valor" type="text" value="10" class="money"></p>
+                <p>Forma de pagamento: 
+                    <select name="formaPagamento">
+                        <? foreach ($this->formasPagamento as $formaPagamento) : ?>
+                            <option><?= $formaPagamento->getDescricao() ?></option>
+                        <? endforeach; ?>
+                    </select>
+                </p>
+                <p><input type="button" onclick="pagar($('#valor').val())" value="Pagar" class="button"/></p>
+            </form>
+        </div>
+        <div id="isentar">
+            <form id="formIsentar" method="POST" action>
+                <input type="hidden" name="acao" value="isentar">
+                <p>Motivo: <textarea name="motivo" cols="60" rows="10"></textarea></p>
+                <p><input type="submit" value="Isentar" class="button"/></p>
+            </form>
+        </div>
     </div>
-    <div id="isentar">
-        <form method="POST" action>
-            <input type="hidden" name="acao" value="isentar">
-            <p>Motivo: <textarea name="motivo" cols="60" rows="10"></textarea></p>
-            <p><input type="submit" value="Isentar" class="button"/></p>
-        </form>
-    </div>
-</div>
