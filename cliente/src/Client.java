@@ -49,6 +49,7 @@ public class Client {
     public void init() {
 
         this.l42.setDebugMode(true);
+        this.l42.setConectada(true);
         this.mp4200.setDebugMode(true);
         this.mp4200.setConectada(true);
 

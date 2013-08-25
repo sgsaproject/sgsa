@@ -3,9 +3,6 @@ package Elgin;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Iterator;
 import javax.print.Doc;
 import javax.print.DocFlavor;
 import javax.print.DocPrintJob;
@@ -14,7 +11,6 @@ import javax.print.PrintServiceLookup;
 import javax.print.SimpleDoc;
 import javax.print.attribute.Attribute;
 import javax.print.attribute.AttributeSet;
-import javax.print.attribute.PrintServiceAttribute;
 import javax.print.attribute.PrintServiceAttributeSet;
 
 /**
@@ -54,22 +50,26 @@ public class sputaIlRospo {
 
     public static void main(String args[]) {
         sputaIlRospo l = new sputaIlRospo();
-        //l.imprime();
-        l.test();
-        l.printerStatus();
-        // Sample usage
-        String value = l.readRegistry("HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\"
-                + "Explorer\\Shell Folders", "Personal");
-        System.out.println(value);
+        l.imprime("NASSER OTHMAN RAHMAN", "12345");
+//        l.test();
+//        l.printerStatus();
+//        // Sample usage
+//        String value = l.readRegistry("HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\"
+//                + "Explorer\\Shell Folders", "Personal");
+//        System.out.println(value);
     }
 
-    public void imprime() {
-        System.out.println("sputaIlRospo Zebra Print testing!");
-
+    /**
+     * Método para executar impressao na impressora Elgin L42
+     *
+     * @param nome nome do participante
+     * @param codBarras codigo de barras do participante
+     */
+    public void imprime(String nome, String codBarras) {
         // Prepare date to print in dd/mm/yyyy format
-        Date now = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        String dateString = format.format(now);
+//        Date now = new Date();
+//        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+//        String dateString = format.format(now);
 
         // Search for an installed zebra printer...
         // is a printer with "zebra" in its name
@@ -93,24 +93,29 @@ public class sputaIlRospo {
             DocPrintJob job = psZebra.createPrintJob();
 
             // Prepare string to send to the printer
-            /*String s = "R0,0\n" + // Set Reference Point                                                             
+            String s = "R0,0\n" + // Set Reference Point                                                             
+                    "N\n" + // Limpa Buffer                                                             
+                    "JB\n" + // PARA NO VÃO ENTRE AS ETIQUETAS
+                    "ZT\n" + // IMPRIME A PARTIR DO TOPO
+                    "Q60,0\n" + // verificar altura da etiqueta, espaço entre etiquetas (altura em mm x 8)
+                    "q480\n" + //LARGURA DA ETIQUETA (largura em mm x 8)
+                    "A45,30,0,4,1,1,N,\"" + nome + "\"\n" +
+                    "B50,90,0,1,3,5,80,B,\"" + codBarras + "\"\n" +
+                    "P1\n";   // Informa que eh para imprimir apenas 1 etiqueta*/
+
+
+            //A --> x (mm x 8) , y (mm x 8), rotacao, fonte, 1, 1, N (IMPRIMIR STRING)
+            //b --> x (mm x 8), y (mm x 8), rotacao, padrao codbarras(1), larg barra fina, larg barra grossa, altura barra(mm x 8), imprime numero(IMPRIMIR CODIGO DE BARRAS)
+            /*
+             // Prepare string to send to the printer
+             String s = "R0,0\n" + // Set Reference Point                                                             
              "N\n" + // Clear Image Buffer                                                             
              "ZB\n" + // Print direction (from Bottom of buffer)
              "Q122,16\n" + // Set label Length and gap
-             "A160,2,0,3,1,1,N,\"DATA: " + dateString + " - CARUGATE\"\n"
-             + "B160,30,0,1A,2,7,50,N,\"612041600021580109\"\n"
-             + "A160,92,0,1,1,1,N,\"AIA AGRICOLA IT.ALIMENT.S - 594679/VR                       \"\n"
+             "A50,150,0,4,1,1,N,\"NOME DO ouvinte FICA AQUI\"\n"
+             + "B100,450,0,3,5,11,50,B,\"12345\"\n" // 5:11 eh o tamanho ideal, naum mude
+             //+ "A100,500,0,1,1,1,N,\"AIA AGRICOLA IT.ALIMENT.S - 594679/VR                       \"\n"
              + "P1\n";   // Print content of buffer, 1 label*/
-
-            // Prepare string to send to the printer
-            String s = "R0,0\n" + // Set Reference Point                                                             
-                    "N\n" + // Clear Image Buffer                                                             
-                    "ZB\n" + // Print direction (from Bottom of buffer)
-                    "Q122,16\n" + // Set label Length and gap
-                    "A50,150,0,4,1,1,N,\"NOME DO ouvinte FICA AQUI\"\n"
-                    + "B100,450,0,3,5,11,50,B,\"12345\"\n" // 5:11 eh o tamanho ideal, naum mude
-                    //+ "A100,500,0,1,1,1,N,\"AIA AGRICOLA IT.ALIMENT.S - 594679/VR                       \"\n"
-                    + "P1\n";   // Print content of buffer, 1 label*/
 
             byte[] by = s.getBytes();
             DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
@@ -118,9 +123,11 @@ public class sputaIlRospo {
             // print data representation class name = "[B" (byte array).
             Doc doc = new SimpleDoc(by, flavor, null);
 
-            System.out.println("Pronti alla stampa");
+            System.out.println("Pronto para imprimir");
+            System.out.println(nome);
+            System.out.println(codBarras);
             job.print(doc, null);
-            System.out.println("Stampa inviata");
+            System.out.println("Impressao concluida");
 
         } catch (Exception e) {
             e.printStackTrace();
