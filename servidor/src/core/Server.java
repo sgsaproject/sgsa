@@ -37,8 +37,10 @@ public class Server {
                 Socket clientSocket = server.accept();
                 BufferedReader d = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 String msgInicial = d.readLine();
+                
+                
+                
                 this.processarMensagem(clientSocket, msgInicial);
-
             }
         } catch (IOException ex) {
             logger.fatal(null, ex);
@@ -48,25 +50,25 @@ public class Server {
     private void processarMensagem(Socket clientSocket, String msgInicial) {
         String msgInicialArray[] = msgInicial.split(":");
         if (msgInicial.contains("SGSA:PRINT")) {
+            SGSA sgsa = new SGSA(clientSocket);
             if (msgInicialArray.length != 3) {
                 logger.warn("Argumento inválido do SGSA");
                 logger.warn("Ignorando pedido de impressão");
+                sgsa.sendText("nok");
                 return;
             }
             String tipoImpressora = msgInicialArray[2];
 
-            SGSA sgsa = new SGSA(clientSocket);
+            sgsa.sendText("ok");
             String text = sgsa.readText();
             logger.info("Pedido de impressão recebido de SGSA para a impressora tipo: " + tipoImpressora);
             logger.info("Texto para impressão: " + text);
             this.sendText(text, Client.getTipoImpressoraByNome(tipoImpressora));
             return;
-        }
-        if (msgInicial.contains("SGSA:LIST")) {
+        } else if (msgInicial.contains("SGSA:LIST")) {
             logger.info("SGSA solicita lista de impressoras");
             return;
-        }
-        if (msgInicial.contains("CLIENT:PRINTER")) {
+        } else if (msgInicial.contains("CLIENT:PRINTER")) {
             logger.info("Cliente de impressão conectado");
             if (msgInicialArray.length != 3) {
                 logger.warn("Argumento inválido do SGSA");

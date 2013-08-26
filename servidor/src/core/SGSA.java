@@ -1,11 +1,12 @@
 package core;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintStream;
+import java.io.OutputStreamWriter;
 import java.net.Socket;
 import org.apache.log4j.Logger;
 
@@ -13,11 +14,11 @@ import org.apache.log4j.Logger;
  *
  * @author thiago
  */
-public class SGSA {//extends Thread {
+public class SGSA {
 
     private Socket socket;
     private BufferedReader in;
-    private PrintStream out;
+    private BufferedWriter out;
     private DataInputStream inputStream;
     private DataOutputStream outputStream;
     static Logger logger = Logger.getLogger(Server.class);
@@ -25,10 +26,10 @@ public class SGSA {//extends Thread {
     public SGSA(Socket socket) {
         try {
             this.socket = socket;
-            this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            //this.out = new PrintStream(socket.getOutputStream());
+            this.in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+            this.out = new BufferedWriter(new OutputStreamWriter(this.socket.getOutputStream()));
 
-            //this.inputStream = new DataInputStream(this.socket.getInputStream());
+            this.inputStream = new DataInputStream(this.socket.getInputStream());
             this.outputStream = new DataOutputStream(this.socket.getOutputStream());
         } catch (IOException ex) {
             logger.fatal(null, ex);
@@ -39,33 +40,27 @@ public class SGSA {//extends Thread {
         try {
             String server = "", line;
             while ((line = in.readLine()) != null) {
+                System.out.println(line);
                 server += line + "\n";
             }
             return server;
-            //return this.inputStream.readUTF();
+            //return this.in.readLine();
         } catch (IOException ex) {
             logger.fatal(null, ex);
         }
         return null;
     }
+    
+    public synchronized void sendText(String text) {
+        logger.info("Enviado resposta para o servidor: " + text);
+        try {
+            this.outputStream.writeUTF(text);
+            this.outputStream.flush();
+        } catch (IOException ex) {
+            logger.fatal(null, ex);
+        }
+    }
 
-    /*@Override
-     public void run() {
-     //BufferedReader entrada = null;
-     try {
-     //entrada = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-     //PrintStream saida = new PrintStream(conexaoCliente.getOutputStream());
-     // aqui a cobra fuma!
-     // lê o comando SERVER
-     String server = "";
-     while (in.readLine() != null) {
-     server += in.readLine() + "\n";
-     }
-     System.out.println(server);
-     } catch (IOException ex) {
-     Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-     }
-     }*/
     /**
      * @return the socket
      */
@@ -97,14 +92,14 @@ public class SGSA {//extends Thread {
     /**
      * @return the out
      */
-    public PrintStream getOut() {
+    public BufferedWriter getOut() {
         return out;
     }
 
     /**
      * @param out the out to set
      */
-    public void setOut(PrintStream out) {
+    public void setOut(BufferedWriter out) {
         this.out = out;
     }
 }

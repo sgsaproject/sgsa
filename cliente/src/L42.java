@@ -39,7 +39,8 @@ public class L42 extends Printer {
     public void imprimir(String texto) throws PrintException, IOException {
         sputaIlRospo l = new sputaIlRospo();
         System.out.println(texto);
-        l.imprime("NASSER OTHMAN RAHMAN", "12345");
+        String[] texts = texto.split("\n");
+        l.imprime(texts[0], texts[1]);
 //        if (this.debug == false) {
 //            if (printer == null) {
 //                logger.fatal("L42 Printer is not set.");
