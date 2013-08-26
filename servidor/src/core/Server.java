@@ -37,9 +37,6 @@ public class Server {
                 Socket clientSocket = server.accept();
                 BufferedReader d = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 String msgInicial = d.readLine();
-                
-                
-                
                 this.processarMensagem(clientSocket, msgInicial);
             }
         } catch (IOException ex) {

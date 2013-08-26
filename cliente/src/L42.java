@@ -39,7 +39,7 @@ public class L42 extends Printer {
     public void imprimir(String texto) throws PrintException, IOException {
         sputaIlRospo l = new sputaIlRospo();
         System.out.println(texto);
-        String[] texts = texto.split("\n");
+        String[] texts = texto.split("|");
         l.imprime(texts[0], texts[1]);
 //        if (this.debug == false) {
 //            if (printer == null) {
