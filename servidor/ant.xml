@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="SGSA_ServidorImpressao" basedir="." default="del">
+    
+    <property name="src.dir" value="."/>
+    <property name="build.dir" value="build"/>
+    <property name="lib.dir" value="library"/>
+    <property name="dist.dir" value="dist"/>
+    <property name="classes.dir" value="classes"/>
+    <property name="nomeArquivo" value="SGSA_ServidorImpressao"/>
+
+    <target name="clean" description="Deleta os diretórios">
+        <delete dir="${build.dir}"/>
+        <delete dir="${classes.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+    
+    <target name="init" depends="clean" description="Cria os diretórios">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${classes.dir}"/>
+        <mkdir dir="${dist.dir}"/>
+        <mkdir dir="${dist.dir}/${lib.dir}"/>
+    </target>
+
+    <target name="compile" depends="init" description="Compila os fontes">
+        <javac srcdir="${src.dir}" destdir="${classes.dir}">
+            <classpath>
+                <pathelement location="${build.dir}" />
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="jar" depends="compile" description="Gera arquivo Jar">
+        <jar destfile="${build.dir}/${nomeArquivo}.jar">
+            <fileset dir="${classes.dir}"/>
+            <manifest>
+                <attribute name="Class-Path" value="${lib.dir}/log4j-1.2.17.jar"/>
+                <attribute name="Main-Class" value="core.Main"/>
+            </manifest>
+            <classpath>
+				<pathelement path="${classpath}"/>
+				<fileset dir="${lib.dir}">
+					<include name="**/*.jar"/>
+				</fileset>
+			</classpath>
+        </jar>
+    </target>
+	
+    <target name="del" depends="jar" description="Apaga pasta das classes">
+        <delete dir="${classes.dir}"/>
+    </target>
+    
+</project>
