@@ -60,9 +60,9 @@ function ImprimeTextoSemFormatacao() {
 }
 function Inicializa() {
     // Abre a porta de comunicacao
-    iRetorno = BemaPrinter1.IniciaPorta("USB");
+    iRetorno = BemaPrinter1.IniciaPorta("COM5");
     if (iRetorno <= 0) {
-        alert("Problemas ao abrir a porta de Comunicação USB. " + iRetorno);
+        alert("Problemas ao abrir a porta de Comunicação COM5. " + iRetorno);
     } else {
 		// Configura o modelo da impressora para MP 4200 TH
 		ModeloImpressora(7);
@@ -285,8 +285,8 @@ function pagar(valor) {
                                     <OPTION value="COM2">COM2</OPTION>
                                     <option value="COM3">COM3</option>
                                     <option value="COM4">COM4</option>
-                                    <option value="COM5">COM5</option>
-                                    <option value="USB" selected>USB</option>
+                                    <option value="COM5" selected>COM5</option>
+                                    <option value="USB">USB</option>
                                     <option value="COM8">COM8</option>
                                 </SELECT>
                             </span></B></TD>
