@@ -261,7 +261,7 @@ function DocInserido() {
 
 function pagar(valor) {
     BemaPrinter1.FormataTX(document.FormPrinter.EdTxtImpressao.value + "\n", 3, 0, 0, 0, 0);
-    FullCut();
+    PartialCut();
     document.forms["formPagar"].submit();
 }
 	</script>
@@ -307,7 +307,25 @@ function pagar(valor) {
                 </TR>
                 <TR>
                     <TD width="879" height="69" colspan="2" class="style1">
-                        <TEXTAREA rows="20" cols="50" name="EdTxtImpressao"><?= $this->usuario->getNomeSobrenome() ?>
+                        <TEXTAREA rows="20" cols="50" name="EdTxtImpressao">
+
+           V Semana Academica
+     Campus Tecnologico de Alegrete
+                SACTA 2013
+
+Recebemos de <?= $this->usuario->getNomeSobrenome() ?>,
+a importancia de R$ 10,00 (dez reais)
+referente ao pagamento da inscriçao na
+SACTA 2013.
+
+             Muito obrigado!
+
+ Sistema de Gerenciamento - SACTA 2013
+
+
+
+
+
 </TEXTAREA>
                         <!--INPUT name="EdTxtImpressao" type="text" class="style4" value="" size="62"-->
                         <INPUT type="button" class="Buttom" value="Caracteres Acentuados" name="BtnCarcAcentuados"
