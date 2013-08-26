@@ -13,9 +13,8 @@ class Application_Model_Printer_Etiqueta extends Application_Model_Printer_Abstr
      */
     public function __construct() {
         parent::__construct();
-        
     }
-    
+
     /**
      * Realiza conexão socket com o servidor de impressão
      * @throws Exception
@@ -23,9 +22,9 @@ class Application_Model_Printer_Etiqueta extends Application_Model_Printer_Abstr
      */
     public function conectar() {
         parent::conectar();
-        $this->enviarTexto('SGSA:PRINT:ETIQUETA'."\r\n");
+        $this->enviarTexto('SGSA:PRINT:ETIQUETA');
     }
-    
+
     /**
      * Manda texto para o servidor de impressão
      * @throws Exception
@@ -44,16 +43,46 @@ class Application_Model_Printer_Etiqueta extends Application_Model_Printer_Abstr
     public function quebrarLinha() {
         $this->texto[] = '\n';
     }
-    
+
+    /**
+     * Recebe um texto do servidor de impressão
+     * @throws Exception
+     * @return string o texto enviado pelo servidor de impressão
+     */
+    public function receberTexto() {
+        $read = socket_read($this->socket, 5);
+        if ($read === false) {
+            throw new Exception("Could not read input: " . socket_strerror(socket_last_error($this->socket)));
+        }
+        return $read;
+    }
+
     /**
      * Envia um texto para o servidor de impressão
      * @param string $texto
      * @throws Exception
      */
     public function enviarTexto($texto) {
-        if (socket_write($this->socket, $texto, strlen($texto)) == false) {
-            throw new Exception("Could not write output: " . socket_strerror(socket_last_error($this->socket)));
+        $texto = $texto . "\r\n";
+        $length = strlen($texto);
+        while (true) {
+            $sent = socket_write($this->socket, $texto, $length);
+            if ($sent === false) {
+                throw new Exception("Could not write output: " . socket_strerror(socket_last_error($this->socket)));
+            }
+            if ($sent < $length) {
+                $texto = substr($texto, $sent);
+                $length -= $sent;
+                print("Message truncated: Resending: $texto");
+            } else {
+                return true;
+            }
         }
+        return false;
+
+//        if (socket_write($this->socket, $texto, strlen($texto)) === false) {
+//            throw new Exception("Could not write output: " . socket_strerror(socket_last_error($this->socket)));
+//        }
     }
 
     /**

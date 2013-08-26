@@ -30,7 +30,6 @@ class CredenciamentoController extends Zend_Controller_Action {
                 $formaPagamento = $fPagamentoDAO->getFormaPagamentoByName($data['formaPagamento']);
                 $pagamento->setIdFormaPagamento($formaPagamento->getIdFormaPagamento());
                 $usuario->setPagamento("pago");
-                
             } else if ($data['acao'] == 'isentar') {
                 $pagamento->setIsento(true);
                 $pagamento->setValor(0);
@@ -57,10 +56,11 @@ class CredenciamentoController extends Zend_Controller_Action {
 //        $etiqueta->A(50, 150, 0, 4, 1, 1, 'N', 'NOME Do usuario Fica AQUI');
 //        $etiqueta->B(100, 450, 0, 3, 5, 11, 50, 'B', '12345');
 //        $etiqueta->P1(1);
-
-        $etiqueta->enviarTexto($nome . "|" . $codigoBarras . "\r\n");
+        $texto = $etiqueta->receberTexto();
+        $etiqueta->enviarTexto($nome . "\r\n" . $codigoBarras);
         $etiqueta->desconectar();
-        // echo $nome . "|" . $codigoBarras;die;
+//        echo $nome . "\r\n" . $codigoBarras;
+//        die;
     }
 
 }
