@@ -1,6 +1,7 @@
 /servidor/nbproject/private/
 /cliente/nbproject/private/
-/build/
-/dist/
-/JavaApplication4/nbproject/private/
+/cliente/build/
+/cliente/dist/
+/servidor/build/
+/servidor/dist/
 *.log
