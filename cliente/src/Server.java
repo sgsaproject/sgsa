@@ -15,9 +15,9 @@ public class Server {
     private int port;
     private Socket socket;
 
-    public Server(String ip) throws UnknownHostException, IOException {
-        this.ip = ip;
-        this.port = 5588;
+    public Server() throws UnknownHostException, IOException {
+        this.ip = Client.getConfig().getProperty("sgsa.ip");
+        this.port = Integer.parseInt(Client.getConfig().getProperty("port"));
         this.socket = new Socket(ip, port);
     }
 

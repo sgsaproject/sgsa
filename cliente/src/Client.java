@@ -1,5 +1,8 @@
 
 import java.io.DataInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -7,6 +10,7 @@ import java.io.PrintStream;
 import java.net.ConnectException;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.util.Properties;
 import javax.print.PrintException;
 import org.apache.log4j.Logger;
 
@@ -26,6 +30,7 @@ public class Client {
     L42 l42;
     MP4200TH mp4200;
     String ip;
+    private static Properties config;
 
     public Client(int identifier, String ip) {
         this.identifier = identifier;
@@ -148,7 +153,7 @@ public class Client {
         try {
             // initialize the conection with server
             logger.info("Conectando no servidor " + ip + "...");
-            this.server = new Server(ip);
+            this.server = new Server();
         } catch (ConnectException ex) {
             logger.fatal(ex.getMessage() + ": Tentando reconnectar em " + this.tempo + " segundos...");
             this.sleep();
@@ -158,6 +163,65 @@ public class Client {
             this.sleep();
             this.conectar(ip);
         } catch (UnknownHostException ex) {
+            logger.fatal(null, ex);
+        } catch (IOException ex) {
+            logger.fatal(null, ex);
+        }
+    }
+    
+    /**
+     * Método que retorna a configuração
+     *
+     * @return config
+     */
+    public static Properties getConfig() {
+        return config;
+    }
+
+    /**
+     * Metodo que retorna a propriedade a partir de uma determinada chave.
+     *
+     * @param key
+     * @return
+     */
+    public static String getProperty(String key) {
+        return config.getProperty(key);
+    }
+
+    /**
+     * Método que altera o valor de uma propriedade de uma dererminada chave.
+     *
+     * @param key
+     * @param value
+     */
+    public static void setProperty(String key, String value) {
+        config.setProperty(key, value);
+    }
+
+    /**
+     * Método estático que lê o arquivo de configuração
+     */
+    public static void readConfig() {
+        config = new Properties();
+        FileReader fr;
+        try {
+            fr = new FileReader("config.prop");
+            config.load(fr);
+        } catch (FileNotFoundException ex) {
+            logger.fatal(null, ex);
+        } catch (IOException ex) {
+            logger.fatal(null, ex);
+        }
+    }
+
+    /**
+     * Metodo estático que grava a configuração no arquivo.
+     */
+    public static void writeConfig() {
+        try {
+            FileWriter fw = new FileWriter("config.prop");
+            config.store(fw, "");
+        } catch (FileNotFoundException ex) {
             logger.fatal(null, ex);
         } catch (IOException ex) {
             logger.fatal(null, ex);
