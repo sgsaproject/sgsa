@@ -1,10 +1,12 @@
 
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.ConnectException;
@@ -102,7 +104,8 @@ public class Client {
                     }
                 } else if (line.equalsIgnoreCase("PRINT:ETIQUETA")) {
                     try {
-                        this.l42.imprimir(inputStream.readUTF());
+                        BufferedReader br = new BufferedReader(new InputStreamReader(this.is));
+                        this.l42.imprimir(br.readLine());
                     } catch (IOException | PrintException ex) {
                         logger.fatal("Erro ao imprimir na impressora de etiqueta", ex);
                     }
