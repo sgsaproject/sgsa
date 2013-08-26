@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 import com.sun.jna.Library;
 import com.sun.jna.win32.StdCallLibrary;
 
