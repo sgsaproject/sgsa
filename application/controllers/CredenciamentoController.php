@@ -58,9 +58,9 @@ class CredenciamentoController extends Zend_Controller_Action {
 //        $etiqueta->B(100, 450, 0, 3, 5, 11, 50, 'B', '12345');
 //        $etiqueta->P1(1);
 
-        $etiqueta->enviarTexto($nome . "|" . $codigoBarras);
+        $etiqueta->enviarTexto($nome . "|" . $codigoBarras . "\r\n");
         $etiqueta->desconectar();
-//        echo $nome . "|" . $codigoBarras;die;
+        // echo $nome . "|" . $codigoBarras;die;
     }
 
 }
