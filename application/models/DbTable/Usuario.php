@@ -43,19 +43,19 @@ class Application_Model_DbTable_Usuario extends Zend_Db_Table_Abstract {
     }
 
     public function getUsuariosNaoPagos() {
-        $select = $this->select()->where('pagamento = ?', 'naopago')
+        $select = $this->select()->where('pagamento = ?', Application_Model_Usuario::NAO_PAGO)
                 ->order('nome asc');
         return $this->fetchAll($select);
     }
 
     public function getUsuariosPagos() {
-        $select = $this->select()->where('pagamento = ?', 'pago')
+        $select = $this->select()->where('pagamento = ?', Application_Model_Usuario::PAGO)
                 ->order('nome asc');
         return $this->fetchAll($select);
     }
 
     public function getUsuariosIsentos() {
-        $select = $this->select()->where('pagamento = ?', 'isento')
+        $select = $this->select()->where('pagamento = ?', Application_Model_Usuario::ISENTO)
                 ->order('nome asc');
         return $this->fetchAll($select);
     }

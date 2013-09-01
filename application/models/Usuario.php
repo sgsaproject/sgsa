@@ -3,6 +3,10 @@
 class Application_Model_Usuario extends Zend_Db_Table_Row_Abstract {
     use Sistema_Model_Utils;
     
+    const PAGO = 'pago';
+    const NAO_PAGO = 'naopago';
+    const ISENTO = 'isento';
+    
     private $tipoUsuario;
     private $palestras;
     private $sessoes;

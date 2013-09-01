@@ -267,17 +267,17 @@ class AdminController extends Zend_Controller_Action {
         $usuariosModel = new Application_Model_DbTable_Usuario();
 
         switch ($filtro) {
-            case 'naopago':
+            case Application_Model_Usuario::NAO_PAGO:
                 $this->view->usuarios = $usuariosModel->getUsuariosNaoPagos();
                 $this->view->filtro = 'Usuarios Não Pagos';
                 break;
-            case 'pago':
-
+            
+            case Application_Model_Usuario::PAGO:
                 $this->view->usuarios = $usuariosModel->getUsuariosPagos();
                 $this->view->filtro = 'Usuarios Pagos';
                 break;
-            case 'isento':
-
+            
+            case Application_Model_Usuario::ISENTO:
                 $this->view->usuarios = $usuariosModel->getUsuariosIsentos();
                 $this->view->filtro = 'Usuarios Isentos';
                 break;
@@ -308,7 +308,7 @@ class AdminController extends Zend_Controller_Action {
         $usuariosModel = new Application_Model_DbTable_Usuario();
         $usuario = $usuariosModel->find($id_usuario)->current();
 
-        $form = new Application_Form_Inscricao();
+        $form = new Application_Form_Usuario();
         $form->populate($usuario->toArray());
         $form->getElement('email')->clearValidators();
         $form->getElement('enviar')->setLabel('Salvar');

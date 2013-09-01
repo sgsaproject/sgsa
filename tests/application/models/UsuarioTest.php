@@ -52,7 +52,7 @@ class UsuarioTest extends PHPUnit_Framework_TestCase {
         $usuario->setImpresso(true);
         $usuario->setInstituicao("Unipampa");
         $usuario->setNome("Thiago Cassio Krug");
-        $usuario->setPagamento("pago");
+        $usuario->setPagamento(Application_Model_Usuario::PAGO);
         $usuario->setRg("3093746001");
         $usuario->setIdTipoUsuario(1);
         $id = $usuario->save();

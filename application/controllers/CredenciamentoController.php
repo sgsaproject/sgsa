@@ -29,13 +29,13 @@ class CredenciamentoController extends Zend_Controller_Action {
                 $pagamento->setValor($data['valor']);
                 $formaPagamento = $fPagamentoDAO->getFormaPagamentoByName($data['formaPagamento']);
                 $pagamento->setIdFormaPagamento($formaPagamento->getIdFormaPagamento());
-                $usuario->setPagamento("pago");
+                $usuario->setPagamento(Application_Model_Usuario::PAGO);
             } else if ($data['acao'] == 'isentar') {
                 $pagamento->setIsento(true);
                 $pagamento->setValor(0);
                 $pagamento->setIdFormaPagamento(1);
                 $pagamento->setObs($data["motivo"]);
-                $usuario->setPagamento("isento");
+                $usuario->setPagamento(Application_Model_Usuario::ISENTO);
             }
             $usuario->save();
             $pagamento->save();
