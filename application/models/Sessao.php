@@ -74,5 +74,10 @@ class Application_Model_Sessao extends Zend_Db_Table_Row_Abstract
         $data = DateTime::createFromFormat(Sistema_Data::PHP_REGULAR_DATETIME, $horaSaida);
         $this->hora_saida = $data->format(Sistema_Data::PHP_DATABASE_DATETIME);
     }
+    
+    public function getDia() {
+        $data = DateTime::createFromFormat(Sistema_Data::PHP_DATABASE_DATETIME, $this->hora_entrada);
+        return $data->format(Sistema_Data::PHP_REGULAR_DATE);
+    }
 }
 

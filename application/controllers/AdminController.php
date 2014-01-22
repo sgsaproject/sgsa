@@ -25,10 +25,7 @@ class AdminController extends Zend_Controller_Action {
                 $db = Zend_Db_Table::getDefaultAdapter();
 
                 $authAdapter = new Zend_Auth_Adapter_DbTable(
-                                $db,
-                                'usuario',
-                                'email',
-                                'senha');
+                        $db, 'usuario', 'email', 'senha');
 
                 $authAdapter->setIdentity($dados['email']);
                 $authAdapter->setCredential($dados['senha']);
@@ -138,10 +135,10 @@ class AdminController extends Zend_Controller_Action {
         
     }
 
-    /*public function usuariosAction() {
-        $usuarioModel = new Application_Model_DbTable_Usuario();
-        $this->view->usuarios = $usuarioModel->getUsuarios();
-    }*/
+    /* public function usuariosAction() {
+      $usuarioModel = new Application_Model_DbTable_Usuario();
+      $this->view->usuarios = $usuarioModel->getUsuarios();
+      } */
 
     public function inserirEditarUsuarioAction() {
         $form = new Application_Form_Usuarios();
@@ -224,6 +221,15 @@ class AdminController extends Zend_Controller_Action {
         $this->view->sessoes = $sessoes;
     }
 
+    public function salvarSessaoParticipanteAction() {
+        if ($this->getRequest()->isPost()) {
+            if ($form->isValid($_POST)) {
+                $dados = $form->getValues();
+            }
+        }
+        return true;
+    }
+
     public function adicionarFiscalPalestraAction() {
         $form = new Application_Form_AdicionaFiscais();
         $modelSessao = new Application_Model_DbTable_Permissao();
@@ -271,12 +277,12 @@ class AdminController extends Zend_Controller_Action {
                 $this->view->usuarios = $usuariosModel->getUsuariosNaoPagos();
                 $this->view->filtro = 'Usuarios Não Pagos';
                 break;
-            
+
             case Application_Model_Usuario::PAGO:
                 $this->view->usuarios = $usuariosModel->getUsuariosPagos();
                 $this->view->filtro = 'Usuarios Pagos';
                 break;
-            
+
             case Application_Model_Usuario::ISENTO:
                 $this->view->usuarios = $usuariosModel->getUsuariosIsentos();
                 $this->view->filtro = 'Usuarios Isentos';
@@ -502,34 +508,83 @@ class AdminController extends Zend_Controller_Action {
             1
             order by
             1;';
-        
+
         $result2 = $dbAdapter->fetchAll($select2);
 
-	foreach ($result as $key => $usuario) {
+        foreach ($result as $key => $usuario) {
             foreach ($result2 as $usuarioAlmir) {
                 if ($usuario['id_usuario'] == $usuarioAlmir['id_usuario']) {
-		    $result[$key]['total'] = $usuario['total'] + 4;
-		}
+                    $result[$key]['total'] = $usuario['total'] + 4;
+                }
             }
         }
-        
+
 //        foreach ($result as $usuario2) {
 //            echo $usuario2['nome'].",".$usuario2['total'].",".$usuario2['email'];
 //        }
 
         $this->view->result = $result;
     }
-    
+
     public function enviarEmailsNaoConfirmadosAction() {
-		set_time_limit( 5 * 60 );
+        set_time_limit(5 * 60);
         $usuarioModel = new Application_Model_DbTable_Usuario();
         $usuarios = $usuarioModel->getUsuariosEmailNaoConfirmado();
-        
+
         /* @var $usuario Application_Model_Usuario */
         foreach ($usuarios as $usuario) {
             $usuario->enviarEmailAtivacao();
         }
     }
 
-}
+    public function salvarPalestraAction() {
+        $this->_helper->layout->disableLayout();
+        if ($this->_request->isPost()) {
+            $idPalestra = $this->getRequest()->getParam('id_palestra');
+            $dia = $this->getRequest()->getParam('dia');
+            $inicio = $dia . " " . $this->getRequest()->getParam('hora_inicio');
+            $fim = $dia . " " . $this->getRequest()->getParam('hora_fim');
 
+            $date = new Zend_Date($inicio);
+            $dados['hora_inicio'] = $date->get(Sistema_Data::ZEND_DATABASE_DATETIME);
+
+            $date = new Zend_Date($fim);
+            $dados['hora_fim'] = $date->get(Sistema_Data::ZEND_DATABASE_DATETIME);
+
+            $palestraDao = new Application_Model_DbTable_Palestra();
+            $where = $palestraDao->getAdapter()->quoteInto('id_palestra = ?', $idPalestra);
+            $rows = $palestraDao->update($dados, $where);
+            if ($rows == 1) {
+                echo true;
+                return;
+            }
+        }
+        echo false;
+    }
+    
+    public function salvarSessaoAction() {
+        $this->_helper->layout->disableLayout();
+        if ($this->_request->isPost()) {
+            $idSessao = $this->getRequest()->getParam('id_sessao');
+            $dia = $this->getRequest()->getParam('dia');
+            $entrada = $dia . " " . $this->getRequest()->getParam('hora_entrada');
+            $saida = $dia . " " . $this->getRequest()->getParam('hora_saida');
+
+            $date = new Zend_Date($entrada);
+            $dados['hora_entrada'] = $date->get(Sistema_Data::ZEND_DATABASE_DATETIME);
+
+            $date = new Zend_Date($saida);
+            $dados['hora_saida'] = $date->get(Sistema_Data::ZEND_DATABASE_DATETIME);
+            
+            $sessaoDao = new Application_Model_DbTable_Sessao();
+            $where = $sessaoDao->getAdapter()->quoteInto('id_sessao = ?', $idSessao);
+            $rows = $sessaoDao->update($dados, $where);
+            if ($rows == 1) {
+                echo "Sessão salva com sucesso!";
+                return;
+            }
+        }
+        echo "Problema ao salvar a sessao do usuário!";
+    }
+
+}

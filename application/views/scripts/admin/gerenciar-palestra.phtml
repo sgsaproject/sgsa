@@ -13,7 +13,7 @@
 <div id="usuarios">
     <br />
     <div class="box-topo">
-        <h2>Usuarios na sala</h2>
+        <h2>Usuários na sala</h2>
     </div>
     <div class="tabela" id="tabela-usuarios">
         <table class="tabela" name="usuarios">
@@ -24,19 +24,35 @@
                     <td width="55%">Nome Completo</td>
                     <td width="15%">Hora Entrada</td>
                     <td width="20%">Hora Saída</td>
+                    <? if ($this->identity->id_tipo_usuario == 3) : ?>
+                        <td>Opções</td>
+                    <? endif; ?>
                 </tr>
             </thead>
 
             <tbody>
                 <? foreach ($this->sessoes as $sessao): ?>
-                    <? $usuario = $sessao->findDependentRowset('Application_Model_DbTable_Usuario')->current() ?>
+                    <?
+                    /* @var $usuario Application_Model_Usuario */
+                    $usuario = $sessao->findDependentRowset('Application_Model_DbTable_Usuario')->current()
+                    ?>
                     <tr>
                         <td><?= $usuario->codigo_barras ?></td>
                         <td><?= $usuario->nome ?></td>
-                        <td style="color:green;"><?= $this->FormatarHora($sessao->hora_entrada) ?></td>
-                        <td style="color:red;"><?= $this->FormatarHora($sessao->hora_saida) ?></td>
-                    </tr>
-                <? endforeach; ?>
+                        <? if ($this->identity->id_tipo_usuario == 3) : ?>
+                    <form action="" id="sessao<?= $sessao->id_sessao ?>">
+                        <input type="hidden" value="<?= $sessao->id_sessao ?>" name="id_sessao">
+                        <input type="hidden" name="dia" value="<?= $sessao->getDia() ?>">
+                        <td><input type="time" name="hora_entrada" value="<?= $this->FormatarHora($sessao->hora_entrada) ?>"></td>
+                        <td><input type="time" name="hora_saida" value="<?= $this->FormatarHora($sessao->hora_saida) ?>"></td>
+                        <td><input type="submit" onclick="salvarDadosSessao('sessao<?= $sessao->id_sessao ?>')" value="Salvar"></td>
+                    </form>
+                <? else: ?>
+                    <td style="color:green;"><?= $this->FormatarHora($sessao->hora_entrada) ?></td>
+                    <td style="color:red;"><?= $this->FormatarHora($sessao->hora_saida) ?></td>
+                <? endif; ?>
+                </tr>
+            <? endforeach; ?>
 
             </tbody>
 
@@ -53,20 +69,70 @@
 <div id="extra">
 
     <script type="text/javascript">
-        function reloadUsuarios(){
+        function reloadUsuarios() {
             $("#usuarios").load('<?= $this->baseUrl('/admin/usuarios-palestra/id_palestra/' . $this->palestra->id_palestra) ?>');
         }
-        function marcar(){
-            var cod = $("#codigo_barras").val(); 
-            $("#status-usuario").load('<?= $this->baseUrl('/admin/registrar-usuario-palestra/codigo_barras/') ?>'+cod+'/id_palestra/'+<?= $this->palestra->id_palestra ?>);
+        function marcar() {
+            var cod = $("#codigo_barras").val();
+            $("#status-usuario").load('<?= $this->baseUrl('/admin/registrar-usuario-palestra/codigo_barras/') ?>' + cod + '/id_palestra/' +<?= $this->palestra->id_palestra ?>);
             $("#codigo_barras").val('');
             setTimeout("reloadUsuarios()", 2000);
-            setTimeout("$('#status-usuario').html('')", 8000);          
+            setTimeout("$('#status-usuario').html('')", 8000);
         }
-        
+        function salvarDadosPalestra() {
+            event.preventDefault();
+
+            console.log($('#palestra2').serialize());
+
+            /* Send the data using post */
+            $.post("<?= $this->baseUrl('/admin/salvar-palestra/') ?>", $('#palestra2').serialize(), function(data) {
+                if (data) {
+                    alert("Horas salvas com sucesso!");
+                } else {
+                    alert("Problema ao salvar o as horas da palestra!");
+                }
+                console.log(data);
+                return;
+            }
+            );
+        }
+        function salvarDadosSessao(idForm) {
+            event.preventDefault();
+
+            console.log($('#' + idForm).serialize());
+
+            /* Send the data using post */
+            $.post("<?= $this->baseUrl('/admin/salvar-sessao/') ?>", $('#' + idForm).serialize(), function(data) {
+                alert(data);
+                console.log(data);
+                window.location = "./" + folder + "/index.jsp";
+                return;
+            }
+            );
+        }
+        ;
+
     </script>
-    <form action="#" onsubmit="marcar();return false">
-        <p>Codigo de Barras</p> <br /> 
+
+    <? if ($this->identity->id_tipo_usuario == 3) : ?>
+        <div style="background-color: lightgrey;">
+            <form id="palestra2" action="">
+                <input onclick="salvarDadosPalestra()" type="button" value="Salvar Alterações">
+                <input type="hidden" name="id_palestra" value="<?= $this->palestra->id_palestra ?>">
+                <input type="hidden" name="dia" value="<?= $this->palestra->getDia() ?>">
+                <dl>
+                    <dt>Hora de Início da Palestra:</dt>
+                    <dd><input type="time" name="hora_inicio" value="<?= $this->FormatarHora($this->palestra->getHoraInicio()) ?>"></dd><br>
+                    <dt>Hora de Fim da Palestra:</dt>
+                    <dd><input type="time" name="hora_fim" value="<?= $this->FormatarHora($this->palestra->getHoraFim()) ?>"></dd>
+                </dl>
+            </form>
+        </div>
+    <? endif; ?>
+
+    <form action="#" onsubmit="marcar();
+            return false">
+        <p>Código de Barras</p> <br /> 
         <input type="text" name="codigo_barras" id="codigo_barras" value="" />
         <input type="submit" value="Marcar Entrada/Saida Usuario" rel="tooltip" class="button" title="Marcar Entrada/Saida Usuario"/>
     </form>
@@ -78,31 +144,33 @@
     <hr />
 
     <br />
-    
+
     <script type="text/javascript">
-        function iniciarPalestra(id){
-            if(confirm("Deseja iniciar a palestra no sistema?")){
-                window.location = "<?=$this->baseUrl('/admin/iniciar-palestra/id_palestra/')?>"+id;
+        function iniciarPalestra(id) {
+            if (confirm("Deseja iniciar a palestra no sistema?")) {
+                window.location = "<?= $this->baseUrl('/admin/iniciar-palestra/id_palestra/') ?>" + id;
             }
         }
-        function finalizarPalestra(id){
-            if(confirm("Deseja finalizar a palestra no sistema?")){
-                window.location = "<?=$this->baseUrl('/admin/finalizar-palestra/id_palestra/')?>"+id;
+        function finalizarPalestra(id) {
+            if (confirm("Deseja finalizar a palestra no sistema?")) {
+                window.location = "<?= $this->baseUrl('/admin/finalizar-palestra/id_palestra/') ?>" + id;
             }
         }
     </script>
-    
-    <form action="" onSubmit="iniciarPalestra('<?=$this->palestra->id_palestra?>');return false">
+
+    <form action="" onSubmit="iniciarPalestra('<?= $this->palestra->id_palestra ?>');
+            return false">
         <input type="submit" rel="tooltip" class="button" title="Inicia palestra no sistema" value="Inicia Palestra" />
     </form>
     <br /></br>
-    <form action="" onSubmit="finalizarPalestra('<?=$this->palestra->id_palestra?>');return false">
+    <form action="" onSubmit="finalizarPalestra('<?= $this->palestra->id_palestra ?>');
+            return false">
         <input type="submit" rel="tooltip" class="button" title="Finaliza palestra no sistema" value="Finaliza Palestra" />
     </form>
-    
+
     <script type="text/javascript">
-        function atualizarTempoCorrente(){
-            $("#tempoCorrente").load('<?= $this->baseUrl('/admin/tempo-corrente/id_palestra/'.$this->palestra->id_palestra) ?>');
+        function atualizarTempoCorrente() {
+            $("#tempoCorrente").load('<?= $this->baseUrl('/admin/tempo-corrente/id_palestra/' . $this->palestra->id_palestra) ?>');
         }
         setInterval("atualizarTempoCorrente()", 2000);
     </script>

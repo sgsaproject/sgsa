@@ -7,14 +7,13 @@ class Application_Form_Usuario extends Zend_Form {
         $this->setMethod('post');
 
         $idUsuario = new Zend_Form_Element_Text('id_usuario');
-        $idUsuario->setLabel("ID Usuário (somente leitura): ")
+        $idUsuario->setLabel("ID Usuário: ")
                 ->setAttrib('rel', 'tooltip')
                 ->setAttrib('title', 'Identificador do usuário')
                 ->setAttrib('size', '60')
                 ->setAttrib('readonly', 'true');
         $this->addElement($idUsuario);
 
-        //$tipo[] = isset($tipo) ? '' : '';
         $tipoModel = new Application_Model_DbTable_TipoUsuario();
         $tipoObj = $tipoModel->getTipoUsuario();
         foreach ($tipoObj as $tipoT) {
@@ -26,6 +25,7 @@ class Application_Form_Usuario extends Zend_Form {
                 ->addMultiOptions($tipo)
                 ->setAttrib('rel', 'tooltip')
                 ->setAttrib('title', 'Selecione o tipo do usuário')
+                ->setAttrib('style', 'width: 338px;')
                 ->setRequired(TRUE);
         $this->addElement($tipoUser);
 
@@ -95,7 +95,26 @@ class Application_Form_Usuario extends Zend_Form {
                 ->setRequired(TRUE);
         $this->addElement($instituicao);
         
-        $pago = new Zend_Form_Element_
+        $codigoBarras = new Zend_Form_Element_Text('codigo_barras');
+        $codigoBarras->setLabel("Código de Barras: ")
+                ->setAttrib('rel', 'tooltip')
+                ->setAttrib('title', 'Código de Barras')
+                ->setAttrib('size', '60')
+                ->setAttrib('readonly', 'true');
+        $this->addElement($codigoBarras);
+
+        $pagamentos[Application_Model_Usuario::PAGO] = "Pago";
+        $pagamentos[Application_Model_Usuario::NAO_PAGO] = "Não Pago";
+        $pagamentos[Application_Model_Usuario::ISENTO] = "Isento";
+
+        $pagamento = new Zend_Form_Element_Select('pagamento');
+        $pagamento->setLabel('Tipo de Pagamento: ')
+                ->addMultiOptions($pagamentos)
+                ->setAttrib('rel', 'tooltip')
+                ->setAttrib('style', 'width: 338px;')
+                ->setAttrib('title', 'Selecione o tipo de pagamento')
+                ->setRequired(TRUE);
+        $this->addElement($pagamento);
 
         $submit = new Zend_Form_Element_Submit('enviar');
         $submit->setLabel('Efetuar Pré-Inscrição')
