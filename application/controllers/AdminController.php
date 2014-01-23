@@ -561,7 +561,7 @@ class AdminController extends Zend_Controller_Action {
         }
         echo false;
     }
-    
+
     public function salvarSessaoAction() {
         $this->_helper->layout->disableLayout();
         if ($this->_request->isPost()) {
@@ -575,7 +575,7 @@ class AdminController extends Zend_Controller_Action {
 
             $date = new Zend_Date($saida);
             $dados['hora_saida'] = $date->get(Sistema_Data::ZEND_DATABASE_DATETIME);
-            
+
             $sessaoDao = new Application_Model_DbTable_Sessao();
             $where = $sessaoDao->getAdapter()->quoteInto('id_sessao = ?', $idSessao);
             $rows = $sessaoDao->update($dados, $where);
@@ -585,6 +585,43 @@ class AdminController extends Zend_Controller_Action {
             }
         }
         echo "Problema ao salvar a sessao do usuário!";
+    }
+
+    public function addSessaoAction() {
+        $this->_helper->layout->disableLayout();
+        $dados = $this->getRequest()->getParams();
+        $sessaoModel = new Application_Model_DbTable_Sessao();
+        $usuarioModel = new Application_Model_DbTable_Usuario();
+
+        $usuario = $usuarioModel->getByCodigoBarras($dados['codigo_barras']);
+        if (is_null($usuario)) {
+            $this->view->mensagem = 'Codigo de Barras do Usuario inexistente!';
+        } else {
+            if ($sessaoModel->existeSessaoAbertaUsuario($usuario->id_usuario) && $dados['id_palestra'] != $sessaoModel->getSessaoAbertaUsuario($usuario->id_usuario)) {
+                $this->view->mensagem = 'Usuario já está em outra palestra!';
+            } else {
+                $date = new Zend_Date();
+                if ($sessaoModel->existeUsuario($usuario->id_usuario, $dados['id_palestra'])) {
+                    $this->view->mensagem = 'Este usuário já se encontra na palestra!';
+                } else {
+                    $dia = $this->getRequest()->getParam('dia');
+                    $entrada = $dia . " " . $this->getRequest()->getParam('hora_entrada');
+                    $saida = $dia . " " . $this->getRequest()->getParam('hora_saida');
+
+                    $date = new Zend_Date($entrada);
+                    $sessao['hora_entrada'] = $date->get(Sistema_Data::ZEND_DATABASE_DATETIME);
+
+                    $date = new Zend_Date($saida);
+                    $sessao['hora_saida'] = $date->get(Sistema_Data::ZEND_DATABASE_DATETIME);
+
+                    $sessao['id_palestra'] = $dados['id_palestra'];
+                    $sessao['id_usuario'] = $usuario->id_usuario;
+
+                    $sessaoModel->insert($sessao);
+                    $this->view->mensagem = 'Sessao adicionada com sucesso!';
+                }
+            }
+        }
     }
 
 }

@@ -20,6 +20,17 @@ class Application_Model_DbTable_Sessao extends Zend_Db_Table_Abstract {
             'refColumns'     => 'id_palestra'
         )
     );
+    
+    public function existeUsuario($id_usuario, $id_palestra) {
+        $select = $this->select()->where('id_palestra = ?', $id_palestra)
+                ->where('id_usuario = ?', $id_usuario);
+        $row = $this->fetchRow($select);
+        if (is_null($row)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
     public function existeEntrada($id_palestra, $id_usuario) {
         $select = $this->select()->where('id_palestra = ?', $id_palestra)

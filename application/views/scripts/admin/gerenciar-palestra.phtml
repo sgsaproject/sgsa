@@ -15,9 +15,25 @@
     <div class="box-topo">
         <h2>Usuários na sala</h2>
     </div>
+    <div>
+        <form action="" id="adicionar">
+            <input type="hidden" name="id_palestra" value="<?= $this->palestra->id_palestra ?>">
+            <input type="hidden" name="dia" value="<?= $this->palestra->getDia() ?>">
+            <label>Código de Barras:</label>
+            <input type="text" name="codigo_barras" value="" />
+            <br />
+            <label>Hora de Entrada:</label>
+            <input type="time" name="hora_entrada" value="" />
+            <br />
+            <label>Hora de Saída:</label>
+            <input type="time" name="hora_saida" value="" />
+            <br />
+            <button onclick="addSessao()">Adicionar Usuario</button>
+            <p style="color: red">Atualize a página para que o usuário apareça!</p>
+        </form>
+    </div>
     <div class="tabela" id="tabela-usuarios">
         <table class="tabela" name="usuarios">
-
             <thead>
                 <tr>
                     <td width="10%">Código</td>
@@ -105,12 +121,26 @@
             $.post("<?= $this->baseUrl('/admin/salvar-sessao/') ?>", $('#' + idForm).serialize(), function(data) {
                 alert(data);
                 console.log(data);
-                window.location = "./" + folder + "/index.jsp";
                 return;
             }
             );
         }
         ;
+        function addSessao() {
+            event.preventDefault();
+
+            console.log($('#adicionar').serialize());
+
+            /* Send the data using post */
+            $.post("<?= $this->baseUrl('/admin/add-sessao/') ?>", $('#adicionar').serialize(), function(data) {
+                alert(data);
+                console.log(data);
+                return;
+            }
+            );
+            $('#adicionar').find("input").val("");
+            $('#adicionar').find("input[name=codigo_barras]").focus();
+        }
 
     </script>
 
