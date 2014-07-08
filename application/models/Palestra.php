@@ -80,7 +80,7 @@ class Application_Model_Palestra extends Zend_Db_Table_Row_Abstract
     public function getDia() {
         $data = DateTime::createFromFormat(Sistema_Data::PHP_DATABASE_DATETIME, $this->hora_inicio);
         return $data->format(Sistema_Data::PHP_REGULAR_DATE);
-    }
+   }
     
     public function getSala() {
         return $this->sala;
