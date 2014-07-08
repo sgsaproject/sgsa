@@ -59,7 +59,11 @@ class Application_Model_Palestra extends Zend_Db_Table_Row_Abstract
     
     public function getHoraInicio() {
         $data = DateTime::createFromFormat(Sistema_Data::PHP_DATABASE_DATETIME, $this->hora_inicio);
-        return $data->format(Sistema_Data::PHP_REGULAR_DATETIME);
+		if ($data != null) {
+            return $data->format(Sistema_Data::PHP_REGULAR_DATETIME);
+		} else {
+		    return "";
+	    }
     }
     
     public function setHoraInicio($horaInicio) {
@@ -69,7 +73,11 @@ class Application_Model_Palestra extends Zend_Db_Table_Row_Abstract
     
     public function getHoraFim() {
         $data = DateTime::createFromFormat(Sistema_Data::PHP_DATABASE_DATETIME, $this->hora_fim);
-        return $data->format(Sistema_Data::PHP_REGULAR_DATETIME);
+		if ($data != null) {
+            return $data->format(Sistema_Data::PHP_REGULAR_DATETIME);
+	    } else {
+		    return "";
+	    }
     }
     
     public function setHoraFim($horaFim) {
@@ -79,8 +87,12 @@ class Application_Model_Palestra extends Zend_Db_Table_Row_Abstract
     
     public function getDia() {
         $data = DateTime::createFromFormat(Sistema_Data::PHP_DATABASE_DATETIME, $this->hora_inicio);
-        return $data->format(Sistema_Data::PHP_REGULAR_DATE);
-   }
+		if ($data != null) {
+			return $data->format(Sistema_Data::PHP_REGULAR_DATE);
+		} else {
+			return "";
+		}
+    }
     
     public function getSala() {
         return $this->sala;
