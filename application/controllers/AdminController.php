@@ -460,7 +460,7 @@ class AdminController extends Zend_Controller_Action {
     }
 
     public function relatorioUsuariosPalestrasAction() {
-
+        ini_set('max_execution_time', 300);
         $usuariosModel = new Application_Model_DbTable_Usuario();
         $this->view->usuarios = $usuariosModel->getUsuarios();
     }
