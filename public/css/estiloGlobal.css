@@ -402,6 +402,11 @@ input[type="text"],input[type=password], .inputbox{
     text-align: center;
 }
 
+#btFacebook{
+    left: 25%;
+    padding-top: 12px;
+}
+
 div.ui-datepicker{
     font-size:12px;
 }
