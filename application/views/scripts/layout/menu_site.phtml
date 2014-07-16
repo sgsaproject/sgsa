@@ -1,15 +1,6 @@
 <? $c = Zend_Controller_Front::getInstance()->getRequest()->getControllerName(); ?>
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.0";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
 <li><a href="<?=$this->baseUrl('/index')?>" class="<?=$c == 'index' ? 'current' : ''?>">Pagina Inicial</a></li>
 <li><a href="<?=$this->baseUrl('/objetivo')?>" class="<?=$c == 'objetivo' ? 'current' : ''?>">Objetivo</a></li>
 <li><a href="<?=$this->baseUrl('/inscricao')?>" class="<?=$c == 'inscricao' ? 'current' : ''?>">Inscrições</a></li>
 <li><a href="<?=$this->baseUrl('/programacao')?>" class="<?=$c == 'programacao' ? 'current' : ''?>">Programação</a></li>
-<li><a href="<?=$this->baseUrl('/contato')?>" class="<?=$c == 'contato' ? 'current' : ''?>">Contato</a></li>
-<div id="btFacebook" class="fb-like" data-href="https://www.facebook.com/sactaunipampa?fref=ts" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+<li><a href="<?=$this->baseUrl('/contato')?>" class="<?=$c == 'contato' ? 'current' : ''?>">Contato</a></li> 
